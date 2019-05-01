@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+// begin
 struct disjoint_set {
   int n;
   vector<int> prt;
@@ -24,6 +25,8 @@ struct disjoint_set {
     return true;
   }
 };
+// end
 int main() {
-  
+
+  return 0;
 }
