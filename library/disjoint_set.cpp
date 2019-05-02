@@ -26,7 +26,3 @@ struct disjoint_set {
   }
 };
 // end
-int main() {
-
-  return 0;
-}
