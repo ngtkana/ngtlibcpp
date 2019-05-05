@@ -85,9 +85,29 @@ function make_link {
   $outstr = "`t- ["
   $outstr += [System.IO.Path]::GetFileNameWithoutExtension($inpath).replace("_", " ")
   $outstr += "]("
-  $outstr += (Resolve-Path $inpath -Relative).remove(0, 2)
+  $outstr += $inpath
+  # $outstr += (Resolve-Path $inpath -Relative).remove(0, 2)
   $outstr += ")"
   $outstr | Write-Output
+}
+
+function write_markdown {
+  param (
+    $infile
+  )
+  Write-Output "``````cpp"
+  $stream = New-Object System.IO.StreamReader($infile)
+  $flg = $false
+  $line = ""
+  while (($nxtline = $stream.ReadLine()) -ne $null) {
+    if (($flg -eq $true)) {
+      Write-Output $line
+    }
+    if (($line -eq "// begin")) { $flg = $true }
+    if (($nxtline -eq "// end")) { $flg = $false }
+    $line = $nxtline
+  }
+  Write-Output "``````"
 }
 
 function make_links_and_markdowns {
@@ -98,13 +118,17 @@ function make_links_and_markdowns {
 
   $outdir = $indir.name
   Get-ChildItem $indir.fullname | ForEach-Object {
-    $outpath = $outdir + "/"
-    $outpath += [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
-    $outpath += ".md"
+    $name_without_ext = [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
 
-    New-Item -Force $outpath
+    $outpath = $outdir + "/"
+    $outpath += $name_without_ext
+    $outpath += ".md"
+    $docs_outpath = "docs/" + $outpath
+
+    New-Item -Force $docs_outpath
+    "# " + $name_without_ext | Add-Content $docs_outpath
+    write_markdown $_.fullname | Add-Content $docs_outpath
     make_link $outpath | Add-Content $index
-    "work in progress..." | Set-Content $outpath
   }
 }
 
