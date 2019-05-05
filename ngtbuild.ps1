@@ -87,23 +87,23 @@ function make_link {
   )
   $outstr = "- ["
   $outstr += [System.IO.Path]::GetFileNameWithoutExtension($infile.Name).replace("_", " ")
-  $outstr += "](\"
-  $outstr += Resolve-Path $infile.fullname-Relative
+  $outstr += "]("
+  $outstr += (Resolve-Path $infile.fullname-Relative).remove(0, 1)
   $outstr += ")"
-  $outstr | Add-Content $index
+  $outstr | Add-Content readme
 }
 
-$index = "docs/index.md"
-Clear-Content $index
+$readme = "readme.md"
+Clear-Content readme
 
-"# Library" | Add-Content $index
+"# Library" | Add-Content readme
 
 Get-ChildItem -Recurse -Path library/*.cpp | ForEach-Object {
   make_link $_
 }
-"" | Add-Content $index
+"" | Add-Content readme
 
-"# How to use script" | Add-Content -Encoding UTF8 $index
-Get-Content -Encoding UTF8 -Path markdown/script.md | Add-Content -Encoding UTF8 $index
+"# How to use script" | Add-Content -Encoding UTF8 readme
+Get-Content -Encoding UTF8 -Path markdown/script.md | Add-Content -Encoding UTF8 readme
 
 
