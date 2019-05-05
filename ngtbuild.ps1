@@ -78,7 +78,7 @@ Get-ChildItem -Recurse -Path library/*.cpp | ForEach-Object {
 
 
 # ----------------------------------------------
-# build readme.md
+# build index.md
 # ----------------------------------------------
 
 function make_link {
@@ -90,20 +90,20 @@ function make_link {
   $outstr += "](\"
   $outstr += Resolve-Path $infile.fullname-Relative
   $outstr += ")"
-  $outstr | Add-Content $readme
+  $outstr | Add-Content $index
 }
 
-$readme = "docs/readme.md"
-Clear-Content $readme
+$index = "docs/index.md"
+Clear-Content $index
 
-"# Library" | Add-Content $readme
+"# Library" | Add-Content $index
 
 Get-ChildItem -Recurse -Path library/*.cpp | ForEach-Object {
   make_link $_
 }
-"" | Add-Content $readme
+"" | Add-Content $index
 
-"# How to use script" | Add-Content -Encoding UTF8 $readme
-Get-Content -Encoding UTF8 -Path markdown/script.md | Add-Content -Encoding UTF8 $readme
+"# How to use script" | Add-Content -Encoding UTF8 $index
+Get-Content -Encoding UTF8 -Path markdown/script.md | Add-Content -Encoding UTF8 $index
 
 
