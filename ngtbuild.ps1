@@ -1,6 +1,8 @@
 # ----------------------------------------------
 # build .vocode/cpp.code-snippets
 # ----------------------------------------------
+$snippets = "./.vscode/cpp.code-snippets"
+Clear-Content $snippets
 
 function ngtwrite {
   param (
@@ -55,8 +57,6 @@ function parse {
   ngtwrite "}," 1
 }
 
-$snippets = "./.vscode/cpp.code-snippets"
-Clear-Content $snippets
 
 ngtwrite "{" | Add-Content $snippets
 
@@ -71,39 +71,46 @@ Get-ChildItem -Recurse -Path library/*.cpp | ForEach-Object {
 ngtwrite "}" 0 | Add-Content $snippets
 
 
-Get-ChildItem -Recurse -Path library/*.cpp | ForEach-Object {
-  New-Item -Force -Path reference -Name "$($_.Name).md"
-}
-
-
 
 # ----------------------------------------------
 # build index.md
 # ----------------------------------------------
+$index = "docs/index.md"
+Clear-Content $index
 
 function make_link {
   param (
-    $infile
+    $inpath
   )
-  $outstr = "- ["
-  $outstr += [System.IO.Path]::GetFileNameWithoutExtension($infile.Name).replace("_", " ")
+  $outstr = "`t- ["
+  $outstr += [System.IO.Path]::GetFileNameWithoutExtension($inpath).replace("_", " ")
   $outstr += "]("
-  $outstr += (Resolve-Path $infile.fullname-Relative).remove(0, 1)
+  $outstr += (Resolve-Path $inpath -Relative).remove(0, 2)
   $outstr += ")"
-  $outstr | Add-Content $readme
+  $outstr | Write-Output
 }
 
-$readme = "readme.md"
-Clear-Content $readme
+function make_links_and_markdowns {
+  param (
+    $indir
+  )
+  "- " + $indir.name | Add-Content $index
 
-"# Library" | Add-Content $readme
+  $outdir = $indir.name
+  Get-ChildItem $indir.fullname | ForEach-Object {
+    $outpath = $outdir + "/"
+    $outpath += [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
+    $outpath += ".md"
 
-Get-ChildItem -Recurse -Path library/*.cpp | ForEach-Object {
-  make_link $_
+    New-Item -Force $outpath
+    make_link $outpath | Add-Content $index
+    "work in progress..." | Set-Content $outpath
+  }
 }
-"" | Add-Content $readme
 
-"# How to use script" | Add-Content -Encoding UTF8 $readme
-Get-Content -Encoding UTF8 -Path markdown/script.md | Add-Content -Encoding UTF8 $readme
 
+"# Library" | Add-Content $index
+Get-ChildItem library | ForEach-Object {
+  make_links_and_markdowns $_
+}
 
