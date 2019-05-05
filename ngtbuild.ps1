@@ -90,20 +90,20 @@ function make_link {
   $outstr += "]("
   $outstr += (Resolve-Path $infile.fullname-Relative).remove(0, 1)
   $outstr += ")"
-  $outstr | Add-Content readme
+  $outstr | Add-Content $readme
 }
 
 $readme = "readme.md"
-Clear-Content readme
+Clear-Content $readme
 
-"# Library" | Add-Content readme
+"# Library" | Add-Content $readme
 
 Get-ChildItem -Recurse -Path library/*.cpp | ForEach-Object {
   make_link $_
 }
-"" | Add-Content readme
+"" | Add-Content $readme
 
-"# How to use script" | Add-Content -Encoding UTF8 readme
-Get-Content -Encoding UTF8 -Path markdown/script.md | Add-Content -Encoding UTF8 readme
+"# How to use script" | Add-Content -Encoding UTF8 $readme
+Get-Content -Encoding UTF8 -Path markdown/script.md | Add-Content -Encoding UTF8 $readme
 
 
