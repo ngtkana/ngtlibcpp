@@ -1,0 +1,872 @@
+	"Basic template": {
+		"prefix": "stemp",
+		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"int main() {",
+			"\t$0",
+			"\treturn 0;",
+			"}",
+		],
+		"description": "基本的なテンプレート"
+	},
+
+	"Mod calculations": {
+		"prefix": "mdcal",
+		"body": [
+			"const int md = $1;",
+			"inline void add(int &a, int b) {",
+			"\ta += b;",
+			"\tif (a >= md) a -= md;",
+			"}",
+			"inline void sub(int &a, int b) {",
+			"\ta -= b;",
+			"\tif (a < 0) a += md;",
+			"}",
+			"inline int mul(int a, int b) {",
+			"\treturn (int)((long long)a * b % md);",
+			"}",
+			"inline int power(int a, long long b) {",
+			"\tint res = 1;",
+			"\twhile (b > 0) {",
+			"\t\tif (b & 1) {",
+			"\t\t\tres = mul(res, a);",
+			"\t\t\tb--;",
+			"\t\t}",
+			"\t\ta = mul(a, a);",
+			"\t\tb >>= 1;",
+			"\t}",
+			"\treturn res;",
+			"}",
+			"inline int inv(int a) {",
+			"\ta %= md;",
+			"\tif(a < 0) a += md;",
+			"\tint b = md, u = 0, v = 1;",
+			"\twhile (a) {",
+			"\t\tint t = b / a;",
+			"\t\tb -= a * t; swap(a, b);",
+			"\t\tu -= v * t; swap(u, v);",
+			"\t}",
+			"\tassert(b == 1);",
+			"\tif(u < 0) u += md;",
+			"\treturn u;",
+			"}",
+		],
+		"description": "四則演算"
+	},
+	"Combination": {
+		"prefix": "cmb",
+		"body": [
+			"struct factorials {",
+			"\tconst int sz;",
+			"\tvector<int> fct, fnv;",
+			"\tfactorials (int n)",
+			"\t\t: sz(n)",
+			"\t\t, fct(n, 1)",
+			"\t\t, fnv(n, 1)",
+			"\t\t{",
+			"\t\t\tfor (int i = 1; i < n; i++) fct[i] = mul(fct[i - 1], i);",
+			"\t\t\tfnv[n - 1] = inv(fct[n - 1]);",
+			"\t\t\tfor (int i = n - 1; i >= 1; i--) fnv[i - 1] = mul(fnv[i], i);",
+			"\t\t}",
+			"\tinline int binom (int n, int k) {",
+			"\t\tassert(0 <= k && k <= n && n < sz);",
+			"\t\treturn mul(fct[n], mul(fnv[k], fnv[n - k]));",
+			"\t}",
+			"};",
+			"",
+		],
+		"description": "組合せの数"
+	},
+	"Greatest common divisor": {
+		"prefix": "gcd",
+		"body": [
+			"$1 gcd ($1 a, $1 b) {",
+				"\tif (a < 0) a = -a;",
+				"\tif (b < 0) b = -b;",
+				"\tif (a < b) swap(a, b);",
+				"\twhile (b) {",
+				"\t\ta %= b;",
+				"\t\tswap(a, b);",
+				"\t}",
+				"\treturn a;",
+				"}$0",
+		],
+		"description": "ユークリッドの互除法を用いて最大公約数を求める"
+	},
+	"Sieve of Eratosthenes": {
+		"prefix": "sieve of eratosthenes",
+		"body": [
+			"struct sieve_of_eratosthenes {",
+			"\tvector<bool> is_prime;",
+			"\tvector<int> prime_numbers;",
+			"\tvector<vector<int>> prime_divisors;",
+			"\tvector<vector<int>> divisors;",
+			"\tsieve_of_eratosthenes(int n)",
+			"\t\t: is_prime(vector<bool>(n))",
+			"\t\t, prime_numbers(vector<int>(0))",
+			"\t\t, prime_divisors(vector<vector<int>>(n))",
+			"\t\t, divisors(vector<vector<int>>(n))",
+			"\t{",
+			"\t\tfor (int i = 1; i < n; i++) {",
+			"\t\t\tif (is_prime[i] = divisors[i].size() == 1) prime_numbers.push_back(i);",
+			"\t\t\tfor (int j = i; j < n; j += i) {",
+			"\t\t\t\tdivisors[j].push_back(i);",
+			"\t\t\t\tif (is_prime[i]) prime_divisors[j].push_back(i);",
+			"\t\t\t}",
+			"\t\t}",
+			"\t}",
+			"};",
+		],
+		"description": "エラストテネスの篩"
+	},
+	"Factorization": {
+		"prefix": "factorization",
+		"body": [
+			"void factorize (int x, map<int, int>& mp) {",
+				"\tfor (int p : prm) {",
+				"\t\twhile (!(x % p)) {",
+				"\t\t\tmp[p]++;",
+				"\t\t\tx /= p;",
+				"\t\t}",
+				"\t\tif (x == 1 || p > ${1:これ以上だと必ず素数}) {",
+				"\t\t\tbreak;",
+				"\t\t}",
+				"\t}",
+				"\tif (x != 1) {",
+				"\t\tmp[x] = 1;",
+				"\t\tx = 1;",
+				"\t}",
+				"}",
+		],
+		"description": "素因数分解"
+	},
+
+	"DFS 1": {
+		"prefix": "dfs1",
+		"body": [
+			"void ${1:dfs} (",
+			"\tint crr",
+			", int prt",
+			", vector<vector<int>>& grh",
+			") {",
+			"\tfor (int nxt : grh[crr]) if (nxt != prt) {",
+			"\t\tdfs(nxt, crr, grh);$0",
+			"\t}",
+			"}",
+		],
+		"description": "親を記憶する方式"
+	},
+	"DFS 2": {
+		"prefix": "dfs2",
+		"body": [
+			"void ${1:dfs} (",
+			"\tint crr",
+			", vector<int>& ckd",
+			", vector<vector<int>>& grh",
+			") {",
+			"\tckd[crr] = true;",
+			"\tfor (int nxt : grh[crr]) if (!ckd[nxt]) {",
+			"\t\tdfs(nxt, ckd, grh);$0",
+			"\t}",
+			"}",
+		],
+		"description": "ckdで管理する方式"
+	},
+	"Low link tree": {
+		"prefix": "low link",
+		"body": [
+			"inline bool chmin (int& a, int b) {",
+			"\tif (a > b) {",
+			"\t\ta = b;",
+			"\t\treturn true;",
+			"\t}",
+			"\treturn false;",
+			"}",
+			"class low_link_tree {",
+			"\tint n;",
+			"\tint tmr = 0;",
+			"\tint rt = 0;",
+			"\tvector<int> ord;",
+			"\tvector<int> low;",
+			"\tset<int> atc;",
+			"\tset<pair<int, int>> bdg;",
+			"\tvector<vector<int>> grh;",
+			"public:",
+			"\tlow_link_tree (",
+			"\t\tvector<vector<int>> const& grh",
+			"\t)",
+			"\t: n(grh.size())",
+			"\t, ord(n, -1)",
+			"\t, low(n, -1)",
+			"\t, grh(grh)",
+			"\t{",
+			"\t\tdfs(0, 0);",
+			"\t}",
+			"\tvoid dfs (",
+			"\t\tint crr",
+			"\t,\tint prt",
+			"\t) {",
+			"\t\tint cnt = 0;",
+			"\t\tord[crr] = low[crr] = tmr++;",
+			"\t\tfor (int nxt : grh[crr]) {",
+			"\t\t\tif (ord[nxt] == -1) {",
+			"\t\t\t\tcnt++;",
+			"\t\t\t\tdfs(nxt, crr);",
+			"\t\t\t\tchmin(low[crr], low[nxt]);",
+			"\t\t\t\tif (crr != rt && ord[crr] <= low[nxt]) atc.insert(crr);",
+			"\t\t\t\tif (ord[crr] < low[nxt]) bdg.emplace(min(crr, nxt), max(crr, nxt));",
+			"\t\t\t}",
+			"\t\t\tif (nxt != prt) chmin(low[crr], ord[nxt]);",
+			"\t\t}",
+			"\t\tif (crr == rt && cnt > 1) atc.insert(crr);",
+			"\t}",
+			"\tauto const &order() {return ord;}",
+			"\tauto const &low_link() {return low;}",
+			"\tauto const &articulation_points() {return atc;}",
+			"\tauto const &bridges() {return bdg;}",
+			"};",
+		],
+		"description": "橋と間接点を検出します"
+	},
+
+	"LIS": {
+		"prefix": "lis",
+		"body": [
+			"\tvector<${2:int}> lis;",
+			"\tfor (auto crr : ${1:コンテナの名前}) {",
+			"\t\tauto lb = lower_bound(lis.begin(), lis.end(), crr);",
+			"\t\tif (lb == lis.end()) lis.push_back(crr);",
+			"\t\telse *lb = crr;",
+			"\t}",
+			"",
+		],
+		"description": "LISを求める"
+	},
+	"binary search": {
+		"prefix": "binary search",
+		"body": [
+			"${1:int} ${2:ok}(${3:0}), ${4:ng}(${5:inf}), md;",
+			"while ($4 - $2 > 1) {",
+			"\tmd = ($2 + $4) >> 1;",
+			"\tif (${6:/*ck(md)*/}) ok = md;",
+			"\telse ng = md;",
+			"}",
+		],
+		"description": "二分探索"
+	},
+	"sakutori algorighm": {
+		"prefix": "shakutori",
+		"body": [
+			"for (; l < ${1:n}; l++) {",
+			"\twhile (r < n && ${2:/*[l, r + 1)が妥当*/]}) {",
+			"\t\tr++;",
+			"\t\t${3:/*[l, r + 1)を訪問*/]};",
+			"\t}",
+			"}",
+		],
+		"description": "尺取り法"
+	},
+
+	"Potential Disjoint Set": {
+		"prefix": "ptdjset",
+		"body": [
+			"class disjoint_set {",
+				"\tpublic:",
+				"\tvector<int> rank, prt, ptl;",
+				"\tdisjoint_set (int size) {",
+				"\t\trank.resize(size);",
+				"\t\tprt.resize(size);",
+				"\t\tptl.resize(size);",
+				"\t\tfor (int i = 0; i < size; i++) {",
+				"\t\t\tprt[i] = i;",
+				"\t\t\trank[i] = 0;",
+				"\t\t\tptl[i] = 0;",
+				"\t\t}",
+				"\t}",
+				"\tint find (int x) {",
+				"\t\tif (x == prt[x]){",
+				"\t\t\treturn x;",
+				"\t\t} else {",
+				"\t\t\tint r = find(prt[x]);",
+				"\t\t\tptl[x] += ptl[prt[x]];",
+				"\t\t\treturn prt[x] = r;",
+				"\t\t}",
+				"\t}",
+				"\tbool is_equiv (int x, int y) {",
+				"\t\treturn find(x) == find(y);",
+				"\t}",
+				"\tbool unite (int x, int y, int w) {",
+				"\t\tif (find(x) == find(y)) {",
+				"\t\t\treturn false;",
+				"\t\t}",
+				"\t\tw += ptl[x];",
+				"\t\tw -= ptl[y];",
+				"\t\tx = find(x);",
+				"\t\ty = find(y);",
+				"\t\tif (rank[x] < rank[y]) {",
+				"\t\t\tswap(x, y);",
+				"\t\t\tw *= -1;",
+				"\t\t}",
+				"\t\tprt[y] = x;",
+				"\t\tptl[y] = w;",
+				"\t\tif (rank[x] == rank[y]) {",
+				"\t\t\trank[x]++;",
+				"\t\t}",
+				"\t\treturn true;",
+				"\t}",
+				"\tint diff (int x, int y) {",
+				"\t\tfind(x);",
+				"\t\tfind(y);",
+				"\t\treturn ptl[y] - ptl[x];",
+				"\t}",
+				"};",
+		],
+		"description": "ポテンシャル付き素集合データ集合"
+	},
+	"Binary Indexed Tree": {
+		"prefix": "binary indexed tree",
+		"body": [
+			"template <typename T>",
+			"class binary_indexed_tree {",
+			"\tint sz;",
+			"\tvector<T> tr;",
+			"\tfunction<T(T, T)> o;",
+			"\tfunction<T(T, T)> dif;",
+			"\tT id;",
+			"\tpublic:",
+			"\t\tbinary_indexed_tree (",
+			"\t\t\tint n",
+			"\t\t, function<T(T, T) > o = [](int a, int b) {return a + b;}",
+			"\t\t, function<T(T, T) > dif = [](int a, int b) {return a - b;}",
+			"\t\t, T id = 0",
+			"\t\t)",
+			"\t\t: sz(n)",
+			"\t\t, tr(n, id)",
+			"\t\t, o(o)",
+			"\t\t, dif(dif)",
+			"\t\t, id(id)",
+			"\t\t{",
+			"\t\t}",
+			"\t\tT query (int l, int r) {",
+			"\t\t\tassert(0 <= l && l <= r && r <= sz);",
+			"\t\t\tif (l == 0) {",
+			"\t\t\t\tr--;",
+			"\t\t\t\tT ret = 0;",
+			"\t\t\t\tfor (; r >= 0; r &= r + 1, r--) ret = o(ret, tr[r]);",
+			"\t\t\t\treturn ret;",
+			"\t\t\t}",
+			"\t\t\treturn dif(query(0, r), query(0, l));",
+			"\t\t}",
+			"\t\tvoid add (int i, T x) {",
+			"\t\t\tfor (; i < sz; i |= i + 1) tr[i] = o(tr[i], x);",
+			"\t\t}",
+			"\t\tvoid print() {",
+			"\t\t\tcout << \"bit: \";",
+			"\t\t\tfor (int i = 0; i < sz; i++) {",
+			"\t\t\t\tcout << query(i, i + 1);",
+			"\t\t\t\tif (i == sz - 1) break;",
+			"\t\t\t\tcout << ' ';",
+			"\t\t\t}",
+			"\t\t\tcout << endl;",
+			"\t\t}",
+			"};"
+		],
+		"description": "BIT"
+	},
+	"Lazy Segment Tree (min, update)": {
+		"prefix": "lzsgt",
+		"body": [
+			"const int infty = (int)((1LL << 31) - 1);",
+			"struct segment_tree {",
+			"\tpublic:",
+			"\t\tint n, N;",
+			"\t\tvector<int> tr, lz, lzf;",
+			"\t\tsegment_tree (vector<int> v) {",
+			"\t\t\tn = v.size();",
+			"\t\t\tN = 1;",
+			"\t\t\twhile (N < n) N <<= 1;",
+			"\t\t\ttr.resize(2 * N, infty);",
+			"\t\t\tlz.resize(2 * N);",
+			"\t\t\tlzf.resize(2 * N, false);",
+			"\t\t\tfor (int i = 0; i < n; i++) tr[N + i] = v[i];",
+			"\t\t\tfor (int i = N - 1; i >= 1; i--) tr[i] = min(tr[2 * i], tr[2 * i + 1]);",
+			"\t\t}",
+			"\t\tinline void pg (int k, int L, int R) {",
+			"\t\t\tif (lzf[k]) {",
+			"\t\t\t\ttr[k] = lz[k];",
+			"\t\t\t\tif (k < N) {",
+			"\t\t\t\t\tlz[2 * k] = lz[2 * k + 1] = lz[k];",
+			"\t\t\t\t\tlzf[2 * k] = lzf[2 * k + 1] = true;",
+			"\t\t\t\t}",
+			"\t\t\t\tlzf[k] = false;",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\tvoid update (int l, int r, int x, int k = 1, int L = 0, int R = -1) {",
+			"\t\t\tif (R == -1) R = N;",
+			"\t\t\tpg(k, L, R);",
+			"\t\t\tif (r <= L || R <= l) {",
+			"\t\t\t\treturn;",
+			"\t\t\t} else if (l <= L && R <= r) {",
+			"\t\t\t\tlz[k] = x;",
+			"\t\t\t\tlzf[k] = true;",
+			"\t\t\t\tpg(k, L, R);",
+			"\t\t\t} else {",
+			"\t\t\t\tint C = (L + R) >> 1;",
+			"\t\t\t\tupdate(l, r, x, 2 * k, L, C);",
+			"\t\t\t\tupdate(l, r, x, 2 * k + 1, C, R);",
+			"\t\t\t\ttr[k] = min(tr[2 * k], tr[2 * k + 1]);",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\tint getMin (int l, int r, int k = 1, int L = 0, int R = -1) {",
+			"\t\t\t if (R == -1) R = N;",
+			"\t\t\tpg(k, L, R);",
+			"\t\t\tif (r <= L || R <= l) {",
+			"\t\t\t\treturn infty;",
+			"\t\t\t} else if (l <= L && R <= r) {",
+			"\t\t\t\treturn tr[k];",
+			"\t\t\t} else {",
+			"\t\t\t\tint C = (L + R) >> 1;",
+			"\t\t\t\treturn min(getMin(l, r, 2 * k, L, C), getMin(l, r, 2 * k + 1, C, R));",
+			"\t\t\t}",
+			"\t\t}",
+			"};$0",
+		],
+		"description": "min, update用 遅延伝播セグメント木"
+	},
+	"sparse table": {
+		"prefix": "sparse table",
+		"body": [
+			"template <typename T>",
+			"class sparse_table {",
+			"\tint sz, ht;",
+			"\tvector<int> dpt;",
+			"\tvector<vector<T>> dat;",
+			"\tconst function<T(T, T)> o;",
+			"\tconst T id;",
+			"",
+			"public:",
+			"\tsparse_table (vector<T> v, function<T(T, T)> o, T id)",
+			"\t\t: sz(v.size())",
+			"\t\t, ht(1)",
+			"\t\t, o(o)",
+			"\t\t, id(id)",
+			"\t{",
+			"\t\twhile ((1 << ht) <= sz) ht++;",
+			"\t\tdpt.assign(sz + 1, 0);",
+			"\t\tdat.assign(ht, v);",
+			"\t\tfor (int j = 2; j <= sz; j++) dpt[j] = dpt[j >> 1] + 1;",
+			"\t\tfor (int i(1), p(1); i < ht; i++, p <<= 1) {",
+			"\t\t\tfor (int j = 0; j < sz; j++) {",
+			"\t\t\t\tdat[i][j] = o(dat[i - 1][j], dat[i - 1][min(j + p, sz - 1)]);",
+			"\t\t\t}",
+			"\t\t}",
+			"\t}",
+			"\tT find (int l, int r) {",
+			"\t\tassert(0 <= l && l <= r && r <= sz);",
+			"\t\tif(l == r) return id;",
+			"\t\tint i = dpt[r - l];",
+			"\t\treturn o(dat[i][l], dat[i][r - (1 << i)]);",
+			"\t}",
+			"\tvoid print () {",
+			"\t\tfor (int i = 0; i < ht; i++) {",
+			"\t\t\tfor (int j = 0; j < sz; j++) {",
+			"\t\t\t\tcout << setw(4) << dat[i][j] << (j < sz - 1 ? ' ' : '\\n');",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\tcout << flush;",
+			"\t}",
+			"};",
+		],
+		"description": "sparse table"
+	},
+
+
+	"Standard input 1": {
+		"prefix": "sin",
+		"body": [
+			"${1:type} $2;",
+			"cin >> $2;",
+		],
+		"description": "標準入力 1"
+	},
+	"Input via a temprary variable": {
+		"prefix": "tin",
+		"body": [
+			"${1:type} tmp;",
+			"cin >> tmp;",
+			"${2:name} = tmp;"
+		],
+		"description": "一時変数を利用した標準入力"
+	},
+	"Standard input 2": {
+		"prefix": "2sin",
+		"body": [
+			"${1:type} $2, $3;",
+			"cin >> $2 >> $3;",
+		],
+		"description": "標準入力 2"
+	},
+	"Standard input 3": {
+		"prefix": "3sin",
+		"body": [
+			"${1:type} $2, $3, $4;",
+			"cin >> $2 >> $3 >> $4;",
+		],
+		"description": "標準入力 3"
+	},
+	"Standard input 4": {
+		"prefix": "4sin",
+		"body": [
+			"${1:type} $2, $3, $4, $5;",
+			"cin >> $2 >> $3 >> $4 >> $5;",
+		],
+		"description": "標準入力 3"
+	},
+	"Standard output 1": {
+		"prefix": "sout",
+		"body": [
+			"cout << $1 << endl;"
+		],
+		"description": "標準出力"
+	},
+	"Error": {
+		"prefix": "err",
+		"body": [
+			"void err() {",
+			"\tcout << ${1:出力} << endl;",
+			"\texit(0);",
+			"}",
+		],
+		"description": "エラー"
+	},
+	"For-loop": {
+		"prefix": "fors",
+		"body": [
+			"for (int $1 = $2; $1 < $3; $1++) {",
+			"\t$0",
+			"}",
+		],
+		"description": "forループ"
+	},
+	"For-loop with iterator": {
+		"prefix": "fior",
+		"body": [
+			"for (auto ${1:変数} = ${2:おなまえ}.begin(); $1 != $2.end(); $1++) {",
+			"\t$0",
+			"}",
+		],
+		"description": "イテレータ―for文"
+	},
+	"All": {
+		"prefix": "all",
+		"body": [
+			"$1.begin(), $1.end()",
+		],
+		"description": "オール"
+	},
+	"Sort": {
+		"prefix": "sort",
+		"body": [
+			"sort($1.begin(), $1.end());$0",
+		],
+		"description": "ソート"
+	},
+	"Reverse-Sort": {
+		"prefix": "rsort",
+		"body": [
+			"sort($1.begin(), $1.end(), greater<${2:中身の型}>);$0",
+		],
+		"description": "ソート"
+	},
+	"Reverse": {
+		"prefix": "rev",
+		"body": [
+			"reverse($1.begin(), $1.end());$0",
+		],
+		"description": "逆"
+	},
+	"Upper-Bound": {
+		"prefix": "upper_bound",
+		"body": [
+			"upper_bound(${1:コンテナの名前}.begin(), $1.end(), ${2:検索対象}) $0"
+		],
+		"description": "upper_bound関数"
+	},
+	"Lower-Bound": {
+		"prefix": "lower_bound",
+		"body": [
+			"lower_bound(${1:コンテナの名前}.begin(), $1.end(), ${2:検索対象}) $0"
+		],
+		"description": "lower_bound関数"
+	},
+	"chmin function": {
+		"prefix": "chmin",
+		"body": [
+			"inline bool chmin ($1& a, $1 b) {",
+			"\tif (a > b) {",
+			"\t\ta = b;",
+			"\t\treturn true;",
+			"\t}",
+			"\treturn false;",
+			"}",
+		],
+		"description": "chmin関数"
+	},
+	"chmax function": {
+		"prefix": "chmax",
+		"body": [
+			"inline bool chmax ($1& a, $1 b) {",
+			"\tif (a < b) {",
+			"\t\ta = b;",
+			"\t\treturn true;",
+			"\t}",
+			"\treturn false;",
+			"}",
+		],
+		"description": "chmax関数"
+	},
+
+	"Grid": {
+		"prefix": "grd",
+		"body": [
+			"int d$1[4] = {-1, +1, 0, 0};",
+			"int d$2[4] = {0, 0, -1, +1};$0",
+		],
+		"description": "ソート"
+	},
+	
+	"Vector": {
+		"prefix": "vec",
+		"body": [
+			"vector<$1> $0",
+		],
+		"description": "可変配列型"
+	},
+	"Vector of Vectors": {
+		"prefix": "vecvec",
+		"body": [
+			"vector<vector<$1>> $0",
+		],
+		"description": "二重可変配列型"
+	},
+	"Vector of Pairs": {
+		"prefix": "vecpair",
+		"body": [
+			"vector<pair<$1, $2>> $0",
+		],
+		"description": "ペアの可変配列型"
+	},
+	"Pair": {
+		"prefix": "pair",
+		"body": [
+			"pair<$1, $2> $0",
+		],
+		"description": "ペア型"
+	},
+
+	"Chrono begin": {
+		"prefix": "chbgn",
+		"body": [
+			"chrono::high_resolution_clock::time_point begin = chrono::high_resolution_clock::now();"
+		],
+		"description": "計時始め"
+	},
+	"Chrono end": {
+		"prefix": "chend",
+		"body": [
+			"chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();",
+			"chrono::milliseconds elapsed_time = chrono::duration_cast<chrono::milliseconds>(end - begin);",
+			"std::cout << \"Time:\" << elapsed_time.count() << \"ms\" << std::endl;",
+		],
+		"description": "計時終わり"
+	},
+	"Check-in and -out": {
+		"prefix": "check",
+		"body": [
+			"printf(\"/%d\\n\", ${1:crr});",
+			"printf(\"\\\\\\\\%d\\n\", ${1:crr});",
+		],
+		"description": "チェックイン・アウト"
+	},
+
+	"Finite Loop": {
+		"prefix": "flop",
+		"body": [
+			"/* ↓ 消し忘れないで！！！ ↓ */",
+			"int loop_cnt = ${1: ループ回数}; // お願い！！",
+			"/* ↑ いや振りじゃないから ↑ */",
+		],
+		"description": "ループを有限にする"
+	},
+	"Debugging Scope": {
+		"prefix": "dbg",
+		"body": [
+			"{ // debug",
+			"\t$0",
+			"}",
+		],
+		"description": "メッセージ"
+	},
+	"None debug": {
+		"prefix": "ndbg",
+		"body": [
+			"cout << \"$0\" << endl;",
+		],
+		"description": "メッセージ"
+	},
+	"New line": {
+		"prefix": "newline",
+		"body": [
+			"cout << endl;",
+		],
+		"description": "メッセージ"
+	},
+	"Single debug": {
+		"prefix": "sdbg",
+		"body": [
+			"{ // debug",
+			"\tcout << \"$1 = \" << ${1:おなまえ} << endl;",
+			"} //",
+		],
+		"description": "単一の値のデバッグ"
+	},
+	"Simplified single debug": {
+		"prefix": "-sdbg",
+		"body": [
+			"cout << ${1:おなまえ};",
+		],
+		"description": "単一の値のデバッグ"
+	},
+	"Pair debug": {
+		"prefix": "pdbg",
+		"body": [
+			"{ // debug",
+			"\tcout << \"$1 = (\" << ${1:おなまえ}${2:.}first << \", \" <<\t$1$2second << \")\" << endl;",
+			"} //",
+			],
+		"description": "ペアのデバッグ"
+	},
+	"Simplified Pair debug": {
+		"prefix": "-pdbg",
+		"body": [
+			"cout << \"(\" << ${1:おなまえ}${2:.}first << \", \" <<\t$1$2second << \")\";",
+		],
+		"description": "簡略版ペアのデバッグ"
+	},
+	"Simplified Pair-Pair debug": {
+		"prefix": "-ppdbg",
+		"body": [
+			"cout << \"(\" << ${1:おなまえ}${2:.}${3:first.first} << \", \" << $1$2$4 << \", \" << $1$2$5 << \")\";",
+		],
+		"description": "簡略版三対のデバッグ"
+	},
+	"Vector debug": {
+		"prefix": "vdbg",
+		"body": [
+			"{ // debug",
+			"\tcout << \"$1: \";",
+			"\tfor (auto ${2:it} = ${1:おなまえ}.begin(); $2 != $1.end(); $2++) {",
+			"\t\t${3:cout << }$0",
+			"\t\tcout << (next($2) == $1.end() ? \"\\n\" : \", \");",
+			"\t}",
+			"\tcout << endl;",
+			"} //",
+		],
+		"description": "コンテナのデバッグ"
+	},
+	"Map debug": {
+		"prefix": "mdbg",
+		"body" : [
+			"{ // debug",
+			"\tfor (auto ${2:it} = ${1:mp}.begin(); $2 != $1.end(); $2++) {",
+			"\t\tcout << \"mp[\";",
+			"\t\t${3:cout << it->first;}",
+			"\t\tcout << \"] = \" << $2->second << \"\" << (next($2) == $1.end() ? \"\\n\" : \", \");",
+			"\t}",
+			"} //",
+		],
+		"description": "連想配列のデバッグ"
+	},
+	"Vector-of-Pair debug": {
+		"prefix": "vpdbg",
+		"body": [
+			"{ // debug",
+			"\tcout << \"${1:おなまえ}: \";",
+			"\tfor (auto ${2:it} = $1.begin(); $2 != $1.end(); $2++) {",
+			"\t\tcout << \"(\" << $2->first << \", \" << $2->second << \")\" << (next($2) == $1.end() ? \"\\\\n\" : \", \");",
+			"\t}",
+			"\tcout << endl;",
+			"} //",
+		],
+		"description": "ペアのコンテナのデバッグ"
+	},
+	"Vector-Vector debug": {
+		"prefix": "vvdbg",
+		"body": [
+			"{// begin: debug vector-vector ${1:vector-vector name}",
+			"\tcout << \"--------------------------------------\" << '\\n';",
+			"\tcout << setw(${5:vector-vector name plaze size}) << left << \"$1\";",
+			"\tfor (int ${2:row index} = 0; $2 < $1.size(); $2++)",
+			"\t{",
+			"\t\t{",
+			"\t\t\tif ($2 != 0) {",
+			"\t\t\t\tcout << setw($5) << \" \";",
+			"\t\t\t}",
+			"\t\t\tcout << \"$2 = \" << setw(2) << right << $2 << \": \";",
+			"\t\t\tfor (int ${3:column index} = 0; $3 < $1[$2].size(); $3++)",
+			"\t\t\t{",
+			"\t\t\t\tcout << setw(${4:output place size}) << right << $1[$2][$3];",
+			"\t\t\t\tif ($3 != $1[$2].size() - 1) {",
+			"\t\t\t\t\tcout << \" \";",
+			"\t\t\t\t}",
+			"\t\t\t}",
+			"\t\t\tcout << '\\n';",
+			"\t\t}",
+			"\t}",
+			"\tcout << \"--------------------------------------\" << '\\n';",
+			"} // end: debug",
+		],
+		"description": "可変配列のデバッグ"
+	},
+	"Binary Indexed Tree debug": {
+		"prefix": "btdbg",
+		"body": [
+			"{// begin: debug",
+			"\tprintf(\"${1:name}: \");",
+			"\tint lgt = $1.getSize();",
+			"\tfor (int ind = 0; ind < lgt; ind++){",
+			"\t\tauto elm = $1.getSum(ind);",
+			"\t\tif (ind) {",
+			"\t\t\telm -= $1.getSum(ind - 1);",
+			"\t\t}",
+			"\t\tprintf(\"%d\", elm);",
+			"\t\tif (ind == lgt - 1) {",
+			"\t\t\tprintf(\"\\n\");",
+			"\t\t} else {",
+			"\t\t\tprintf(\", \");",
+			"\t\t}",
+			"\t}",
+			"} // end: debug",
+		],
+		"description": "BITのデバッグ"
+	},
+	"Segment Tree debug": {
+		"prefix": "sgtdbg",
+		"body": [
+			"{ // dbg ${1:セグメント木の名前}.dat",
+			"\tcout << \"$1.dat:\" << '\\n';",
+			"\tint ht = $1.ht;",
+			"\tauto dat = $1.dat;",
+			"\tconst int dgtlen = 12;",
+			"\tfor (int d = 0; d < ht; d++) {",
+			"\t\tcout << \"\t\";",
+			"\t\tfor (int i = 0; i < (1 << d); i++) {",
+			"\t\t\tcout << setw(dgtlen * (1 << (ht - d - 1))) << left << dat[(1 << d) + i];",
+			"\t\t}",
+			"\t\tcout << '\\n';",
+			"\t}",
+			"} //",
+		],
+		"description": "セグメント木のデバッグ"
+	},
