@@ -87,13 +87,13 @@ function make_link {
   )
   $outstr = "- ["
   $outstr += [System.IO.Path]::GetFileNameWithoutExtension($infile.Name).replace("_", " ")
-  $outstr += "](library/blob/master/"
+  $outstr += "](\"
   $outstr += Resolve-Path $infile.fullname-Relative
   $outstr += ")"
   $outstr | Add-Content $readme
 }
 
-$readme = "readme.md"
+$readme = "docs/readme.md"
 Clear-Content $readme
 
 "# Library" | Add-Content $readme

@@ -1,14 +1,14 @@
 # Library
-- [binary indexed tree](.\library\datasets_and_queries\binary_indexed_tree.cpp)
-- [disjoint set](.\library\datasets_and_queries\disjoint_set.cpp)
-- [lazy segment tree](.\library\datasets_and_queries\lazy_segment_tree.cpp)
-- [potential disjoint set](.\library\datasets_and_queries\potential_disjoint_set.cpp)
-- [segment tree](.\library\datasets_and_queries\segment_tree.cpp)
-- [sparse table](.\library\datasets_and_queries\sparse_table.cpp)
-- [dfs1](.\library\graph_algorithms\dfs1.cpp)
-- [dfs2](.\library\graph_algorithms\dfs2.cpp)
-- [low link tree](.\library\graph_algorithms\low_link_tree.cpp)
-- [tree dfs](.\library\graph_algorithms\tree_dfs.cpp)
+- [binary indexed tree](\.\library\datasets_and_queries\binary_indexed_tree.cpp)
+- [disjoint set](\.\library\datasets_and_queries\disjoint_set.cpp)
+- [lazy segment tree](\.\library\datasets_and_queries\lazy_segment_tree.cpp)
+- [potential disjoint set](\.\library\datasets_and_queries\potential_disjoint_set.cpp)
+- [segment tree](\.\library\datasets_and_queries\segment_tree.cpp)
+- [sparse table](\.\library\datasets_and_queries\sparse_table.cpp)
+- [dfs1](\.\library\graph_algorithms\dfs1.cpp)
+- [dfs2](\.\library\graph_algorithms\dfs2.cpp)
+- [low link tree](\.\library\graph_algorithms\low_link_tree.cpp)
+- [tree dfs](\.\library\graph_algorithms\tree_dfs.cpp)
 
 # How to use script
 ## できること
