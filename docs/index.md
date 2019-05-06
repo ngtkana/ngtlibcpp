@@ -10,4 +10,8 @@
 	- [dfs1](graph_algorithms/dfs1.md)
 	- [dfs2](graph_algorithms/dfs2.md)
 	- [low link tree](graph_algorithms/low_link_tree.md)
-	- [tree dfs](graph_algorithms/tree_dfs.md)
+- number_theory
+	- [factorials](number_theory/factorials.md)
+	- [factorize](number_theory/factorize.md)
+	- [gcd](number_theory/gcd.md)
+	- [sieve of eratosthenes](number_theory/sieve_of_eratosthenes.md)

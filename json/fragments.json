@@ -10,7 +10,6 @@
 		],
 		"description": "基本的なテンプレート"
 	},
-
 	"Mod calculations": {
 		"prefix": "mdcal",
 		"body": [
@@ -53,93 +52,6 @@
 			"}",
 		],
 		"description": "四則演算"
-	},
-	"Combination": {
-		"prefix": "cmb",
-		"body": [
-			"struct factorials {",
-			"\tconst int sz;",
-			"\tvector<int> fct, fnv;",
-			"\tfactorials (int n)",
-			"\t\t: sz(n)",
-			"\t\t, fct(n, 1)",
-			"\t\t, fnv(n, 1)",
-			"\t\t{",
-			"\t\t\tfor (int i = 1; i < n; i++) fct[i] = mul(fct[i - 1], i);",
-			"\t\t\tfnv[n - 1] = inv(fct[n - 1]);",
-			"\t\t\tfor (int i = n - 1; i >= 1; i--) fnv[i - 1] = mul(fnv[i], i);",
-			"\t\t}",
-			"\tinline int binom (int n, int k) {",
-			"\t\tassert(0 <= k && k <= n && n < sz);",
-			"\t\treturn mul(fct[n], mul(fnv[k], fnv[n - k]));",
-			"\t}",
-			"};",
-			"",
-		],
-		"description": "組合せの数"
-	},
-	"Greatest common divisor": {
-		"prefix": "gcd",
-		"body": [
-			"$1 gcd ($1 a, $1 b) {",
-				"\tif (a < 0) a = -a;",
-				"\tif (b < 0) b = -b;",
-				"\tif (a < b) swap(a, b);",
-				"\twhile (b) {",
-				"\t\ta %= b;",
-				"\t\tswap(a, b);",
-				"\t}",
-				"\treturn a;",
-				"}$0",
-		],
-		"description": "ユークリッドの互除法を用いて最大公約数を求める"
-	},
-	"Sieve of Eratosthenes": {
-		"prefix": "sieve of eratosthenes",
-		"body": [
-			"struct sieve_of_eratosthenes {",
-			"\tvector<bool> is_prime;",
-			"\tvector<int> prime_numbers;",
-			"\tvector<vector<int>> prime_divisors;",
-			"\tvector<vector<int>> divisors;",
-			"\tsieve_of_eratosthenes(int n)",
-			"\t\t: is_prime(vector<bool>(n))",
-			"\t\t, prime_numbers(vector<int>(0))",
-			"\t\t, prime_divisors(vector<vector<int>>(n))",
-			"\t\t, divisors(vector<vector<int>>(n))",
-			"\t{",
-			"\t\tfor (int i = 1; i < n; i++) {",
-			"\t\t\tif (is_prime[i] = divisors[i].size() == 1) prime_numbers.push_back(i);",
-			"\t\t\tfor (int j = i; j < n; j += i) {",
-			"\t\t\t\tdivisors[j].push_back(i);",
-			"\t\t\t\tif (is_prime[i]) prime_divisors[j].push_back(i);",
-			"\t\t\t}",
-			"\t\t}",
-			"\t}",
-			"};",
-		],
-		"description": "エラストテネスの篩"
-	},
-	"Factorization": {
-		"prefix": "factorization",
-		"body": [
-			"void factorize (int x, map<int, int>& mp) {",
-				"\tfor (int p : prm) {",
-				"\t\twhile (!(x % p)) {",
-				"\t\t\tmp[p]++;",
-				"\t\t\tx /= p;",
-				"\t\t}",
-				"\t\tif (x == 1 || p > ${1:これ以上だと必ず素数}) {",
-				"\t\t\tbreak;",
-				"\t\t}",
-				"\t}",
-				"\tif (x != 1) {",
-				"\t\tmp[x] = 1;",
-				"\t\tx = 1;",
-				"\t}",
-				"}",
-		],
-		"description": "素因数分解"
 	},
 
 
