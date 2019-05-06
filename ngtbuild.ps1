@@ -1,7 +1,7 @@
 # ----------------------------------------------
 # build .vocode/cpp.code-snippets
 # ----------------------------------------------
-$snippets = "./.vscode/cpp.code-snippets"
+$snippets = "./.vscode/snippets.json"
 Clear-Content $snippets
 
 function ngtwrite {
@@ -58,17 +58,7 @@ function parse {
 }
 
 
-ngtwrite "{" | Add-Content $snippets
 
-Get-ChildItem -Recurse -Path library/*.cpp | ForEach-Object {
-  parse $_ | Add-Content $snippets
-}
-
-# Get-ChildItem -Path library/fragments/*.json | ForEach-Object {
-#   Get-Content -Encoding UTF8 $_.FullName | Add-Content -Encoding UTF8 $snippets
-# }
-
-ngtwrite "}" 0 | Add-Content $snippets
 
 
 
@@ -77,19 +67,6 @@ ngtwrite "}" 0 | Add-Content $snippets
 # ----------------------------------------------
 $index = "docs/index.md"
 Clear-Content $index
-
-function make_link {
-  param (
-    $inpath
-  )
-  $outstr = "`t- ["
-  $outstr += [System.IO.Path]::GetFileNameWithoutExtension($inpath).replace("_", " ")
-  $outstr += "]("
-  $outstr += $inpath
-  $outstr += (Resolve-Path $inpath -Relative).remove(0, 2)
-  $outstr += ")"
-  $outstr | Write-Output
-}
 
 function write_markdown {
   param (
@@ -110,12 +87,28 @@ function write_markdown {
   Write-Output "``````"
 }
 
+function make_link {
+  param (
+    $inpath
+  )
+  $outstr = "`| ["
+  $outstr += [System.IO.Path]::GetFileNameWithoutExtension($inpath).replace("_", " ")
+  $outstr += "]("
+  $outstr += $inpath
+  $outstr += (Resolve-Path $inpath -Relative).remove(0, 2)
+  $outstr += ") |"
+  $outstr | Write-Output
+}
+
 function make_links_and_markdowns {
   param (
     $indir
   )
-  "- " + $indir.name | Add-Content $index
+  "## " + $indir.name | Add-Content $index
+  "" | Add-Content $index
 
+  "|snippet name|" | Add-Content $index
+  "---" | Add-Content $index
   $outdir = $indir.name
   Get-ChildItem $indir.fullname | ForEach-Object {
     $name_without_ext = [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
@@ -123,12 +116,12 @@ function make_links_and_markdowns {
     $outpath = $outdir + "/"
     $outpath += $name_without_ext
     $outpath += ".md"
-    $docs_outpath = "docs/" + $outpath
+    $docs_outpath = $outpath
 
     New-Item -Force $docs_outpath
     "# " + $name_without_ext | Add-Content $docs_outpath
     write_markdown $_.fullname | Add-Content $docs_outpath
-    make_link $outpath | Add-Content $index
+    make_link $docs_outpath | Add-Content $index
   }
 }
 
@@ -138,3 +131,14 @@ Get-ChildItem library | ForEach-Object {
   make_links_and_markdowns $_
 }
 
+ngtwrite "{" | Add-Content $snippets
+
+Get-ChildItem -Recurse -Path library/*.cpp | ForEach-Object {
+  parse $_ | Add-Content $snippets
+}
+
+Get-ChildItem -Path json/fragments.json | ForEach-Object {
+  Get-Content -Encoding UTF8 $_.FullName | Add-Content -Encoding UTF8 $snippets
+}
+
+ngtwrite "}" 0 | Add-Content $snippets
