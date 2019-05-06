@@ -1,7 +1,7 @@
 # ----------------------------------------------
 # build .vocode/cpp.code-snippets
 # ----------------------------------------------
-$snippets = "./.vscode/snippets.json"
+$snippets = "build/snippets.json"
 Clear-Content $snippets
 
 function ngtwrite {
@@ -96,7 +96,7 @@ function make_link {
   $outstr += "]("
   $outstr += (Resolve-Path $inpath -Relative).remove(0, 7)
   $outstr += ") |"
-  $outstr | Write-Output
+  Write-Output $outstr 
 }
 
 function make_links_and_markdowns {
@@ -120,8 +120,9 @@ function make_links_and_markdowns {
     New-Item -Force $docs_outpath
     "# " + $name_without_ext | Add-Content $docs_outpath
     write_markdown $_.fullname | Add-Content $docs_outpath
-    make_link $outpath | Add-Content $index
+    make_link $docs_outpath | Add-Content $index
   }
+  "" | Add-Content $index
 }
 
 

@@ -1,0 +1,939 @@
+{
+	"all": {
+		"prefix": "all",
+		"body": [
+			"${1:おなまえ}.begin(), $1.end()"
+		],
+		"description": "none"
+	},
+	"bug": {
+		"prefix": "bug",
+		"body": [
+			"/* ↓ 消し忘れないで！！！ ↓ */",
+			"$0 // お願い！！",
+			"/* ↑ いや振りじゃないから ↑ */"
+		],
+		"description": "none"
+	},
+	"check": {
+		"prefix": "check",
+		"body": [
+			"printf(\"/%d\n\", ${1:crr});",
+			"printf(\"\\%d\n\", ${1:crr});"
+		],
+		"description": "none"
+	},
+	"chmax": {
+		"prefix": "chmax",
+		"body": [
+			"template<typename T1, typename T2>",
+			"inline bool chmax (T1& a, T2 b) {",
+			"\tif (a < b) a = b, return true;",
+			"\treturn false;",
+			"}"
+		],
+		"description": "none"
+	},
+	"chmin": {
+		"prefix": "chmin",
+		"body": [
+			"template<typename T1, typename T2>",
+			"inline bool chmin (T1& a, T2 b) {",
+			"\tif (a > b) a = b, return true;",
+			"\treturn false;",
+			"}"
+		],
+		"description": "none"
+	},
+	"didj": {
+		"prefix": "didj",
+		"body": [
+			"int d${1:i}[4] = {-1, +1, 0, 0};",
+			"int d${2:j}[4] = {0, 0, -1, +1};"
+		],
+		"description": "none"
+	},
+	"lower bound": {
+		"prefix": "lower bound",
+		"body": [
+			"lower_bound(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});"
+		],
+		"description": "none"
+	},
+	"mdcal": {
+		"prefix": "mdcal",
+		"body": [
+			"constexpr int md = ${1:1e9 + 7};",
+			"inline void add(int &a, int b) {",
+			"\ta += b;",
+			"\tif (a >= md) a -= md;",
+			"}",
+			"inline void sub(int &a, int b) {",
+			"\ta -= b;",
+			"\tif (a < 0) a += md;",
+			"}",
+			"inline int mul(int a, int b) {",
+			"\treturn (int)((long long)a * b % md);",
+			"}",
+			"inline int power(int a, long long b) {",
+			"\tint res = 1;",
+			"\twhile (b > 0) {",
+			"\t\tif (b & 1) {",
+			"\t\t\tres = mul(res, a);",
+			"\t\t\tb--;",
+			"\t\t}",
+			"\t\ta = mul(a, a);",
+			"\t\tb >>= 1;",
+			"\t}",
+			"\treturn res;",
+			"}",
+			"inline int inv(int a) {",
+			"\ta %= md;",
+			"\tif(a < 0) a += md;",
+			"\tint b = md, u = 0, v = 1;",
+			"\twhile (a) {",
+			"\t\tint t = b / a;",
+			"\t\tb -= a * t; swap(a, b);",
+			"\t\tu -= v * t; swap(u, v);",
+			"\t}",
+			"\tassert(b == 1);",
+			"\tif(u < 0) u += md;",
+			"\treturn u;",
+			"}"
+		],
+		"description": "none"
+	},
+	"pair": {
+		"prefix": "pair",
+		"body": [
+			"pair<${1:int}, ${2:int}> ${3:おなまえ}(${4:0}, ${5:0})$0;"
+		],
+		"description": "none"
+	},
+	"reverse": {
+		"prefix": "reverse",
+		"body": [
+			"reverse(${1:おなまえ}.begin(), ${1:おなまえ}.end());"
+		],
+		"description": "none"
+	},
+	"sort": {
+		"prefix": "sort",
+		"body": [
+			"sort(${1:おなまえ}.begin(), ${1:おなまえ}.end());"
+		],
+		"description": "none"
+	},
+	"sort reverse": {
+		"prefix": "sort reverse",
+		"body": [
+			"sort(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:greator<${3:int}>});"
+		],
+		"description": "none"
+	},
+	"stemp": {
+		"prefix": "stemp",
+		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"int main() {",
+			"\t",
+			"\treturn 0;",
+			"}"
+		],
+		"description": "none"
+	},
+	"upper": {
+		"prefix": "upper",
+		"body": [
+			"upper(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});"
+		],
+		"description": "none"
+	},
+	"vec": {
+		"prefix": "vec",
+		"body": [
+			"vector<${1:int}> ${2:おなまえ}(${3:n}, ${4:0})$0;"
+		],
+		"description": "none"
+	},
+	"vecpair": {
+		"prefix": "vecpair",
+		"body": [
+			"vector<pair<${1:int}, ${2:int}>> ${3:おなまえ}(${4:n}, {${5:0}, ${6:0}})$0;"
+		],
+		"description": "none"
+	},
+	"vecvec": {
+		"prefix": "vecvec",
+		"body": [
+			"vector<vector<${1:int}>> ${2:おなまえ}(${3:h}, vector<$1>(${4:w}, ${5:0}))$0;"
+		],
+		"description": "none"
+	},
+	"vecvecpair": {
+		"prefix": "vecvecpair",
+		"body": [
+			"vector<vector<pair<${1:int}, ${2:int}>>> ${3:おなまえ}(${4:h}, vector<pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;"
+		],
+		"description": "none"
+	},
+	"binary indexed tree": {
+		"prefix": "binary indexed tree",
+		"body": [
+			"template <typename T>",
+			"class binary_indexed_tree {",
+			"\tint sz;",
+			"\tvector<T> tr;",
+			"\tfunction<T(T, T)> o;",
+			"\tfunction<T(T, T)> dif;",
+			"\tT id;",
+			"\tpublic:",
+			"\t\tbinary_indexed_tree (",
+			"\t\t\tint n",
+			"\t\t, function<T(T, T) > o = [](int a, int b) {return a + b;}",
+			"\t\t, function<T(T, T) > dif = [](int a, int b) {return a - b;}",
+			"\t\t, T id = 0",
+			"\t\t)",
+			"\t\t: sz(n)",
+			"\t\t, tr(n, id)",
+			"\t\t, o(o)",
+			"\t\t, dif(dif)",
+			"\t\t, id(id)",
+			"\t\t{",
+			"\t\t}",
+			"\t\tT query (int l, int r) {",
+			"\t\t\tassert(0 <= l && l <= r && r <= sz);",
+			"\t\t\tif (l == 0) {",
+			"\t\t\t\tr--;",
+			"\t\t\t\tT ret = 0;",
+			"\t\t\t\tfor (; r >= 0; r &= r + 1, r--) ret = o(ret, tr[r]);",
+			"\t\t\t\treturn ret;",
+			"\t\t\t}",
+			"\t\t\treturn dif(query(0, r), query(0, l));",
+			"\t\t}",
+			"\t\tvoid add (int i, T x) {",
+			"\t\t\tfor (; i < sz; i |= i + 1) tr[i] = o(tr[i], x);",
+			"\t\t}",
+			"\t\tvoid print() {",
+			"\t\t\tcout << \"bit: \";",
+			"\t\t\tfor (int i = 0; i < sz; i++) {",
+			"\t\t\t\tcout << query(i, i + 1);",
+			"\t\t\t\tif (i == sz - 1) break;",
+			"\t\t\t\tcout << ' ';",
+			"\t\t\t}",
+			"\t\t\tcout << endl;",
+			"\t\t}",
+			"};"
+		],
+		"description": "none"
+	},
+	"disjoint set": {
+		"prefix": "disjoint set",
+		"body": [
+			"struct disjoint_set {",
+			"\tint n;",
+			"\tvector<int> prt;",
+			"\tdisjoint_set (int n)",
+			"\t\t: n(n)",
+			"\t\t, prt(n, -1)",
+			"\t{}",
+			"\tbool is_root (int x) {return prt[x] < 0;}",
+			"\tint size (int x) {return prt[find(x)];}",
+			"\tbool equiv (int x, int y) {return find(x) == find(y);}",
+			"\tint find (int x) {",
+			"\t\tif (is_root(x)) return x;",
+			"\t\telse return prt[x] = find(prt[x]);",
+			"\t}",
+			"\tbool unite (int x, int y) {",
+			"\t\tx = find(x);",
+			"\t\ty = find(y);",
+			"\t\tif (x == y) return false;",
+			"\t\tif (size(x) < size(y)) swap(x, y);",
+			"\t\tprt[x] += prt[y];",
+			"\t\tprt[y] = x;",
+			"\t\treturn true;",
+			"\t}",
+			"};"
+		],
+		"description": "none"
+	},
+	"lazy segment tree": {
+		"prefix": "lazy segment tree",
+		"body": [
+			"const int infty = (int)((1LL << 31) - 1);",
+			"struct lazy_segment_tree {",
+			"\tpublic:",
+			"\t\tint n, N;",
+			"\t\tvector<int> tr, lz, lzf;",
+			"\t\tlazy_segment_tree (vector<int> v) {",
+			"\t\t\tn = v.size();",
+			"\t\t\tN = 1;",
+			"\t\t\twhile (N < n) N <<= 1;",
+			"\t\t\ttr.resize(2 * N, infty);",
+			"\t\t\tlz.resize(2 * N);",
+			"\t\t\tlzf.resize(2 * N, false);",
+			"\t\t\tfor (int i = 0; i < n; i++) tr[N + i] = v[i];",
+			"\t\t\tfor (int i = N - 1; i >= 1; i--) tr[i] = min(tr[2 * i], tr[2 * i + 1]);",
+			"\t\t}",
+			"\t\tinline void pg (int k, int L, int R) {",
+			"\t\t\tif (lzf[k]) {",
+			"\t\t\t\ttr[k] = lz[k];",
+			"\t\t\t\tif (k < N) {",
+			"\t\t\t\t\tlz[2 * k] = lz[2 * k + 1] = lz[k];",
+			"\t\t\t\t\tlzf[2 * k] = lzf[2 * k + 1] = true;",
+			"\t\t\t\t}",
+			"\t\t\t\tlzf[k] = false;",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\tvoid update (int l, int r, int x, int k = 1, int L = 0, int R = -1) {",
+			"\t\t\tif (R == -1) R = N;",
+			"\t\t\tpg(k, L, R);",
+			"\t\t\tif (r <= L || R <= l) {",
+			"\t\t\t\treturn;",
+			"\t\t\t} else if (l <= L && R <= r) {",
+			"\t\t\t\tlz[k] = x;",
+			"\t\t\t\tlzf[k] = true;",
+			"\t\t\t\tpg(k, L, R);",
+			"\t\t\t} else {",
+			"\t\t\t\tint C = (L + R) >> 1;",
+			"\t\t\t\tupdate(l, r, x, 2 * k, L, C);",
+			"\t\t\t\tupdate(l, r, x, 2 * k + 1, C, R);",
+			"\t\t\t\ttr[k] = min(tr[2 * k], tr[2 * k + 1]);",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\tint getMin (int l, int r, int k = 1, int L = 0, int R = -1) {",
+			"\t\t\t if (R == -1) R = N;",
+			"\t\t\tpg(k, L, R);",
+			"\t\t\tif (r <= L || R <= l) {",
+			"\t\t\t\treturn infty;",
+			"\t\t\t} else if (l <= L && R <= r) {",
+			"\t\t\t\treturn tr[k];",
+			"\t\t\t} else {",
+			"\t\t\t\tint C = (L + R) >> 1;",
+			"\t\t\t\treturn min(getMin(l, r, 2 * k, L, C), getMin(l, r, 2 * k + 1, C, R));",
+			"\t\t\t}",
+			"\t\t}",
+			"};"
+		],
+		"description": "none"
+	},
+	"potential disjoint set": {
+		"prefix": "potential disjoint set",
+		"body": [
+			"class potential_disjoint_set {",
+			"\tpublic:",
+			"\tvector<int> rank, prt, ptl;",
+			"\tpotential_disjoint_set (int size) {",
+			"\t\trank.resize(size);",
+			"\t\tprt.resize(size);",
+			"\t\tptl.resize(size);",
+			"\t\tfor (int i = 0; i < size; i++) {",
+			"\t\t\tprt[i] = i;",
+			"\t\t\trank[i] = 0;",
+			"\t\t\tptl[i] = 0;",
+			"\t\t}",
+			"\t}",
+			"\tint find (int x) {",
+			"\t\tif (x == prt[x]){",
+			"\t\t\treturn x;",
+			"\t\t} else {",
+			"\t\t\tint r = find(prt[x]);",
+			"\t\t\tptl[x] += ptl[prt[x]];",
+			"\t\t\treturn prt[x] = r;",
+			"\t\t}",
+			"\t}",
+			"\tbool is_equiv (int x, int y) {",
+			"\t\treturn find(x) == find(y);",
+			"\t}",
+			"\tbool unite (int x, int y, int w) {",
+			"\t\tif (find(x) == find(y)) {",
+			"\t\t\treturn false;",
+			"\t\t}",
+			"\t\tw += ptl[x];",
+			"\t\tw -= ptl[y];",
+			"\t\tx = find(x);",
+			"\t\ty = find(y);",
+			"\t\tif (rank[x] < rank[y]) {",
+			"\t\t\tswap(x, y);",
+			"\t\t\tw *= -1;",
+			"\t\t}",
+			"\t\tprt[y] = x;",
+			"\t\tptl[y] = w;",
+			"\t\tif (rank[x] == rank[y]) {",
+			"\t\t\trank[x]++;",
+			"\t\t}",
+			"\t\treturn true;",
+			"\t}",
+			"\tint diff (int x, int y) {",
+			"\t\tfind(x);",
+			"\t\tfind(y);",
+			"\t\treturn ptl[y] - ptl[x];",
+			"\t}",
+			"};"
+		],
+		"description": "none"
+	},
+	"segment tree": {
+		"prefix": "segment tree",
+		"body": [
+			"template< typename T >",
+			"class segment_tree {",
+			"\tint sz;",
+			"\tvector<T> seg;",
+			"\tconst function<T(T, T)> o;",
+			"\tconst T id;",
+			"publ",
+			"\tsegment_tree(int n, const function<T(T, T)> o, const T id)",
+			"\t\t: o(o)",
+			"\t\t, id(id)",
+			"\t{",
+			"\t\tsz = 1;",
+			"\t\twhile(sz < n) sz <<= 1;",
+			"\t\tseg.assign(2 * sz, id);",
+			"\t}",
+			"\tvoid update(int k, const T &x) {",
+			"\t\tk += sz;",
+			"\t\tseg[k] = x;",
+			"\t\twhile(k >>= 1) {",
+			"\t\t\tseg[k] = o(seg[2 * k], seg[2 * k + 1]);",
+			"\t\t}",
+			"\t}",
+			"\tT find(int l, int r) {",
+			"\t\tT L = id, R = id;",
+			"\t\tfor(l += sz, r += sz; l < r; l >>= 1, r >>= 1) {",
+			"\t\t\tif(l & 1) L = o(L, seg[l++]);",
+			"\t\t\tif(r & 1) R = o(seg[--r], R);",
+			"\t\t}",
+			"\t\treturn o(L, R);",
+			"\t}",
+			"\tT operator[](const int &k) const {",
+			"\t\treturn seg[k + sz];",
+			"\t}",
+			"\tvoid print() {",
+			"\t\tcout << \"segment_tree:\" << endl;",
+			"\t\tint crr = 1;",
+			"\t\tfor (int p = sz; p; p >>= 1) {",
+			"\t\t\tfor (int i = 0; i < sz; i++) {",
+			"\t\t\t\tcout",
+			"\t\t\t\t\t\t<< setw(12)",
+			"\t\t\t\t\t\t<< (i % p == 0 ? to_string(seg[crr++]) : \"\")",
+			"\t\t\t\t\t\t<< (i < sz - 1 ? \"\" : \"\n\");",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\tcout << endl;",
+			"\t}",
+			"};"
+		],
+		"description": "none"
+	},
+	"sparse table": {
+		"prefix": "sparse table",
+		"body": [
+			"template <typename T>",
+			"class sparse_table {",
+			"\tint sz, ht;",
+			"\tvector<int> dpt;",
+			"\tvector<vector<T>> dat;",
+			"\tconst function<T(T, T)> o;",
+			"\tconst T id;",
+			"",
+			"public:",
+			"\tsparse_table (vector<T> v, function<T(T, T)> o, T id)",
+			"\t\t: sz(v.size())",
+			"\t\t, ht(1)",
+			"\t\t, o(o)",
+			"\t\t, id(id)",
+			"\t{",
+			"\t\twhile ((1 << ht) <= sz) ht++;",
+			"\t\tdpt.assign(sz + 1, 0);",
+			"\t\tdat.assign(ht, v);",
+			"\t\tfor (int j = 2; j <= sz; j++) dpt[j] = dpt[j >> 1] + 1;",
+			"\t\tfor (int i(1), p(1); i < ht; i++, p <<= 1) {",
+			"\t\t\tfor (int j = 0; j < sz; j++) {",
+			"\t\t\t\tdat[i][j] = o(dat[i - 1][j], dat[i - 1][min(j + p, sz - 1)]);",
+			"\t\t\t}",
+			"\t\t}",
+			"\t}",
+			"\tT find (int l, int r) {",
+			"\t\tassert(0 <= l && l <= r && r <= sz);",
+			"\t\tif(l == r) return id;",
+			"\t\tint i = dpt[r - l];",
+			"\t\treturn o(dat[i][l], dat[i][r - (1 << i)]);",
+			"\t}",
+			"\tvoid print () {",
+			"\t\tfor (int i = 0; i < ht; i++) {",
+			"\t\t\tfor (int j = 0; j < sz; j++) {",
+			"\t\t\t\tcout << setw(4) << dat[i][j] << (j < sz - 1 ? ' ' : '\n');",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\tcout << flush;",
+			"\t}",
+			"};"
+		],
+		"description": "none"
+	},
+	"dfs1": {
+		"prefix": "dfs1",
+		"body": [
+			"void ${1:dfs} (",
+			"\tint crr",
+			", int prt",
+			", vector<vector<int>>& grh",
+			") {",
+			"\tfor (int nxt : grh[crr]) if (nxt != prt) {",
+			"\t\t$1(nxt, crr, grh);",
+			"\t}",
+			"}"
+		],
+		"description": "none"
+	},
+	"dfs2": {
+		"prefix": "dfs2",
+		"body": [
+			"void ${1:dfs} (",
+			"\tint crr",
+			", vector<int>& ckd",
+			", vector<vector<int>>& grh",
+			") {",
+			"\tckd[crr] = true;",
+			"\tfor (int nxt : grh[crr]) if (!ckd[nxt]) {",
+			"\t\t$1(nxt, ckd, grh);",
+			"\t}",
+			"}"
+		],
+		"description": "none"
+	},
+	"low link tree": {
+		"prefix": "low link tree",
+		"body": [
+			"class low_link_tree {",
+			"\tint n;",
+			"\tint tmr = 0;",
+			"\tint rt = 0;",
+			"\tvector<int> ord;",
+			"\tvector<int> low;",
+			"\tset<int> atc;",
+			"\tset<pair<int, int>> bdg;",
+			"\tvector<vector<int>> grh;",
+			"public:",
+			"\tlow_link_tree (",
+			"\t\tvector<vector<int>> const& grh",
+			"\t)",
+			"\t: n(grh.size())",
+			"\t, ord(n, -1)",
+			"\t, low(n, -1)",
+			"\t, grh(grh)",
+			"\t{",
+			"\t\tdfs(0, 0);",
+			"\t}",
+			"\tvoid dfs (",
+			"\t\tint crr",
+			"\t,\tint prt",
+			"\t) {",
+			"\t\tint cnt = 0;",
+			"\t\tord[crr] = low[crr] = tmr++;",
+			"\t\tfor (int nxt : grh[crr]) {",
+			"\t\t\tif (ord[nxt] == -1) {",
+			"\t\t\t\tcnt++;",
+			"\t\t\t\tdfs(nxt, crr);",
+			"\t\t\t\tchmin(low[crr], low[nxt]);",
+			"\t\t\t\tif (crr != rt && ord[crr] <= low[nxt]) atc.insert(crr);",
+			"\t\t\t\tif (ord[crr] < low[nxt]) bdg.emplace(min(crr, nxt), max(crr, nxt));",
+			"\t\t\t}",
+			"\t\t\tif (nxt != prt) chmin(low[crr], ord[nxt]);",
+			"\t\t}",
+			"\t\tif (crr == rt && cnt > 1) atc.insert(crr);",
+			"\t}",
+			"\tauto const &order() {return ord;}",
+			"\tauto const &low_link() {return low;}",
+			"\tauto const &articulation_points() {return atc;}",
+			"\tauto const &bridges() {return bdg;}",
+			"};"
+		],
+		"description": "none"
+	},
+	"binary serch": {
+		"prefix": "binary serch",
+		"body": [
+			"${1:int} ${2:ok}(${3:0}), ${4:ng}(${5:inf}), md;",
+			"while (${4:ng} - ${2:ok} > 1) {",
+			"\tmd = (${2:ok} + ${4:ng}) >> 1;",
+			"\tif (${6:ck(md)}) ok = md;",
+			"\telse ng = md;",
+			"}"
+		],
+		"description": "none"
+	},
+	"lis": {
+		"prefix": "lis",
+		"body": [
+			"vector<${1:int}> lis;",
+			"for (auto crr : ${2:おなまえ}) {",
+			"\tauto lb = lower_bound(lis.begin(), lis.end(), crr);",
+			"\tif (lb == lis.end()) lis.push_back(crr);",
+			"\telse *lb = crr;",
+			"}"
+		],
+		"description": "none"
+	},
+	"shakutori": {
+		"prefix": "shakutori",
+		"body": [
+			"int l(0), r(0);",
+			"for (; l < ${1:n}; l++) {",
+			"\twhile (r < n && ${2:/*[l, r + 1)が妥当*/}) {",
+			"\t\tr++;",
+			"\t\t${3:/*[l, r + 1)を訪問*/};",
+			"\t}",
+			"}"
+		],
+		"description": "none"
+	},
+	"factorials": {
+		"prefix": "factorials",
+		"body": [
+			"struct factorials {",
+			"\tconst int sz;",
+			"\tvector<int> fct, fnv;",
+			"\tfactorials (int n)",
+			"\t\t: sz(n)",
+			"\t\t, fct(n, 1)",
+			"\t\t, fnv(n, 1)",
+			"\t\t{",
+			"\t\t\tfor (int i = 1; i < n; i++) fct[i] = mul(fct[i - 1], i);",
+			"\t\t\tfnv[n - 1] = inv(fct[n - 1]);",
+			"\t\t\tfor (int i = n - 1; i >= 1; i--) fnv[i - 1] = mul(fnv[i], i);",
+			"\t\t}",
+			"\tinline int binom (int n, int k) {",
+			"\t\tassert(0 <= k && k <= n && n < sz);",
+			"\t\treturn mul(fct[n], mul(fnv[k], fnv[n - k]));",
+			"\t}",
+			"};"
+		],
+		"description": "none"
+	},
+	"factorize": {
+		"prefix": "factorize",
+		"body": [
+			"auto factorize (",
+			"\tint x",
+			") -> map<int, int>",
+			"{",
+			"\tmap<int, int> mp;",
+			"\tfor (int p = 2; p * p <= x; p++) {",
+			"\t\twhile (!(x % p)) {",
+			"\t\t\tmp[p]++;",
+			"\t\t\tx /= p;",
+			"\t\t}",
+			"\t}",
+			"\tif (x != 1) mp[x] = 1;",
+			"\treturn map;",
+			"}"
+		],
+		"description": "none"
+	},
+	"gcd": {
+		"prefix": "gcd",
+		"body": [
+			"template<typename T>",
+			"T gcd (T a, T b) {",
+			"\tif (a < 0) a = -a;",
+			"\tif (b < 0) b = -b;",
+			"\tif (a < b) swap(a, b);",
+			"\twhile (b) {",
+			"\t\ta %= b;",
+			"\t\tswap(a, b);",
+			"\t}",
+			"\treturn a;",
+			"}"
+		],
+		"description": "none"
+	},
+	"sieve of eratosthenes": {
+		"prefix": "sieve of eratosthenes",
+		"body": [
+			"struct sieve_of_eratosthenes {",
+			"\tvector<bool> is_prime;",
+			"\tvector<int> prime_numbers;",
+			"\tvector<vector<int>> prime_divisors;",
+			"\tvector<vector<int>> divisors;",
+			"\tsieve_of_eratosthenes(int n)",
+			"\t\t: is_prime(vector<bool>(n))",
+			"\t\t, prime_numbers(vector<int>(0))",
+			"\t\t, prime_divisors(vector<vector<int>>(n))",
+			"\t\t, divisors(vector<vector<int>>(n))",
+			"\t{",
+			"\t\tfor (int i = 1; i < n; i++) {",
+			"\t\t\tif (is_prime[i] = divisors[i].size() == 1) prime_numbers.push_back(i);",
+			"\t\t\tfor (int j = i; j < n; j += i) {",
+			"\t\t\t\tdivisors[j].push_back(i);",
+			"\t\t\t\tif (is_prime[i]) prime_divisors[j].push_back(i);",
+			"\t\t\t}",
+			"\t\t}",
+			"\t}",
+			"\tauto factorize (",
+			"\t\tint x ",
+			"\t) -> map<int, int> ",
+			"\t{",
+			"\t\tmap<int, int> mp;",
+			"\t\tfor (int p : prime_numbers) {",
+			"\t\t\twhile (!(x % p)) {",
+			"\t\t\t\tmp[p]++;",
+			"\t\t\t\tx /= p;",
+			"\t\t\t}",
+			"\t\t\tif (x == 1 || p * p > x) break;",
+			"\t\t}",
+			"\t\tif (x != 1) mp[x] = 1;",
+			"\t\treturn mp;",
+			"\t}",
+			"};"
+		],
+		"description": "none"
+	},
+	"-pdbg": {
+		"prefix": "-pdbg",
+		"body": [
+			"cout << \"(\" << ${1:おなまえ}${2:.}first << \", \" <<\t$1$2second << \")\";"
+		],
+		"description": "none"
+	},
+	"-ppdbg": {
+		"prefix": "-ppdbg",
+		"body": [
+			"cout << \"(\" << ${1:おなまえ}${2:.}${3:first.first} << \", \" << $1$2$4 << \", \" << $1$2$5 << \")\";"
+		],
+		"description": "none"
+	},
+	"-sdbg": {
+		"prefix": "-sdbg",
+		"body": [
+			"cout << ${1:おなまえ};"
+		],
+		"description": "none"
+	},
+	"1dbg": {
+		"prefix": "1dbg",
+		"body": [
+			"{ // debug",
+			"\tcout << \"${1:a} = \" << $1 << endl;",
+			"} //"
+		],
+		"description": "none"
+	},
+	"2dbg": {
+		"prefix": "2dbg",
+		"body": [
+			"cout << \\"(\\" << ${1:おなまえ}${2:.}first << \\", \\" <<\t$1$2second << \\")\\";"
+		],
+		"description": "none"
+	},
+	"3dbg": {
+		"prefix": "3dbg",
+		"body": [
+			"{ // debug",
+			"\tcout",
+			"\t\t<< \"${1:a} = \" << $1 << \", \"",
+			"\t\t<< \"${2:b} = \" << $2",
+			"\t\t<< \"${3:c} = \" << $3",
+			"\t\t<< endl;",
+			"} //"
+		],
+		"description": "none"
+	},
+	"interval debug": {
+		"prefix": "interval debug",
+		"body": [
+			"{ // debug",
+			"\tcout",
+			"\t\t<< \"[\" << $1 << \", \" << $2 << \",)\" << endl;",
+			"} //"
+		],
+		"description": "none"
+	},
+	"map debug": {
+		"prefix": "map debug",
+		"body": [
+			"{ // debug",
+			"\tfor (auto ${2:it} = ${1:mp}.begin(); $2 != $1.end(); $2++) {",
+			"\t\tcout << \"mp[\";",
+			"\t\tcout << $0$2->first;",
+			"\t\tcout << \"] = \";",
+			"\t\tcout << $2->second;",
+			"\t\tcout << \"\" << (next($2) == $1.end() ? \"\n\" : \", \");",
+			"\t}",
+			"} //"
+		],
+		"description": "none"
+	},
+	"ndbg": {
+		"prefix": "ndbg",
+		"body": [
+			"cout << \"$0\" << endl;"
+		],
+		"description": "none"
+	},
+	"new line": {
+		"prefix": "new line",
+		"body": [
+			"{ // debug",
+			"\tcout << endl;",
+			"} //"
+		],
+		"description": "none"
+	},
+	"pdbg": {
+		"prefix": "pdbg",
+		"body": [
+			"{ // debug",
+			"\tcout << \"${1:おなまえ} = (\" << $1${2:.}first << \", \" <<\t$1$2second << \")\" << endl;",
+			"} //"
+		],
+		"description": "none"
+	},
+	"vdbg": {
+		"prefix": "vdbg",
+		"body": [
+			"{ // debug",
+			"\tcout << \"${1:おなまえ}: \";",
+			"\tfor (auto ${2:it} = $1.begin(); $2 != $1.end(); $2++) {",
+			"\t\t${3:cout << *it;}",
+			"\t\tcout << (next($2) == $1.end() ? \"\n\" : \", \");",
+			"\t}",
+			"\tcout << endl;",
+			"} //"
+		],
+		"description": "none"
+	},
+	"vpdebug": {
+		"prefix": "vpdebug",
+		"body": [
+			"{ // debug",
+			"\tcout << \"${1:おなまえ}: \";",
+			"\tfor (auto $2 = $1.begin(); $2 != $1.end(); $2++) {",
+			"\t\tcout << \"(\";",
+			"\t\tcout << $2->first;",
+			"\t\tcout << \", \";",
+			"\t\tcout << $2->second;",
+			"\t\tcout << \")\" << (next($2) == $1.end() ? \"\n\" : \", \");",
+			"\t}",
+			"\tcout << endl;",
+			"} //"
+		],
+		"description": "none"
+	},
+	"vvdbg": {
+		"prefix": "vvdbg",
+		"body": [
+			"{ // debug",
+			"\tcout << \"--------------------------------------\" << endl;",
+			"\tcout << setw(${5:5}) << left << \"$1\";",
+			"\tfor (int ${2:i} = 0; $2 < ${1:おなまえ}.size(); $2++) {",
+			"\t\tif ($2 != 0) cout << setw($5) << \" \";",
+			"\t\tcout << \"$2 = \" << setw(2) << right << $2 << \": \";",
+			"\t\tfor (int ${3:j} = 0; $3 < $1[$2].size(); $3++) {",
+			"\t\t\tcout << setw(${4:4}) << right << $1[$2][$3];",
+			"\t\t\tif ($3 != $1[$2].size() - 1) cout << \" \";",
+			"\t\t}",
+			"\t\tcout << endl;",
+			"\t}",
+			"\tcout << \"--------------------------------------\" << endl;",
+			"} //"
+		],
+		"description": "none"
+	},
+	"1sin": {
+		"prefix": "1sin",
+		"body": [
+			"${1:int} $2;",
+			"cin >> $2;"
+		],
+		"description": "none"
+	},
+	"2sin": {
+		"prefix": "2sin",
+		"body": [
+			"${1:int} $2, $3;",
+			"cin >> $2 >> $3;"
+		],
+		"description": "none"
+	},
+	"3sin": {
+		"prefix": "3sin",
+		"body": [
+			"${1:int} $2, $3, $4;",
+			"cin >> $2 >> $3 >> $4;"
+		],
+		"description": "none"
+	},
+	"4sin": {
+		"prefix": "4sin",
+		"body": [
+			"${1:sin} $2, $3, $4, $5;",
+			"cin >> $2 >> $3 >> $4 >> $5;"
+		],
+		"description": "none"
+	},
+	"err": {
+		"prefix": "err",
+		"body": [
+			"void err() {",
+			"\tcout << ${1:出力} << endl;",
+			"\texit(0);",
+			"}"
+		],
+		"description": "none"
+	},
+	"for": {
+		"prefix": "for",
+		"body": [
+			"for (int ${1:i} = ${2:0}; ${1:i} < ${3:n}; ${1:i}++) {",
+			"\t$0",
+			"}"
+		],
+		"description": "none"
+	},
+	"for const": {
+		"prefix": "for const",
+		"body": [
+			"for (auto const & ${1:e}: ${2:おなまえ}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "none"
+	},
+	"for iterator": {
+		"prefix": "for iterator",
+		"body": [
+			"for (auto ${1:it} = ${2:おなまえ}.begin(); $1 != $2.end(); it++) {",
+			"\t$0",
+			"}"
+		],
+		"description": "none"
+	},
+	"for reverse": {
+		"prefix": "for reverse",
+		"body": [
+			"for (int ${1:i} = ${2:n - 1}; $1 >= 0; $1--) {",
+			"\t$0",
+			"}"
+		],
+		"description": "none"
+	},
+	"sout": {
+		"prefix": "sout",
+		"body": [
+			"cout << ${1:内容} << endl;"
+		],
+		"description": "none"
+	},
+	"tin": {
+		"prefix": "tin",
+		"body": [
+			"${1:int} ${2:tmp};",
+			"cin >> $2;",
+			"$0;"
+		],
+		"description": "none"
+	},
+}
