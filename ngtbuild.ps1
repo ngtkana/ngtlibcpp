@@ -86,7 +86,7 @@ function make_link {
   $outstr += [System.IO.Path]::GetFileNameWithoutExtension($inpath).replace("_", " ")
   $outstr += "]("
   $outstr += $inpath
-  # $outstr += (Resolve-Path $inpath -Relative).remove(0, 2)
+  $outstr += (Resolve-Path $inpath -Relative).remove(0, 2)
   $outstr += ")"
   $outstr | Write-Output
 }
