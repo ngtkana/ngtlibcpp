@@ -1,12 +1,12 @@
 # dfs1
 ```cpp
-void dfs (
+void ${1:dfs} (
   int crr
 , int prt
 , vector<vector<int>>& grh
 ) {
   for (int nxt : grh[crr]) if (nxt != prt) {
-    dfs(nxt, crr, grh);
+    $1(nxt, crr, grh);
   }
 }
 ```

@@ -94,8 +94,7 @@ function make_link {
   $outstr = "`| ["
   $outstr += [System.IO.Path]::GetFileNameWithoutExtension($inpath).replace("_", " ")
   $outstr += "]("
-  $outstr += $inpath
-  $outstr += (Resolve-Path $inpath -Relative).remove(0, 2)
+  $outstr += (Resolve-Path $inpath -Relative).remove(0, 7)
   $outstr += ") |"
   $outstr | Write-Output
 }
@@ -116,7 +115,7 @@ function make_links_and_markdowns {
     $outpath = $outdir + "/"
     $outpath += $name_without_ext
     $outpath += ".md"
-    $docs_outpath = $outpath
+    $docs_outpath = "docs/" + $outpath
 
     New-Item -Force $docs_outpath
     "# " + $name_without_ext | Add-Content $docs_outpath

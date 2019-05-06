@@ -1,14 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 // begin
-void dfs (
+void ${1:dfs} (
   int crr
 , vector<int>& ckd
 , vector<vector<int>>& grh
 ) {
   ckd[crr] = true;
   for (int nxt : grh[crr]) if (!ckd[nxt]) {
-    dfs(nxt, ckd, grh);
+    $1(nxt, ckd, grh);
   }
 }
 // end

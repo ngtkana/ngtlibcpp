@@ -1,12 +1,5 @@
 # low_link_tree
 ```cpp
-inline bool chmin (int& a, int b) {
-  if (a > b) {
-    a = b;
-    return true;
-  }
-  return false;
-}
 class low_link_tree {
   int n;
   int tmr = 0;
