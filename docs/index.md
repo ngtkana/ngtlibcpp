@@ -1,4 +1,11 @@
 # Library
+
+experiment
+|`code`    |*italic*                  |
+|----------|--------------------------|
+|**bold**  |***bold italic***         |
+|$ \omega $|[Qiita](http://qiita.com)||
+
 - datasets_and_queries
 	- [binary indexed tree](datasets_and_queries/binary_indexed_tree.md)
 	- [disjoint set](datasets_and_queries/disjoint_set.md)
