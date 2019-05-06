@@ -120,7 +120,7 @@ function make_links_and_markdowns {
     New-Item -Force $docs_outpath
     "# " + $name_without_ext | Add-Content $docs_outpath
     write_markdown $_.fullname | Add-Content $docs_outpath
-    make_link $docs_outpath | Add-Content $index
+    make_link $outpath | Add-Content $index
   }
 }
 
