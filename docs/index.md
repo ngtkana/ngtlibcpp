@@ -1,7 +1,6 @@
 # Library
 
 experiment
-
 |`code`    |*italic*                  |
 |----------|--------------------------|
 |**bold**  |***bold italic***         |
