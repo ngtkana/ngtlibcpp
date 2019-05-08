@@ -1,4 +1,5 @@
-# low_link_tree
+﻿# low_link_tree
+[prev](..\index.md)
 ```cpp
 class low_link_tree {
   int n;

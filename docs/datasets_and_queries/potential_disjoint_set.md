@@ -1,4 +1,5 @@
-# potential_disjoint_set
+﻿# potential_disjoint_set
+[prev](..\index.md)
 ```cpp
 class potential_disjoint_set {
   public:

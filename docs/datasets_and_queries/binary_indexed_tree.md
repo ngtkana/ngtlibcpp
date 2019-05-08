@@ -1,4 +1,5 @@
-# binary_indexed_tree
+﻿# binary_indexed_tree
+[prev](..\index.md)
 ```cpp
 template <typename T>
 class binary_indexed_tree {

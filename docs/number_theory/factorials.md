@@ -1,4 +1,5 @@
-# factorials
+﻿# factorials
+[prev](..\index.md)
 ```cpp
 struct factorials {
   const int sz;

@@ -1,6 +1,7 @@
-# for_iterator
+ï»¿# for_iterator
+[prev](..\index.md)
 ```cpp
-for (auto ${1:it} = ${2:‚¨‚È‚Ü‚¦}.begin(); $1 != $2.end(); it++) {
+for (auto ${1:it} = ${2:ãŠãªã¾ãˆ}.begin(); $1 != $2.end(); it++) {
   $0
 }
 ```

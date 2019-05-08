@@ -1,4 +1,5 @@
-# all
+ï»¿# all
+[prev](..\index.md)
 ```cpp
-${1:‚¨‚È‚Ü‚¦}.begin(), $1.end()
+${1:ãŠãªã¾ãˆ}.begin(), $1.end()
 ```

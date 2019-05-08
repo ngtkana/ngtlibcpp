@@ -14,7 +14,7 @@ function ngtwrite {
     $outstr += "`t"
   }
   $outstr += $instr
-  Write-Output $outstr
+  Write-Output -Encoding UTF8 $outstr
 }
 function escape_and_quote {
   param (
@@ -43,7 +43,7 @@ function parse {
   $stream = New-Object System.IO.StreamReader($infile.FullName)
   $flg = $false
   $line = ""
-  while (($nxtline = $stream.ReadLine()) -ne $null) {
+  while ($null -ne ($nxtline = $stream.ReadLine())) {
     if (($flg -eq $true)) {
       escape_and_quote $line 3 (($nxtline -eq "// end"))
     }
@@ -58,10 +58,6 @@ function parse {
 }
 
 
-
-
-
-
 # ----------------------------------------------
 # build index.md
 # ----------------------------------------------
@@ -72,19 +68,19 @@ function write_markdown {
   param (
     $infile
   )
-  Write-Output "``````cpp"
-  $stream = New-Object System.IO.StreamReader($infile)
+  "``````cpp"
+  $stream = New-Object System.IO.StreamReader($infile, [System.Text.Encoding]::UTF8)
   $flg = $false
   $line = ""
-  while (($nxtline = $stream.ReadLine()) -ne $null) {
+  while ($null -ne ($nxtline = $stream.ReadLine())) {
     if (($flg -eq $true)) {
-      Write-Output $line
+      $line
     }
     if (($line -eq "// begin")) { $flg = $true }
     if (($nxtline -eq "// end")) { $flg = $false }
     $line = $nxtline
   }
-  Write-Output "``````"
+  "``````"
 }
 
 function make_link {
@@ -118,22 +114,23 @@ function make_links_and_markdowns {
     $docs_outpath = "docs/" + $outpath
 
     New-Item -Force $docs_outpath
-    "# " + $name_without_ext | Add-Content $docs_outpath
-    write_markdown $_.fullname | Add-Content $docs_outpath
-    make_link $docs_outpath | Add-Content $index
+    "# " + $name_without_ext | Add-Content -Encoding UTF8 $docs_outpath
+    "[prev](..\index.md)" |  Add-Content -Encoding UTF8 $docs_outpath
+    write_markdown $_.fullname | Add-Content -Encoding UTF8 $docs_outpath
+    make_link $docs_outpath | Add-Content -Encoding UTF8 $index
   }
   "" | Add-Content $index
 }
 
 
 "# Library" | Add-Content $index
-Get-ChildItem library | ForEach-Object {
+Get-ChildItem src | ForEach-Object {
   make_links_and_markdowns $_
 }
 
 ngtwrite "{" | Add-Content $snippets
 
-Get-ChildItem -Recurse -Path library/*.cpp | ForEach-Object {
+Get-ChildItem -Recurse -Path src/*.cpp | ForEach-Object {
   parse $_ | Add-Content $snippets
 }
 

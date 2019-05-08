@@ -1,4 +1,5 @@
-# segment_tree
+﻿# segment_tree
+[prev](..\index.md)
 ```cpp
 template< typename T >
 class segment_tree {

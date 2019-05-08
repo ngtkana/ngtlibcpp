@@ -1,939 +1,2817 @@
+-Encoding
+UTF8
 {
+-Encoding
+UTF8
 	"all": {
+-Encoding
+UTF8
 		"prefix": "all",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"${1:Ç®Ç»Ç‹Ç¶}.begin(), $1.end()"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"bug": {
+-Encoding
+UTF8
 		"prefix": "bug",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"/* Å´ è¡ÇµñYÇÍÇ»Ç¢Ç≈ÅIÅIÅI Å´ */",
+-Encoding
+UTF8
 			"$0 // Ç®äËÇ¢ÅIÅI",
+-Encoding
+UTF8
 			"/* Å™ Ç¢Ç‚êUÇËÇ∂Ç·Ç»Ç¢Ç©ÇÁ Å™ */"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"check": {
+-Encoding
+UTF8
 		"prefix": "check",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"printf(\"/%d\n\", ${1:crr});",
+-Encoding
+UTF8
 			"printf(\"\\%d\n\", ${1:crr});"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"chmax": {
+-Encoding
+UTF8
 		"prefix": "chmax",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"template<typename T1, typename T2>",
+-Encoding
+UTF8
 			"inline bool chmax (T1& a, T2 b) {",
+-Encoding
+UTF8
 			"\tif (a < b) a = b, return true;",
+-Encoding
+UTF8
 			"\treturn false;",
+-Encoding
+UTF8
 			"}"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"chmin": {
+-Encoding
+UTF8
 		"prefix": "chmin",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"template<typename T1, typename T2>",
+-Encoding
+UTF8
 			"inline bool chmin (T1& a, T2 b) {",
+-Encoding
+UTF8
 			"\tif (a > b) a = b, return true;",
+-Encoding
+UTF8
 			"\treturn false;",
+-Encoding
+UTF8
 			"}"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"didj": {
+-Encoding
+UTF8
 		"prefix": "didj",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"int d${1:i}[4] = {-1, +1, 0, 0};",
+-Encoding
+UTF8
 			"int d${2:j}[4] = {0, 0, -1, +1};"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"lower bound": {
+-Encoding
+UTF8
 		"prefix": "lower bound",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"lower_bound(${1:Ç®Ç»Ç‹Ç¶}.begin(), ${1:Ç®Ç»Ç‹Ç¶}.end(), ${2:Ç´Ç∂Ç„ÇÒÇø});"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"mdcal": {
+-Encoding
+UTF8
 		"prefix": "mdcal",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"constexpr int md = ${1:1e9 + 7};",
+-Encoding
+UTF8
 			"inline void add(int &a, int b) {",
+-Encoding
+UTF8
 			"\ta += b;",
+-Encoding
+UTF8
 			"\tif (a >= md) a -= md;",
+-Encoding
+UTF8
 			"}",
+-Encoding
+UTF8
 			"inline void sub(int &a, int b) {",
+-Encoding
+UTF8
 			"\ta -= b;",
+-Encoding
+UTF8
 			"\tif (a < 0) a += md;",
+-Encoding
+UTF8
 			"}",
+-Encoding
+UTF8
 			"inline int mul(int a, int b) {",
+-Encoding
+UTF8
 			"\treturn (int)((long long)a * b % md);",
+-Encoding
+UTF8
 			"}",
+-Encoding
+UTF8
 			"inline int power(int a, long long b) {",
+-Encoding
+UTF8
 			"\tint res = 1;",
+-Encoding
+UTF8
 			"\twhile (b > 0) {",
+-Encoding
+UTF8
 			"\t\tif (b & 1) {",
+-Encoding
+UTF8
 			"\t\t\tres = mul(res, a);",
+-Encoding
+UTF8
 			"\t\t\tb--;",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\ta = mul(a, a);",
+-Encoding
+UTF8
 			"\t\tb >>= 1;",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\treturn res;",
+-Encoding
+UTF8
 			"}",
+-Encoding
+UTF8
 			"inline int inv(int a) {",
+-Encoding
+UTF8
 			"\ta %= md;",
+-Encoding
+UTF8
 			"\tif(a < 0) a += md;",
+-Encoding
+UTF8
 			"\tint b = md, u = 0, v = 1;",
+-Encoding
+UTF8
 			"\twhile (a) {",
+-Encoding
+UTF8
 			"\t\tint t = b / a;",
+-Encoding
+UTF8
 			"\t\tb -= a * t; swap(a, b);",
+-Encoding
+UTF8
 			"\t\tu -= v * t; swap(u, v);",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tassert(b == 1);",
+-Encoding
+UTF8
 			"\tif(u < 0) u += md;",
+-Encoding
+UTF8
 			"\treturn u;",
+-Encoding
+UTF8
 			"}"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"pair": {
+-Encoding
+UTF8
 		"prefix": "pair",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"pair<${1:int}, ${2:int}> ${3:Ç®Ç»Ç‹Ç¶}(${4:0}, ${5:0})$0;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"reverse": {
+-Encoding
+UTF8
 		"prefix": "reverse",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"reverse(${1:Ç®Ç»Ç‹Ç¶}.begin(), ${1:Ç®Ç»Ç‹Ç¶}.end());"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"sort": {
+-Encoding
+UTF8
 		"prefix": "sort",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"sort(${1:Ç®Ç»Ç‹Ç¶}.begin(), ${1:Ç®Ç»Ç‹Ç¶}.end());"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"sort reverse": {
+-Encoding
+UTF8
 		"prefix": "sort reverse",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"sort(${1:Ç®Ç»Ç‹Ç¶}.begin(), ${1:Ç®Ç»Ç‹Ç¶}.end(), ${2:greator<${3:int}>});"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"stemp": {
+-Encoding
+UTF8
 		"prefix": "stemp",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"#include <bits/stdc++.h>",
+-Encoding
+UTF8
 			"using namespace std;",
+-Encoding
+UTF8
 			"int main() {",
+-Encoding
+UTF8
 			"\t",
+-Encoding
+UTF8
 			"\treturn 0;",
+-Encoding
+UTF8
 			"}"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"upper": {
+-Encoding
+UTF8
 		"prefix": "upper",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"upper(${1:Ç®Ç»Ç‹Ç¶}.begin(), ${1:Ç®Ç»Ç‹Ç¶}.end(), ${2:Ç´Ç∂Ç„ÇÒÇø});"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"vec": {
+-Encoding
+UTF8
 		"prefix": "vec",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"vector<${1:int}> ${2:Ç®Ç»Ç‹Ç¶}(${3:n}, ${4:0})$0;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"vecpair": {
+-Encoding
+UTF8
 		"prefix": "vecpair",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"vector<pair<${1:int}, ${2:int}>> ${3:Ç®Ç»Ç‹Ç¶}(${4:n}, {${5:0}, ${6:0}})$0;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"vecvec": {
+-Encoding
+UTF8
 		"prefix": "vecvec",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"vector<vector<${1:int}>> ${2:Ç®Ç»Ç‹Ç¶}(${3:h}, vector<$1>(${4:w}, ${5:0}))$0;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"vecvecpair": {
+-Encoding
+UTF8
 		"prefix": "vecvecpair",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"vector<vector<pair<${1:int}, ${2:int}>>> ${3:Ç®Ç»Ç‹Ç¶}(${4:h}, vector<pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"binary indexed tree": {
+-Encoding
+UTF8
 		"prefix": "binary indexed tree",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"template <typename T>",
+-Encoding
+UTF8
 			"class binary_indexed_tree {",
+-Encoding
+UTF8
 			"\tint sz;",
+-Encoding
+UTF8
 			"\tvector<T> tr;",
+-Encoding
+UTF8
 			"\tfunction<T(T, T)> o;",
+-Encoding
+UTF8
 			"\tfunction<T(T, T)> dif;",
+-Encoding
+UTF8
 			"\tT id;",
+-Encoding
+UTF8
 			"\tpublic:",
+-Encoding
+UTF8
 			"\t\tbinary_indexed_tree (",
+-Encoding
+UTF8
 			"\t\t\tint n",
+-Encoding
+UTF8
 			"\t\t, function<T(T, T) > o = [](int a, int b) {return a + b;}",
+-Encoding
+UTF8
 			"\t\t, function<T(T, T) > dif = [](int a, int b) {return a - b;}",
+-Encoding
+UTF8
 			"\t\t, T id = 0",
+-Encoding
+UTF8
 			"\t\t)",
+-Encoding
+UTF8
 			"\t\t: sz(n)",
+-Encoding
+UTF8
 			"\t\t, tr(n, id)",
+-Encoding
+UTF8
 			"\t\t, o(o)",
+-Encoding
+UTF8
 			"\t\t, dif(dif)",
+-Encoding
+UTF8
 			"\t\t, id(id)",
+-Encoding
+UTF8
 			"\t\t{",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tT query (int l, int r) {",
+-Encoding
+UTF8
 			"\t\t\tassert(0 <= l && l <= r && r <= sz);",
+-Encoding
+UTF8
 			"\t\t\tif (l == 0) {",
+-Encoding
+UTF8
 			"\t\t\t\tr--;",
+-Encoding
+UTF8
 			"\t\t\t\tT ret = 0;",
+-Encoding
+UTF8
 			"\t\t\t\tfor (; r >= 0; r &= r + 1, r--) ret = o(ret, tr[r]);",
+-Encoding
+UTF8
 			"\t\t\t\treturn ret;",
+-Encoding
+UTF8
 			"\t\t\t}",
+-Encoding
+UTF8
 			"\t\t\treturn dif(query(0, r), query(0, l));",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tvoid add (int i, T x) {",
+-Encoding
+UTF8
 			"\t\t\tfor (; i < sz; i |= i + 1) tr[i] = o(tr[i], x);",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tvoid print() {",
+-Encoding
+UTF8
 			"\t\t\tcout << \"bit: \";",
+-Encoding
+UTF8
 			"\t\t\tfor (int i = 0; i < sz; i++) {",
+-Encoding
+UTF8
 			"\t\t\t\tcout << query(i, i + 1);",
+-Encoding
+UTF8
 			"\t\t\t\tif (i == sz - 1) break;",
+-Encoding
+UTF8
 			"\t\t\t\tcout << ' ';",
+-Encoding
+UTF8
 			"\t\t\t}",
+-Encoding
+UTF8
 			"\t\t\tcout << endl;",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"};"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"disjoint set": {
+-Encoding
+UTF8
 		"prefix": "disjoint set",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"struct disjoint_set {",
+-Encoding
+UTF8
 			"\tint n;",
+-Encoding
+UTF8
 			"\tvector<int> prt;",
+-Encoding
+UTF8
 			"\tdisjoint_set (int n)",
+-Encoding
+UTF8
 			"\t\t: n(n)",
+-Encoding
+UTF8
 			"\t\t, prt(n, -1)",
+-Encoding
+UTF8
 			"\t{}",
+-Encoding
+UTF8
 			"\tbool is_root (int x) {return prt[x] < 0;}",
+-Encoding
+UTF8
 			"\tint size (int x) {return prt[find(x)];}",
+-Encoding
+UTF8
 			"\tbool equiv (int x, int y) {return find(x) == find(y);}",
+-Encoding
+UTF8
 			"\tint find (int x) {",
+-Encoding
+UTF8
 			"\t\tif (is_root(x)) return x;",
+-Encoding
+UTF8
 			"\t\telse return prt[x] = find(prt[x]);",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tbool unite (int x, int y) {",
+-Encoding
+UTF8
 			"\t\tx = find(x);",
+-Encoding
+UTF8
 			"\t\ty = find(y);",
+-Encoding
+UTF8
 			"\t\tif (x == y) return false;",
+-Encoding
+UTF8
 			"\t\tif (size(x) < size(y)) swap(x, y);",
+-Encoding
+UTF8
 			"\t\tprt[x] += prt[y];",
+-Encoding
+UTF8
 			"\t\tprt[y] = x;",
+-Encoding
+UTF8
 			"\t\treturn true;",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"};"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"lazy segment tree": {
+-Encoding
+UTF8
 		"prefix": "lazy segment tree",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"const int infty = (int)((1LL << 31) - 1);",
+-Encoding
+UTF8
 			"struct lazy_segment_tree {",
+-Encoding
+UTF8
 			"\tpublic:",
+-Encoding
+UTF8
 			"\t\tint n, N;",
+-Encoding
+UTF8
 			"\t\tvector<int> tr, lz, lzf;",
+-Encoding
+UTF8
 			"\t\tlazy_segment_tree (vector<int> v) {",
+-Encoding
+UTF8
 			"\t\t\tn = v.size();",
+-Encoding
+UTF8
 			"\t\t\tN = 1;",
+-Encoding
+UTF8
 			"\t\t\twhile (N < n) N <<= 1;",
+-Encoding
+UTF8
 			"\t\t\ttr.resize(2 * N, infty);",
+-Encoding
+UTF8
 			"\t\t\tlz.resize(2 * N);",
+-Encoding
+UTF8
 			"\t\t\tlzf.resize(2 * N, false);",
+-Encoding
+UTF8
 			"\t\t\tfor (int i = 0; i < n; i++) tr[N + i] = v[i];",
+-Encoding
+UTF8
 			"\t\t\tfor (int i = N - 1; i >= 1; i--) tr[i] = min(tr[2 * i], tr[2 * i + 1]);",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tinline void pg (int k, int L, int R) {",
+-Encoding
+UTF8
 			"\t\t\tif (lzf[k]) {",
+-Encoding
+UTF8
 			"\t\t\t\ttr[k] = lz[k];",
+-Encoding
+UTF8
 			"\t\t\t\tif (k < N) {",
+-Encoding
+UTF8
 			"\t\t\t\t\tlz[2 * k] = lz[2 * k + 1] = lz[k];",
+-Encoding
+UTF8
 			"\t\t\t\t\tlzf[2 * k] = lzf[2 * k + 1] = true;",
+-Encoding
+UTF8
 			"\t\t\t\t}",
+-Encoding
+UTF8
 			"\t\t\t\tlzf[k] = false;",
+-Encoding
+UTF8
 			"\t\t\t}",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tvoid update (int l, int r, int x, int k = 1, int L = 0, int R = -1) {",
+-Encoding
+UTF8
 			"\t\t\tif (R == -1) R = N;",
+-Encoding
+UTF8
 			"\t\t\tpg(k, L, R);",
+-Encoding
+UTF8
 			"\t\t\tif (r <= L || R <= l) {",
+-Encoding
+UTF8
 			"\t\t\t\treturn;",
+-Encoding
+UTF8
 			"\t\t\t} else if (l <= L && R <= r) {",
+-Encoding
+UTF8
 			"\t\t\t\tlz[k] = x;",
+-Encoding
+UTF8
 			"\t\t\t\tlzf[k] = true;",
+-Encoding
+UTF8
 			"\t\t\t\tpg(k, L, R);",
+-Encoding
+UTF8
 			"\t\t\t} else {",
+-Encoding
+UTF8
 			"\t\t\t\tint C = (L + R) >> 1;",
+-Encoding
+UTF8
 			"\t\t\t\tupdate(l, r, x, 2 * k, L, C);",
+-Encoding
+UTF8
 			"\t\t\t\tupdate(l, r, x, 2 * k + 1, C, R);",
+-Encoding
+UTF8
 			"\t\t\t\ttr[k] = min(tr[2 * k], tr[2 * k + 1]);",
+-Encoding
+UTF8
 			"\t\t\t}",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tint getMin (int l, int r, int k = 1, int L = 0, int R = -1) {",
+-Encoding
+UTF8
 			"\t\t\t if (R == -1) R = N;",
+-Encoding
+UTF8
 			"\t\t\tpg(k, L, R);",
+-Encoding
+UTF8
 			"\t\t\tif (r <= L || R <= l) {",
+-Encoding
+UTF8
 			"\t\t\t\treturn infty;",
+-Encoding
+UTF8
 			"\t\t\t} else if (l <= L && R <= r) {",
+-Encoding
+UTF8
 			"\t\t\t\treturn tr[k];",
+-Encoding
+UTF8
 			"\t\t\t} else {",
+-Encoding
+UTF8
 			"\t\t\t\tint C = (L + R) >> 1;",
+-Encoding
+UTF8
 			"\t\t\t\treturn min(getMin(l, r, 2 * k, L, C), getMin(l, r, 2 * k + 1, C, R));",
+-Encoding
+UTF8
 			"\t\t\t}",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"};"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"potential disjoint set": {
+-Encoding
+UTF8
 		"prefix": "potential disjoint set",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"class potential_disjoint_set {",
+-Encoding
+UTF8
 			"\tpublic:",
+-Encoding
+UTF8
 			"\tvector<int> rank, prt, ptl;",
+-Encoding
+UTF8
 			"\tpotential_disjoint_set (int size) {",
+-Encoding
+UTF8
 			"\t\trank.resize(size);",
+-Encoding
+UTF8
 			"\t\tprt.resize(size);",
+-Encoding
+UTF8
 			"\t\tptl.resize(size);",
+-Encoding
+UTF8
 			"\t\tfor (int i = 0; i < size; i++) {",
+-Encoding
+UTF8
 			"\t\t\tprt[i] = i;",
+-Encoding
+UTF8
 			"\t\t\trank[i] = 0;",
+-Encoding
+UTF8
 			"\t\t\tptl[i] = 0;",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tint find (int x) {",
+-Encoding
+UTF8
 			"\t\tif (x == prt[x]){",
+-Encoding
+UTF8
 			"\t\t\treturn x;",
+-Encoding
+UTF8
 			"\t\t} else {",
+-Encoding
+UTF8
 			"\t\t\tint r = find(prt[x]);",
+-Encoding
+UTF8
 			"\t\t\tptl[x] += ptl[prt[x]];",
+-Encoding
+UTF8
 			"\t\t\treturn prt[x] = r;",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tbool is_equiv (int x, int y) {",
+-Encoding
+UTF8
 			"\t\treturn find(x) == find(y);",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tbool unite (int x, int y, int w) {",
+-Encoding
+UTF8
 			"\t\tif (find(x) == find(y)) {",
+-Encoding
+UTF8
 			"\t\t\treturn false;",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tw += ptl[x];",
+-Encoding
+UTF8
 			"\t\tw -= ptl[y];",
+-Encoding
+UTF8
 			"\t\tx = find(x);",
+-Encoding
+UTF8
 			"\t\ty = find(y);",
+-Encoding
+UTF8
 			"\t\tif (rank[x] < rank[y]) {",
+-Encoding
+UTF8
 			"\t\t\tswap(x, y);",
+-Encoding
+UTF8
 			"\t\t\tw *= -1;",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tprt[y] = x;",
+-Encoding
+UTF8
 			"\t\tptl[y] = w;",
+-Encoding
+UTF8
 			"\t\tif (rank[x] == rank[y]) {",
+-Encoding
+UTF8
 			"\t\t\trank[x]++;",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\treturn true;",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tint diff (int x, int y) {",
+-Encoding
+UTF8
 			"\t\tfind(x);",
+-Encoding
+UTF8
 			"\t\tfind(y);",
+-Encoding
+UTF8
 			"\t\treturn ptl[y] - ptl[x];",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"};"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"segment tree": {
+-Encoding
+UTF8
 		"prefix": "segment tree",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"template< typename T >",
+-Encoding
+UTF8
 			"class segment_tree {",
+-Encoding
+UTF8
 			"\tint sz;",
+-Encoding
+UTF8
 			"\tvector<T> seg;",
+-Encoding
+UTF8
 			"\tconst function<T(T, T)> o;",
+-Encoding
+UTF8
 			"\tconst T id;",
+-Encoding
+UTF8
 			"publ",
+-Encoding
+UTF8
 			"\tsegment_tree(int n, const function<T(T, T)> o, const T id)",
+-Encoding
+UTF8
 			"\t\t: o(o)",
+-Encoding
+UTF8
 			"\t\t, id(id)",
+-Encoding
+UTF8
 			"\t{",
+-Encoding
+UTF8
 			"\t\tsz = 1;",
+-Encoding
+UTF8
 			"\t\twhile(sz < n) sz <<= 1;",
+-Encoding
+UTF8
 			"\t\tseg.assign(2 * sz, id);",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tvoid update(int k, const T &x) {",
+-Encoding
+UTF8
 			"\t\tk += sz;",
+-Encoding
+UTF8
 			"\t\tseg[k] = x;",
+-Encoding
+UTF8
 			"\t\twhile(k >>= 1) {",
+-Encoding
+UTF8
 			"\t\t\tseg[k] = o(seg[2 * k], seg[2 * k + 1]);",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tT find(int l, int r) {",
+-Encoding
+UTF8
 			"\t\tT L = id, R = id;",
+-Encoding
+UTF8
 			"\t\tfor(l += sz, r += sz; l < r; l >>= 1, r >>= 1) {",
+-Encoding
+UTF8
 			"\t\t\tif(l & 1) L = o(L, seg[l++]);",
+-Encoding
+UTF8
 			"\t\t\tif(r & 1) R = o(seg[--r], R);",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\treturn o(L, R);",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tT operator[](const int &k) const {",
+-Encoding
+UTF8
 			"\t\treturn seg[k + sz];",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tvoid print() {",
+-Encoding
+UTF8
 			"\t\tcout << \"segment_tree:\" << endl;",
+-Encoding
+UTF8
 			"\t\tint crr = 1;",
+-Encoding
+UTF8
 			"\t\tfor (int p = sz; p; p >>= 1) {",
+-Encoding
+UTF8
 			"\t\t\tfor (int i = 0; i < sz; i++) {",
+-Encoding
+UTF8
 			"\t\t\t\tcout",
+-Encoding
+UTF8
 			"\t\t\t\t\t\t<< setw(12)",
+-Encoding
+UTF8
 			"\t\t\t\t\t\t<< (i % p == 0 ? to_string(seg[crr++]) : \"\")",
+-Encoding
+UTF8
 			"\t\t\t\t\t\t<< (i < sz - 1 ? \"\" : \"\n\");",
+-Encoding
+UTF8
 			"\t\t\t}",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tcout << endl;",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"};"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"sparse table": {
+-Encoding
+UTF8
 		"prefix": "sparse table",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"template <typename T>",
+-Encoding
+UTF8
 			"class sparse_table {",
+-Encoding
+UTF8
 			"\tint sz, ht;",
+-Encoding
+UTF8
 			"\tvector<int> dpt;",
+-Encoding
+UTF8
 			"\tvector<vector<T>> dat;",
+-Encoding
+UTF8
 			"\tconst function<T(T, T)> o;",
+-Encoding
+UTF8
 			"\tconst T id;",
+-Encoding
+UTF8
 			"",
+-Encoding
+UTF8
 			"public:",
+-Encoding
+UTF8
 			"\tsparse_table (vector<T> v, function<T(T, T)> o, T id)",
+-Encoding
+UTF8
 			"\t\t: sz(v.size())",
+-Encoding
+UTF8
 			"\t\t, ht(1)",
+-Encoding
+UTF8
 			"\t\t, o(o)",
+-Encoding
+UTF8
 			"\t\t, id(id)",
+-Encoding
+UTF8
 			"\t{",
+-Encoding
+UTF8
 			"\t\twhile ((1 << ht) <= sz) ht++;",
+-Encoding
+UTF8
 			"\t\tdpt.assign(sz + 1, 0);",
+-Encoding
+UTF8
 			"\t\tdat.assign(ht, v);",
+-Encoding
+UTF8
 			"\t\tfor (int j = 2; j <= sz; j++) dpt[j] = dpt[j >> 1] + 1;",
+-Encoding
+UTF8
 			"\t\tfor (int i(1), p(1); i < ht; i++, p <<= 1) {",
+-Encoding
+UTF8
 			"\t\t\tfor (int j = 0; j < sz; j++) {",
+-Encoding
+UTF8
 			"\t\t\t\tdat[i][j] = o(dat[i - 1][j], dat[i - 1][min(j + p, sz - 1)]);",
+-Encoding
+UTF8
 			"\t\t\t}",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tT find (int l, int r) {",
+-Encoding
+UTF8
 			"\t\tassert(0 <= l && l <= r && r <= sz);",
+-Encoding
+UTF8
 			"\t\tif(l == r) return id;",
+-Encoding
+UTF8
 			"\t\tint i = dpt[r - l];",
+-Encoding
+UTF8
 			"\t\treturn o(dat[i][l], dat[i][r - (1 << i)]);",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tvoid print () {",
+-Encoding
+UTF8
 			"\t\tfor (int i = 0; i < ht; i++) {",
+-Encoding
+UTF8
 			"\t\t\tfor (int j = 0; j < sz; j++) {",
+-Encoding
+UTF8
 			"\t\t\t\tcout << setw(4) << dat[i][j] << (j < sz - 1 ? ' ' : '\n');",
+-Encoding
+UTF8
 			"\t\t\t}",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tcout << flush;",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"};"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
-	"dfs1": {
-		"prefix": "dfs1",
-		"body": [
-			"void ${1:dfs} (",
-			"\tint crr",
-			", int prt",
-			", vector<vector<int>>& grh",
-			") {",
-			"\tfor (int nxt : grh[crr]) if (nxt != prt) {",
-			"\t\t$1(nxt, crr, grh);",
-			"\t}",
-			"}"
-		],
-		"description": "none"
-	},
-	"dfs2": {
-		"prefix": "dfs2",
-		"body": [
-			"void ${1:dfs} (",
-			"\tint crr",
-			", vector<int>& ckd",
-			", vector<vector<int>>& grh",
-			") {",
-			"\tckd[crr] = true;",
-			"\tfor (int nxt : grh[crr]) if (!ckd[nxt]) {",
-			"\t\t$1(nxt, ckd, grh);",
-			"\t}",
-			"}"
-		],
-		"description": "none"
-	},
-	"low link tree": {
-		"prefix": "low link tree",
-		"body": [
-			"class low_link_tree {",
-			"\tint n;",
-			"\tint tmr = 0;",
-			"\tint rt = 0;",
-			"\tvector<int> ord;",
-			"\tvector<int> low;",
-			"\tset<int> atc;",
-			"\tset<pair<int, int>> bdg;",
-			"\tvector<vector<int>> grh;",
-			"public:",
-			"\tlow_link_tree (",
-			"\t\tvector<vector<int>> const& grh",
-			"\t)",
-			"\t: n(grh.size())",
-			"\t, ord(n, -1)",
-			"\t, low(n, -1)",
-			"\t, grh(grh)",
-			"\t{",
-			"\t\tdfs(0, 0);",
-			"\t}",
-			"\tvoid dfs (",
-			"\t\tint crr",
-			"\t,\tint prt",
-			"\t) {",
-			"\t\tint cnt = 0;",
-			"\t\tord[crr] = low[crr] = tmr++;",
-			"\t\tfor (int nxt : grh[crr]) {",
-			"\t\t\tif (ord[nxt] == -1) {",
-			"\t\t\t\tcnt++;",
-			"\t\t\t\tdfs(nxt, crr);",
-			"\t\t\t\tchmin(low[crr], low[nxt]);",
-			"\t\t\t\tif (crr != rt && ord[crr] <= low[nxt]) atc.insert(crr);",
-			"\t\t\t\tif (ord[crr] < low[nxt]) bdg.emplace(min(crr, nxt), max(crr, nxt));",
-			"\t\t\t}",
-			"\t\t\tif (nxt != prt) chmin(low[crr], ord[nxt]);",
-			"\t\t}",
-			"\t\tif (crr == rt && cnt > 1) atc.insert(crr);",
-			"\t}",
-			"\tauto const &order() {return ord;}",
-			"\tauto const &low_link() {return low;}",
-			"\tauto const &articulation_points() {return atc;}",
-			"\tauto const &bridges() {return bdg;}",
-			"};"
-		],
-		"description": "none"
-	},
-	"binary serch": {
-		"prefix": "binary serch",
-		"body": [
-			"${1:int} ${2:ok}(${3:0}), ${4:ng}(${5:inf}), md;",
-			"while (${4:ng} - ${2:ok} > 1) {",
-			"\tmd = (${2:ok} + ${4:ng}) >> 1;",
-			"\tif (${6:ck(md)}) ok = md;",
-			"\telse ng = md;",
-			"}"
-		],
-		"description": "none"
-	},
-	"lis": {
-		"prefix": "lis",
-		"body": [
-			"vector<${1:int}> lis;",
-			"for (auto crr : ${2:Ç®Ç»Ç‹Ç¶}) {",
-			"\tauto lb = lower_bound(lis.begin(), lis.end(), crr);",
-			"\tif (lb == lis.end()) lis.push_back(crr);",
-			"\telse *lb = crr;",
-			"}"
-		],
-		"description": "none"
-	},
-	"shakutori": {
-		"prefix": "shakutori",
-		"body": [
-			"int l(0), r(0);",
-			"for (; l < ${1:n}; l++) {",
-			"\twhile (r < n && ${2:/*[l, r + 1)Ç™ë√ìñ*/}) {",
-			"\t\tr++;",
-			"\t\t${3:/*[l, r + 1)ÇñKñ‚*/};",
-			"\t}",
-			"}"
-		],
-		"description": "none"
-	},
-	"factorials": {
-		"prefix": "factorials",
-		"body": [
-			"struct factorials {",
-			"\tconst int sz;",
-			"\tvector<int> fct, fnv;",
-			"\tfactorials (int n)",
-			"\t\t: sz(n)",
-			"\t\t, fct(n, 1)",
-			"\t\t, fnv(n, 1)",
-			"\t\t{",
-			"\t\t\tfor (int i = 1; i < n; i++) fct[i] = mul(fct[i - 1], i);",
-			"\t\t\tfnv[n - 1] = inv(fct[n - 1]);",
-			"\t\t\tfor (int i = n - 1; i >= 1; i--) fnv[i - 1] = mul(fnv[i], i);",
-			"\t\t}",
-			"\tinline int binom (int n, int k) {",
-			"\t\tassert(0 <= k && k <= n && n < sz);",
-			"\t\treturn mul(fct[n], mul(fnv[k], fnv[n - k]));",
-			"\t}",
-			"};"
-		],
-		"description": "none"
-	},
-	"factorize": {
-		"prefix": "factorize",
-		"body": [
-			"auto factorize (",
-			"\tint x",
-			") -> map<int, int>",
-			"{",
-			"\tmap<int, int> mp;",
-			"\tfor (int p = 2; p * p <= x; p++) {",
-			"\t\twhile (!(x % p)) {",
-			"\t\t\tmp[p]++;",
-			"\t\t\tx /= p;",
-			"\t\t}",
-			"\t}",
-			"\tif (x != 1) mp[x] = 1;",
-			"\treturn map;",
-			"}"
-		],
-		"description": "none"
-	},
-	"gcd": {
-		"prefix": "gcd",
-		"body": [
-			"template<typename T>",
-			"T gcd (T a, T b) {",
-			"\tif (a < 0) a = -a;",
-			"\tif (b < 0) b = -b;",
-			"\tif (a < b) swap(a, b);",
-			"\twhile (b) {",
-			"\t\ta %= b;",
-			"\t\tswap(a, b);",
-			"\t}",
-			"\treturn a;",
-			"}"
-		],
-		"description": "none"
-	},
-	"sieve of eratosthenes": {
-		"prefix": "sieve of eratosthenes",
-		"body": [
-			"struct sieve_of_eratosthenes {",
-			"\tvector<bool> is_prime;",
-			"\tvector<int> prime_numbers;",
-			"\tvector<vector<int>> prime_divisors;",
-			"\tvector<vector<int>> divisors;",
-			"\tsieve_of_eratosthenes(int n)",
-			"\t\t: is_prime(vector<bool>(n))",
-			"\t\t, prime_numbers(vector<int>(0))",
-			"\t\t, prime_divisors(vector<vector<int>>(n))",
-			"\t\t, divisors(vector<vector<int>>(n))",
-			"\t{",
-			"\t\tfor (int i = 1; i < n; i++) {",
-			"\t\t\tif (is_prime[i] = divisors[i].size() == 1) prime_numbers.push_back(i);",
-			"\t\t\tfor (int j = i; j < n; j += i) {",
-			"\t\t\t\tdivisors[j].push_back(i);",
-			"\t\t\t\tif (is_prime[i]) prime_divisors[j].push_back(i);",
-			"\t\t\t}",
-			"\t\t}",
-			"\t}",
-			"\tauto factorize (",
-			"\t\tint x ",
-			"\t) -> map<int, int> ",
-			"\t{",
-			"\t\tmap<int, int> mp;",
-			"\t\tfor (int p : prime_numbers) {",
-			"\t\t\twhile (!(x % p)) {",
-			"\t\t\t\tmp[p]++;",
-			"\t\t\t\tx /= p;",
-			"\t\t\t}",
-			"\t\t\tif (x == 1 || p * p > x) break;",
-			"\t\t}",
-			"\t\tif (x != 1) mp[x] = 1;",
-			"\t\treturn mp;",
-			"\t}",
-			"};"
-		],
-		"description": "none"
-	},
+-Encoding
+UTF8
 	"-pdbg": {
+-Encoding
+UTF8
 		"prefix": "-pdbg",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"cout << \"(\" << ${1:Ç®Ç»Ç‹Ç¶}${2:.}first << \", \" <<\t$1$2second << \")\";"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"-ppdbg": {
+-Encoding
+UTF8
 		"prefix": "-ppdbg",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"cout << \"(\" << ${1:Ç®Ç»Ç‹Ç¶}${2:.}${3:first.first} << \", \" << $1$2$4 << \", \" << $1$2$5 << \")\";"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"-sdbg": {
+-Encoding
+UTF8
 		"prefix": "-sdbg",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"cout << ${1:Ç®Ç»Ç‹Ç¶};"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"1dbg": {
+-Encoding
+UTF8
 		"prefix": "1dbg",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"{ // debug",
+-Encoding
+UTF8
 			"\tcout << \"${1:a} = \" << $1 << endl;",
+-Encoding
+UTF8
 			"} //"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"2dbg": {
+-Encoding
+UTF8
 		"prefix": "2dbg",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"cout << \\"(\\" << ${1:Ç®Ç»Ç‹Ç¶}${2:.}first << \\", \\" <<\t$1$2second << \\")\\";"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"3dbg": {
+-Encoding
+UTF8
 		"prefix": "3dbg",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"{ // debug",
+-Encoding
+UTF8
 			"\tcout",
+-Encoding
+UTF8
 			"\t\t<< \"${1:a} = \" << $1 << \", \"",
+-Encoding
+UTF8
 			"\t\t<< \"${2:b} = \" << $2",
+-Encoding
+UTF8
 			"\t\t<< \"${3:c} = \" << $3",
+-Encoding
+UTF8
 			"\t\t<< endl;",
+-Encoding
+UTF8
 			"} //"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"interval debug": {
+-Encoding
+UTF8
 		"prefix": "interval debug",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"{ // debug",
+-Encoding
+UTF8
 			"\tcout",
+-Encoding
+UTF8
 			"\t\t<< \"[\" << $1 << \", \" << $2 << \",)\" << endl;",
+-Encoding
+UTF8
 			"} //"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"map debug": {
+-Encoding
+UTF8
 		"prefix": "map debug",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"{ // debug",
+-Encoding
+UTF8
 			"\tfor (auto ${2:it} = ${1:mp}.begin(); $2 != $1.end(); $2++) {",
+-Encoding
+UTF8
 			"\t\tcout << \"mp[\";",
+-Encoding
+UTF8
 			"\t\tcout << $0$2->first;",
+-Encoding
+UTF8
 			"\t\tcout << \"] = \";",
+-Encoding
+UTF8
 			"\t\tcout << $2->second;",
+-Encoding
+UTF8
 			"\t\tcout << \"\" << (next($2) == $1.end() ? \"\n\" : \", \");",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"} //"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"ndbg": {
+-Encoding
+UTF8
 		"prefix": "ndbg",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"cout << \"$0\" << endl;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"new line": {
+-Encoding
+UTF8
 		"prefix": "new line",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"{ // debug",
+-Encoding
+UTF8
 			"\tcout << endl;",
+-Encoding
+UTF8
 			"} //"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"pdbg": {
+-Encoding
+UTF8
 		"prefix": "pdbg",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"{ // debug",
+-Encoding
+UTF8
 			"\tcout << \"${1:Ç®Ç»Ç‹Ç¶} = (\" << $1${2:.}first << \", \" <<\t$1$2second << \")\" << endl;",
+-Encoding
+UTF8
 			"} //"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"vdbg": {
+-Encoding
+UTF8
 		"prefix": "vdbg",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"{ // debug",
+-Encoding
+UTF8
 			"\tcout << \"${1:Ç®Ç»Ç‹Ç¶}: \";",
+-Encoding
+UTF8
 			"\tfor (auto ${2:it} = $1.begin(); $2 != $1.end(); $2++) {",
+-Encoding
+UTF8
 			"\t\t${3:cout << *it;}",
+-Encoding
+UTF8
 			"\t\tcout << (next($2) == $1.end() ? \"\n\" : \", \");",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tcout << endl;",
+-Encoding
+UTF8
 			"} //"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"vpdebug": {
+-Encoding
+UTF8
 		"prefix": "vpdebug",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"{ // debug",
+-Encoding
+UTF8
 			"\tcout << \"${1:Ç®Ç»Ç‹Ç¶}: \";",
+-Encoding
+UTF8
 			"\tfor (auto $2 = $1.begin(); $2 != $1.end(); $2++) {",
+-Encoding
+UTF8
 			"\t\tcout << \"(\";",
+-Encoding
+UTF8
 			"\t\tcout << $2->first;",
+-Encoding
+UTF8
 			"\t\tcout << \", \";",
+-Encoding
+UTF8
 			"\t\tcout << $2->second;",
+-Encoding
+UTF8
 			"\t\tcout << \")\" << (next($2) == $1.end() ? \"\n\" : \", \");",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tcout << endl;",
+-Encoding
+UTF8
 			"} //"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"vvdbg": {
+-Encoding
+UTF8
 		"prefix": "vvdbg",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"{ // debug",
+-Encoding
+UTF8
 			"\tcout << \"--------------------------------------\" << endl;",
+-Encoding
+UTF8
 			"\tcout << setw(${5:5}) << left << \"$1\";",
+-Encoding
+UTF8
 			"\tfor (int ${2:i} = 0; $2 < ${1:Ç®Ç»Ç‹Ç¶}.size(); $2++) {",
+-Encoding
+UTF8
 			"\t\tif ($2 != 0) cout << setw($5) << \" \";",
+-Encoding
+UTF8
 			"\t\tcout << \"$2 = \" << setw(2) << right << $2 << \": \";",
+-Encoding
+UTF8
 			"\t\tfor (int ${3:j} = 0; $3 < $1[$2].size(); $3++) {",
+-Encoding
+UTF8
 			"\t\t\tcout << setw(${4:4}) << right << $1[$2][$3];",
+-Encoding
+UTF8
 			"\t\t\tif ($3 != $1[$2].size() - 1) cout << \" \";",
+-Encoding
+UTF8
 			"\t\t}",
+-Encoding
+UTF8
 			"\t\tcout << endl;",
+-Encoding
+UTF8
 			"\t}",
+-Encoding
+UTF8
 			"\tcout << \"--------------------------------------\" << endl;",
+-Encoding
+UTF8
 			"} //"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
+	"dfs1": {
+-Encoding
+UTF8
+		"prefix": "dfs1",
+-Encoding
+UTF8
+		"body": [
+-Encoding
+UTF8
+			"void ${1:dfs} (",
+-Encoding
+UTF8
+			"\tint crr",
+-Encoding
+UTF8
+			", int prt",
+-Encoding
+UTF8
+			", vector<vector<int>>& grh",
+-Encoding
+UTF8
+			") {",
+-Encoding
+UTF8
+			"\tfor (int nxt : grh[crr]) if (nxt != prt) {",
+-Encoding
+UTF8
+			"\t\t$1(nxt, crr, grh);",
+-Encoding
+UTF8
+			"\t}",
+-Encoding
+UTF8
+			"}"
+-Encoding
+UTF8
+		],
+-Encoding
+UTF8
+		"description": "none"
+-Encoding
+UTF8
+	},
+-Encoding
+UTF8
+	"dfs2": {
+-Encoding
+UTF8
+		"prefix": "dfs2",
+-Encoding
+UTF8
+		"body": [
+-Encoding
+UTF8
+			"void ${1:dfs} (",
+-Encoding
+UTF8
+			"\tint crr",
+-Encoding
+UTF8
+			", vector<int>& ckd",
+-Encoding
+UTF8
+			", vector<vector<int>>& grh",
+-Encoding
+UTF8
+			") {",
+-Encoding
+UTF8
+			"\tckd[crr] = true;",
+-Encoding
+UTF8
+			"\tfor (int nxt : grh[crr]) if (!ckd[nxt]) {",
+-Encoding
+UTF8
+			"\t\t$1(nxt, ckd, grh);",
+-Encoding
+UTF8
+			"\t}",
+-Encoding
+UTF8
+			"}"
+-Encoding
+UTF8
+		],
+-Encoding
+UTF8
+		"description": "none"
+-Encoding
+UTF8
+	},
+-Encoding
+UTF8
+	"low link tree": {
+-Encoding
+UTF8
+		"prefix": "low link tree",
+-Encoding
+UTF8
+		"body": [
+-Encoding
+UTF8
+			"class low_link_tree {",
+-Encoding
+UTF8
+			"\tint n;",
+-Encoding
+UTF8
+			"\tint tmr = 0;",
+-Encoding
+UTF8
+			"\tint rt = 0;",
+-Encoding
+UTF8
+			"\tvector<int> ord;",
+-Encoding
+UTF8
+			"\tvector<int> low;",
+-Encoding
+UTF8
+			"\tset<int> atc;",
+-Encoding
+UTF8
+			"\tset<pair<int, int>> bdg;",
+-Encoding
+UTF8
+			"\tvector<vector<int>> grh;",
+-Encoding
+UTF8
+			"public:",
+-Encoding
+UTF8
+			"\tlow_link_tree (",
+-Encoding
+UTF8
+			"\t\tvector<vector<int>> const& grh",
+-Encoding
+UTF8
+			"\t)",
+-Encoding
+UTF8
+			"\t: n(grh.size())",
+-Encoding
+UTF8
+			"\t, ord(n, -1)",
+-Encoding
+UTF8
+			"\t, low(n, -1)",
+-Encoding
+UTF8
+			"\t, grh(grh)",
+-Encoding
+UTF8
+			"\t{",
+-Encoding
+UTF8
+			"\t\tdfs(0, 0);",
+-Encoding
+UTF8
+			"\t}",
+-Encoding
+UTF8
+			"\tvoid dfs (",
+-Encoding
+UTF8
+			"\t\tint crr",
+-Encoding
+UTF8
+			"\t,\tint prt",
+-Encoding
+UTF8
+			"\t) {",
+-Encoding
+UTF8
+			"\t\tint cnt = 0;",
+-Encoding
+UTF8
+			"\t\tord[crr] = low[crr] = tmr++;",
+-Encoding
+UTF8
+			"\t\tfor (int nxt : grh[crr]) {",
+-Encoding
+UTF8
+			"\t\t\tif (ord[nxt] == -1) {",
+-Encoding
+UTF8
+			"\t\t\t\tcnt++;",
+-Encoding
+UTF8
+			"\t\t\t\tdfs(nxt, crr);",
+-Encoding
+UTF8
+			"\t\t\t\tchmin(low[crr], low[nxt]);",
+-Encoding
+UTF8
+			"\t\t\t\tif (crr != rt && ord[crr] <= low[nxt]) atc.insert(crr);",
+-Encoding
+UTF8
+			"\t\t\t\tif (ord[crr] < low[nxt]) bdg.emplace(min(crr, nxt), max(crr, nxt));",
+-Encoding
+UTF8
+			"\t\t\t}",
+-Encoding
+UTF8
+			"\t\t\tif (nxt != prt) chmin(low[crr], ord[nxt]);",
+-Encoding
+UTF8
+			"\t\t}",
+-Encoding
+UTF8
+			"\t\tif (crr == rt && cnt > 1) atc.insert(crr);",
+-Encoding
+UTF8
+			"\t}",
+-Encoding
+UTF8
+			"\tauto const &order() {return ord;}",
+-Encoding
+UTF8
+			"\tauto const &low_link() {return low;}",
+-Encoding
+UTF8
+			"\tauto const &articulation_points() {return atc;}",
+-Encoding
+UTF8
+			"\tauto const &bridges() {return bdg;}",
+-Encoding
+UTF8
+			"};"
+-Encoding
+UTF8
+		],
+-Encoding
+UTF8
+		"description": "none"
+-Encoding
+UTF8
+	},
+-Encoding
+UTF8
+	"binary serch": {
+-Encoding
+UTF8
+		"prefix": "binary serch",
+-Encoding
+UTF8
+		"body": [
+-Encoding
+UTF8
+			"${1:int} ${2:ok}(${3:0}), ${4:ng}(${5:inf}), md;",
+-Encoding
+UTF8
+			"while (${4:ng} - ${2:ok} > 1) {",
+-Encoding
+UTF8
+			"\tmd = (${2:ok} + ${4:ng}) >> 1;",
+-Encoding
+UTF8
+			"\tif (${6:ck(md)}) ok = md;",
+-Encoding
+UTF8
+			"\telse ng = md;",
+-Encoding
+UTF8
+			"}"
+-Encoding
+UTF8
+		],
+-Encoding
+UTF8
+		"description": "none"
+-Encoding
+UTF8
+	},
+-Encoding
+UTF8
+	"lis": {
+-Encoding
+UTF8
+		"prefix": "lis",
+-Encoding
+UTF8
+		"body": [
+-Encoding
+UTF8
+			"vector<${1:int}> lis;",
+-Encoding
+UTF8
+			"for (auto crr : ${2:Ç®Ç»Ç‹Ç¶}) {",
+-Encoding
+UTF8
+			"\tauto lb = lower_bound(lis.begin(), lis.end(), crr);",
+-Encoding
+UTF8
+			"\tif (lb == lis.end()) lis.push_back(crr);",
+-Encoding
+UTF8
+			"\telse *lb = crr;",
+-Encoding
+UTF8
+			"}"
+-Encoding
+UTF8
+		],
+-Encoding
+UTF8
+		"description": "none"
+-Encoding
+UTF8
+	},
+-Encoding
+UTF8
+	"shakutori": {
+-Encoding
+UTF8
+		"prefix": "shakutori",
+-Encoding
+UTF8
+		"body": [
+-Encoding
+UTF8
+			"int l(0), r(0);",
+-Encoding
+UTF8
+			"for (; l < ${1:n}; l++) {",
+-Encoding
+UTF8
+			"\twhile (r < n && ${2:/*[l, r + 1)Ç™ë√ìñ*/}) {",
+-Encoding
+UTF8
+			"\t\tr++;",
+-Encoding
+UTF8
+			"\t\t${3:/*[l, r + 1)ÇñKñ‚*/};",
+-Encoding
+UTF8
+			"\t}",
+-Encoding
+UTF8
+			"}"
+-Encoding
+UTF8
+		],
+-Encoding
+UTF8
+		"description": "none"
+-Encoding
+UTF8
+	},
+-Encoding
+UTF8
+	"factorials": {
+-Encoding
+UTF8
+		"prefix": "factorials",
+-Encoding
+UTF8
+		"body": [
+-Encoding
+UTF8
+			"struct factorials {",
+-Encoding
+UTF8
+			"\tconst int sz;",
+-Encoding
+UTF8
+			"\tvector<int> fct, fnv;",
+-Encoding
+UTF8
+			"\tfactorials (int n)",
+-Encoding
+UTF8
+			"\t\t: sz(n)",
+-Encoding
+UTF8
+			"\t\t, fct(n, 1)",
+-Encoding
+UTF8
+			"\t\t, fnv(n, 1)",
+-Encoding
+UTF8
+			"\t\t{",
+-Encoding
+UTF8
+			"\t\t\tfor (int i = 1; i < n; i++) fct[i] = mul(fct[i - 1], i);",
+-Encoding
+UTF8
+			"\t\t\tfnv[n - 1] = inv(fct[n - 1]);",
+-Encoding
+UTF8
+			"\t\t\tfor (int i = n - 1; i >= 1; i--) fnv[i - 1] = mul(fnv[i], i);",
+-Encoding
+UTF8
+			"\t\t}",
+-Encoding
+UTF8
+			"\tinline int binom (int n, int k) {",
+-Encoding
+UTF8
+			"\t\tassert(0 <= k && k <= n && n < sz);",
+-Encoding
+UTF8
+			"\t\treturn mul(fct[n], mul(fnv[k], fnv[n - k]));",
+-Encoding
+UTF8
+			"\t}",
+-Encoding
+UTF8
+			"};"
+-Encoding
+UTF8
+		],
+-Encoding
+UTF8
+		"description": "none"
+-Encoding
+UTF8
+	},
+-Encoding
+UTF8
+	"factorize": {
+-Encoding
+UTF8
+		"prefix": "factorize",
+-Encoding
+UTF8
+		"body": [
+-Encoding
+UTF8
+			"auto factorize (",
+-Encoding
+UTF8
+			"\tint x",
+-Encoding
+UTF8
+			") -> map<int, int>",
+-Encoding
+UTF8
+			"{",
+-Encoding
+UTF8
+			"\tmap<int, int> mp;",
+-Encoding
+UTF8
+			"\tfor (int p = 2; p * p <= x; p++) {",
+-Encoding
+UTF8
+			"\t\twhile (!(x % p)) {",
+-Encoding
+UTF8
+			"\t\t\tmp[p]++;",
+-Encoding
+UTF8
+			"\t\t\tx /= p;",
+-Encoding
+UTF8
+			"\t\t}",
+-Encoding
+UTF8
+			"\t}",
+-Encoding
+UTF8
+			"\tif (x != 1) mp[x] = 1;",
+-Encoding
+UTF8
+			"\treturn map;",
+-Encoding
+UTF8
+			"}"
+-Encoding
+UTF8
+		],
+-Encoding
+UTF8
+		"description": "none"
+-Encoding
+UTF8
+	},
+-Encoding
+UTF8
+	"gcd": {
+-Encoding
+UTF8
+		"prefix": "gcd",
+-Encoding
+UTF8
+		"body": [
+-Encoding
+UTF8
+			"template<typename T>",
+-Encoding
+UTF8
+			"T gcd (T a, T b) {",
+-Encoding
+UTF8
+			"\tif (a < 0) a = -a;",
+-Encoding
+UTF8
+			"\tif (b < 0) b = -b;",
+-Encoding
+UTF8
+			"\tif (a < b) swap(a, b);",
+-Encoding
+UTF8
+			"\twhile (b) {",
+-Encoding
+UTF8
+			"\t\ta %= b;",
+-Encoding
+UTF8
+			"\t\tswap(a, b);",
+-Encoding
+UTF8
+			"\t}",
+-Encoding
+UTF8
+			"\treturn a;",
+-Encoding
+UTF8
+			"}"
+-Encoding
+UTF8
+		],
+-Encoding
+UTF8
+		"description": "none"
+-Encoding
+UTF8
+	},
+-Encoding
+UTF8
+	"sieve of eratosthenes": {
+-Encoding
+UTF8
+		"prefix": "sieve of eratosthenes",
+-Encoding
+UTF8
+		"body": [
+-Encoding
+UTF8
+			"struct sieve_of_eratosthenes {",
+-Encoding
+UTF8
+			"\tvector<bool> is_prime;",
+-Encoding
+UTF8
+			"\tvector<int> prime_numbers;",
+-Encoding
+UTF8
+			"\tvector<vector<int>> prime_divisors;",
+-Encoding
+UTF8
+			"\tvector<vector<int>> divisors;",
+-Encoding
+UTF8
+			"\tsieve_of_eratosthenes(int n)",
+-Encoding
+UTF8
+			"\t\t: is_prime(vector<bool>(n))",
+-Encoding
+UTF8
+			"\t\t, prime_numbers(vector<int>(0))",
+-Encoding
+UTF8
+			"\t\t, prime_divisors(vector<vector<int>>(n))",
+-Encoding
+UTF8
+			"\t\t, divisors(vector<vector<int>>(n))",
+-Encoding
+UTF8
+			"\t{",
+-Encoding
+UTF8
+			"\t\tfor (int i = 1; i < n; i++) {",
+-Encoding
+UTF8
+			"\t\t\tif (is_prime[i] = divisors[i].size() == 1) prime_numbers.push_back(i);",
+-Encoding
+UTF8
+			"\t\t\tfor (int j = i; j < n; j += i) {",
+-Encoding
+UTF8
+			"\t\t\t\tdivisors[j].push_back(i);",
+-Encoding
+UTF8
+			"\t\t\t\tif (is_prime[i]) prime_divisors[j].push_back(i);",
+-Encoding
+UTF8
+			"\t\t\t}",
+-Encoding
+UTF8
+			"\t\t}",
+-Encoding
+UTF8
+			"\t}",
+-Encoding
+UTF8
+			"\tauto factorize (",
+-Encoding
+UTF8
+			"\t\tint x ",
+-Encoding
+UTF8
+			"\t) -> map<int, int> ",
+-Encoding
+UTF8
+			"\t{",
+-Encoding
+UTF8
+			"\t\tmap<int, int> mp;",
+-Encoding
+UTF8
+			"\t\tfor (int p : prime_numbers) {",
+-Encoding
+UTF8
+			"\t\t\twhile (!(x % p)) {",
+-Encoding
+UTF8
+			"\t\t\t\tmp[p]++;",
+-Encoding
+UTF8
+			"\t\t\t\tx /= p;",
+-Encoding
+UTF8
+			"\t\t\t}",
+-Encoding
+UTF8
+			"\t\t\tif (x == 1 || p * p > x) break;",
+-Encoding
+UTF8
+			"\t\t}",
+-Encoding
+UTF8
+			"\t\tif (x != 1) mp[x] = 1;",
+-Encoding
+UTF8
+			"\t\treturn mp;",
+-Encoding
+UTF8
+			"\t}",
+-Encoding
+UTF8
+			"};"
+-Encoding
+UTF8
+		],
+-Encoding
+UTF8
+		"description": "none"
+-Encoding
+UTF8
+	},
+-Encoding
+UTF8
 	"1sin": {
+-Encoding
+UTF8
 		"prefix": "1sin",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"${1:int} $2;",
+-Encoding
+UTF8
 			"cin >> $2;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"2sin": {
+-Encoding
+UTF8
 		"prefix": "2sin",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"${1:int} $2, $3;",
+-Encoding
+UTF8
 			"cin >> $2 >> $3;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"3sin": {
+-Encoding
+UTF8
 		"prefix": "3sin",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"${1:int} $2, $3, $4;",
+-Encoding
+UTF8
 			"cin >> $2 >> $3 >> $4;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"4sin": {
+-Encoding
+UTF8
 		"prefix": "4sin",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"${1:sin} $2, $3, $4, $5;",
+-Encoding
+UTF8
 			"cin >> $2 >> $3 >> $4 >> $5;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"err": {
+-Encoding
+UTF8
 		"prefix": "err",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"void err() {",
+-Encoding
+UTF8
 			"\tcout << ${1:èoóÕ} << endl;",
+-Encoding
+UTF8
 			"\texit(0);",
+-Encoding
+UTF8
 			"}"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"for": {
+-Encoding
+UTF8
 		"prefix": "for",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"for (int ${1:i} = ${2:0}; ${1:i} < ${3:n}; ${1:i}++) {",
+-Encoding
+UTF8
 			"\t$0",
+-Encoding
+UTF8
 			"}"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"for const": {
+-Encoding
+UTF8
 		"prefix": "for const",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"for (auto const & ${1:e}: ${2:Ç®Ç»Ç‹Ç¶}) {",
+-Encoding
+UTF8
 			"\t$0",
+-Encoding
+UTF8
 			"}"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"for iterator": {
+-Encoding
+UTF8
 		"prefix": "for iterator",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"for (auto ${1:it} = ${2:Ç®Ç»Ç‹Ç¶}.begin(); $1 != $2.end(); it++) {",
+-Encoding
+UTF8
 			"\t$0",
+-Encoding
+UTF8
 			"}"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"for reverse": {
+-Encoding
+UTF8
 		"prefix": "for reverse",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"for (int ${1:i} = ${2:n - 1}; $1 >= 0; $1--) {",
+-Encoding
+UTF8
 			"\t$0",
+-Encoding
+UTF8
 			"}"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"sout": {
+-Encoding
+UTF8
 		"prefix": "sout",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"cout << ${1:ì‡óe} << endl;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 	"tin": {
+-Encoding
+UTF8
 		"prefix": "tin",
+-Encoding
+UTF8
 		"body": [
+-Encoding
+UTF8
 			"${1:int} ${2:tmp};",
+-Encoding
+UTF8
 			"cin >> $2;",
+-Encoding
+UTF8
 			"$0;"
+-Encoding
+UTF8
 		],
+-Encoding
+UTF8
 		"description": "none"
+-Encoding
+UTF8
 	},
+-Encoding
+UTF8
 }

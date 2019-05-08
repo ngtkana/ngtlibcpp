@@ -1,4 +1,5 @@
-# sieve_of_eratosthenes
+﻿# sieve_of_eratosthenes
+[prev](..\index.md)
 ```cpp
 struct sieve_of_eratosthenes {
   vector<bool> is_prime;

@@ -1,4 +1,5 @@
-# lower_bound
+ï»¿# lower_bound
+[prev](..\index.md)
 ```cpp
-lower_bound(${1:‚¨‚È‚Ü‚¦}.begin(), ${1:‚¨‚È‚Ü‚¦}.end(), ${2:‚«‚¶‚ã‚ñ‚¿});
+lower_bound(${1:ãŠãªã¾ãˆ}.begin(), ${1:ãŠãªã¾ãˆ}.end(), ${2:ãã˜ã‚…ã‚“ã¡});
 ```

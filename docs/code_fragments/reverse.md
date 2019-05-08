@@ -1,4 +1,5 @@
-# reverse
+ï»¿# reverse
+[prev](..\index.md)
 ```cpp
-reverse(${1:‚¨‚È‚Ü‚¦}.begin(), ${1:‚¨‚È‚Ü‚¦}.end());
+reverse(${1:ãŠãªã¾ãˆ}.begin(), ${1:ãŠãªã¾ãˆ}.end());
 ```

@@ -1,4 +1,5 @@
-# factorize
+﻿# factorize
+[prev](..\index.md)
 ```cpp
 auto factorize (
   int x

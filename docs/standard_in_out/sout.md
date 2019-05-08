@@ -1,4 +1,5 @@
-# sout
+ï»¿# sout
+[prev](..\index.md)
 ```cpp
-cout << ${1:“à—e} << endl;
+cout << ${1:å†…å®¹} << endl;
 ```

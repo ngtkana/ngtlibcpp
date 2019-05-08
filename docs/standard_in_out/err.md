@@ -1,7 +1,8 @@
-# err
+ï»¿# err
+[prev](..\index.md)
 ```cpp
 void err() {
-  cout << ${1:o—Í} << endl;
+  cout << ${1:å‡ºåŠ›} << endl;
   exit(0);
 }
 ```

@@ -1,6 +1,7 @@
-# for_const
+ï»¿# for_const
+[prev](..\index.md)
 ```cpp
-for (auto const & ${1:e}: ${2:‚¨‚È‚Ü‚¦}) {
+for (auto const & ${1:e}: ${2:ãŠãªã¾ãˆ}) {
   $0
 }
 ```

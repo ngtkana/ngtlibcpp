@@ -1,7 +1,8 @@
-# lis
+ï»¿# lis
+[prev](..\index.md)
 ```cpp
 vector<${1:int}> lis;
-for (auto crr : ${2:‚¨‚È‚Ü‚¦}) {
+for (auto crr : ${2:ãŠãªã¾ãˆ}) {
   auto lb = lower_bound(lis.begin(), lis.end(), crr);
   if (lb == lis.end()) lis.push_back(crr);
   else *lb = crr;

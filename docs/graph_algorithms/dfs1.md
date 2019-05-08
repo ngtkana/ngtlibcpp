@@ -1,4 +1,5 @@
-# dfs1
+﻿# dfs1
+[prev](..\index.md)
 ```cpp
 void ${1:dfs} (
   int crr

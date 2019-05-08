@@ -1,4 +1,5 @@
-# disjoint_set
+﻿# disjoint_set
+[prev](..\index.md)
 ```cpp
 struct disjoint_set {
   int n;

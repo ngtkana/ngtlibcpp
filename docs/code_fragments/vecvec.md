@@ -1,4 +1,5 @@
-# vecvec
+ï»¿# vecvec
+[prev](..\index.md)
 ```cpp
-vector<vector<${1:int}>> ${2:‚¨‚È‚Ü‚¦}(${3:h}, vector<$1>(${4:w}, ${5:0}))$0;
+vector<vector<${1:int}>> ${2:ãŠãªã¾ãˆ}(${3:h}, vector<$1>(${4:w}, ${5:0}))$0;
 ```

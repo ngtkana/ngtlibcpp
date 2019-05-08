@@ -1,4 +1,5 @@
-# gcd
+﻿# gcd
+[prev](..\index.md)
 ```cpp
 template<typename T>
 T gcd (T a, T b) {

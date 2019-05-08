@@ -1,4 +1,5 @@
-# lazy_segment_tree
+﻿# lazy_segment_tree
+[prev](..\index.md)
 ```cpp
 const int infty = (int)((1LL << 31) - 1);
 struct lazy_segment_tree {

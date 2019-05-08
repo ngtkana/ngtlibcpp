@@ -1,4 +1,5 @@
-# sparse_table
+﻿# sparse_table
+[prev](..\index.md)
 ```cpp
 template <typename T>
 class sparse_table {

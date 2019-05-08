@@ -1,4 +1,5 @@
-# mdcal
+﻿# mdcal
+[prev](..\index.md)
 ```cpp
 constexpr int md = ${1:1e9 + 7};
 inline void add(int &a, int b) {

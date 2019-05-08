@@ -1,4 +1,5 @@
-# binary_serch
+﻿# binary_serch
+[prev](..\index.md)
 ```cpp
 ${1:int} ${2:ok}(${3:0}), ${4:ng}(${5:inf}), md;
 while (${4:ng} - ${2:ok} > 1) {
