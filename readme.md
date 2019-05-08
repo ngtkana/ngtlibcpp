@@ -1,5 +1,8 @@
 # Library
-GitHubPages にライブラリへのリンクをまとめてあります。
+GitHub Pages にライブラリへのリンクをまとめてあります。
+
+GitHub Pages 不調のため [こちら](docs/index.md) からお願いします。（`docs/index.md` への直リンク）
+
 
 ## できること
 C++で書かれたライブラリ群を整形して、json に変換してくれます！

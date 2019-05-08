@@ -88,11 +88,13 @@ function make_link {
   param (
     $inpath
   )
-  $outstr = "`| ["
+  # $outstr = "`| ["
+  $outstr = "`- ["
   $outstr += [System.IO.Path]::GetFileNameWithoutExtension($inpath).replace("_", " ")
   $outstr += "]("
   $outstr += (Resolve-Path $inpath -Relative).remove(0, 7)
-  $outstr += ") |"
+  $outstr += ")"
+  # $outstr += ") |"
   Write-Output $outstr 
 }
 
@@ -103,8 +105,8 @@ function make_links_and_markdowns {
   "## " + $indir.name | Add-Content $index
   "" | Add-Content $index
 
-  "|snippet name|" | Add-Content $index
-  "---" | Add-Content $index
+  # "|snippet name|" | Add-Content $index
+  # "---" | Add-Content $index
   $outdir = $indir.name
   Get-ChildItem $indir.fullname | ForEach-Object {
     $name_without_ext = [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
