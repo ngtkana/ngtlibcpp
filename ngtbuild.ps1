@@ -14,7 +14,7 @@ function ngtwrite {
     $outstr += "`t"
   }
   $outstr += $instr
-  Write-Output -Encoding UTF8 $outstr
+  Write-Output $outstr
 }
 function escape_and_quote {
   param (
@@ -23,6 +23,7 @@ function escape_and_quote {
     , $final
   )
   $instr = $instr.replace("  ", "`t")
+  $instr = $instr.replace("\", "\\")
   $instr = $instr.replace("`t", "`\t")
   $instr = $instr.replace("`n", "`\n")
   $instr = $instr.replace("`"", "`\`"")
@@ -128,14 +129,15 @@ Get-ChildItem src | ForEach-Object {
   make_links_and_markdowns $_
 }
 
-ngtwrite "{" | Add-Content $snippets
+ngtwrite "{" | Add-Content -Encoding UTF8 $snippets
 
 Get-ChildItem -Recurse -Path src/*.cpp | ForEach-Object {
-  parse $_ | Add-Content $snippets
+  parse $_ | Add-Content -Encoding UTF8 $snippets
 }
 
 Get-ChildItem -Path json/fragments.json | ForEach-Object {
   Get-Content -Encoding UTF8 $_.FullName | Add-Content -Encoding UTF8 $snippets
 }
 
+ngtwrite "`"this_is_to_be_deleted`": `"foo`"" 1 | Add-Content $snippets
 ngtwrite "}" 0 | Add-Content $snippets
