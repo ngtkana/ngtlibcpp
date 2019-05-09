@@ -1,7 +1,76 @@
 #include <bits/stdc++.h>
 using namespace std;
 // begin
-struct segment_tree {
+template<typename T, typename U>
+struct range_minimum_query {
+  const T id;
+  const function<T(T, T)> merge_function;
+  const function<void(U&)> twice;
+  const function<U(U)> half;
+  range_minimum_query(T id):
+    id(id),
+    merge_function ([](T a, T b) {return min(a, b);}),
+    twice ([](U& a) {}),
+    half ([](U a) {return a;})
+    {
+    }
+};
+template<typename T, typename U>
+struct range_maximum_query {
+  const T id;
+  const function<T(T, T)> merge_function;
+  const function<void(U&)> twice;
+  const function<U(U)> half;
+  range_maximum_query(T id):
+    id(id),
+    merge_function ([](T a, T b) {return max(a, b);}),
+    twice ([](U& a) {}),
+    half ([](U a) {return a;})
+    {
+    }
+};
+template<typename T, typename U>
+struct range_sum_query {
+  const T id;
+  const function<T(T, T)> merge_function;
+  const function<void(U&)> twice;
+  const function<U(U)> half;
+  range_sum_query(T id = 0):
+    id(id),
+    merge_function ([](T a, T b) {return a + b;}),
+    twice ([](U& a) {a *= 2;}),
+    half ([](U a) {return a / 2;})
+    {
+    }
+};
+template<typename T, typename U>
+struct range_update_query {
+    const U id;
+    const function<void(T&, U)> action;
+    const function<void(U&, U)> composition;
+  public:
+    range_update_query(U id = 0):
+      id(id),
+      action ([](T& a, U b) {a = b;}),
+      composition ([](U& a, U b) {a = b;})
+      {
+      }
+};
+template<typename T, typename U>
+struct range_add_query {
+    const U id;
+    const function<void(T&, U)> action;
+    const function<void(U&, U)> composition;
+  public:
+    range_add_query(U id = 0):
+      id(id),
+      action ([](T& a, U b) {a += b;}),
+      composition ([](U& a, U b) {a += b;})
+      {
+      }
+};
+template<typename T, typename U>
+class segment_tree {
   int sz;
   int Sz;
   int ht;
@@ -15,6 +84,7 @@ struct segment_tree {
   const function<U(U)> half;
   const T tid;
   const U uid;
+  
   public:
     segment_tree(
         int n,
@@ -65,6 +135,25 @@ struct segment_tree {
       {
         copy(data.begin(), data.end(), seg.begin() + sz);
         for (int i = sz - 1; i >= 1; i--) seg[i] = o(seg[i << 1], seg[(i << 1) + 1]);
+      }
+    
+    template<typename V, typename M, typename A>
+    segment_tree(
+        const V n_or_v,
+        const M& merge_instance,
+        const A& action_instance
+      )
+        : segment_tree(
+          n_or_v,
+          merge_instance.merge_function,
+          action_instance.action,
+          action_instance.composition,
+          merge_instance.twice,
+          merge_instance.half,
+          merge_instance.id,
+          action_instance.id
+        )
+      {
       }
     
     inline int lft (int i) {return i << 1;}
@@ -138,8 +227,9 @@ struct segment_tree {
     void print(int w = 4) {
       for (int i(1), last(2), output_size(w << ht); last <= Sz; last <<= 1, output_size >>= 1) {
         for (; i < last; i++) {
-          cout << right << setw(w) << seg[i];
-          cout << setw(2) <<  " <";
+          cout << right << setw(w);
+          cout << (seg[i] != tid ? to_string(seg[i]) : "");
+          cout << setw(2) <<  "<";
           cout << left << setw(output_size - w - 2);
           cout << (has_act[i] ? to_string(act[i]) : "");
         }

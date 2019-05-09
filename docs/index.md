@@ -4,6 +4,7 @@
 - [all](code_fragments\all.md)
 - [bug](code_fragments\bug.md)
 - [check](code_fragments\check.md)
+- [chmax](code_fragments\chmax.md)
 - [chmin](code_fragments\chmin.md)
 - [didj](code_fragments\didj.md)
 - [err](code_fragments\err.md)
@@ -44,6 +45,7 @@
 - [2prpmpt](debug\2prpmpt.md)
 - [3dbg](debug\3dbg.md)
 - [3prompt](debug\3prompt.md)
+- [interval debug](debug\interval_debug.md)
 - [map debug](debug\map_debug.md)
 - [ndbg](debug\ndbg.md)
 - [new line](debug\new_line.md)
@@ -68,6 +70,7 @@
 
 - [factorials](number_theory\factorials.md)
 - [factorize](number_theory\factorize.md)
+- [gcd](number_theory\gcd.md)
 - [sieve of eratosthenes](number_theory\sieve_of_eratosthenes.md)
 
 ## standard_in_out
