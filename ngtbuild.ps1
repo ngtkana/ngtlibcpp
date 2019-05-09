@@ -137,9 +137,5 @@ Get-ChildItem -Recurse -Path src/*.cpp | ForEach-Object {
   parse $_ | Add-Content -Encoding UTF8 $snippets
 }
 
-Get-ChildItem -Path json/fragments.json | ForEach-Object {
-  Get-Content -Encoding UTF8 $_.FullName | Add-Content -Encoding UTF8 $snippets
-}
-
 ngtwrite "`"this_is_to_be_deleted`": `"foo`"" 1 | Add-Content $snippets
 ngtwrite "}" 0 | Add-Content $snippets

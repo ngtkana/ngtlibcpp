@@ -6,6 +6,11 @@
 - [check](code_fragments\check.md)
 - [chmin](code_fragments\chmin.md)
 - [didj](code_fragments\didj.md)
+- [err](code_fragments\err.md)
+- [for](code_fragments\for.md)
+- [for const](code_fragments\for_const.md)
+- [for iterator](code_fragments\for_iterator.md)
+- [for reverse](code_fragments\for_reverse.md)
 - [lower bound](code_fragments\lower_bound.md)
 - [mdcal](code_fragments\mdcal.md)
 - [pair](code_fragments\pair.md)
@@ -34,9 +39,11 @@
 - [-ppdbg](debug\-ppdbg.md)
 - [-sdbg](debug\-sdbg.md)
 - [1dbg](debug\1dbg.md)
+- [1prompt](debug\1prompt.md)
 - [2dbg](debug\2dbg.md)
+- [2prpmpt](debug\2prpmpt.md)
 - [3dbg](debug\3dbg.md)
-- [interval debug](debug\interval_debug.md)
+- [3prompt](debug\3prompt.md)
 - [map debug](debug\map_debug.md)
 - [ndbg](debug\ndbg.md)
 - [new line](debug\new_line.md)
@@ -47,6 +54,12 @@
 
 ## graph_algorithms
 
+- [dfs1](graph_algorithms\dfs1.md)
+- [dfs2](graph_algorithms\dfs2.md)
+- [low link tree](graph_algorithms\low_link_tree.md)
+
+## intervals_and_strings
+
 - [binary serch](intervals_and_strings\binary_serch.md)
 - [lis](intervals_and_strings\lis.md)
 - [shakutori](intervals_and_strings\shakutori.md)
@@ -55,7 +68,6 @@
 
 - [factorials](number_theory\factorials.md)
 - [factorize](number_theory\factorize.md)
-- [gcd](number_theory\gcd.md)
 - [sieve of eratosthenes](number_theory\sieve_of_eratosthenes.md)
 
 ## standard_in_out
@@ -64,11 +76,6 @@
 - [2sin](standard_in_out\2sin.md)
 - [3sin](standard_in_out\3sin.md)
 - [4sin](standard_in_out\4sin.md)
-- [err](standard_in_out\err.md)
-- [for](standard_in_out\for.md)
-- [for const](standard_in_out\for_const.md)
-- [for iterator](standard_in_out\for_iterator.md)
-- [for reverse](standard_in_out\for_reverse.md)
 - [sout](standard_in_out\sout.md)
 - [tin](standard_in_out\tin.md)
 
