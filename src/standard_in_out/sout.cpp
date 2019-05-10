@@ -1,1 +1,1 @@
-﻿cout << ${1:内容} << endl;
+﻿cout << $0 << endl;

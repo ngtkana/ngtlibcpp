@@ -59,16 +59,6 @@
 		],
 		"description": "none"
 	},
-	"err": {
-		"prefix": "err",
-		"body": [
-			"void err() {",
-			"\tcout << ${1:出力} << endl;",
-			"\texit(0);",
-			"}"
-		],
-		"description": "none"
-	},
 	"for": {
 		"prefix": "for",
 		"body": [
@@ -905,20 +895,40 @@
 	"bellman ford": {
 		"prefix": "bellman ford",
 		"body": [
-			"constexpr ${3:long long} inf = ${4:1LL << 60};",
-			"vector<long long> dst(${1:n}, inf);",
-			"dst[r] = 0;",
-			"int q = $1;",
-			"bool flg;",
-			"while (q--) {",
-			"\tflg = false;",
-			"\tfor (auto const& e : edg) {",
-			"\t\t$3 d; int s, t; tie(d, s, t) = e;",
-			"\t\tif (dst[s] == inf) continue;",
-			"\t\tif (chmin(dst[t], dst[s] + d)) flg = true;",
-			"\t}",
-			"}",
-			"assert(!flg);"
+			"template<typename T>",
+			"struct bellman_ford {",
+			"\tusing edge_type = tuple<T, int, int>;",
+			"\tconst int n;",
+			"\tconst int r;",
+			"\tconst vector<edge_type>& edg;",
+			"\tconst T inf;",
+			"\tbool flg;",
+			"\tvector<long long> dst;",
+			"\tbellman_ford (",
+			"\t\t\tint n,",
+			"\t\t\tint root,",
+			"\t\t\tconst vector<edge_type>& edg,",
+			"\t\t\tconst T inf",
+			"\t\t) :",
+			"\t\tn(n),",
+			"\t\tr(root),",
+			"\t\tedg(edg),",
+			"\t\tinf(inf),",
+			"\t\tflg(false),",
+			"\t\tdst(n, inf)",
+			"\t\t{",
+			"\t\t\tdst[r] = 0;",
+			"\t\t\tfor (int q = n; q--;) {",
+			"\t\t\t\tflg = false;",
+			"\t\t\t\tfor (auto const& e : edg) {",
+			"\t\t\t\t\tT d; int s, t; tie(d, s, t) = e;",
+			"\t\t\t\t\tif (dst[s] == inf) continue;",
+			"\t\t\t\t\tif (chmin(dst[t], dst[s] + d)) flg = true;",
+			"\t\t\t\t}",
+			"\t\t\t}",
+			"\t\t}",
+			"\tbool has_negative_cycle () const {return flg;}",
+			"};"
 		],
 		"description": "none"
 	},
@@ -950,6 +960,89 @@
 			"\t\t$1(nxt, ckd, grh);",
 			"\t}",
 			"}"
+		],
+		"description": "none"
+	},
+	"dijkstra": {
+		"prefix": "dijkstra",
+		"body": [
+			"template <typename T>",
+			"struct dijkstra {",
+			"\tconst int n;",
+			"\tconst int r;",
+			"\tconst T inf;",
+			"\tconst vector<vector<pair<T, int>>>& grh;",
+			"\tvector<T> dst;",
+			"\tdijkstra (",
+			"\t\t\tconst vector<vector<pair<T, int>>>& grh,",
+			"\t\t\tconst int root,",
+			"\t\t\tconst T inf",
+			"\t\t) :",
+			"\t\tn(grh.size()),",
+			"\t\tr(root),",
+			"\t\tinf(inf),",
+			"\t\tgrh(grh),",
+			"\t\tdst(n, inf)",
+			"\t\t{",
+			"\t\t\tpriority_queue<",
+			"\t\t\t\tpair<T, int>,",
+			"\t\t\t\tvector<pair<T, int>>,",
+			"\t\t\t\tgreater<pair<T, int>>",
+			"\t\t\t> que;",
+			"\t\t\tque.emplace(0, r);",
+			"\t\t\twhile (!que.empty()) {",
+			"\t\t\t\tT crd; int crr;",
+			"\t\t\t\ttie(crd, crr) = que.top(), que.pop();",
+			"\t\t\t\tif (!chmin(dst[crr], crd)) continue;",
+			"\t\t\t\tfor (auto e : grh[crr]) {",
+			"\t\t\t\t\tT w; int nxt; tie(w, nxt) = e;",
+			"\t\t\t\t\tT nxd = crd + w;",
+			"\t\t\t\t\tif (dst[nxt] > nxd) que.emplace(nxd, nxt);",
+			"\t\t\t\t}",
+			"\t\t\t}",
+			"\t\t}",
+			"};"
+		],
+		"description": "none"
+	},
+	"floyd warshall": {
+		"prefix": "floyd warshall",
+		"body": [
+			"template<typename T1, typename T2>",
+			"inline bool chmin (T1& a, T2 b) {",
+			"\tif (a > b) {",
+			"\t\ta = b;",
+			"\t\treturn true;",
+			"\t}",
+			"\treturn false;",
+			"}",
+			"template<typename T>",
+			"struct floyd_warshall {",
+			"\tconst int n;",
+			"\tconst T inf;",
+			"\tvector<vector<T>> dst;",
+			"\tfloyd_warshall (",
+			"\t\t\tvector<vector<T>> adj,",
+			"\t\t\tconst T inf",
+			"\t\t) :",
+			"\t\tn(adj.size()),",
+			"\t\tinf(inf),",
+			"\t\tdst(adj)",
+			"\t\t{",
+			"\t\t\tfor (int k = 0; k < n; k++) {",
+			"\t\t\t\tfor (int i = 0; i < n; i++) {",
+			"\t\t\t\t\tfor (int j = 0; j < n; j++) {",
+			"\t\t\t\t\t\tif (dst[i][k] != inf && dst[k][j] != inf)",
+			"\t\t\t\t\t\t\tchmin(dst[i][j], dst[i][k] + dst[k][j]);",
+			"\t\t\t\t\t}",
+			"\t\t\t\t}",
+			"\t\t\t}",
+			"\t\t}",
+			"\tconst bool has_negative_cycle () {",
+			"\t\tfor (int i = 0; i < n; i++) if (dst[i][i] < 0) return true;",
+			"\t\treturn false;",
+			"\t}",
+			"};"
 		],
 		"description": "none"
 	},
@@ -1265,6 +1358,22 @@
 		],
 		"description": "none"
 	},
+	"adjacency input": {
+		"prefix": "adjacency input",
+		"body": [
+			"int ${1:n}, ${2:m};",
+			"cin >> $1 >> $2;",
+			"constexpr ${3:long long} inf = 1LL << 60;",
+			"vector<vector<$3>> adj(n, vector<$3>(n, inf));",
+			"for (int i = 0; i < $1; i++) adj[i][i] = 0;",
+			"for (int i = 0; i < m; i++) {",
+			"\t$3 d; int s, t;",
+			"\tcin >> s >> t >> d;",
+			"\tchmin(adj[s][t], d);",
+			"}"
+		],
+		"description": "none"
+	},
 	"edge input": {
 		"prefix": "edge input",
 		"body": [
@@ -1276,6 +1385,16 @@
 			"\tint s, t;",
 			"\tcin >> s >> t >> d;",
 			"\tedg[i] = decltype(edg)::value_type(d, ${4:--}s, $4t);",
+			"}"
+		],
+		"description": "none"
+	},
+	"err": {
+		"prefix": "err",
+		"body": [
+			"void err() {",
+			"\tcout << $0 << endl;",
+			"\texit(0);",
 			"}"
 		],
 		"description": "none"
@@ -1333,7 +1452,7 @@
 	"sout": {
 		"prefix": "sout",
 		"body": [
-			"cout << ${1:内容} << endl;"
+			"cout << $0 << endl;"
 		],
 		"description": "none"
 	},
