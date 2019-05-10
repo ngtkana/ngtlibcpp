@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-struct factorials {
+﻿struct factorials {
   const int sz;
   vector<int> fct, fnv;
   factorials (int n)
@@ -18,4 +15,3 @@ struct factorials {
     return mul(fct[n], mul(fnv[k], fnv[n - k]));
   }
 };
-// end

@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-template <typename T>
+﻿template <typename T>
 class binary_indexed_tree {
   int sz;
   vector<T> tr;
@@ -45,4 +42,3 @@ class binary_indexed_tree {
       cout << endl;
     }
 };
-// end

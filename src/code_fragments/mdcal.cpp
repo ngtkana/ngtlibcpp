@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-constexpr int md = ${1:1e9 + 7};
+﻿constexpr int md = ${1:1e9 + 7};
 inline void add(int &a, int b) {
   a += b;
   if (a >= md) a -= md;
@@ -38,4 +35,3 @@ inline int inv(int a) {
   if(u < 0) u += md;
   return u;
 }
-// end

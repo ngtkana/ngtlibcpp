@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-template <typename T>
+﻿template <typename T>
 class sparse_table {
   int sz, ht;
   vector<int> dpt;
@@ -41,4 +38,3 @@ public:
     cout << flush;
   }
 };
-// end

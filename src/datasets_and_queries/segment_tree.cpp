@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-template< typename T >
+﻿template< typename T >
 class segment_tree {
   int sz;
   vector<T> seg;
@@ -48,4 +45,3 @@ class segment_tree {
       cout << endl;
     }
 };
-// end

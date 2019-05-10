@@ -1,5 +1,4 @@
-// begin
-template<typename T1, typename T2>
+﻿template<typename T1, typename T2>
 inline bool chmax (T1& a, T2 b) {
   if (a < b) {
     a = b;
@@ -7,4 +6,3 @@ inline bool chmax (T1& a, T2 b) {
   }
   return false;
 }
-// end

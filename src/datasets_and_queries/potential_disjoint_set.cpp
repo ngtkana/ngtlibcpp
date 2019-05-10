@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-class potential_disjoint_set {
+﻿class potential_disjoint_set {
   public:
   vector<int> rank, prt, ptl;
   potential_disjoint_set (int size) {
@@ -51,4 +48,3 @@ class potential_disjoint_set {
     return ptl[y] - ptl[x];
   }
 };
-// end

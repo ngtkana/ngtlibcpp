@@ -58,6 +58,7 @@
 
 - [dfs1](graph_algorithms\dfs1.md)
 - [dfs2](graph_algorithms\dfs2.md)
+- [grid bfs](graph_algorithms\grid_bfs.md)
 - [low link tree](graph_algorithms\low_link_tree.md)
 
 ## intervals_and_strings
@@ -79,6 +80,7 @@
 - [2sin](standard_in_out\2sin.md)
 - [3sin](standard_in_out\3sin.md)
 - [4sin](standard_in_out\4sin.md)
+- [grid input](standard_in_out\grid_input.md)
 - [sout](standard_in_out\sout.md)
 - [tin](standard_in_out\tin.md)
 

@@ -43,14 +43,8 @@ function parse {
   ngtwrite "`"body`": [" 2
   $stream = New-Object System.IO.StreamReader($infile.FullName)
   $flg = $false
-  $line = ""
-  while ($null -ne ($nxtline = $stream.ReadLine())) {
-    if (($flg -eq $true)) {
-      escape_and_quote $line 3 (($nxtline -eq "// end"))
-    }
-    if (($line -eq "// begin")) { $flg = $true }
-    if (($nxtline -eq "// end")) { $flg = $false }
-    $line = $nxtline
+  while ($null -ne ($line = $stream.ReadLine())) {
+    escape_and_quote $line 3 (($stream.Peek() -eq -1))
   }
   $stream.Close()
   ngtwrite "]," 2

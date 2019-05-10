@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-auto factorize (
+﻿auto factorize (
   int x
 ) -> map<int, int>
 {
@@ -15,4 +12,3 @@ auto factorize (
   if (x != 1) mp[x] = 1;
   return map;
 }
-// end

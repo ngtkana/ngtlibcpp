@@ -1,3 +1,1 @@
-// begin
-lower_bound(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});
-// end
+﻿lower_bound(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});

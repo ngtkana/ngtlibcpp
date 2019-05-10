@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-struct sieve_of_eratosthenes {
+﻿struct sieve_of_eratosthenes {
   vector<bool> is_prime;
   vector<int> prime_numbers;
   vector<vector<int>> prime_divisors;
@@ -36,4 +33,3 @@ struct sieve_of_eratosthenes {
     return mp;
   }
 };
-// end

@@ -1,5 +1,3 @@
-// begin
-{ // debug
+﻿{ // debug
   cout << endl;
 } //
-// end

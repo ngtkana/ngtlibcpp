@@ -1,5 +1,3 @@
-// begin
-{ // debug
+﻿{ // debug
   cout << "${1:a} = " << $1 << endl;
 } //
-// end

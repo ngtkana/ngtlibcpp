@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-template<typename T>
+﻿template<typename T>
 T gcd (T a, T b) {
   if (a < 0) a = -a;
   if (b < 0) b = -b;
@@ -12,4 +9,3 @@ T gcd (T a, T b) {
   }
   return a;
 }
-// end

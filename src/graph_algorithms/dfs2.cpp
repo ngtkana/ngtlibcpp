@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-void ${1:dfs} (
+﻿void ${1:dfs} (
   int crr
 , vector<int>& ckd
 , vector<vector<int>>& grh
@@ -11,4 +8,3 @@ void ${1:dfs} (
     $1(nxt, ckd, grh);
   }
 }
-// end

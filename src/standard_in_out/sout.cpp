@@ -1,3 +1,1 @@
-// begin
-cout << ${1:内容} << endl;
-// end
+﻿cout << ${1:内容} << endl;

@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-template<typename T, typename U>
+﻿template<typename T, typename U>
 struct range_minimum_query {
   const T id;
   const function<T(T, T)> merge_function;
@@ -237,4 +234,3 @@ class segment_tree {
       }
     }
 };
-// end

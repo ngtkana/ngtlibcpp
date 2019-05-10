@@ -2,30 +2,37 @@
 	"all": {
 		"prefix": "all",
 		"body": [
-			"${1:おなまえ}.begin(), $1.end()"
+			"// begin",
+			"${1:おなまえ}.begin(), $1.end()",
+			"// end"
 		],
 		"description": "none"
 	},
 	"bug": {
 		"prefix": "bug",
 		"body": [
+			"// begin",
 			"/* ↓ 消し忘れないで！！！ ↓ */",
 			"$0 // お願い！！",
-			"/* ↑ いや振りじゃないから ↑ */"
+			"/* ↑ いや振りじゃないから ↑ */",
+			"// end"
 		],
 		"description": "none"
 	},
 	"check": {
 		"prefix": "check",
 		"body": [
+			"// begin",
 			"printf(\"/%d\\n\", ${1:crr});",
-			"printf(\"\\\\%d\\n\", ${1:crr});"
+			"printf(\"\\\\%d\\n\", ${1:crr});",
+			"// end"
 		],
 		"description": "none"
 	},
 	"chmax": {
 		"prefix": "chmax",
 		"body": [
+			"// begin",
 			"template<typename T1, typename T2>",
 			"inline bool chmax (T1& a, T2 b) {",
 			"\tif (a < b) {",
@@ -33,13 +40,15 @@
 			"\t\treturn true;",
 			"\t}",
 			"\treturn false;",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"chmin": {
 		"prefix": "chmin",
 		"body": [
+			"// begin",
 			"template<typename T1, typename T2>",
 			"inline bool chmin (T1& a, T2 b) {",
 			"\tif (a > b) {",
@@ -47,74 +56,92 @@
 			"\t\treturn true;",
 			"\t}",
 			"\treturn false;",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"didj": {
 		"prefix": "didj",
 		"body": [
+			"// begin",
 			"int d${1:i}[4] = {-1, +1, 0, 0};",
-			"int d${2:j}[4] = {0, 0, -1, +1};"
+			"int d${2:j}[4] = {0, 0, -1, +1};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"err": {
 		"prefix": "err",
 		"body": [
+			"// begin",
 			"void err() {",
 			"\tcout << ${1:出力} << endl;",
 			"\texit(0);",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"for": {
 		"prefix": "for",
 		"body": [
+			"// begin",
 			"for (int ${1:i} = ${2:0}; ${1:i} < ${3:n}; ${1:i}++) {",
 			"\t$0",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"for const": {
 		"prefix": "for const",
 		"body": [
+			"// begin",
 			"for (auto const & ${1:e}: ${2:おなまえ}) {",
 			"\t$0",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"for iterator": {
 		"prefix": "for iterator",
 		"body": [
+			"// begin",
 			"for (auto ${1:it} = ${2:おなまえ}.begin(); $1 != $2.end(); it++) {",
 			"\t$0",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"for reverse": {
 		"prefix": "for reverse",
 		"body": [
+			"// begin",
 			"for (int ${1:i} = ${2:n - 1}; $1 >= ${3:0}; $1--) {",
 			"\t$0",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"lower bound": {
 		"prefix": "lower bound",
 		"body": [
-			"lower_bound(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});"
+			"// begin",
+			"lower_bound(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});",
+			"// end"
 		],
 		"description": "none"
 	},
 	"mdcal": {
 		"prefix": "mdcal",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"constexpr int md = ${1:1e9 + 7};",
 			"inline void add(int &a, int b) {",
 			"\ta += b;",
@@ -151,88 +178,112 @@
 			"\tassert(b == 1);",
 			"\tif(u < 0) u += md;",
 			"\treturn u;",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"pair": {
 		"prefix": "pair",
 		"body": [
-			"pair<${1:int}, ${2:int}> ${3:おなまえ}(${4:0}, ${5:0})$0;"
+			"// begin",
+			"pair<${1:int}, ${2:int}> ${3:おなまえ}(${4:0}, ${5:0})$0;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"reverse": {
 		"prefix": "reverse",
 		"body": [
-			"reverse(${1:おなまえ}.begin(), ${1:おなまえ}.end());"
+			"// begin",
+			"reverse(${1:おなまえ}.begin(), ${1:おなまえ}.end());",
+			"// end"
 		],
 		"description": "none"
 	},
 	"sort": {
 		"prefix": "sort",
 		"body": [
-			"sort(${1:おなまえ}.begin(), ${1:おなまえ}.end());"
+			"// begin",
+			"sort(${1:おなまえ}.begin(), ${1:おなまえ}.end());",
+			"// end"
 		],
 		"description": "none"
 	},
 	"sort reverse": {
 		"prefix": "sort reverse",
 		"body": [
-			"sort(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:greator<${3:int}>});"
+			"// begin",
+			"sort(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:greator<${3:int}>});",
+			"// end"
 		],
 		"description": "none"
 	},
 	"stemp": {
 		"prefix": "stemp",
 		"body": [
+			"// begin",
 			"#include <bits/stdc++.h>",
 			"using namespace std;",
 			"int main() {",
 			"\t",
 			"\treturn 0;",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"upper": {
 		"prefix": "upper",
 		"body": [
-			"upper(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});"
+			"// begin",
+			"upper(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});",
+			"// end"
 		],
 		"description": "none"
 	},
 	"vec": {
 		"prefix": "vec",
 		"body": [
-			"vector<${1:int}> ${2:おなまえ}(${3:n}, ${4:0})$0;"
+			"// begin",
+			"vector<${1:int}> ${2:おなまえ}(${3:n}, ${4:0})$0;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"vecpair": {
 		"prefix": "vecpair",
 		"body": [
-			"vector<pair<${1:int}, ${2:int}>> ${3:おなまえ}(${4:n}, {${5:0}, ${6:0}})$0;"
+			"// begin",
+			"vector<pair<${1:int}, ${2:int}>> ${3:おなまえ}(${4:n}, {${5:0}, ${6:0}})$0;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"vecvec": {
 		"prefix": "vecvec",
 		"body": [
-			"vector<vector<${1:int}>> ${2:おなまえ}(${3:h}, vector<$1>(${4:w}, ${5:0}))$0;"
+			"// begin",
+			"vector<vector<${1:int}>> ${2:おなまえ}(${3:h}, vector<$1>(${4:w}, ${5:0}))$0;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"vecvecpair": {
 		"prefix": "vecvecpair",
 		"body": [
-			"vector<vector<pair<${1:int}, ${2:int}>>> ${3:おなまえ}(${4:h}, vector<pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;"
+			"// begin",
+			"vector<vector<pair<${1:int}, ${2:int}>>> ${3:おなまえ}(${4:h}, vector<pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"binary indexed tree": {
 		"prefix": "binary indexed tree",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"template <typename T>",
 			"class binary_indexed_tree {",
 			"\tint sz;",
@@ -276,13 +327,17 @@
 			"\t\t\t}",
 			"\t\t\tcout << endl;",
 			"\t\t}",
-			"};"
+			"};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"disjoint set": {
 		"prefix": "disjoint set",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"struct disjoint_set {",
 			"\tint n;",
 			"\tvector<int> prt;",
@@ -306,13 +361,17 @@
 			"\t\tprt[y] = x;",
 			"\t\treturn true;",
 			"\t}",
-			"};"
+			"};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"lazy segment tree": {
 		"prefix": "lazy segment tree",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"template<typename T, typename U>",
 			"struct range_minimum_query {",
 			"\tconst T id;",
@@ -548,13 +607,17 @@
 			"\t\t\t\tcout << endl;",
 			"\t\t\t}",
 			"\t\t}",
-			"};"
+			"};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"potential disjoint set": {
 		"prefix": "potential disjoint set",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"class potential_disjoint_set {",
 			"\tpublic:",
 			"\tvector<int> rank, prt, ptl;",
@@ -604,13 +667,17 @@
 			"\t\tfind(y);",
 			"\t\treturn ptl[y] - ptl[x];",
 			"\t}",
-			"};"
+			"};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"segment tree": {
 		"prefix": "segment tree",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"template< typename T >",
 			"class segment_tree {",
 			"\tint sz;",
@@ -657,13 +724,17 @@
 			"\t\t\t}",
 			"\t\t\tcout << endl;",
 			"\t\t}",
-			"};"
+			"};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"sparse table": {
 		"prefix": "sparse table",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"template <typename T>",
 			"class sparse_table {",
 			"\tint sz, ht;",
@@ -703,105 +774,127 @@
 			"\t\t}",
 			"\t\tcout << flush;",
 			"\t}",
-			"};"
+			"};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"-pdbg": {
 		"prefix": "-pdbg",
 		"body": [
-			"cout << \"(\" << ${1:おなまえ}${2:.}first << \", \" <<\\t$1$2second << \")\";"
+			"// begin",
+			"cout << \"(\" << ${1:おなまえ}${2:.}first << \", \" <<\\t$1$2second << \")\";",
+			"// end"
 		],
 		"description": "none"
 	},
 	"-ppdbg": {
 		"prefix": "-ppdbg",
 		"body": [
-			"cout << \"(\" << ${1:おなまえ}${2:.}${3:first.first} << \", \" << $1$2$4 << \", \" << $1$2$5 << \")\";"
+			"// begin",
+			"cout << \"(\" << ${1:おなまえ}${2:.}${3:first.first} << \", \" << $1$2$4 << \", \" << $1$2$5 << \")\";",
+			"// end"
 		],
 		"description": "none"
 	},
 	"-sdbg": {
 		"prefix": "-sdbg",
 		"body": [
-			"cout << ${1:おなまえ};"
+			"// begin",
+			"cout << ${1:おなまえ};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"1dbg": {
 		"prefix": "1dbg",
 		"body": [
+			"// begin",
 			"{ // debug",
 			"\tcout << \"${1:a} = \" << $1 << endl;",
-			"} //"
+			"} //",
+			"// end"
 		],
 		"description": "none"
 	},
 	"1prompt": {
 		"prefix": "1prompt",
 		"body": [
+			"// begin",
 			"cout << \"${2:a} > \";",
 			"${1:int} $2;",
-			"cin >> $2;"
+			"cin >> $2;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"2dbg": {
 		"prefix": "2dbg",
 		"body": [
+			"// begin",
 			"{ // debug",
 			"\tcout",
 			"\t\t<< \"${1:a} = \" << $1 << \", \"",
 			"\t\t<< \"${2:b} = \" << $2",
 			"\t\t<< endl;",
-			"} //"
+			"} //",
+			"// end"
 		],
 		"description": "none"
 	},
 	"2prpmpt": {
 		"prefix": "2prpmpt",
 		"body": [
+			"// begin",
 			"cout << \"${2:a}, ${3:b} > \";",
 			"${1:int} $2, $3;",
-			"cin >> $2 >> $3;"
+			"cin >> $2 >> $3;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"3dbg": {
 		"prefix": "3dbg",
 		"body": [
+			"// begin",
 			"{ // debug",
 			"\tcout",
 			"\t\t<< \"${1:a} = \" << $1 << \", \"",
 			"\t\t<< \"${2:b} = \" << $2 << \", \"",
 			"\t\t<< \"${3:c} = \" << $3",
 			"\t\t<< endl;",
-			"} //"
+			"} //",
+			"// end"
 		],
 		"description": "none"
 	},
 	"3prompt": {
 		"prefix": "3prompt",
 		"body": [
+			"// begin",
 			"cout << \"${2:a}, ${3:b}, ${4:c} > \";",
 			"${1:int} $2, $3, $4;",
-			"cin >> $2 >> $3 >> $4;"
+			"cin >> $2 >> $3 >> $4;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"interval debug": {
 		"prefix": "interval debug",
 		"body": [
+			"// begin",
 			"{ // debug",
 			"\tcout",
 			"\t\t<< \"[\" << $1 << \", \" << $2 << \",)\" << endl;",
-			"} //"
+			"} //",
+			"// end"
 		],
 		"description": "none"
 	},
 	"map debug": {
 		"prefix": "map debug",
 		"body": [
+			"// begin",
 			"{ // debug",
 			"\tfor (auto ${2:it} = ${1:mp}.begin(); $2 != $1.end(); $2++) {",
 			"\t\tcout << \"mp[\";",
@@ -810,38 +903,46 @@
 			"\t\tcout << $2->second;",
 			"\t\tcout << \"\" << (next($2) == $1.end() ? \"\\n\" : \", \");",
 			"\t}",
-			"} //"
+			"} //",
+			"// end"
 		],
 		"description": "none"
 	},
 	"ndbg": {
 		"prefix": "ndbg",
 		"body": [
-			"cout << \"$0\" << endl;"
+			"// begin",
+			"cout << \"$0\" << endl;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"new line": {
 		"prefix": "new line",
 		"body": [
+			"// begin",
 			"{ // debug",
 			"\tcout << endl;",
-			"} //"
+			"} //",
+			"// end"
 		],
 		"description": "none"
 	},
 	"pdbg": {
 		"prefix": "pdbg",
 		"body": [
+			"// begin",
 			"{ // debug",
 			"\tcout << \"${1:おなまえ} = (\" << $1${2:.}first << \", \" <<\t$1$2second << \")\" << endl;",
-			"} //"
+			"} //",
+			"// end"
 		],
 		"description": "none"
 	},
 	"vdbg": {
 		"prefix": "vdbg",
 		"body": [
+			"// begin",
 			"{ // debug",
 			"\tcout << \"${1:おなまえ}: \";",
 			"\tfor (auto ${2:it} = $1.begin(); $2 != $1.end(); $2++) {",
@@ -849,13 +950,15 @@
 			"\t\tcout << (next($2) == $1.end() ? \"\\n\" : \", \");",
 			"\t}",
 			"\tcout << endl;",
-			"} //"
+			"} //",
+			"// end"
 		],
 		"description": "none"
 	},
 	"vpdebug": {
 		"prefix": "vpdebug",
 		"body": [
+			"// begin",
 			"{ // debug",
 			"\tcout << \"${1:おなまえ}: \";",
 			"\tfor (auto $2 = $1.begin(); $2 != $1.end(); $2++) {",
@@ -866,13 +969,15 @@
 			"\t\tcout << \")\" << (next($2) == $1.end() ? \"\\n\" : \", \");",
 			"\t}",
 			"\tcout << endl;",
-			"} //"
+			"} //",
+			"// end"
 		],
 		"description": "none"
 	},
 	"vvdbg": {
 		"prefix": "vvdbg",
 		"body": [
+			"// begin",
 			"{ // debug",
 			"\tcout << \"--------------------------------------\" << endl;",
 			"\tcout << setw(${5:5}) << left << \"$1\";",
@@ -886,13 +991,17 @@
 			"\t\tcout << endl;",
 			"\t}",
 			"\tcout << \"--------------------------------------\" << endl;",
-			"} //"
+			"} //",
+			"// end"
 		],
 		"description": "none"
 	},
 	"dfs1": {
 		"prefix": "dfs1",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"void ${1:dfs} (",
 			"\tint crr",
 			", int prt",
@@ -901,13 +1010,17 @@
 			"\tfor (int nxt : grh[crr]) if (nxt != prt) {",
 			"\t\t$1(nxt, crr, grh);",
 			"\t}",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"dfs2": {
 		"prefix": "dfs2",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"void ${1:dfs} (",
 			"\tint crr",
 			", vector<int>& ckd",
@@ -917,13 +1030,45 @@
 			"\tfor (int nxt : grh[crr]) if (!ckd[nxt]) {",
 			"\t\t$1(nxt, ckd, grh);",
 			"\t}",
-			"}"
+			"}",
+			"// end"
+		],
+		"description": "none"
+	},
+	"grid bfs": {
+		"prefix": "grid bfs",
+		"body": [
+			"\tconstexpr int inf = 1 << 30;",
+			"\tvector<vector<int>> dst(h, vector<int>(w, inf));",
+			"\tqueue<tuple<int, int, int>> que;",
+			"\tfor (int i = 0; i < h; i++) {",
+			"\t\tfor (int j = 0; j < w; j++) {",
+			"\t\t\tif (a[i][j]) que.emplace(0, i, j);",
+			"\t\t}",
+			"\t}",
+			"\twhile (!que.empty()) {",
+			"\t\tint crd, cri, crj;",
+			"\t\ttie(crd, cri, crj) = que.front(), que.pop();",
+			"\t\tif (!chmin(dst[cri][crj], crd)) continue;",
+			"\t\tfor (int k = 0; k < 4; k++) {",
+			"\t\t\tint nxd = crd + 1;",
+			"\t\t\tint nxi = cri + di[k];",
+			"\t\t\tint nxj = crj + dj[k];",
+			"\t\t\tif (",
+			"\t\t\t\t\t0 <= nxi && nxi < h &&",
+			"\t\t\t\t\t0 <= nxj && nxj <= w &&",
+			"\t\t\t\t\tnxd < dst[nxi][nxj]",
+			"\t\t\t\t) que.emplace(nxd, nxi, nxj);",
+			"\t\t}"
 		],
 		"description": "none"
 	},
 	"low link tree": {
 		"prefix": "low link tree",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"class low_link_tree {",
 			"\tint n;",
 			"\tint tmr = 0;",
@@ -966,50 +1111,66 @@
 			"\tauto const &low_link() {return low;}",
 			"\tauto const &articulation_points() {return atc;}",
 			"\tauto const &bridges() {return bdg;}",
-			"};"
+			"};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"binary serch": {
 		"prefix": "binary serch",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"${1:int} ${2:ok}(${3:0}), ${4:ng}(${5:inf}), md;",
 			"while (${4:ng} - ${2:ok} > 1) {",
 			"\tmd = (${2:ok} + ${4:ng}) >> 1;",
 			"\tif (${6:ck(md)}) ok = md;",
 			"\telse ng = md;",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"lis": {
 		"prefix": "lis",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"vector<${1:int}> lis;",
 			"for (auto crr : ${2:おなまえ}) {",
 			"\tauto lb = lower_bound(lis.begin(), lis.end(), crr);",
 			"\tif (lb == lis.end()) lis.push_back(crr);",
 			"\telse *lb = crr;",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"shakutori": {
 		"prefix": "shakutori",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"int l(0), r(0);",
 			"for (; l < ${1:n}; l++) {",
 			"\twhile (r < n && ${2:/*[l, r + 1)が妥当*/}) {",
 			"\t\tr++;",
 			"\t\t${3:/*[l, r + 1)を訪問*/};",
 			"\t}",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"factorials": {
 		"prefix": "factorials",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"struct factorials {",
 			"\tconst int sz;",
 			"\tvector<int> fct, fnv;",
@@ -1026,13 +1187,17 @@
 			"\t\tassert(0 <= k && k <= n && n < sz);",
 			"\t\treturn mul(fct[n], mul(fnv[k], fnv[n - k]));",
 			"\t}",
-			"};"
+			"};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"factorize": {
 		"prefix": "factorize",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"auto factorize (",
 			"\tint x",
 			") -> map<int, int>",
@@ -1046,13 +1211,17 @@
 			"\t}",
 			"\tif (x != 1) mp[x] = 1;",
 			"\treturn map;",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"gcd": {
 		"prefix": "gcd",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"template<typename T>",
 			"T gcd (T a, T b) {",
 			"\tif (a < 0) a = -a;",
@@ -1063,13 +1232,17 @@
 			"\t\tswap(a, b);",
 			"\t}",
 			"\treturn a;",
-			"}"
+			"}",
+			"// end"
 		],
 		"description": "none"
 	},
 	"sieve of eratosthenes": {
 		"prefix": "sieve of eratosthenes",
 		"body": [
+			"#include <bits/stdc++.h>",
+			"using namespace std;",
+			"// begin",
 			"struct sieve_of_eratosthenes {",
 			"\tvector<bool> is_prime;",
 			"\tvector<int> prime_numbers;",
@@ -1104,55 +1277,85 @@
 			"\t\tif (x != 1) mp[x] = 1;",
 			"\t\treturn mp;",
 			"\t}",
-			"};"
+			"};",
+			"// end"
 		],
 		"description": "none"
 	},
 	"1sin": {
 		"prefix": "1sin",
 		"body": [
+			"// begin",
 			"${1:int} $2;",
-			"cin >> $2;"
+			"cin >> $2;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"2sin": {
 		"prefix": "2sin",
 		"body": [
+			"// begin",
 			"${1:int} $2, $3;",
-			"cin >> $2 >> $3;"
+			"cin >> $2 >> $3;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"3sin": {
 		"prefix": "3sin",
 		"body": [
+			"// begin",
 			"${1:int} $2, $3, $4;",
-			"cin >> $2 >> $3 >> $4;"
+			"cin >> $2 >> $3 >> $4;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"4sin": {
 		"prefix": "4sin",
 		"body": [
+			"// begin",
 			"${1:sin} $2, $3, $4, $5;",
-			"cin >> $2 >> $3 >> $4 >> $5;"
+			"cin >> $2 >> $3 >> $4 >> $5;",
+			"// end"
+		],
+		"description": "none"
+	},
+	"grid input": {
+		"prefix": "grid input",
+		"body": [
+			"int ${1:h}, ${2:w}, ${3:si}, ${4:sj}, ${5:gi}, ${6:gj};",
+			"cin >> $1 >> $2 >> $3 >> $4 >> $5 >> $6;",
+			"$3--, $4--, $5--, $6--;",
+			"vector<vector<int>> ${7:a}($1, vector<int>($2));",
+			"for (int i = 0; i < $1; i++) {",
+			"\tfor (int j = 0; j < $2; j++) {",
+			"\t\tchar c;",
+			"\t\tcin >> c;",
+			"\t\t$1[i][j] = c == '#';",
+			"\t}",
+			"}"
 		],
 		"description": "none"
 	},
 	"sout": {
 		"prefix": "sout",
 		"body": [
-			"cout << ${1:内容} << endl;"
+			"// begin",
+			"cout << ${1:内容} << endl;",
+			"// end"
 		],
 		"description": "none"
 	},
 	"tin": {
 		"prefix": "tin",
 		"body": [
+			"// begin",
 			"${1:int} ${2:tmp};",
 			"cin >> $2;",
-			"$0;"
+			"$0;",
+			"// end"
 		],
 		"description": "none"
 	},

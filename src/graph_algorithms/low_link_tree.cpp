@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-// begin
-class low_link_tree {
+﻿class low_link_tree {
   int n;
   int tmr = 0;
   int rt = 0;
@@ -44,4 +41,3 @@ public:
   auto const &articulation_points() {return atc;}
   auto const &bridges() {return bdg;}
 };
-// end
