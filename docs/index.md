@@ -57,6 +57,7 @@
 
 ## graph_algorithms
 
+- [bellman ford](graph_algorithms\bellman_ford.md)
 - [dfs1](graph_algorithms\dfs1.md)
 - [dfs2](graph_algorithms\dfs2.md)
 - [dijkstra](graph_algorithms\dijkstra.md)
@@ -84,6 +85,7 @@
 - [2sin](standard_in_out\2sin.md)
 - [3sin](standard_in_out\3sin.md)
 - [4sin](standard_in_out\4sin.md)
+- [edge input](standard_in_out\edge_input.md)
 - [graph input](standard_in_out\graph_input.md)
 - [graph pair input](standard_in_out\graph_pair_input.md)
 - [grid input](standard_in_out\grid_input.md)
