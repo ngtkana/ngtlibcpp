@@ -16,6 +16,7 @@
 - [mdcal](code_fragments\mdcal.md)
 - [pair](code_fragments\pair.md)
 - [reverse](code_fragments\reverse.md)
+- [reverse priority queue](code_fragments\reverse_priority_queue.md)
 - [sort](code_fragments\sort.md)
 - [sort reverse](code_fragments\sort_reverse.md)
 - [stemp](code_fragments\stemp.md)
@@ -58,8 +59,11 @@
 
 - [dfs1](graph_algorithms\dfs1.md)
 - [dfs2](graph_algorithms\dfs2.md)
+- [dijkstra](graph_algorithms\dijkstra.md)
 - [grid bfs](graph_algorithms\grid_bfs.md)
+- [kruskal](graph_algorithms\kruskal.md)
 - [low link tree](graph_algorithms\low_link_tree.md)
+- [prim](graph_algorithms\prim.md)
 
 ## intervals_and_strings
 
@@ -80,7 +84,10 @@
 - [2sin](standard_in_out\2sin.md)
 - [3sin](standard_in_out\3sin.md)
 - [4sin](standard_in_out\4sin.md)
+- [graph input](standard_in_out\graph_input.md)
+- [graph pair input](standard_in_out\graph_pair_input.md)
 - [grid input](standard_in_out\grid_input.md)
+- [optional value](standard_in_out\optional_value.md)
 - [sout](standard_in_out\sout.md)
 - [tin](standard_in_out\tin.md)
 

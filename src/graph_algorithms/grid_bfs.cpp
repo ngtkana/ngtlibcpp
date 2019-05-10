@@ -1,22 +1,17 @@
-constexpr int inf = 1 << 30;
-vector<vector<int>> dst(h, vector<int>(w, inf));
-queue<tuple<int, int, int>> que;
-for (int i = 0; i < h; i++) {
-  for (int j = 0; j < w; j++) {
-    if (a[i][j]) que.emplace(0, i, j);
-  }
-}
+vector<vector<${1:long long}>> dst(h, vector<$1>(w, ${4:-1}));
+queue<pair<int, int>> que;
+dst[${2:si}][${3:sj}] = 0, que.emplace($2, $3);
 while (!que.empty()) {
-  int crd, cri, crj;
-  tie(crd, cri, crj) = que.front(), que.pop();
-  if (!chmin(dst[cri][crj], crd)) continue;
+  int cri, crj;
+  tie(cri, crj) = que.front(), que.pop();
   for (int k = 0; k < 4; k++) {
-    int nxd = crd + 1;
     int nxi = cri + di[k];
     int nxj = crj + dj[k];
     if (
         0 <= nxi && nxi < h &&
         0 <= nxj && nxj <= w &&
-        nxd < dst[nxi][nxj]
-      ) que.emplace(nxd, nxi, nxj);
+        dst[nxi][nxj] == $4 &&
+        !grd[nxi][nxj]
+      ) dst[nxi][nxj] = dst[cri][crj] + 1, que.emplace(nxi, nxj);
   }
+}
