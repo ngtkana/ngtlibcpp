@@ -1,9 +1,9 @@
 ﻿void ${1:dfs} (
-  int crr
-, int prt
-, vector<vector<int>>& grh
+  vector<vector<int>>& grh,
+  int crr = ${2:0},
+  int prt = ${2:0}
 ) {
   for (int nxt : grh[crr]) if (nxt != prt) {
-    $1(nxt, crr, grh);
+    $1(grh, nxt, crr);
   }
 }

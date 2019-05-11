@@ -1,4 +1,4 @@
-﻿# 3prompt
+﻿# ternary
 [prev](..\index.md)
 ```cpp
 ```

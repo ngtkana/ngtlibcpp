@@ -122,6 +122,7 @@ function make_links_and_markdowns {
 
 "# Library" | Add-Content $index
 Get-ChildItem src | ForEach-Object {
+  if ($_.Name -eq "debug") {continue;}
   make_links_and_markdowns $_
 }
 

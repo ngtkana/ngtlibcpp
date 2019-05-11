@@ -1,4 +1,4 @@
-﻿# 2prpmpt
+﻿# least_common_ancestor
 [prev](..\index.md)
 ```cpp
 ```

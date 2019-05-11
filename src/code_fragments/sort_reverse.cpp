@@ -1,1 +1,1 @@
-﻿sort(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:greator<${3:int}>});
+﻿sort(${1:おなまえ}.begin(), ${1:おなまえ}.end(), greater<${2:int}>());
