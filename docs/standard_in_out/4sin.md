@@ -1,4 +1,1 @@
-﻿# 4sin
-[prev](..\index.md)
-```cpp
-```
+﻿# 4sin\n[prev](..\index.md)

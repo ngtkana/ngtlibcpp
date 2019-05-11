@@ -1,4 +1,1 @@
-﻿# lis
-[prev](..\index.md)
-```cpp
-```
+﻿# lis\n[prev](..\index.md)

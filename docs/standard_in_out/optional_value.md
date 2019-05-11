@@ -1,4 +1,1 @@
-﻿# optional_value
-[prev](..\index.md)
-```cpp
-```
+﻿# optional_value\n[prev](..\index.md)

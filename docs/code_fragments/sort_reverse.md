@@ -1,4 +1,1 @@
-﻿# sort_reverse
-[prev](..\index.md)
-```cpp
-```
+﻿# sort_reverse\n[prev](..\index.md)

@@ -1,4 +1,1 @@
-﻿# ternary
-[prev](..\index.md)
-```cpp
-```
+﻿# ternary\n[prev](..\index.md)

@@ -1,8 +1,10 @@
+$log = "log.txt"
+$snippets = "build/snippets.json"
+$index = "docs/index.md"
+
 # ----------------------------------------------
 # build .vocode/cpp.code-snippets
 # ----------------------------------------------
-$snippets = "build/snippets.json"
-Clear-Content $snippets
 
 function ngtwrite {
   param (
@@ -56,13 +58,12 @@ function parse {
 # ----------------------------------------------
 # build index.md
 # ----------------------------------------------
-$index = "docs/index.md"
-Clear-Content $index
 
 function write_markdown {
   param (
     $infile
   )
+  $inflie | Add-Content $log
   "``````cpp"
   $stream = New-Object System.IO.StreamReader($infile, [System.Text.Encoding]::UTF8)
   $flg = $false
@@ -99,32 +100,38 @@ function make_links_and_markdowns {
   "## " + $indir.name | Add-Content $index
   "" | Add-Content $index
 
-  # "|snippet name|" | Add-Content $index
-  # "---" | Add-Content $index
   $outdir = $indir.name
   Get-ChildItem $indir.fullname | ForEach-Object {
     $name_without_ext = [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
 
-    $outpath = $outdir + "/"
-    $outpath += $name_without_ext
-    $outpath += ".md"
+    $outpath = "${outdir}/${name_without_ext}.md"
     $docs_outpath = "docs/" + $outpath
 
     New-Item -Force $docs_outpath
-    "# " + $name_without_ext | Add-Content -Encoding UTF8 $docs_outpath
-    "[prev](..\index.md)" |  Add-Content -Encoding UTF8 $docs_outpath
-    write_markdown $_.fullname | Add-Content -Encoding UTF8 $docs_outpath
+    "# ${name_without_ext}\n[prev](..\index.md)" | Add-Content -Encoding UTF8 $docs_outpath
+    "foo" | Add-Content $log
+    "docs/${out_path}" | Add-Content $log
+    
+    # write_markdown $_.fullname | Add-Content -Encoding UTF8 "docs/${out_path}"
     make_link $docs_outpath | Add-Content -Encoding UTF8 $index
   }
   "" | Add-Content $index
 }
 
 
-"# Library" | Add-Content $index
-Get-ChildItem src | ForEach-Object {
-  if ($_.Name -eq "debug") {continue;}
-  make_links_and_markdowns $_
-}
+# ----------------------------------------------
+# main
+# ----------------------------------------------
+Clear-Content $log
+Clear-Content $snippets
+Clear-Content $index
+
+# "# Library" | Add-Content $index
+# Get-ChildItem src | ForEach-Object {
+#   if ($_.Name -ne "debug") {
+#     make_links_and_markdowns $_
+#   }
+# }
 
 ngtwrite "{" | Add-Content -Encoding UTF8 $snippets
 

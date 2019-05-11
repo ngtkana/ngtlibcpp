@@ -1,4 +1,1 @@
-﻿# for_iterator
-[prev](..\index.md)
-```cpp
-```
+﻿# for_iterator\n[prev](..\index.md)

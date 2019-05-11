@@ -1,4 +1,1 @@
-﻿# depth
-[prev](..\index.md)
-```cpp
-```
+﻿# depth\n[prev](..\index.md)

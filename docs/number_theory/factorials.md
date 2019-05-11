@@ -1,4 +1,1 @@
-﻿# factorials
-[prev](..\index.md)
-```cpp
-```
+﻿# factorials\n[prev](..\index.md)

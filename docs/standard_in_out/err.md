@@ -1,4 +1,1 @@
-﻿# err
-[prev](..\index.md)
-```cpp
-```
+﻿# err\n[prev](..\index.md)

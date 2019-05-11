@@ -1,4 +1,1 @@
-﻿# shakutori
-[prev](..\index.md)
-```cpp
-```
+﻿# shakutori\n[prev](..\index.md)

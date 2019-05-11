@@ -1,4 +1,1 @@
-﻿# edge_input
-[prev](..\index.md)
-```cpp
-```
+﻿# edge_input\n[prev](..\index.md)

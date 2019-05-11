@@ -1,4 +1,1 @@
-﻿# least_common_ancestor
-[prev](..\index.md)
-```cpp
-```
+﻿# least_common_ancestor\n[prev](..\index.md)

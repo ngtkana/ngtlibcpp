@@ -1,4 +1,1 @@
-﻿# grid_bfs
-[prev](..\index.md)
-```cpp
-```
+﻿# grid_bfs\n[prev](..\index.md)

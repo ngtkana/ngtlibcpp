@@ -1,4 +1,1 @@
-﻿# disjoint_set
-[prev](..\index.md)
-```cpp
-```
+﻿# disjoint_set\n[prev](..\index.md)

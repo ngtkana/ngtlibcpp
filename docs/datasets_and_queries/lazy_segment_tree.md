@@ -1,4 +1,1 @@
-﻿# lazy_segment_tree
-[prev](..\index.md)
-```cpp
-```
+﻿# lazy_segment_tree\n[prev](..\index.md)

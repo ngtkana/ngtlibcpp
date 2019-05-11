@@ -1,4 +1,1 @@
-﻿# pair
-[prev](..\index.md)
-```cpp
-```
+﻿# pair\n[prev](..\index.md)

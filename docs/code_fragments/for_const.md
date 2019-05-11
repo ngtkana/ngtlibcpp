@@ -1,4 +1,1 @@
-﻿# for_const
-[prev](..\index.md)
-```cpp
-```
+﻿# for_const\n[prev](..\index.md)

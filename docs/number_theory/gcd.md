@@ -1,4 +1,1 @@
-﻿# gcd
-[prev](..\index.md)
-```cpp
-```
+﻿# gcd\n[prev](..\index.md)

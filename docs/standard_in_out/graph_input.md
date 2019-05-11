@@ -1,4 +1,1 @@
-﻿# graph_input
-[prev](..\index.md)
-```cpp
-```
+﻿# graph_input\n[prev](..\index.md)

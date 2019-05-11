@@ -1,4 +1,1 @@
-﻿# dijkstra
-[prev](..\index.md)
-```cpp
-```
+﻿# dijkstra\n[prev](..\index.md)

@@ -1,4 +1,1 @@
-﻿# stemp
-[prev](..\index.md)
-```cpp
-```
+﻿# stemp\n[prev](..\index.md)

@@ -1,4 +1,1 @@
-﻿# 2sin
-[prev](..\index.md)
-```cpp
-```
+﻿# 2sin\n[prev](..\index.md)

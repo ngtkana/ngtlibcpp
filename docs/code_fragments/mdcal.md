@@ -1,4 +1,1 @@
-﻿# mdcal
-[prev](..\index.md)
-```cpp
-```
+﻿# mdcal\n[prev](..\index.md)

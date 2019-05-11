@@ -1,4 +1,1 @@
-﻿# tin
-[prev](..\index.md)
-```cpp
-```
+﻿# tin\n[prev](..\index.md)

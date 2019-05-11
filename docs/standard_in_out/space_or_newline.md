@@ -1,4 +1,1 @@
-﻿# space_or_newline
-[prev](..\index.md)
-```cpp
-```
+﻿# space_or_newline\n[prev](..\index.md)

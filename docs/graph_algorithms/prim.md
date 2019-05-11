@@ -1,4 +1,1 @@
-﻿# prim
-[prev](..\index.md)
-```cpp
-```
+﻿# prim\n[prev](..\index.md)

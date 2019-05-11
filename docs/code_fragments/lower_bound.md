@@ -1,4 +1,1 @@
-﻿# lower_bound
-[prev](..\index.md)
-```cpp
-```
+﻿# lower_bound\n[prev](..\index.md)

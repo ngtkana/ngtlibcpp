@@ -1,4 +1,1 @@
-﻿# floyd_warshall
-[prev](..\index.md)
-```cpp
-```
+﻿# floyd_warshall\n[prev](..\index.md)

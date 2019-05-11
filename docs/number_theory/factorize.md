@@ -1,4 +1,1 @@
-﻿# factorize
-[prev](..\index.md)
-```cpp
-```
+﻿# factorize\n[prev](..\index.md)

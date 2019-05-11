@@ -1,4 +1,1 @@
-﻿# sparse_table
-[prev](..\index.md)
-```cpp
-```
+﻿# sparse_table\n[prev](..\index.md)
