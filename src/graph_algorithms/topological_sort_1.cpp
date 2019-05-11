@@ -26,12 +26,18 @@ class topological_sort {
       grh(grh),
       srd(),
       ckd(n, 0),
-      flg(false)
+      flg(
+          [&](){
+            bool ret = false;
+            for (int i = 0; i < n; i++) {
+              flg |= (ckd[i] == 0 && dfs(i));
+            }
+            return ret;
+          }()
+        )
       {
-        for (int i = 0; i < n; i++) {
-          flg |= (ckd[i] == 0 && dfs(i));
-        }
       }
     bool has_cycle () {return flg;}
-    auto sorted() const -> const vector<int>& {return srd;} 
+    auto sorted() const -> const vector<int>& {return srd;}
+    auto operator [] (int i) const -> int {return srd[i];}
 };

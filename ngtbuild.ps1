@@ -124,7 +124,7 @@ function make_links_and_markdowns {
 # ----------------------------------------------
 Clear-Content $log
 Clear-Content $snippets
-Clear-Content $index
+# Clear-Content $index
 
 # "# Library" | Add-Content $index
 # Get-ChildItem src | ForEach-Object {

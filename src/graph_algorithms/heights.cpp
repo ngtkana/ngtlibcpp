@@ -54,6 +54,5 @@ class calculate_heights {
         efs();
       }
     
-    auto heights () const -> const vector<T>& {return dp;}
-    auto height (int i) const -> const T {return dp[i];}
+    auto operator[] (int i) const -> const T {return dp[i];}
 };
