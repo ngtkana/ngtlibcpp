@@ -1,4 +1,1 @@
-﻿# adjacency_input
-[prev](..\index.md)
-```cpp
-```
+﻿# adjacency_input\n[prev](..\index.md)

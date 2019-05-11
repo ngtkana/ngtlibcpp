@@ -1,4 +1,1 @@
-﻿# chmax
-[prev](..\index.md)
-```cpp
-```
+﻿# chmax\n[prev](..\index.md)

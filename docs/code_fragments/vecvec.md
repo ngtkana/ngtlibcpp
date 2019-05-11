@@ -1,4 +1,1 @@
-﻿# vecvec
-[prev](..\index.md)
-```cpp
-```
+﻿# vecvec\n[prev](..\index.md)

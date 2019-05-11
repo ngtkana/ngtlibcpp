@@ -1,4 +1,1 @@
-﻿# chmin
-[prev](..\index.md)
-```cpp
-```
+﻿# chmin\n[prev](..\index.md)

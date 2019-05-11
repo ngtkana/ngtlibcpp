@@ -1,4 +1,1 @@
-﻿# segment_tree
-[prev](..\index.md)
-```cpp
-```
+﻿# segment_tree\n[prev](..\index.md)

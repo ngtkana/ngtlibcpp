@@ -1,4 +1,1 @@
-﻿# reverse
-[prev](..\index.md)
-```cpp
-```
+﻿# reverse\n[prev](..\index.md)

@@ -1,4 +1,1 @@
-﻿# all
-[prev](..\index.md)
-```cpp
-```
+﻿# all\n[prev](..\index.md)

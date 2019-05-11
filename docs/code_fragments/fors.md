@@ -1,4 +1,1 @@
-﻿# fors
-[prev](..\index.md)
-```cpp
-```
+﻿# fors\n[prev](..\index.md)

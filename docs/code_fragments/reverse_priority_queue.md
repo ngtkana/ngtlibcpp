@@ -1,4 +1,1 @@
-﻿# reverse_priority_queue
-[prev](..\index.md)
-```cpp
-```
+﻿# reverse_priority_queue\n[prev](..\index.md)

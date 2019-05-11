@@ -1,4 +1,1 @@
-﻿# bug
-[prev](..\index.md)
-```cpp
-```
+﻿# bug\n[prev](..\index.md)

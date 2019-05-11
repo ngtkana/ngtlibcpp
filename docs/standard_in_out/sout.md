@@ -1,4 +1,1 @@
-﻿# sout
-[prev](..\index.md)
-```cpp
-```
+﻿# sout\n[prev](..\index.md)

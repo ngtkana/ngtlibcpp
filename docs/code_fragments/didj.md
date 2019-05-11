@@ -1,4 +1,1 @@
-﻿# didj
-[prev](..\index.md)
-```cpp
-```
+﻿# didj\n[prev](..\index.md)

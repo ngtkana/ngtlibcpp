@@ -1,4 +1,1 @@
-﻿# kruskal
-[prev](..\index.md)
-```cpp
-```
+﻿# kruskal\n[prev](..\index.md)

@@ -1,4 +1,1 @@
-﻿# bellman_ford
-[prev](..\index.md)
-```cpp
-```
+﻿# bellman_ford\n[prev](..\index.md)

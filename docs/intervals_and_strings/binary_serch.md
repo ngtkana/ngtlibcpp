@@ -1,4 +1,1 @@
-﻿# binary_serch
-[prev](..\index.md)
-```cpp
-```
+﻿# binary_serch\n[prev](..\index.md)

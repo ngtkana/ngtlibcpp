@@ -1,4 +1,1 @@
-﻿# dfs1
-[prev](..\index.md)
-```cpp
-```
+﻿# dfs1\n[prev](..\index.md)

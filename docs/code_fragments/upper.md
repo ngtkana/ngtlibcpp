@@ -1,4 +1,1 @@
-﻿# upper
-[prev](..\index.md)
-```cpp
-```
+﻿# upper\n[prev](..\index.md)

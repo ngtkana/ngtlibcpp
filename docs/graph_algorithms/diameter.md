@@ -1,4 +1,1 @@
-﻿# diameter
-[prev](..\index.md)
-```cpp
-```
+﻿# diameter\n[prev](..\index.md)

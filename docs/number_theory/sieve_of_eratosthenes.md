@@ -1,4 +1,1 @@
-﻿# sieve_of_eratosthenes
-[prev](..\index.md)
-```cpp
-```
+﻿# sieve_of_eratosthenes\n[prev](..\index.md)

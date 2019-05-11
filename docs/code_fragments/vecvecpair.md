@@ -1,4 +1,1 @@
-﻿# vecvecpair
-[prev](..\index.md)
-```cpp
-```
+﻿# vecvecpair\n[prev](..\index.md)

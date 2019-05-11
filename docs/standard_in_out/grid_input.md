@@ -1,4 +1,1 @@
-﻿# grid_input
-[prev](..\index.md)
-```cpp
-```
+﻿# grid_input\n[prev](..\index.md)

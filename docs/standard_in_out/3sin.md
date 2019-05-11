@@ -1,4 +1,1 @@
-﻿# 3sin
-[prev](..\index.md)
-```cpp
-```
+﻿# 3sin\n[prev](..\index.md)

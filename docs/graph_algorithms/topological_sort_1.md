@@ -1,4 +1,1 @@
-﻿# topological_sort_1
-[prev](..\index.md)
-```cpp
-```
+﻿# topological_sort_1\n[prev](..\index.md)

@@ -1,4 +1,1 @@
-﻿# binary_indexed_tree
-[prev](..\index.md)
-```cpp
-```
+﻿# binary_indexed_tree\n[prev](..\index.md)

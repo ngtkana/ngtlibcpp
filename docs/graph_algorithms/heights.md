@@ -1,4 +1,1 @@
-﻿# heights
-[prev](..\index.md)
-```cpp
-```
+﻿# heights\n[prev](..\index.md)
