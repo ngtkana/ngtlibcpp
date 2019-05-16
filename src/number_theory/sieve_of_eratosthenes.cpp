@@ -1,35 +1,46 @@
-﻿struct sieve_of_eratosthenes {
-  vector<bool> is_prime;
-  vector<int> prime_numbers;
-  vector<vector<int>> prime_divisors;
-  vector<vector<int>> divisors;
-  sieve_of_eratosthenes(int n)
-    : is_prime(vector<bool>(n))
-    , prime_numbers(vector<int>(0))
-    , prime_divisors(vector<vector<int>>(n))
-    , divisors(vector<vector<int>>(n))
-  {
-    for (int i = 1; i < n; i++) {
-      if (is_prime[i] = divisors[i].size() == 1) prime_numbers.push_back(i);
-      for (int j = i; j < n; j += i) {
-        divisors[j].push_back(i);
-        if (is_prime[i]) prime_divisors[j].push_back(i);
+﻿class sieve_of_eratosthenes {
+  const int n;
+  vector<bool> is_prm;
+  vector<int> prm;
+  vector<vector<int>> pdv;
+  vector<vector<int>> div;
+
+  public:
+    sieve_of_eratosthenes(
+        int n
+      ):
+        n(n),
+        is_prm(vector<bool>(n)),
+        prm(vector<int>(0)), 
+        pdv(vector<vector<int>>(n)),
+        div(vector<vector<int>>(n))
+      {
+        for (int i = 1; i < n; i++) {
+          if (is_prm[i] = div[i].size() == 1) prm.push_back(i);
+          for (int j = i; j < n; j += i) {
+            div[j].push_back(i);
+            if (is_prm[i]) pdv[j].push_back(i);
+          }
+        }
       }
-    }
-  }
-  auto factorize (
-    int x 
-  ) -> map<int, int> 
-  {
-    map<int, int> mp;
-    for (int p : prime_numbers) {
-      while (!(x % p)) {
-        mp[p]++;
-        x /= p;
+    
+    bool is_prime (int x) const {assert(x < n); return is_prime[x];}
+    auto prime_divisors (int x) const {assert(x < n); return pdv[x];}
+    auto divisors (int x) const {assert(x < n); return div[x];}
+
+    auto factorize (
+      int x 
+    ) -> map<int, int> 
+    {
+      map<int, int> mp;
+      for (int p : prm) {
+        while (!(x % p)) {
+          mp[p]++;
+          x /= p;
+        }
+        if (x == 1 || p * p > x) break;
       }
-      if (x == 1 || p * p > x) break;
+      if (x != 1) mp[x] = 1;
+      return mp;
     }
-    if (x != 1) mp[x] = 1;
-    return mp;
-  }
 };

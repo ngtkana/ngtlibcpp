@@ -6,7 +6,7 @@
     , prt(n, -1)
   {}
   bool is_root (int x) {return prt[x] < 0;}
-  int size (int x) {return prt[find(x)];}
+  int size (int x) {return -prt[find(x)];}
   bool equiv (int x, int y) {return find(x) == find(y);}
   int find (int x) {
     if (is_root(x)) return x;
