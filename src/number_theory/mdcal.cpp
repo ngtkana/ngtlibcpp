@@ -16,7 +16,7 @@ inline int mul (int a, int b) {
 }
 inline int mow (int a, long long b) {
   int res = 1;
-  for (; b; b >>= 1;) {
+  for (; b; b >>= 1) {
     if (b & 1) res = mul(res, a);
     a = mul(a, a);
   }

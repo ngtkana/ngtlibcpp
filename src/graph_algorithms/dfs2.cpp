@@ -1,5 +1,5 @@
 ﻿void ${1:dfs} (
-  vector<vector<int>>& grh,
+  const vector<vector<int>>& grh,
   vector<int>& ckd,
   int crr = ${2:0}
 ) {
