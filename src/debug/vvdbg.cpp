@@ -1,14 +1,22 @@
 ﻿{ // debug
-  cout << "--------------------------------------" << endl;
-  cout << setw(${5:5}) << left << "$1";
-  for (int ${2:i} = 0; $2 < (int)${1:おなまえ}.size(); $2++) {
-    if ($2 != 0) cout << setw($5) << " ";
-    cout << "$2 = " << setw(2) << right << $2 << ": ";
-    for (int ${3:j} = 0; $3 < (int)$1[$2].size(); $3++) {
-      cout << setw(${4:4}) << right << $1[$2][$3];
-      if ($3 != (int)$1[$2].size() - 1) cout << " ";
-    }
+  int h = ${1:name}.size(); int w = 0;
+  int name_length = ${2:3}; int output_length = ${3:4};
+  for (int i = 0; i < h; i++) if (w < (int)$1[i].size()) w = $1[i].size();
+  cout << string(name_length, '-') << "--";
+  for (int j = 0; j < w; j++) cout << setw(${3:output length}) << "----";
+  cout << endl;
+  cout << setw(name_length) << right << "$1" << "| ";
+  for (int j = 0; j < w; j++) cout << setw(output_length) << right <<  j;
+  cout << endl;
+  cout << string(name_length, '-') << "+-";
+  for (int j = 0; j < w; j++) cout << string(output_length, '-');
+  cout << endl;
+  for (int i = 0; i < h; i++) {
+    cout << setw(name_length) << right << i << "| ";
+    for (auto const& e : $1[i]) cout << setw(output_length) << right << (e == ${4:0} ? "0" : to_string(e));
     cout << endl;
   }
-  cout << "--------------------------------------" << endl;
+  cout << string(name_length, '-') << "--";
+  for (int j = 0; j < w; j++) cout << string(output_length, '-');
+  cout << endl;
 } //

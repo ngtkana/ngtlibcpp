@@ -1,13 +1,13 @@
-﻿template <typename T>
-class sparse_table {
+template <typename T>
+class disjoint_sparse_table {
   const int n, ht;
   const vector<int> msb;
   const function<T(T, T)> o;
   const vector<vector<T>> tab;
   public:
-    sparse_table (
-        vector<T> a,
-        function<T(T, T)> o
+    disjoint_sparse_table (
+        const vector<T> a,
+        const function<T(T, T)> o
       ) :
       n(a.size()),
       ht([&](){
@@ -24,9 +24,12 @@ class sparse_table {
       o(o),
       tab([&](){
           auto ret = vector<vector<T>>(ht, a);
-          for (int i = 1, p = 1; i < ht; i++, p <<= 1) {
-            for (int j = 0; j < n; j++) {
-              ret[i][j] = o(ret[i - 1][j], ret[i - 1][min(j + p, n - 1)]);
+          for (int i = 1; i < ht; i++) {
+            int p = 1 << i; int P = p << 1;
+            for (int s = 0; s < n; s += P) {
+              int t = min(s + p, n);
+              for (int j = t - 2; j >= s; j--) ret[i][j] = o(a[j], ret[i][j + 1]);
+              for (int j = t + 1; j < min(s + P, n); j++) ret[i][j] = o(ret[i][j - 1], a[j]);
             }
           }
           return ret;
@@ -38,8 +41,8 @@ class sparse_table {
         int r
       ) -> T
       {
-        assert(0 <= l && l < r && r <= n);
-        int i = msb[r - l];
-        return o(tab[i][l], tab[i][r - (1 << i)]);
+        assert(l <= --r);
+        int m = msb[l ^ r];
+        return m == -1 ? tab[0][l] : o(tab[m][l], tab[m][r]);
       }
 };

@@ -6,8 +6,8 @@
   cout << setw(4) << "----"; for (int i = 0; i < n; i++) cout << setw(4) << "----" ; cout << endl;
   cout << setw(4) << ""; for (int i = 0; i < n; i++) cout << setw(4) << i; cout << endl;
   cout << setw(4) << "----"; for (int i = 0; i < n; i++) cout << setw(4) << "----" ; cout << endl;
-  cout << setw(4) << "$1"; for (int i = 0; i < n; i++) cout << setw(4) << $1[i]; cout << endl;
-  cout << setw(4) << "$2"; for (int i = 0; i < n; i++) cout << setw(4) << $2[i]; cout << endl;
-  cout << setw(4) << "$3"; for (int i = 0; i < n; i++) cout << setw(4) << $3[i]; cout << endl;
+  cout << setw(4) << "$1"; for (auto const& e : $1) cout << setw(4) << e; cout << endl;
+  cout << setw(4) << "$2"; for (auto const& e : $2) cout << setw(4) << e; cout << endl;
+  cout << setw(4) << "$3"; for (auto const& e : $3) cout << setw(4) << e; cout << endl;
   cout << setw(4) << "----"; for (int i = 0; i < n; i++) cout << setw(4) << "----" ; cout << endl;
 } //
