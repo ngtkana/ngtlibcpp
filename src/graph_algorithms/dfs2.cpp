@@ -1,10 +1,7 @@
-﻿void ${1:dfs} (
-  const vector<vector<int>>& grh,
-  vector<int>& ckd,
-  int crr = ${2:0}
-) {
+﻿vector<bool> ckd(${1:n}, false);
+make_fixed_point ([&](auto dfs, int crr) -> void {
   ckd[crr] = true;
-  for (int nxt : grh[crr]) if (!ckd[nxt]) {
-    $1(grh, ckd, crr);
+  for (auto const& nxt : grh[crr]) if (!ckd[nxt]) {
+    dfs(nxt, crr);
   }
-}
+})(${2:0});
