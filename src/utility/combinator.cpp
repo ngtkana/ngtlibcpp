@@ -17,7 +17,6 @@ class fixed_point : T {
       }
 };
 template<typename T>
-static inline constexpr decltype(auto)
-  make_fixed_point (T&& t) noexcept {
-    return fixed_point<T>{forward<T>(t)};
-  }
+static inline constexpr decltype(auto) fix (T&& t) noexcept {
+  return fixed_point<T>{forward<T>(t)};
+}

@@ -1,4 +1,4 @@
-﻿make_fixed_point ([&](auto dfs, int crr, int prt) -> void {
+﻿fix ([&](auto dfs, int crr, int prt) -> void {
   for (auto const& nxt : grh[crr]) if (nxt != prt) {
     dfs(nxt, crr);
   }
