@@ -52,4 +52,32 @@
     }
     return res;
   }
+  namespace factorials {
+    int sz;
+    vector<int> fact, finv;
+    void init (int n) {
+      sz = n;
+      fact.resize(n); finv.resize(n);
+      fact[0] = 1;
+      for (int i = 1; i < n; i++) fact[i] = prod(fact[i - 1], i);
+      finv[n - 1] = inv(fact[n - 1]);
+      for (int i = n - 2; i >= 0; i--) finv[i] = prod(finv[i + 1], i + 1);
+    }
+  }
+  inline int fct (int i) {
+    using namespace factorials;
+    assert(0 <= i && i < sz);
+    return fact[i];
+  }
+  inline int fnv (int i) {
+    using namespace factorials;
+    assert(0 <= i && i < sz);
+    return finv[i];
+  }
+  inline int binom (int n, int k) {
+    using namespace factorials;
+    assert(0 <= n && n < sz);
+    if (0 < k || n < k) return 0;
+    return prod(fact[n], finv[k], finv[n - k]);
+  }
 }

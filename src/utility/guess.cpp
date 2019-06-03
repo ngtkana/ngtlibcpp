@@ -1,6 +1,10 @@
 struct rational {int n, d;};
 ostream& operator << (ostream& os, rational r){
-  os << r.n << "/" << r.d;
+  if (r.d == 1) {
+    os << r.n;
+  } else {
+    os << r.n << "/" << r.d;
+  }
   return os;
 }
 rational guess (int k) {
@@ -8,7 +12,7 @@ rational guess (int k) {
   const int nmx = 1000;
   for (int d = 1; d < dmx; d++) {
     int n = mint::prod(k, d);
-    if (gcd(n, d) == 1 && n < nmx) {
+    if (n < nmx) {
       return {n, d};
     }
   }

@@ -1,37 +1,31 @@
 template<typename T>
-class calculate_diameter {
+class diameter {
   const int n;
   const vector<vector<pair<T, int>>>& grh;
-  int max_dpt;
-  int far_0, far_1;
-
-    void dfs (
-        int crr,
-        int prt,
-        T dpt,
-        int& far
-      ) {
-        if (chmax(max_dpt, dpt)) far = crr;
+  T diam;
+  int ex, fx;
+  void cal () {
+    for (int t = 0; t < 2; t++) {
+      diam = 0;
+      fix ([&](auto dfs, int crr, int prt, T dpt = 0) -> void {
+        if (cmx(diam, dpt)) fx = crr;
         for (auto const& e : grh[crr]) {
           T w; int nxt; tie(w, nxt) = e;
           if (nxt == prt) continue;
-          dfs(nxt, crr, dpt + w, far);
+          dfs(nxt, crr, dpt + w);
         }
-      }
-
+      })(ex, ex);
+      swap(ex, fx);
+    }
+    if (ex > fx) swap(ex, fx);
+  }
   public:
-    calculate_diameter(
-        vector<vector<pair<T, int>>>& grh
-      ) :
-      n(grh.size()),
-      grh(grh),
-      max_dpt(0),
-      far_0(0), far_1(0)
+    diameter (vector<vector<pair<T, int>>>& grh) :
+      n(grh.size()), grh(grh),
+      diam(0), ex(0), fx(0)
       {
-        dfs(0, 0, 0, far_0);
-        dfs(far_0, far_0, 0, far_1);
+        cal();
       }
-
-    T diameter () const {return max_dpt;}
-    auto extremal () const -> pair<int, int> {return {min(far_0, far_1), max(far_0, far_1)};}
+    T result () const {return diam;}
+    auto extremals () const -> pair<int, int> {return {ex, fx};}
 };

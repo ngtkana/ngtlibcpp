@@ -1,43 +1,34 @@
-template<typename T>
-static inline constexpr decltype(auto)
-  make_fixed_point (T&& t) noexcept {
-    return fixed_point<T>{forward<T>(t)};
-  }
 template <typename T>
 class dijkstra {
-  const int n;
-  const int r;
-  const T inf;
+  const int n, r;
   const vector<vector<pair<T, int>>>& grh;
   vector<T> dst;
+  void cal () {
+    priority_queue<
+      pair<T, int>, vector<pair<T, int>>, greater<pair<T, int>>
+      > que;
+    que.emplace(0, r);
+    while (!que.empty()) {
+      T crd; int crr; tie(crd, crr) = que.top(), que.pop();
+      if (!cmn(dst[crr], crd)) continue;
+      for (auto e : grh[crr]) {
+        T w; int nxt; tie(w, nxt) = e;
+        T nxd = crd + w;
+        if (nxd < dst[nxt]) que.emplace(nxd, nxt);
+      }
+    }
+  }
   public:
+    const T inf;
     dijkstra (
+        const int r,
         const vector<vector<pair<T, int>>>& grh,
-        const int root,
-        const T inf
+        const T inf = numeric_limits<T>::max()
       ) :
-      n(grh.size()),
-      r(root),
-      inf(inf),
-      grh(grh),
-      dst(n, inf)
+      n(grh.size()), r(r),
+      grh(grh), dst(n, inf), inf(inf)
       {
-        priority_queue<
-          pair<T, int>,
-          vector<pair<T, int>>,
-          greater<pair<T, int>>
-        > que;
-        que.emplace(0, r);
-        while (!que.empty()) {
-          T crd; int crr;
-          tie(crd, crr) = que.top(), que.pop();
-          if (!cmn(dst[crr], crd)) continue;
-          for (auto e : grh[crr]) {
-            T w; int nxt; tie(w, nxt) = e;
-            T nxd = crd + w;
-            if (dst[nxt] > nxd) que.emplace(nxd, nxt);
-          }
-        }
+        cal();
       }
     auto result () const {return dst;}
 };
