@@ -38,11 +38,11 @@
     if(u < 0) u += md;
     return u;
   }
-  inline int quat (int a, int b) {
+  inline int quot (int a, int b) {
     return prod(a, inv(b));
   }
   inline void div (int& a, int b) {
-    a = quat(a, b);
+    a = quot(a, b);
   }
   inline int pow (int a, long long b) {
     int res = 1;
