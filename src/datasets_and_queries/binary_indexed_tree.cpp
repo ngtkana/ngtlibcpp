@@ -1,43 +1,47 @@
 ﻿template <typename T>
 class binary_indexed_tree {
-  int sz;
-  vector<T> tr;
-  function<T(T, T)> o;
-  function<T(T, T)> dif;
-  T id;
+    size_t sz;
+    vector<T> tr;
+    function<T(T, T)> sum;
+    function<T(T, T)> dif;
+    T id;
   public:
     binary_indexed_tree (
-      int n
-    , function<T(T, T) > o = [](int a, int b) {return a + b;}
-    , function<T(T, T) > dif = [](int a, int b) {return a - b;}
-    , T id = 0
-    )
-    : sz(n)
-    , tr(n, id)
-    , o(o)
-    , dif(dif)
-    , id(id)
-    {
-    }
-    T query (int l, int r) {
+        size_t n,
+        function<T(T, T) > sum,
+        function<T(T, T) > dif,
+        T id
+      ) :
+      sz(n), tr(n, id),
+      sum(sum), dif(dif), id(id)
+      {}
+    auto query (size_t l, size_t r) const -> T {
       assert(0 <= l && l <= r && r <= sz);
       if (l == 0) {
-        r--;
+        int k = (int)r;
+        k--;
         T ret = 0;
-        for (; r >= 0; r &= r + 1, r--) ret = o(ret, tr[r]);
+        for (; k >= 0; k &= k + 1, k--) ret = sum(ret, tr[k]);
         return ret;
       }
-      return dif(query(0, r), query(0, l));
+      else
+        return dif(query(0, r), query(0, l));
     }
-    void add (int i, T x) {
-      for (; i < sz; i |= i + 1) tr[i] = o(tr[i], x);
+    auto operator[] (size_t i) const -> T {
+      assert(0 <= i && i < sz);
+      return query(i, i + 1);
+    }
+    auto at (size_t i) const -> T {
+      return operator[](i);
+    }
+    void add (size_t i, T x) {
+      for (; i < sz; i |= i + 1) tr[i] = sum(tr[i], x);
     }
     void print() {
       cout << "bit: ";
       for (int i = 0; i < sz; i++) {
-        cout << query(i, i + 1);
-        if (i == sz - 1) break;
-        cout << ' ';
+        if (i) cout << " ";
+        cout << operator[](i);
       }
       cout << endl;
     }

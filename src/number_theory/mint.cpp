@@ -1,31 +1,37 @@
 ﻿namespace mint {
-  constexpr int md = 1e9 + 7;
+  int md;
   inline void add (int &a, int b) {
+    assert(0 <= a && a < md && 0 <= b && b < md);
     a += b; if (a >= md) a -= md;
   }
   inline void sub (int &a, int b) {
+    assert(0 <= a && a < md && 0 <= b && b < md);
     a -= b; if (a < 0) a += md;
   }
   inline int sum (int a, int b) {
+    assert(0 <= a && a < md && 0 <= b && b < md);
     add(a, b); return a;
   }
   inline int dif (int a, int b) {
+    assert(0 <= a && a < md && 0 <= b && b < md);
     sub(a, b); return a;
   }
   template<class... A>
   inline int prod (A... args) {
     long long ret = 1;
-    for (int a : initializer_list<int>{args...}) {
-      assert(a >= 0);
+    for (int a :  initializer_list<int>{args...}) {
+      assert(0 <= a && a < md);
       ret *= a;
       ret %= md;
     }
     return (int)(ret % md);
   }
   inline void mul (int &a, int b) {
+    assert(0 <= a && a < md && 0 <= b && b < md);
     a = prod(a, b);
   }
   inline int inv (int a) {
+    assert(0 <= a && a < md);
     a %= md;
     if(a < 0) a += md;
     int b = md, u = 0, v = 1;
@@ -39,12 +45,15 @@
     return u;
   }
   inline int quot (int a, int b) {
+    assert(0 <= a && a < md && 0 <= b && b < md);
     return prod(a, inv(b));
   }
   inline void div (int& a, int b) {
+    assert(0 <= a && a < md && 0 <= b && b < md);
     a = quot(a, b);
   }
   inline int pow (int a, long long b) {
+    assert(0 <= a && a < md);
     int res = 1;
     for (; b; b >>= 1) {
       if (b & 1) mul(res, a);
