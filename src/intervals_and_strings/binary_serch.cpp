@@ -1,6 +1,6 @@
-﻿${1:int} ${2:ok} = ${3:0}, ${4:ng} = ${5:inf}, md;
-while (${4:ng} - ${2:ok} > 1) {
-  md = (${2:ok} + ${4:ng}) >> 1;
-  if (${6:ck(md)}) ok = md;
+﻿${1:int} ok = ${2:0}, ng = ${3:inf}, md;
+while (abs(ok - ng) > 1) {
+  md = (ok + ng) >> 1;
+  if (${4:ck(md)}) ok = md;
   else ng = md;
 }
