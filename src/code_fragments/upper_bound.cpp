@@ -1,1 +1,1 @@
-﻿std::upper_bound(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});
+﻿std::upper_bound(${1:name}.begin(), ${1:おname.end(), ${2:きじゅんち});

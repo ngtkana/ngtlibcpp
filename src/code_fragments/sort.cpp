@@ -1,1 +1,1 @@
-﻿sort(${1:おなまえ}.begin(), ${1:おなまえ}.end());
+﻿sort(${1:name}.begin(), ${1:name}.end());

@@ -1,1 +1,1 @@
-﻿std::cout << ${1:おなまえ};
+﻿std::cout << ${1:name};

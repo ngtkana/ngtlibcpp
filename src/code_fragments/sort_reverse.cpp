@@ -1,1 +1,1 @@
-﻿sort(${1:おなまえ}.begin(), ${1:おなまえ}.end(), greater<${2:int}>());
+﻿sort(${1:name}.begin(), ${1:name}.end(), greater<${2:int}>());
