@@ -6,8 +6,8 @@ class ford_fulkerson {
     edge(int to, T cap) : to(to), cap(cap) {}
   };
   const int n, source, sink;
-  vector<bool> ckd;
-  vector<vector<shared_ptr<edge>>> grh;
+  std::vector<bool> ckd;
+  std::vector<std::vector<shared_ptr<edge>>> grh;
   static constexpr T inf = numeric_limits<T>::max();
   T dfs () {
     return fix ([&](auto dfs, int crr, int f = inf) -> T {

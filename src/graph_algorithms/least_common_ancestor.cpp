@@ -1,13 +1,13 @@
 ﻿class least_common_ancestor {
   const int n, r;
   int ht;
-  vector<int> dpt;
-  vector<vector<int>> prt;
-  const vector<vector<int>> grh;
+  std::vector<int> dpt;
+  std::vector<std::vector<int>> prt;
+  const std::vector<std::vector<int>> grh;
 
   void dfs (
-      const vector<vector<int>>& grh,
-      vector<int>& dpt,
+      const std::vector<std::vector<int>>& grh,
+      std::vector<int>& dpt,
       int crr, int prt
     ) {
       for (int const& nxt : grh[crr]) {
@@ -24,8 +24,8 @@
 
   public:
     least_common_ancestor (
-        const vector<vector<int>>& grh,
-        const vector<int>& direct_prt,
+        const std::vector<std::vector<int>>& grh,
+        const std::vector<int>& direct_prt,
         const int root
       ) :
       n(direct_prt.size()), r(root),
@@ -34,12 +34,12 @@
           return i;
         }()),
       dpt([&](){
-          vector<int> ret(n, 0);
+          std::vector<int> ret(n, 0);
           dfs(grh, ret, r, r);
           return ret;
         }()),
       prt([&](){
-          vector<vector<int>> ret(ht, direct_prt);
+          std::vector<std::vector<int>> ret(ht, direct_prt);
           for (int i = 1; i < ht; i++) {
             for (int j = 0; j < n; j++) {
               prt[i][j] = prt[i - 1][prt[i - 1][j]];

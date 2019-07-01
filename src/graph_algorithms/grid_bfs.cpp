@@ -1,9 +1,9 @@
-vector<vector<${1:long long}>> dst(h, vector<$1>(w, ${4:-1}));
-queue<pair<int, int>> que;
+std::vector<std::vector<${1:long long}>> dst(h, std::vector<$1>(w, ${4:-1}));
+queue<std::pair<int, int>> que;
 dst[${2:si}][${3:sj}] = 0, que.emplace($2, $3);
 while (!que.empty()) {
   int cri, crj;
-  tie(cri, crj) = que.front(), que.pop();
+  std::tie(cri, crj) = que.front(), que.pop();
   for (int k = 0; k < 4; k++) {
     int nxi = cri + di[k];
     int nxj = crj + dj[k];

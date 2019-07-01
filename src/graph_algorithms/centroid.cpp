@@ -1,16 +1,16 @@
 class centroid_tree {
   const int n;
-  const vector<vector<int>> grh;
-  vector<bool> ckd;
-  vector<vector<int>> ctr;
+  const std::vector<std::vector<int>> grh;
+  std::vector<bool> ckd;
+  std::vector<std::vector<int>> ctr;
   queue<tuple<int, int, int>> que;
   int rt = -1;
   void build ()
     {
-      vector<int> sz(n);
+      std::vector<int> sz(n);
       que.emplace(-1, 0, n);
       while (!que.empty()) {
-        int prv_ctr, start, bkt; tie(prv_ctr, start, bkt) = que.front(); que.pop();
+        int prv_ctr, start, bkt; std::tie(prv_ctr, start, bkt) = que.front(); que.pop();
         int new_ctr = -1;
         make_fixed_point ([&](auto dfs, int crr, int prt) -> void {
             sz[crr] = 1;
@@ -33,7 +33,7 @@ class centroid_tree {
     }
   public:
     centroid_tree (
-        vector<vector<int>> grh
+        std::vector<std::vector<int>> grh
       ) :
       n(grh.size()),
       grh(grh), ckd(n, false),

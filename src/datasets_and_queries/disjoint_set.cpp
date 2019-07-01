@@ -1,6 +1,6 @@
 ﻿class disjoint_set {
 	int n;
-	vector<int> prt;
+	std::vector<int> prt;
 	public:
 		disjoint_set (int n)
 			: n(n), prt(n, -1)
@@ -21,7 +21,7 @@
 			inline bool unite (int x, int y) {
 				x = find(x); y = find(y);
 				if (x == y) return false;
-				if (size(x) < size(y)) swap(x, y);
+				if (size(x) < size(y)) std::swap(x, y);
 				prt[x] += prt[y];
 				prt[y] = x;
 				return true;

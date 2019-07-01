@@ -1,8 +1,8 @@
 class topological_sort {
   const int n;
-  const vector<vector<int>>& grh;
-  vector<int> srd;
-  vector<int> ckd;
+  const std::vector<std::vector<int>>& grh;
+  std::vector<int> srd;
+  std::vector<int> ckd;
   bool flg;
 
   bool dfs (int crr) {
@@ -20,7 +20,7 @@ class topological_sort {
 
   public:
     topological_sort (
-        const vector<vector<int>>& grh
+        const std::vector<std::vector<int>>& grh
       ) :
       n(grh.size()),
       grh(grh),
@@ -38,6 +38,6 @@ class topological_sort {
       {
       }
     bool has_cycle () {return flg;}
-    auto sorted() const -> const vector<int>& {return srd;}
+    auto sorted() const -> const std::vector<int>& {return srd;}
     auto operator [] (int i) const -> int {return srd[i];}
 };

@@ -2,14 +2,14 @@
   const int n;
   const int r = 0;
   int tmr = 0;
-  vector<int> ord;
-  vector<int> low;
+  std::vector<int> ord;
+  std::vector<int> low;
   set<int> art;
-  set<pair<int, int>> bdg;
-  vector<vector<int>> grh;
+  set<std::pair<int, int>> bdg;
+  std::vector<std::vector<int>> grh;
 public:
   low_link_tree (
-    vector<vector<int>> const& grh,
+    std::vector<std::vector<int>> const& grh,
     const int root
   )
   : n(grh.size())

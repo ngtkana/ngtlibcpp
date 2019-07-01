@@ -1,9 +1,9 @@
 ﻿{ // debug
   for (auto ${2:it} = ${1:mp}.begin(); $2 != $1.end(); $2++) {
-    cout << "mp[";
-    cout << $0$2->first;
-    cout << "] = ";
-    cout << $2->second;
-    cout << "" << (next($2) == $1.end() ? "\n" : ", ");
+    std::cout << "mp[";
+    std::cout << $0$2->first;
+    std::cout << "] = ";
+    std::cout << $2->second;
+    std::cout << "" << (next($2) == $1.end() ? "\n" : ", ");
   }
 } //

@@ -1,8 +1,8 @@
 ﻿class factorize {
   int x;
   map<int, int> mp;
-  vector<int> pdv;
-  vector<int> pdv_m;
+  std::vector<int> pdv;
+  std::vector<int> pdv_m;
 
   public:
     factorize(

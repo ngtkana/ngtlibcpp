@@ -1,3 +1,3 @@
 ﻿{ // debug
-  cout << endl;
+  std::cout << std::endl;
 } //

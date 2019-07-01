@@ -1,19 +1,19 @@
 ﻿template<typename T, typename U>
 class compressed_segment_tree {
-	const vector<T> a;
+	const std::vector<T> a;
 	const size_t sz, Sz;
-	vector<U> seg;
-	const function<U(U, U)> o;
+	std::vector<U> seg;
+	const std::function<U(U, U)> o;
 	const U id;
 	inline auto find (T k) const {
-		auto it = lower_bound(a.begin(), a.end(), k);
+		auto it = std::lower_bound(a.begin(), a.end(), k);
 		assert(it != a.end() && *it == k);
 		return it - a.begin() + sz;
 	}
 	public:
 		compressed_segment_tree (
-				const vector<T> a,
-				const function<U(U, U)> o,
+				const std::vector<T> a,
+				const std::function<U(U, U)> o,
 				const U id
 			) :
 			a(a),
@@ -39,8 +39,8 @@ class compressed_segment_tree {
 			update(x, at(x) + y);
 		}
 		U query (T l, T r) {
-			l = lower_bound(a.begin(), a.end(), l) - a.begin();
-			r = lower_bound(a.begin(), a.end(), r) - a.begin();
+			l = std::lower_bound(a.begin(), a.end(), l) - a.begin();
+			r = std::lower_bound(a.begin(), a.end(), r) - a.begin();
 			U L = id, R = id;
 			for(l += sz, r += sz; l < r; l >>= 1, r >>= 1) {
 				if(l & 1) L = o(L, seg[l++]);
@@ -53,10 +53,10 @@ class compressed_segment_tree {
 		}
 		void print () const {
 			int n = a.size();
-			cout << setw(4) << "----"; for (int i = 0; i < n; i++) cout << setw(4) << "----" ; cout << endl;
-			cout << setw(4) << ""; for (auto const& e : a) cout << setw(4) << e; cout << endl;
-			cout << setw(4) << "----"; for (int i = 0; i < n; i++) cout << setw(4) << "----" ; cout << endl;
-			cout << setw(4) << "val"; for (auto const& e : a) cout << setw(4) << at(e); cout << endl;
-			cout << setw(4) << "----"; for (int i = 0; i < n; i++) cout << setw(4) << "----" ; cout << endl;
+			std::cout << std::setw(4) << "----"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << "----" ; std::cout << std::endl;
+			std::cout << std::setw(4) << ""; for (auto const& e : a) std::cout << std::setw(4) << e; std::cout << std::endl;
+			std::cout << std::setw(4) << "----"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << "----" ; std::cout << std::endl;
+			std::cout << std::setw(4) << "val"; for (auto const& e : a) std::cout << std::setw(4) << at(e); std::cout << std::endl;
+			std::cout << std::setw(4) << "----"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << "----" ; std::cout << std::endl;
 		}
 };

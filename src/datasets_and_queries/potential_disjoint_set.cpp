@@ -1,6 +1,6 @@
 ﻿class potential_disjoint_set {
   public:
-  vector<int> rank, prt, ptl;
+  std::vector<int> rank, prt, ptl;
   potential_disjoint_set (int size) {
     rank.resize(size);
     prt.resize(size);
@@ -32,7 +32,7 @@
     x = find(x);
     y = find(y);
     if (rank[x] < rank[y]) {
-      swap(x, y);
+      std::swap(x, y);
       w *= -1;
     }
     prt[y] = x;

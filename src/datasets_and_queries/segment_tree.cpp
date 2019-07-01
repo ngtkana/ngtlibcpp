@@ -1,13 +1,13 @@
 ﻿template<typename T>
 class segment_tree {
   const size_t n, sz, Sz;
-  vector<T> seg;
-  const function<T(T, T)> o;
+  std::vector<T> seg;
+  const std::function<T(T, T)> o;
   const T id;
   public:
     segment_tree (
         const size_t n,
-        const function<T(T, T)> o,
+        const std::function<T(T, T)> o,
         const T id
       ) :
       n(n),
@@ -44,10 +44,10 @@ class segment_tree {
       return seg[x + sz];
     }
     void print() {
-      cout << setw(4) << "----"; for (size_t i = 0; i < n; i++) cout << setw(4) << "----" ; cout << endl;
-      cout << setw(4) << ""; for (size_t i = 0; i < n; i++) cout << setw(4) << i; cout << endl;
-      cout << setw(4) << "----"; for (size_t i = 0; i < n; i++) cout << setw(4) << "----" ; cout << endl;
-      cout << setw(4) << "val"; for (size_t i = 0; i < n; i++) cout << setw(4) << seg[i + sz]; cout << endl;
-      cout << setw(4) << "----"; for (size_t i = 0; i < n; i++) cout << setw(4) << "----" ; cout << endl;
+      std::cout << std::setw(4) << "----"; for (size_t i = 0; i < n; i++) std::cout << std::setw(4) << "----" ; std::cout << std::endl;
+      std::cout << std::setw(4) << ""; for (size_t i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;
+      std::cout << std::setw(4) << "----"; for (size_t i = 0; i < n; i++) std::cout << std::setw(4) << "----" ; std::cout << std::endl;
+      std::cout << std::setw(4) << "val"; for (size_t i = 0; i < n; i++) std::cout << std::setw(4) << seg[i + sz]; std::cout << std::endl;
+      std::cout << std::setw(4) << "----"; for (size_t i = 0; i < n; i++) std::cout << std::setw(4) << "----" ; std::cout << std::endl;
     }
 };

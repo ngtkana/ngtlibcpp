@@ -1,9 +1,9 @@
 ﻿template<typename T, typename U>
 struct range_minimum_query {
 	const T id;
-	const function<T(T, T)> merge_function;
-	const function<void(U&)> twice;
-	const function<U(U)> half;
+	const std::function<T(T, T)> merge_function;
+	const std::function<void(U&)> twice;
+	const std::function<U(U)> half;
 	range_minimum_query(T id):
 		id(id),
 		merge_function ([](T a, T b) {return min(a, b);}),
@@ -15,9 +15,9 @@ struct range_minimum_query {
 template<typename T, typename U>
 struct range_maximum_query {
 	const T id;
-	const function<T(T, T)> merge_function;
-	const function<void(U&)> twice;
-	const function<U(U)> half;
+	const std::function<T(T, T)> merge_function;
+	const std::function<void(U&)> twice;
+	const std::function<U(U)> half;
 	range_maximum_query(T id):
 		id(id),
 		merge_function ([](T a, T b) {return max(a, b);}),
@@ -29,9 +29,9 @@ struct range_maximum_query {
 template<typename T, typename U>
 struct range_sum_query {
 	const T id;
-	const function<T(T, T)> merge_function;
-	const function<void(U&)> twice;
-	const function<U(U)> half;
+	const std::function<T(T, T)> merge_function;
+	const std::function<void(U&)> twice;
+	const std::function<U(U)> half;
 	range_sum_query(T id = 0):
 		id(id),
 		merge_function ([](T a, T b) {return a + b;}),
@@ -43,8 +43,8 @@ struct range_sum_query {
 template<typename T, typename U>
 struct range_update_query {
 		const U id;
-		const function<void(T&, U)> action;
-		const function<void(U&, U)> composition;
+		const std::function<void(T&, U)> action;
+		const std::function<void(U&, U)> composition;
 	public:
 		range_update_query(U id = 0):
 			id(id),
@@ -56,8 +56,8 @@ struct range_update_query {
 template<typename T, typename U>
 struct range_add_query {
 		const U id;
-		const function<void(T&, U)> action;
-		const function<void(U&, U)> composition;
+		const std::function<void(T&, U)> action;
+		const std::function<void(U&, U)> composition;
 	public:
 		range_add_query(U id = 0):
 			id(id),
@@ -71,25 +71,25 @@ class lazy_segment_tree {
 	int sz;
 	int Sz;
 	int ht;
-	vector<T> seg;
-	vector<U> act;
-	vector<bool> has_act;
-	const function<T(T, T)> o;
-	const function<void(T&, U)> oo;
-	const function<void(U&, U)> ooo;
-	const function<void(U&)> twice;
-	const function<U(U)> half;
+	std::vector<T> seg;
+	std::vector<U> act;
+	std::vector<bool> has_act;
+	const std::function<T(T, T)> o;
+	const std::function<void(T&, U)> oo;
+	const std::function<void(U&, U)> ooo;
+	const std::function<void(U&)> twice;
+	const std::function<U(U)> half;
 	const T tid;
 	const U uid;
 	
 	public:
 		lazy_segment_tree(
 				int n,
-				const function<T(T, T)> merge_function,
-				const function<void(T&, U)> action,
-				const function<void(U&, U)> composition,
-				const function<void(U&)> twice,
-				const function<U(U)> half,
+				const std::function<T(T, T)> merge_function,
+				const std::function<void(T&, U)> action,
+				const std::function<void(U&, U)> composition,
+				const std::function<void(U&)> twice,
+				const std::function<U(U)> half,
 				const T seg_id,
 				const U act_id
 			)
@@ -110,12 +110,12 @@ class lazy_segment_tree {
 			}
 		
 		lazy_segment_tree(
-				const vector<T>& data,
-				const function<T(T, T)> merge_function,
-				const function<void(T&, U)> action,
-				const function<void(U&, U)> composition,
-				const function<void(U&)> twice,
-				const function<U(U)> half,
+				const std::vector<T>& data,
+				const std::function<T(T, T)> merge_function,
+				const std::function<void(T&, U)> action,
+				const std::function<void(U&, U)> composition,
+				const std::function<void(U&)> twice,
+				const std::function<U(U)> half,
 				const T seg_id,
 				const U act_id
 			)
@@ -224,13 +224,13 @@ class lazy_segment_tree {
 		void print(int w = 4) {
 			for (int i(1), last(2), output_size(w << ht); last <= Sz; last <<= 1, output_size >>= 1) {
 				for (; i < last; i++) {
-					cout << right << setw(w);
-					cout << (seg[i] != tid ? to_string(seg[i]) : "");
-					cout << setw(2) <<	"<";
-					cout << left << setw(output_size - w - 2);
-					cout << (has_act[i] ? to_string(act[i]) : "");
+					std::cout << right << std::setw(w);
+					std::cout << (seg[i] != tid ? to_string(seg[i]) : "");
+					std::cout << std::setw(2) <<	"<";
+					std::cout << left << std::setw(output_size - w - 2);
+					std::cout << (has_act[i] ? to_string(act[i]) : "");
 				}
-				cout << endl;
+				std::cout << std::endl;
 			}
 		}
 };

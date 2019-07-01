@@ -37,8 +37,8 @@
     int b = md, u = 0, v = 1;
     while (a) {
       int t = b / a;
-      b -= a * t; swap(a, b);
-      u -= v * t; swap(u, v);
+      b -= a * t; std::swap(a, b);
+      u -= v * t; std::swap(u, v);
     }
     assert(b == 1);
     if(u < 0) u += md;
@@ -63,7 +63,7 @@
   }
   namespace factorials {
     int sz;
-    vector<int> fact, finv;
+    std::vector<int> fact, finv;
     void init (int n) {
       sz = n;
       fact.resize(n); finv.resize(n);

@@ -2,15 +2,15 @@ template <typename T>
 class bellman_ford {
   using edge_t = tuple<T, int, int>;
   const int n, r;
-  const vector<edge_t>& edg;
+  const std::vector<edge_t>& edg;
   bool flg;
-  vector<long long> dst;
+  std::vector<long long> dst;
   void cal () {
       dst[r] = 0;
       for (int q = n; q--;) {
         flg = false;
         for (auto const& e : edg) {
-          T d; int s, t; tie(d, s, t) = e;
+          T d; int s, t; std::tie(d, s, t) = e;
           if (dst[s] == inf) continue;
           if (cmn(dst[t], dst[s] + d)) flg = true;
         }
@@ -20,7 +20,7 @@ class bellman_ford {
     const T inf;
     bellman_ford (
         const int n, const int r,
-        const vector<edge_t>& edg,
+        const std::vector<edge_t>& edg,
         const T inf = numeric_limits<T>::max()
       ) :
       n(n), r(r), edg(edg), 
@@ -30,7 +30,7 @@ class bellman_ford {
       }
     bellman_ford (
         const int n, const int r,
-        const vector<edge_t>& edg
+        const std::vector<edge_t>& edg
       ) :
       bellman_ford(n, r, edg, numeric_limits<T>::max())
       {

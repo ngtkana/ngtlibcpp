@@ -1,1 +1,1 @@
-﻿cout << $0 << endl;
+﻿std::cout << $0 << std::endl;

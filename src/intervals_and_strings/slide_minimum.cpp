@@ -1,12 +1,12 @@
 template <typename T, class Compare = less<T>>
 class slide_minimum {
   public:
-  const vector<T> a;
+  const std::vector<T> a;
   Compare cmp;
   deque<int> que;
   int l, r;
     slide_minimum(
-        const vector<T>& a
+        const std::vector<T>& a
       ) :
       a(a), cmp(Compare()), l(0), r(0)
       {

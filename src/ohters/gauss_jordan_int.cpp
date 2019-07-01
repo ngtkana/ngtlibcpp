@@ -1,8 +1,8 @@
 class gauss_jordan {
   const int h, w;
   int rk;
-  vector<bool> ckd;
-  vector<int> p, a;
+  std::vector<bool> ckd;
+  std::vector<int> p, a;
   void init () {
     for (int j = 0; j < w; j++) {
       for (int pvt = 0; pvt < h; pvt++) {
@@ -26,13 +26,13 @@ class gauss_jordan {
   }
   public:
     gauss_jordan (
-        vector<int> a,
+        std::vector<int> a,
         int h
       ) :
       h(h), w(a.size()), rk(0),
       ckd(h, false),
       p([&]{
-        vector<int> p(h); 
+        std::vector<int> p(h); 
         for (int i = 0, x = 1; i < h; i++, x *= 2) p[i] = x;
         return p;
       }()),

@@ -1,4 +1,4 @@
-﻿vector<bool> ckd(${1:n}, false);
+﻿std::vector<bool> ckd(${1:n}, false);
 fix ([&](auto dfs, int crr) -> void {
   if (ckd[crr]) return;
   ckd[crr] = true;

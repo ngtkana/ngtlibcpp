@@ -9,8 +9,8 @@ class minimum_cost_flow {
       weak_ptr<edge> rev;
     };
     const int n, source, sink;
-    vector<U> dst;
-    vector<vector<shared_ptr<edge>>> grh;
+    std::vector<U> dst;
+    std::vector<std::vector<shared_ptr<edge>>> grh;
     void bf () {
       dst.assign(n, max_dist); dst[source] = 0;
       for (int t = 0; t < n; t++) {
@@ -29,7 +29,7 @@ class minimum_cost_flow {
       }
     }
     U flush () {
-      vector<bool> ckd(n, false);
+      std::vector<bool> ckd(n, false);
       return fix([&] (auto dfs, int crr, U f) -> U {
         if (ckd[crr]) return 0;
         ckd[crr] = true;

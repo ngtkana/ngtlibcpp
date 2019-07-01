@@ -1,3 +1,3 @@
 ﻿{ // debug
-  cout << "${1:a} = " << $1 << endl;
+  std::cout << "${1:a} = " << $1 << std::endl;
 } //

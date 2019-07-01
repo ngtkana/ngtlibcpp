@@ -2,7 +2,7 @@ template<typename T>
 struct floyd_warshall {
   const int n;
   const T inf;
-  vector<vector<T>> dst;
+  std::vector<std::vector<T>> dst;
   void cal () {
     for (int k = 0; k < n; k++) {
       for (int i = 0; i < n; i++) {
@@ -15,7 +15,7 @@ struct floyd_warshall {
     }
   }
   floyd_warshall (
-      const vector<vector<T>> adj,
+      const std::vector<std::vector<T>> adj,
       const T inf
     ) :
     n(adj.size()), inf(inf), dst(adj)

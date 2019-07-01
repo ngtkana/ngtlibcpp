@@ -1,19 +1,19 @@
 ﻿class sieve_of_eratosthenes {
   const int n;
-  vector<bool> is_prm;
-  vector<int> prm;
-  vector<vector<int>> pdv;
-  vector<vector<int>> div;
+  std::vector<bool> is_prm;
+  std::vector<int> prm;
+  std::vector<std::vector<int>> pdv;
+  std::vector<std::vector<int>> div;
 
   public:
     sieve_of_eratosthenes(
         int n
       ):
         n(n),
-        is_prm(vector<bool>(n)),
-        prm(vector<int>(0)), 
-        pdv(vector<vector<int>>(n)),
-        div(vector<vector<int>>(n))
+        is_prm(std::vector<bool>(n)),
+        prm(std::vector<int>(0)), 
+        pdv(std::vector<std::vector<int>>(n)),
+        div(std::vector<std::vector<int>>(n))
       {
         for (int i = 1; i < n; i++) {
           if (is_prm[i] = div[i].size() == 1) prm.push_back(i);

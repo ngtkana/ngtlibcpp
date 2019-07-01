@@ -1,7 +1,7 @@
 ﻿#include <bits/stdc++.h>
 using namespace std;
 int main() {
-  cin.tie(0); cin.sync_with_stdio(false);
+  std::cin.std::tie(0); std::cin.sync_with_stdio(false);
   $0
   return 0;
 }

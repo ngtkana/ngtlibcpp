@@ -5,9 +5,9 @@ class dinic {
     weak_ptr<edge> rev;
   };
   const int n, source, sink;
-  vector<bool> ckd;
-  vector<int> dst;
-  vector<vector<shared_ptr<edge>>> grh;
+  std::vector<bool> ckd;
+  std::vector<int> dst;
+  std::vector<std::vector<shared_ptr<edge>>> grh;
   static constexpr T inf = numeric_limits<T>::max();
   void bfs () {
     queue<int> que;

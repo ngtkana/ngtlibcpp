@@ -34,8 +34,8 @@ namespace mats {
   using T = int;
   T elem_0 = 0;
   T elem_1 = 1;
-  function<void(T&, T)> elem_add  = mint::add;
-  function<T(T, T)>     elem_prod = mint::prod<int, int>;
+  std::function<void(T&, T)> elem_add  = mint::add;
+  std::function<T(T, T)>     elem_prod = mint::prod<int, int>;
   using mat = array<array<int, N>, N>;
   auto zero = [&] () {
     mat zero;

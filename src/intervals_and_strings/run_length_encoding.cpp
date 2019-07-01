@@ -1,9 +1,9 @@
 template<typename T>
 class run_length_encoding {
-  vector<pair<int, T>> rle;
+  std::vector<std::pair<int, T>> rle;
   public:
     run_length_encoding(
-        vector<T> input
+        std::vector<T> input
       ) :
       rle(0)
       {
