@@ -2,7 +2,7 @@
 	"all": {
 		"prefix": "all",
 		"body": [
-			"${1:おなまえ}.begin(), $1.end()"
+			"${1:name}.begin(), $1.end()"
 		],
 		"description": "none"
 	},
@@ -18,7 +18,7 @@
 	"for const": {
 		"prefix": "for const",
 		"body": [
-			"for (auto const & ${1:e}: ${2:おなまえ}) {",
+			"for (auto const & ${1:e}: ${2:name}) {",
 			"\t$0",
 			"}"
 		],
@@ -27,7 +27,7 @@
 	"for iterator": {
 		"prefix": "for iterator",
 		"body": [
-			"for (auto ${1:it} = ${2:おなまえ}.begin(); $1 != $2.end(); it++) {",
+			"for (auto ${1:it} = ${2:name}.begin(); $1 != $2.end(); it++) {",
 			"\t$0",
 			"}"
 		],
@@ -88,7 +88,7 @@
 	"lower bound": {
 		"prefix": "lower bound",
 		"body": [
-			"std::lower_bound(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});"
+			"std::lower_bound(${1:name}.begin(), ${1:name}.end(), ${2:きじゅんち});"
 		],
 		"description": "none"
 	},
@@ -103,14 +103,14 @@
 	"pair": {
 		"prefix": "pair",
 		"body": [
-			"std::pair<${1:int}, ${2:int}> ${3:おなまえ}(${4:0}, ${5:0})$0;"
+			"std::pair<${1:int}, ${2:int}> ${3:name}(${4:0}, ${5:0})$0;"
 		],
 		"description": "none"
 	},
 	"reverse": {
 		"prefix": "reverse",
 		"body": [
-			"reverse(${1:おなまえ}.begin(), ${1:おなまえ}.end());"
+			"reverse(${1:name}.begin(), ${1:name}.end());"
 		],
 		"description": "none"
 	},
@@ -129,14 +129,14 @@
 	"sort": {
 		"prefix": "sort",
 		"body": [
-			"sort(${1:おなまえ}.begin(), ${1:おなまえ}.end());"
+			"sort(${1:name}.begin(), ${1:name}.end());"
 		],
 		"description": "none"
 	},
 	"sort reverse": {
 		"prefix": "sort reverse",
 		"body": [
-			"sort(${1:おなまえ}.begin(), ${1:おなまえ}.end(), greater<${2:int}>());"
+			"sort(${1:name}.begin(), ${1:name}.end(), greater<${2:int}>());"
 		],
 		"description": "none"
 	},
@@ -144,7 +144,6 @@
 		"prefix": "stemp",
 		"body": [
 			"#include <bits/stdc++.h>",
-			"using namespace std;",
 			"int main() {",
 			"\tstd::cin.std::tie(0); std::cin.sync_with_stdio(false);",
 			"\t$0",
@@ -156,21 +155,21 @@
 	"upper bound": {
 		"prefix": "upper bound",
 		"body": [
-			"std::upper_bound(${1:おなまえ}.begin(), ${1:おなまえ}.end(), ${2:きじゅんち});"
+			"std::upper_bound(${1:name}.begin(), ${1:おname.end(), ${2:きじゅんち});"
 		],
 		"description": "none"
 	},
 	"vec": {
 		"prefix": "vec",
 		"body": [
-			"std::vector<${1:int}> ${2:おなまえ}(${3:n});$0"
+			"std::vector<${1:int}> ${2:name}(${3:n});$0"
 		],
 		"description": "none"
 	},
 	"vecpair": {
 		"prefix": "vecpair",
 		"body": [
-			"std::vector<std::pair<${1:int}, ${2:int}>> ${3:おなまえ}(${4:n}, {${5:0}, ${6:0}})$0;"
+			"std::vector<std::pair<${1:int}, ${2:int}>> ${3:name}(${4:n}, {${5:0}, ${6:0}})$0;"
 		],
 		"description": "none"
 	},
@@ -184,7 +183,7 @@
 	"vecvecpair": {
 		"prefix": "vecvecpair",
 		"body": [
-			"std::vector<std::vector<std::pair<${1:int}, ${2:int}>>> ${3:おなまえ}(${4:h}, std::vector<std::pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;"
+			"std::vector<std::vector<std::pair<${1:int}, ${2:int}>>> ${3:name}(${4:h}, std::vector<std::pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;"
 		],
 		"description": "none"
 	},
@@ -810,7 +809,7 @@
 	"-pdbg": {
 		"prefix": "-pdbg",
 		"body": [
-			"std::cout << \"(\" << ${1:おなまえ}${2:->}first << \", \" << $1$2second << \")\";"
+			"std::cout << \"(\" << ${1:name}${2:->}first << \", \" << $1$2second << \")\";"
 		],
 		"description": "none"
 	},
@@ -824,7 +823,7 @@
 	"-sdbg": {
 		"prefix": "-sdbg",
 		"body": [
-			"std::cout << ${1:おなまえ};"
+			"std::cout << ${1:name};"
 		],
 		"description": "none"
 	},
@@ -1036,7 +1035,7 @@
 		"prefix": "pdbg",
 		"body": [
 			"{ // debug",
-			"\tstd::cout << \"${1:おなまえ} = (\" << $1${2:.}first << \", \" <<\t$1$2second << \")\" << std::endl;",
+			"\tstd::cout << \"${1:name} = (\" << $1${2:.}first << \", \" <<\t$1$2second << \")\" << std::endl;",
 			"} //"
 		],
 		"description": "none"
@@ -1930,7 +1929,7 @@
 		"prefix": "lis",
 		"body": [
 			"std::vector<${1:int}> lis;",
-			"for (auto crr : ${2:おなまえ}) {",
+			"for (auto crr : ${2:name}) {",
 			"\tauto lb = std::lower_bound(lis.begin(), lis.end(), crr);",
 			"\tif (lb == lis.end()) lis.push_back(crr);",
 			"\telse *lb = crr;",
@@ -2467,16 +2466,14 @@
 	"1sin": {
 		"prefix": "1sin",
 		"body": [
-			"${1:int} $2;",
-			"std::cin >> $2;"
+			"${1:int} $2; std::cin >> $2;"
 		],
 		"description": "none"
 	},
 	"2sin": {
 		"prefix": "2sin",
 		"body": [
-			"${1:int} $2, $3;",
-			"std::cin >> $2 >> $3;"
+			"${1:int} $2, $3; std::cin >> $2 >> $3;"
 		],
 		"description": "none"
 	},
