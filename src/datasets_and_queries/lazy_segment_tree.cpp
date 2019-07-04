@@ -224,7 +224,7 @@ class lazy_segment_tree {
 		void print(int w = 4) {
 			for (int i(1), last(2), output_size(w << ht); last <= Sz; last <<= 1, output_size >>= 1) {
 				for (; i < last; i++) {
-					std::cout << right << std::setw(w);
+					std::cout << std::right << std::setw(w);
 					std::cout << (seg[i] != tid ? to_string(seg[i]) : "");
 					std::cout << std::setw(2) <<	"<";
 					std::cout << left << std::setw(output_size - w - 2);

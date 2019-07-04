@@ -5,15 +5,15 @@
   std::cout << std::string(name_length, '-') << "--";
   for (int j = 0; j < w; j++) std::cout << std::setw(${3:output length}) << "----";
   std::cout << std::endl;
-  std::cout << std::setw(name_length) << right << "$1" << "| ";
-  for (int j = 0; j < w; j++) std::cout << std::setw(output_length) << right <<  j;
+  std::cout << std::setw(name_length) << std::right << "$1" << "| ";
+  for (int j = 0; j < w; j++) std::cout << std::setw(output_length) << std::right <<  j;
   std::cout << std::endl;
   std::cout << std::string(name_length, '-') << "+-";
   for (int j = 0; j < w; j++) std::cout << std::string(output_length, '-');
   std::cout << std::endl;
   for (int i = 0; i < h; i++) {
-    std::cout << std::setw(name_length) << right << i << "| ";
-    for (auto const& e : $1[i]) std::cout << std::setw(output_length) << right << (e == ${4:0} ? "0" : to_string(e));
+    std::cout << std::setw(name_length) << std::right << i << "| ";
+    for (auto const& e : $1[i]) std::cout << std::setw(output_length) << std::right << (e == ${4:0} ? "0" : to_string(e));
     std::cout << std::endl;
   }
   std::cout << std::string(name_length, '-') << "--";

@@ -19,7 +19,7 @@
   template<class... A>
   inline int prod (A... args) {
     long long ret = 1;
-    for (int a :  initializer_list<int>{args...}) {
+    for (int a :  std::initializer_list<int>{args...}) {
       assert(0 <= a && a < md);
       ret *= a;
       ret %= md;

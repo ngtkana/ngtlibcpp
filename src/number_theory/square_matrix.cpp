@@ -10,7 +10,7 @@ namespace mats {
       square_matrix& operator=(const square_matrix&) = default;
       square_matrix& operator=(square_matrix&&) = default;
       ~square_matrix() = default;
-      square_matrix(initializer_list<initializer_list<int>> il)
+      square_matrix(std::initializer_list<std::initializer_list<int>> il)
         : mat([il]{
           mat_t mat;
           assert(il.size() == N);

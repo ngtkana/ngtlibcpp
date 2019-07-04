@@ -4,7 +4,7 @@ class fixed_point : T {
     explicit constexpr fixed_point (
         T&& t
       ) noexcept
-      : T(forward<T>(t))
+      : T(std::forward<T>(t))
       {
       }
     template<typename... Args>
@@ -13,10 +13,10 @@ class fixed_point : T {
         Args&&... args
       ) const
       {
-        return T::operator()(*this, forward<Args>(args)...);
+        return T::operator()(*this, std::forward<Args>(args)...);
       }
 };
 template<typename T>
 static inline constexpr decltype(auto) fix (T&& t) noexcept {
-  return fixed_point<T>{forward<T>(t)};
+  return fixed_point<T>{std::forward<T>(t)};
 }
