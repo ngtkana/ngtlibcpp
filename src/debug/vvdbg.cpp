@@ -13,7 +13,7 @@
   std::cout << std::endl;
   for (int i = 0; i < h; i++) {
     std::cout << std::setw(name_length) << std::right << i << "| ";
-    for (auto const& e : $1[i]) std::cout << std::setw(output_length) << std::right << (e == ${4:0} ? "0" : to_string(e));
+    for (auto const& e : $1[i]) std::cout << std::setw(output_length) << std::right << (e == ${4:0} ? "0" : std::to_string(e));
     std::cout << std::endl;
   }
   std::cout << std::string(name_length, '-') << "--";

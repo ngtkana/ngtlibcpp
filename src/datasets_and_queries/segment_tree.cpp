@@ -1,53 +1,67 @@
-﻿template<typename T>
+﻿template<typename T, typename F, std::enable_if_t<
+  std::is_same<std::result_of_t<F(T, T)>, T>::value,
+  std::nullptr_t
+> = nullptr>
 class segment_tree {
-  const size_t n, sz, Sz;
-  std::vector<T> seg;
-  const std::function<T(T, T)> o;
-  const T id;
+    using vec = std::vector<T>;
+    size_t ht, n, N;
+    F o; T id; vec tab;
+    void cal (size_t u) {tab.at(u) = o(tab.at(2 * u), tab.at(2 * u + 1));}
+
   public:
-    segment_tree (
-        const size_t n,
-        const std::function<T(T, T)> o,
-        const T id
+    using value_type    = T;
+    using function_type = F;
+    segment_tree(
+        size_t size,
+        F      merge_function,
+        T      id,
+        vec    v
       ) :
-      n(n),
-      sz([&](){
-          size_t p = 1;
-          for (; p < n; p <<= 1) {}
-          return p;
-        }()),
-      Sz(sz << 1),
-      seg(Sz, id),
-      o(o),
-      id(id)
+      ht(std::log2(size) + 2), n(std::pow(2, ht - 1)), N(n * 2),
+      o(merge_function), id (id), tab(N)
       {
+        assert(n > 0);
+        v.resize(n, id);
+        std::copy(v.begin(), v.end(), tab.begin() + n);
+        for (size_t i = n - 1; i < n; i--) cal(i);
       }
-    void update (size_t k, const T& x) {
-      k += sz;
-      seg[k] = x;
-      while(k >>= 1) {
-        seg[k] = o(seg[2 * k], seg[2 * k + 1]);
+    segment_tree(
+        size_t size,
+        F      merge_function,
+        T      id
+      ) :
+      segment_tree(size, std::move(merge_function), id, vec(size, id)){}
+
+    // Change a value at the leaf.
+    void update (size_t u, T val) {
+      tab.at(u += n) = val;
+      for (u /= 2; u != 0; u /= 2) cal(u);
+    }
+    // Range-something query at [l, r[.
+    auto query (size_t l, size_t r) const -> T {
+      struct state {size_t top, left, right;};
+      auto ret = id;
+      std::stack<state> stk; stk.push({1, 0, n});
+      while (!stk.empty()) {
+        auto now = stk.top(); stk.pop();
+        if (l <= now.left && now.right <= r) {
+          ret = o(ret, tab.at(now.top));
+          continue;
+        }
+        size_t mid = (now.left + now.right) / 2;
+        if (l < mid) stk.push({2 * now.top,     now.left,  mid});
+        if (mid < r) stk.push({2 * now.top + 1, mid, now.right});
       }
-    }
-    void add (size_t x, const T& y) {
-      update(x, at(x) + y);
-    }
-    T query (size_t l, size_t r) {
-      T L = id, R = id;
-      for(l += sz, r += sz; l < r; l >>= 1, r >>= 1) {
-        if(l & 1) L = o(L, seg[l++]);
-        if(r & 1) R = o(seg[--r], R);
-      }
-      return o(L, R);
-    }
-    T at (const size_t &x) const {
-      return seg[x + sz];
-    }
-    void print() {
-      std::cout << std::setw(4) << "----"; for (size_t i = 0; i < n; i++) std::cout << std::setw(4) << "----" ; std::cout << std::endl;
-      std::cout << std::setw(4) << ""; for (size_t i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;
-      std::cout << std::setw(4) << "----"; for (size_t i = 0; i < n; i++) std::cout << std::setw(4) << "----" ; std::cout << std::endl;
-      std::cout << std::setw(4) << "val"; for (size_t i = 0; i < n; i++) std::cout << std::setw(4) << seg[i + sz]; std::cout << std::endl;
-      std::cout << std::setw(4) << "----"; for (size_t i = 0; i < n; i++) std::cout << std::setw(4) << "----" ; std::cout << std::endl;
+      return ret;
     }
 };
+template<typename T, typename F, typename... Args>
+auto make_segment_tree (
+    size_t  size,
+    F       merge_function,
+    Args... args
+  )
+  {
+    return segment_tree<T, F>(
+      size, std::move(merge_function), std::forward<Args>(args)...);
+  }

@@ -1,92 +1,121 @@
-﻿namespace mint {
-  int md;
-  inline void add (int &a, int b) {
-    assert(0 <= a && a < md && 0 <= b && b < md);
-    a += b; if (a >= md) a -= md;
+template <typename T>
+T inverse(T a, T m) {
+  T u = 0, v = 1;
+  while (a != 0) {
+    T t = m / a;
+    m -= t * a; swap(a, m);
+    u -= t * v; swap(u, v);
   }
-  inline void sub (int &a, int b) {
-    assert(0 <= a && a < md && 0 <= b && b < md);
-    a -= b; if (a < 0) a += md;
-  }
-  inline int sum (int a, int b) {
-    assert(0 <= a && a < md && 0 <= b && b < md);
-    add(a, b); return a;
-  }
-  inline int dif (int a, int b) {
-    assert(0 <= a && a < md && 0 <= b && b < md);
-    sub(a, b); return a;
-  }
-  template<class... A>
-  inline int prod (A... args) {
-    long long ret = 1;
-    for (int a :  std::initializer_list<int>{args...}) {
-      assert(0 <= a && a < md);
-      ret *= a;
-      ret %= md;
-    }
-    return (int)(ret % md);
-  }
-  inline void mul (int &a, int b) {
-    assert(0 <= a && a < md && 0 <= b && b < md);
-    a = prod(a, b);
-  }
-  inline int inv (int a) {
-    assert(0 <= a && a < md);
-    a %= md;
-    if(a < 0) a += md;
-    int b = md, u = 0, v = 1;
-    while (a) {
-      int t = b / a;
-      b -= a * t; std::swap(a, b);
-      u -= v * t; std::swap(u, v);
-    }
-    assert(b == 1);
-    if(u < 0) u += md;
-    return u;
-  }
-  inline int quot (int a, int b) {
-    assert(0 <= a && a < md && 0 <= b && b < md);
-    return prod(a, inv(b));
-  }
-  inline void div (int& a, int b) {
-    assert(0 <= a && a < md && 0 <= b && b < md);
-    a = quot(a, b);
-  }
-  inline int pow (int a, long long b) {
-    assert(0 <= a && a < md);
-    int res = 1;
-    for (; b; b >>= 1) {
-      if (b & 1) mul(res, a);
-      mul(a, a);
-    }
-    return res;
-  }
-  namespace factorials {
-    int sz;
-    std::vector<int> fact, finv;
-    void init (int n) {
-      sz = n;
-      fact.resize(n); finv.resize(n);
-      fact[0] = 1;
-      for (int i = 1; i < n; i++) fact[i] = prod(fact[i - 1], i);
-      finv[n - 1] = inv(fact[n - 1]);
-      for (int i = n - 2; i >= 0; i--) finv[i] = prod(finv[i + 1], i + 1);
-    }
-  }
-  inline int fct (int i) {
-    using namespace factorials;
-    assert(0 <= i && i < sz);
-    return fact[i];
-  }
-  inline int fnv (int i) {
-    using namespace factorials;
-    assert(0 <= i && i < sz);
-    return finv[i];
-  }
-  inline int binom (int n, int k) {
-    using namespace factorials;
-    assert(0 <= n && n < sz);
-    if (0 < k || n < k) return 0;
-    return prod(fact[n], finv[k], finv[n - k]);
-  }
+  assert(m == 1);
+  return u;
 }
+template <typename T>
+class modular {
+  private:
+    int value;
+  public:
+    constexpr modular() = default;
+    constexpr modular(const modular&) = default;
+    constexpr modular(modular&&) = default;
+    modular& operator=(const modular&) = default;
+    modular& operator=(modular&&) = default;
+
+    template <typename U>
+    modular (const U& x) {value = normalize(x);}
+
+    template <typename U>
+    static auto normalize(const U& x) {
+      int v = static_cast<int>(-mod() <= x && x < mod() ? x : x % mod());
+      if (v < 0) v += mod();
+      return v;
+    }
+
+    auto const& operator()() const { return value; }
+    template <typename U>
+    explicit operator U() const { return static_cast<U>(value); }
+    constexpr static auto mod() { return T::value; }
+
+    auto& operator+=(const modular& other) {
+      if ((value += other.value) >= mod()) value -= mod();
+      return *this;
+    }
+    auto& operator-=(const modular& other) {
+      if ((value -= other.value) < 0) value += mod();
+      return *this;
+    }
+    template <typename U>
+    auto& operator+=(const U& other) {return *this += modular(other); }
+    template <typename U>
+    auto& operator-=(const U& other) {return *this -= modular(other); }
+    auto operator-() const { return modular(-value); }
+
+    template <typename U = T>
+    auto operator*=(const modular& rhs) {
+      value = normalize(static_cast<int64_t>(value) * static_cast<int64_t>(rhs.value));
+      return *this;
+    }
+    auto& operator/=(const modular& other) {
+      return *this *= modular(inverse(other.value, mod()));
+    }
+};
+
+template <typename T> bool operator==(const modular<T>& lhs, const modular<T>& rhs) { return lhs.value == rhs.value; }
+template <typename T, typename U> bool operator==(const modular<T>& lhs, U rhs) { return lhs == modular<T>(rhs); }
+template <typename T, typename U> bool operator==(U lhs, const modular<T>& rhs) { return modular<T>(lhs) == rhs; }
+
+template <typename T> bool operator!=(const modular<T>& lhs, const modular<T>& rhs) { return !(lhs == rhs); }
+template <typename T, typename U> bool operator!=(const modular<T>& lhs, U rhs) { return !(lhs == rhs); }
+template <typename T, typename U> bool operator!=(U lhs, const modular<T>& rhs) { return !(lhs == rhs); }
+
+template <typename T> modular<T> operator+(const modular<T>& lhs, const modular<T>& rhs) { return modular<T>(lhs) += rhs; }
+template <typename T, typename U> modular<T> operator+(const modular<T>& lhs, U rhs) { return modular<T>(lhs) += rhs; }
+template <typename T, typename U> modular<T> operator+(U lhs, const modular<T>& rhs) { return modular<T>(lhs) += rhs; }
+
+template <typename T> modular<T> operator-(const modular<T>& lhs, const modular<T>& rhs) { return modular<T>(lhs) -= rhs; }
+template <typename T, typename U> modular<T> operator-(const modular<T>& lhs, U rhs) { return modular<T>(lhs) -= rhs; }
+template <typename T, typename U> modular<T> operator-(U lhs, const modular<T>& rhs) { return modular<T>(lhs) -= rhs; }
+
+template <typename T> modular<T> operator*(const modular<T>& lhs, const modular<T>& rhs) { return modular<T>(lhs) *= rhs; }
+template <typename T, typename U> modular<T> operator*(const modular<T>& lhs, U rhs) { return modular<T>(lhs) *= rhs; }
+template <typename T, typename U> modular<T> operator*(U lhs, const modular<T>& rhs) { return modular<T>(lhs) *= rhs; }
+
+template <typename T> modular<T> operator/(const modular<T>& lhs, const modular<T>& rhs) { return modular<T>(lhs) /= rhs; }
+template <typename T, typename U> modular<T> operator/(const modular<T>& lhs, U rhs) { return modular<T>(lhs) /= rhs; }
+template <typename T, typename U> modular<T> operator/(U lhs, const modular<T>& rhs) { return modular<T>(lhs) /= rhs; }
+
+template<typename T, typename U>
+modular<T> pow (const modular<T>& a, U b) {
+  assert(b >= 0);
+  modular<T> x = a, ret = 1;
+  for (; b > 0; b /= 2) {
+    if (b % 2 == 1) ret *= x;
+    x *= x;
+  }
+  return ret;
+}
+
+template <typename T>
+std::string to_string(const modular<T>& a) {
+  return std::to_string(a());
+}
+template <typename T>
+std::ostream& operator<<(std::ostream& stream, const modular<T>& a) {
+  return stream << a();
+}
+template <typename T>
+std::istream& operator>>(std::istream& stream, modular<T>& a) {
+  int x; stream >> x;
+  a.value = modular<T>::normalize(x);
+  return stream;
+}
+
+/*
+using ModType = int;
+
+struct VarMod { static ModType value; };
+ModType VarMod::value;
+ModType& md = VarMod::value;
+using mint = modular<VarMod>;
+*/
+constexpr int md = 1'000'000'007;
+using mint = modular<std::integral_constant<std::decay_t<decltype(md)>, md>>;

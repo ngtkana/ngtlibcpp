@@ -1,2 +1,2 @@
-﻿printf("/%d\n", ${1:crr});
-printf("\\\\%d\n", ${1:crr});
+﻿std::cout << "/" << ${1:crr} << std::endl;
+std::cout << "\\\\" << ${1:crr} << std::endl;
