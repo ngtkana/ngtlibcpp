@@ -23,7 +23,7 @@ class segment_tree {
         assert(n > 0);
         v.resize(n, id);
         std::copy(v.begin(), v.end(), tab.begin() + n);
-        for (size_t i = n - 1; i < n; i--) cal(i);
+        for (size_t i = n - 1; i != 0; i--) cal(i);
       }
     segment_tree(
         size_t size,
