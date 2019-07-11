@@ -3,8 +3,8 @@ T inverse(T a, T m) {
   T u = 0, v = 1;
   while (a != 0) {
     T t = m / a;
-    m -= t * a; swap(a, m);
-    u -= t * v; swap(u, v);
+    m -= t * a; std::swap(a, m);
+    u -= t * v; std::swap(u, v);
   }
   assert(m == 1);
   return u;
@@ -48,9 +48,13 @@ class modular {
     template <typename U>
     auto& operator-=(const U& other) {return *this -= modular(other); }
     auto operator-() const { return modular(-value); }
-
+    auto& operator++() {return *this += 1;}
+    auto& operator--() {return *this -= 1;}
+    auto  operator++(int) {modular result(*this); operator++(); return result;}
+    auto  operator--(int) {modular result(*this); operator--(); return result;}
+  
     template <typename U = T>
-    auto operator*=(const modular& rhs) {
+    auto& operator*=(const modular& rhs) {
       value = normalize(static_cast<int64_t>(value) * static_cast<int64_t>(rhs.value));
       return *this;
     }
@@ -58,6 +62,9 @@ class modular {
       return *this *= modular(inverse(other.value, mod()));
     }
 };
+template <typename T> struct is_modular : std::false_type {};
+template <typename T> struct is_modular <modular<T>> : std::true_type{};
+template <typename T> constexpr bool is_modular_v = is_modular<T>::value;
 
 template <typename T> bool operator==(const modular<T>& lhs, const modular<T>& rhs) { return lhs.value == rhs.value; }
 template <typename T, typename U> bool operator==(const modular<T>& lhs, U rhs) { return lhs == modular<T>(rhs); }
@@ -99,23 +106,26 @@ std::string to_string(const modular<T>& a) {
   return std::to_string(a());
 }
 template <typename T>
-std::ostream& operator<<(std::ostream& stream, const modular<T>& a) {
-  return stream << a();
-}
+auto operator<<(std::ostream& os, const T& a)
+  -> std::enable_if_t<is_modular_v<T>, std::ostream&>{
+    return os << a();
+  }
 template <typename T>
-std::istream& operator>>(std::istream& stream, modular<T>& a) {
-  int x; stream >> x;
-  a.value = modular<T>::normalize(x);
-  return stream;
+auto operator>>(std::istream& is, T& a)
+  -> std::enable_if_t<is_modular_v<T>, std::istream&> {
+  long long x; is >> x;
+  a = T(x);
+  return is;
 }
 
 /*
 using ModType = int;
-
+ 
 struct VarMod { static ModType value; };
 ModType VarMod::value;
 ModType& md = VarMod::value;
-using mint = modular<VarMod>;
+using Mint = Modular<VarMod>;
 */
+
 constexpr int md = 1'000'000'007;
 using mint = modular<std::integral_constant<std::decay_t<decltype(md)>, md>>;
