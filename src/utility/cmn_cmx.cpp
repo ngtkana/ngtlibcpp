@@ -1,16 +1,4 @@
-﻿template<typename T1, typename T2>
-inline bool cmn (T1& a, T2 b) {
-  if (a > b) {
-    a = b;
-    return true;
-  }
-  return false;
-}
-template<typename T1, typename T2>
-inline bool cmx (T1& a, T2 b) {
-  if (a < b) {
-    a = b;
-    return true;
-  }
-  return false;
-}
+﻿template<typename T, typename U>
+inline auto& cmn (T& a, U b) {return a = a <= b ? a : b;}
+template<typename T, typename U>
+inline auto& cmx (T& a, U b) {return a = a >= b ? a : b;}
