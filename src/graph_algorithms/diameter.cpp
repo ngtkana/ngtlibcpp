@@ -1,31 +1,39 @@
 template<typename T>
 class diameter {
-  const int n;
-  const std::vector<std::vector<std::pair<T, int>>>& grh;
-  T diam;
-  int ex, fx;
-  void cal () {
-    for (int t = 0; t < 2; t++) {
-      diam = 0;
-      fix ([&](auto dfs, int crr, int prt, T dpt = 0) -> void {
-        if (cmx(diam, dpt)) fx = crr;
-        for (auto const& e : grh[crr]) {
-          T w; int nxt; std::tie(w, nxt) = e;
-          if (nxt == prt) continue;
-          dfs(nxt, crr, dpt + w);
-        }
-      })(ex, ex);
-      std::swap(ex, fx);
-    }
-    if (ex > fx) std::swap(ex, fx);
-  }
+    struct edge {
+      size_t to; T cost;
+      edge(size_t to, T cost) : to(to), cost(cost){}
+    };
+    size_t n;
+    std::vector<std::vector<edge>> graph;
+
   public:
-    diameter (std::vector<std::vector<std::pair<T, int>>>& grh) :
-      n(grh.size()), grh(grh),
-      diam(0), ex(0), fx(0)
-      {
-        cal();
-      }
-    T result () const {return diam;}
-    auto extremals () const -> std::pair<int, int> {return {ex, fx};}
+    diameter(size_t n) : n(n), graph(n){}
+
+    // Insert an edge.
+    void insert(size_t i, size_t j, T cost = 1) {
+      assert(0 <= i && i < n);
+      assert(0 <= j && j < n);
+      graph.at(i).emplace_back(j, cost);
+      graph.at(j).emplace_back(i, cost);
+    };
+
+    // Calculate the diameter.
+    auto operator()(size_t root = 0){
+      std::vector<T> depth; 
+      auto cal = [&] (size_t r) {
+        depth.assign(n, 0);
+        fix ([&](auto dfs, size_t crr, size_t p) -> void {
+          for (auto const& e : graph.at(crr)) {
+            if (e.to == p) continue;
+            depth.at(e.to) = depth.at(crr) + e.cost;
+            dfs(e.to, crr);
+          }
+        })(r, r);
+      };
+      cal(root);
+      auto ex = std::max_element(depth.begin(), depth.end()) - depth.begin();
+      cal(ex);
+      return *std::max_element(depth.begin(), depth.end());
+    }
 };

@@ -1,46 +1,29 @@
-﻿class sieve_of_eratosthenes {
-  const int n;
-  std::vector<bool> is_prm;
-  std::vector<int> prm;
-  std::vector<std::vector<int>> pdv;
-  std::vector<std::vector<int>> div;
+﻿template <size_t N>
+class sieve_of_eratosthenes {
+    std::bitset<N> is_prime_;
 
   public:
-    sieve_of_eratosthenes(
-        int n
-      ):
-        n(n),
-        is_prm(std::vector<bool>(n)),
-        prm(std::vector<int>(0)), 
-        pdv(std::vector<std::vector<int>>(n)),
-        div(std::vector<std::vector<int>>(n))
-      {
-        for (int i = 1; i < n; i++) {
-          if (is_prm[i] = div[i].size() == 1) prm.push_back(i);
-          for (int j = i; j < n; j += i) {
-            div[j].push_back(i);
-            if (is_prm[i]) pdv[j].push_back(i);
-          }
+    constexpr sieve_of_eratosthenes(){
+      is_prime_ = ~is_prime_;
+      is_prime_.reset(0), is_prime_.reset(1);
+      for (size_t p = 2; p < N; p++) {
+        if (!is_prime_.test(p)) continue;
+        for (size_t j = 2; j * p < N; j++) {
+          is_prime_.reset(p * j);
         }
       }
-    
-    bool is_prime (int x) const {assert(x < n); return is_prime[x];}
-    auto prime_divisors (int x) const {assert(x < n); return pdv[x];}
-    auto divisors (int x) const {assert(x < n); return div[x];}
+    }
 
-    auto factorize (
-      int x 
-    ) -> map<int, int> 
-    {
-      map<int, int> mp;
-      for (int p : prm) {
-        while (!(x % p)) {
-          mp[p]++;
-          x /= p;
-        }
-        if (x == 1 || p * p > x) break;
+    // Return the bitset testing if a number is prime.
+    constexpr const auto& is_prime() const {return is_prime_;}
+
+    // Returns the vector of prime numbers.
+    template <typename T>
+    auto primes() const {
+      std::vector<T> primes{}; 
+      for (size_t i = 0; i < N; i++) {
+        if (is_prime_.test(i)) primes.push_back(i);
       }
-      if (x != 1) mp[x] = 1;
-      return mp;
+      return primes;
     }
 };

@@ -1,8 +1,7 @@
-﻿std::vector<bool> ckd(${1:n}, false);
-fix ([&](auto dfs, int crr) -> void {
-  if (ckd[crr]) return;
-  ckd[crr] = true;
-  for (auto const& nxt : grh[crr]) {
+﻿fix ([&](auto dfs, int crr) -> void {
+  ckd.at(crr) = true;
+  for (auto const& nxt : graph.at(crr)) {
+    if (ckd.at(nxt)) continue;
     dfs(nxt);
   }
-})(${2:0});
+})(${1:root});

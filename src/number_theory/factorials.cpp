@@ -8,16 +8,16 @@ class factorials {
       for (int i = n - 2; i >= 0; i--) finv.at(i) = finv.at(i + 1) * mint(i + 1);
     }
     // Returns the factorial.
-    auto const& operator()(size_t i) const {return fact.at(i);}
-    auto const& operator()(mint   i) const {return operator()(size_t(i));}
+    template <typename T>
+    auto const& operator()(T i) const {return fact.at(i);}
     // Returns the inverse of the factorial.
-    auto const& inv(size_t i) const {return finv.at(i);}
-    auto const& inv(mint   i) const {return inv(size_t(i));}
+    template <typename T>
+    auto const& inv(T i) const {return finv.at(i);}
     // Returns the binominal coefficient.
-    auto binom(size_t i, size_t j) const {
+    template <typename T>
+    auto binom(T i, T j) const {
       assert(0 <= i);
       if (j < 0 ||i < j) return mint(0);
       return fact.at(i) * finv.at(j) * finv.at(i - j);
     }
-    auto binom(mint i, mint j) const {return binom(size_t(i), size_t(j));}
 };
