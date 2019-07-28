@@ -15,7 +15,6 @@ class fully_indexable_dictionary {
       row_data(n), rank_table(n) {
         debug(sz, n);
       }
-    
 
     // Set the i-th bit.
     void set(size_t i) {
