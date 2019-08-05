@@ -1,8 +1,8 @@
 [
   {
-    "output_file": "../out.json",
+    "output_file": "out.json",
     "input_dirs": [
-      "../src"
+      "src"
     ]
   }
 ]

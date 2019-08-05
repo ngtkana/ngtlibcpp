@@ -6,6 +6,6 @@ ORIG_WD=$(pwd)
 cd ${SCRIPT_DIR}
 
 cd autolibrary
-cargo run ../config.json
+cargo run ..
 
 cd ${ORIG_WD}
