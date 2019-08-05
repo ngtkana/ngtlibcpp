@@ -1,170 +1,5 @@
 {
-  "../src/code_fragments/all.cpp": {
-    "body": [
-      "${1:name}.begin(), $1.end()"
-    ],
-    "prefix": "all"
-  },
-  "../src/code_fragments/for_const.cpp": {
-    "body": [
-      "for (auto const & ${1:e}: ${2:name}) {",
-      "  $0",
-      "}"
-    ],
-    "prefix": "for_const"
-  },
-  "../src/code_fragments/for_iterator.cpp": {
-    "body": [
-      "for (auto ${1:it} = ${2:name}.begin(); $1 != $2.end(); it++) {",
-      "  $0",
-      "}"
-    ],
-    "prefix": "for_iterator"
-  },
-  "../src/code_fragments/for_range.cpp": {
-    "body": [
-      "for (auto const& ${1:e} : ${2:name}) {",
-      "  $0",
-      "}"
-    ],
-    "prefix": "for_range"
-  },
-  "../src/code_fragments/for_reverse.cpp": {
-    "body": [
-      "for (int ${1:i} = ${2:n - 1}; $1 >= ${3:0}; $1--) {",
-      "  $0",
-      "}"
-    ],
-    "prefix": "for_reverse"
-  },
-  "../src/code_fragments/fors.cpp": {
-    "body": [
-      "for (${1:int} ${2:i} = ${3:0}; $2 < ${4:n}; $2++) {",
-      "  $0",
-      "}"
-    ],
-    "prefix": "fors"
-  },
-  "../src/code_fragments/inf.cpp": {
-    "body": [
-      "constexpr int inf = 1 << 30;"
-    ],
-    "prefix": "inf"
-  },
-  "../src/code_fragments/interval_dp.cpp": {
-    "body": [
-      "for (int d = 1; d <= ${1:n}; d++) {",
-      "  for (int l = 0, r = d; r <= $1; l++, r++) {",
-      "    $0",
-      "  }",
-      "}"
-    ],
-    "prefix": "interval_dp"
-  },
-  "../src/code_fragments/lambda.cpp": {
-    "body": [
-      "auto ${1:name} = [&] ($2) {",
-      "  $0",
-      "};"
-    ],
-    "prefix": "lambda"
-  },
-  "../src/code_fragments/long_inf.cpp": {
-    "body": [
-      "constexpr long long inf = 1LL << 60;"
-    ],
-    "prefix": "long_inf"
-  },
-  "../src/code_fragments/lower_bound.cpp": {
-    "body": [
-      "std::lower_bound(${1:name}.begin(), ${1:name}.end(), ${2:きじゅんち});"
-    ],
-    "prefix": "lower_bound"
-  },
-  "../src/code_fragments/output_stream.cpp": {
-    "body": [
-      "copy(${1:a}.begin(), $1.end(), ostream_iterator<${2:int}>(std::cout, \" \"));",
-      "$0"
-    ],
-    "prefix": "output_stream"
-  },
-  "../src/code_fragments/pair.cpp": {
-    "body": [
-      "std::pair<${1:int}, ${2:int}> ${3:name}(${4:0}, ${5:0})$0;"
-    ],
-    "prefix": "pair"
-  },
-  "../src/code_fragments/reverse.cpp": {
-    "body": [
-      "reverse(${1:name}.begin(), ${1:name}.end());"
-    ],
-    "prefix": "reverse"
-  },
-  "../src/code_fragments/reverse_priority_queue.cpp": {
-    "body": [
-      "priority_queue<",
-      "  ${1:std::pair<int, int>},",
-      "  std::vector<$1>,",
-      "  greater<$1>",
-      "> ${2:que};",
-      "$2.emplace($0);"
-    ],
-    "prefix": "reverse_priority_queue"
-  },
-  "../src/code_fragments/sort.cpp": {
-    "body": [
-      "sort(${1:name}.begin(), ${1:name}.end());"
-    ],
-    "prefix": "sort"
-  },
-  "../src/code_fragments/sort_reverse.cpp": {
-    "body": [
-      "sort(${1:name}.begin(), ${1:name}.end(), greater<${2:int}>());"
-    ],
-    "prefix": "sort_reverse"
-  },
-  "../src/code_fragments/stemp.cpp": {
-    "body": [
-      "#include <bits/stdc++.h>",
-      "int main() {",
-      "  std::cin.tie(0); std::cin.sync_with_stdio(false);",
-      "  $0",
-      "  return 0;",
-      "}"
-    ],
-    "prefix": "stemp"
-  },
-  "../src/code_fragments/upper_bound.cpp": {
-    "body": [
-      "std::upper_bound(${1:name}.begin(), ${1:おname.end(), ${2:きじゅんち});"
-    ],
-    "prefix": "upper_bound"
-  },
-  "../src/code_fragments/vec.cpp": {
-    "body": [
-      "std::vector<${1:int}> ${2:name}(${3:n});$0"
-    ],
-    "prefix": "vec"
-  },
-  "../src/code_fragments/vecpair.cpp": {
-    "body": [
-      "std::vector<std::pair<${1:int}, ${2:int}>> ${3:name}(${4:n}, {${5:0}, ${6:0}})$0;"
-    ],
-    "prefix": "vecpair"
-  },
-  "../src/code_fragments/vecvec.cpp": {
-    "body": [
-      "std::vector<std::vector<${1:int}>> ${2:grh}($0);"
-    ],
-    "prefix": "vecvec"
-  },
-  "../src/code_fragments/vecvecpair.cpp": {
-    "body": [
-      "std::vector<std::vector<std::pair<${1:int}, ${2:int}>>> ${3:name}(${4:h}, std::vector<std::pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;"
-    ],
-    "prefix": "vecvecpair"
-  },
-  "../src/datasets_and_queries/binary_indexed_tree.cpp": {
+  "../src/lib/datasets_and_queries/binary_indexed_tree.cpp": {
     "body": [
       "template <typename T>",
       "class binary_indexed_tree {",
@@ -217,7 +52,7 @@
     ],
     "prefix": "binary_indexed_tree"
   },
-  "../src/datasets_and_queries/compressed_segment_tree.cpp": {
+  "../src/lib/datasets_and_queries/compressed_segment_tree.cpp": {
     "body": [
       "template<typename T, typename U>",
       "class compressed_segment_tree {",
@@ -284,7 +119,7 @@
     ],
     "prefix": "compressed_segment_tree"
   },
-  "../src/datasets_and_queries/disjoint_sparse_table.cpp": {
+  "../src/lib/datasets_and_queries/disjoint_sparse_table.cpp": {
     "body": [
       "template <typename T>",
       "class disjoint_sparse_table {",
@@ -337,7 +172,7 @@
     ],
     "prefix": "disjoint_sparse_table"
   },
-  "../src/datasets_and_queries/lazy_segment_tree.cpp": {
+  "../src/lib/datasets_and_queries/lazy_segment_tree.cpp": {
     "body": [
       "template<typename T, typename U>",
       "struct range_minimum_query {",
@@ -578,7 +413,7 @@
     ],
     "prefix": "lazy_segment_tree"
   },
-  "../src/datasets_and_queries/potential_disjoint_set.cpp": {
+  "../src/lib/datasets_and_queries/potential_disjoint_set.cpp": {
     "body": [
       "class potential_disjoint_set {",
       "  public:",
@@ -633,7 +468,7 @@
     ],
     "prefix": "potential_disjoint_set"
   },
-  "../src/datasets_and_queries/segment_tree.cpp": {
+  "../src/lib/datasets_and_queries/segment_tree.cpp": {
     "body": [
       "template<typename T, typename F, std::enable_if_t<",
       "  std::is_same<std::result_of_t<F(T, T)>, T>::value,",
@@ -705,7 +540,7 @@
     ],
     "prefix": "segment_tree"
   },
-  "../src/datasets_and_queries/sparse_table.cpp": {
+  "../src/lib/datasets_and_queries/sparse_table.cpp": {
     "body": [
       "template <typename T>",
       "class sparse_table {",
@@ -755,7 +590,7 @@
     ],
     "prefix": "sparse_table"
   },
-  "../src/datasets_and_queries/union_find_tree.cpp": {
+  "../src/lib/datasets_and_queries/union_find_tree.cpp": {
     "body": [
       "class union_find_tree {",
       "    int n;",
@@ -789,316 +624,7 @@
     ],
     "prefix": "union_find_tree"
   },
-  "../src/debug/-pdbg.cpp": {
-    "body": [
-      "std::cout << \"(\" << ${1:name}${2:->}first << \", \" << $1$2second << \")\";"
-    ],
-    "prefix": "-pdbg"
-  },
-  "../src/debug/-ppdbg.cpp": {
-    "body": [
-      "std::cout << \"(\" << get<0>(${1:*it}) << \", \" << get<1>($1) << \", \" << get<2>($1) << \")\";"
-    ],
-    "prefix": "-ppdbg"
-  },
-  "../src/debug/-sdbg.cpp": {
-    "body": [
-      "std::cout << ${1:name};"
-    ],
-    "prefix": "-sdbg"
-  },
-  "../src/debug/1dbg.cpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout << \"${1:a} = \" << $1 << std::endl;",
-      "} //"
-    ],
-    "prefix": "1dbg"
-  },
-  "../src/debug/1prompt.cpp": {
-    "body": [
-      "std::cout << \"${2:a} > \";",
-      "${1:int} $2;",
-      "std::cin >> $2;"
-    ],
-    "prefix": "1prompt"
-  },
-  "../src/debug/1vdebug.cpp": {
-    "body": [
-      "{ // debug",
-      "  int n = 0;",
-      "  if (n < (int)${1:name}.size()) n = $1.size();",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "1vdebug"
-  },
-  "../src/debug/2dbg.cpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout",
-      "    << \"${1:a} = \" << $1 << \", \"",
-      "    << \"${2:b} = \" << $2",
-      "    << std::endl;",
-      "} //"
-    ],
-    "prefix": "2dbg"
-  },
-  "../src/debug/2prpmpt.cpp": {
-    "body": [
-      "std::cout << \"${2:a}, ${3:b} > \";",
-      "${1:int} $2, $3;",
-      "std::cin >> $2 >> $3;"
-    ],
-    "prefix": "2prpmpt"
-  },
-  "../src/debug/2vdebug.cpp": {
-    "body": [
-      "{ // debug",
-      "  int n = 0;",
-      "  if (n < (int)${1:name}.size()) n = $1.size();",
-      "  if (n < (int)${2:name}.size()) n = $2.size();",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$2\"; for (auto const& e : $2) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "2vdebug"
-  },
-  "../src/debug/3dbg.cpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout",
-      "    << \"${1:a} = \" << $1 << \", \"",
-      "    << \"${2:b} = \" << $2 << \", \"",
-      "    << \"${3:c} = \" << $3",
-      "    << std::endl;",
-      "} //"
-    ],
-    "prefix": "3dbg"
-  },
-  "../src/debug/3prompt.cpp": {
-    "body": [
-      "std::cout << \"${2:a}, ${3:b}, ${4:c} > \";",
-      "${1:int} $2, $3, $4;",
-      "std::cin >> $2 >> $3 >> $4;"
-    ],
-    "prefix": "3prompt"
-  },
-  "../src/debug/3vdebug.cpp": {
-    "body": [
-      "{ // debug",
-      "  int n = 0;",
-      "  if (n < (int)${1:name}.size()) n = $1.size();",
-      "  if (n < (int)${2:name}.size()) n = $2.size();",
-      "  if (n < (int)${3:name}.size()) n = $3.size();",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$2\"; for (auto const& e : $2) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$3\"; for (auto const& e : $3) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "3vdebug"
-  },
-  "../src/debug/4dbg.cpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout",
-      "    << \"${1:a} = \" << $1 << \", \"",
-      "    << \"${2:b} = \" << $2 << \", \"",
-      "    << \"${3:c} = \" << $3 << \", \"",
-      "    << \"${4:d} = \" << $4",
-      "    << std::endl;",
-      "} //"
-    ],
-    "prefix": "4dbg"
-  },
-  "../src/debug/4vdebug.cpp": {
-    "body": [
-      "{ // debug",
-      "  int n = 0;",
-      "  if (n < (int)${1:name}.size()) n = $1.size();",
-      "  if (n < (int)${2:name}.size()) n = $2.size();",
-      "  if (n < (int)${3:name}.size()) n = $3.size();",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$2\"; for (auto const& e : $2) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$3\"; for (auto const& e : $3) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$4\"; for (auto const& e : $4) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "4vdebug"
-  },
-  "../src/debug/bug.cpp": {
-    "body": [
-      "/* ↓ 消し忘れないで！！！ ↓ */",
-      "$0",
-      "/* ↑ いや振りじゃないから ↑ */"
-    ],
-    "prefix": "bug"
-  },
-  "../src/debug/check.cpp": {
-    "body": [
-      "std::cout << \"/\" << ${1:crr} << std::endl;",
-      "std::cout << \"\\\\\\\\\" << ${1:crr} << std::endl;"
-    ],
-    "prefix": "check"
-  },
-  "../src/debug/interval_debug.cpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout",
-      "    << \"[\" << $1 << \", \" << $2 << \")\" << std::endl;",
-      "} //"
-    ],
-    "prefix": "interval_debug"
-  },
-  "../src/debug/map_debug.cpp": {
-    "body": [
-      "{ // debug",
-      "  for (auto ${2:it} = ${1:mp}.begin(); $2 != $1.end(); $2++) {",
-      "    std::cout << \"mp[\";",
-      "    std::cout << $0$2->first;",
-      "    std::cout << \"] = \";",
-      "    std::cout << $2->second;",
-      "    std::cout << \"\" << (next($2) == $1.end() ? \"\\n\" : \", \");",
-      "  }",
-      "} //"
-    ],
-    "prefix": "map_debug"
-  },
-  "../src/debug/ndbg.cpp": {
-    "body": [
-      "std::cout << \"$0\" << std::endl;"
-    ],
-    "prefix": "ndbg"
-  },
-  "../src/debug/new_line.cpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "new_line"
-  },
-  "../src/debug/pdbg.cpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout << \"${1:name} = (\" << $1${2:.}first << \", \" <<\t$1$2second << \")\" << std::endl;",
-      "} //"
-    ],
-    "prefix": "pdbg"
-  },
-  "../src/debug/pretty_debug.cpp": {
-    "body": [
-      "#define LOCAL",
-      "using std::to_string;",
-      "auto to_string(std::string s) -> std::string {",
-      "  return '\"' + s + '\"';",
-      "}",
-      "auto to_string(char c) -> std::string {",
-      "  return \"'\" + std::string{c} + \"'\";",
-      "}",
-      "auto to_string(const char* s) -> std::string {",
-      "  return to_string((std::string) s);",
-      "}",
-      "auto to_string(bool b) -> std::string {",
-      "  return (b ? \"true\" : \"false\");",
-      "}",
-      "template <typename T, typename U>",
-      "auto to_string(std::pair<T, U> p) -> std::string {",
-      "  return \"(\" + to_string(p.first) + \", \" + to_string(p.second) + \")\";",
-      "}",
-      "template <size_t N>",
-      "auto to_string(std::bitset<N> bs) -> std::string {",
-      "  std::string res{};",
-      "  for (size_t i = 0; i < N; i++)",
-      "    res.insert(res.begin(), bs.test(i) ? '1' : '0');",
-      "  return res;",
-      "}",
-      "template <typename T>",
-      "auto to_string(T v) -> std::string {",
-      "  bool flg = false;",
-      "  std::string res = \"{\";",
-      "  for (auto const&x : v) {",
-      "    if (flg) res += \", \";",
-      "    else flg = true;",
-      "    res += to_string(x);",
-      "  }",
-      "  res += \"}\";",
-      "  return res;",
-      "}",
-      "void debug_out() { std::cerr << std::endl; }",
-      "template <typename Head, typename... Tail>",
-      "void debug_out(Head H, Tail... T) {",
-      "  std::cerr << \" \" << to_string(H);",
-      "  debug_out(T...);",
-      "}",
-      "#ifdef LOCAL",
-      "#define debug(...) std::cerr << \"[\" << #__VA_ARGS__ << \"]:\", debug_out(__VA_ARGS__)",
-      "#else",
-      "#define debug(...) 42",
-      "#endif"
-    ],
-    "prefix": "pretty_debug"
-  },
-  "../src/debug/vpdebug.cpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout << \"${1:name}: \";",
-      "  for (auto ${2:it} = $1.begin(); $2 != $1.end(); $2++) {",
-      "    std::cout << \"(\";",
-      "    std::cout << $2->first;",
-      "    std::cout << \", \";",
-      "    std::cout << $2->second;",
-      "    std::cout << \")\" << (next($2) == $1.end() ? \"\\n\" : \", \");",
-      "  }",
-      "  std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "vpdebug"
-  },
-  "../src/debug/vvdbg.cpp": {
-    "body": [
-      "{ // debug",
-      "  int h = ${1:name}.size(); int w = 0;",
-      "  int name_length = ${2:3}; int output_length = ${3:4};",
-      "  for (int i = 0; i < h; i++) if (w < (int)$1[i].size()) w = $1[i].size();",
-      "  std::cout << std::string(name_length, '-') << \"--\";",
-      "  for (int j = 0; j < w; j++) std::cout << std::setw(${3:output length}) << \"----\";",
-      "  std::cout << std::endl;",
-      "  std::cout << std::setw(name_length) << std::right << \"$1\" << \"| \";",
-      "  for (int j = 0; j < w; j++) std::cout << std::setw(output_length) << std::right <<  j;",
-      "  std::cout << std::endl;",
-      "  std::cout << std::string(name_length, '-') << \"+-\";",
-      "  for (int j = 0; j < w; j++) std::cout << std::string(output_length, '-');",
-      "  std::cout << std::endl;",
-      "  for (int i = 0; i < h; i++) {",
-      "    std::cout << std::setw(name_length) << std::right << i << \"| \";",
-      "    for (auto const& e : $1[i]) std::cout << std::setw(output_length) << std::right << (e == ${4:0} ? \"0\" : std::to_string(e));",
-      "    std::cout << std::endl;",
-      "  }",
-      "  std::cout << std::string(name_length, '-') << \"--\";",
-      "  for (int j = 0; j < w; j++) std::cout << std::string(output_length, '-');",
-      "  std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "vvdbg"
-  },
-  "../src/graph_algorithms/bellman_ford.cpp": {
+  "../src/lib/graph_algorithms/bellman_ford.cpp": {
     "body": [
       "template <typename T>",
       "class bellman_ford {",
@@ -1143,7 +669,7 @@
     ],
     "prefix": "bellman_ford"
   },
-  "../src/graph_algorithms/bipartite_matching.cpp": {
+  "../src/lib/graph_algorithms/bipartite_matching.cpp": {
     "body": [
       "class bipartite_matching {",
       "  int x, y;",
@@ -1165,7 +691,7 @@
     ],
     "prefix": "bipartite_matching"
   },
-  "../src/graph_algorithms/centroid.cpp": {
+  "../src/lib/graph_algorithms/centroid.cpp": {
     "body": [
       "class centroid_tree {",
       "  const int n;",
@@ -1218,7 +744,7 @@
     ],
     "prefix": "centroid"
   },
-  "../src/graph_algorithms/dfs1.cpp": {
+  "../src/lib/graph_algorithms/dfs1.cpp": {
     "body": [
       "fix ([&](auto dfs, int crr, int p) -> void {",
       "  for (auto const& nxt : graph.at(crr)) {",
@@ -1229,7 +755,7 @@
     ],
     "prefix": "dfs1"
   },
-  "../src/graph_algorithms/dfs2.cpp": {
+  "../src/lib/graph_algorithms/dfs2.cpp": {
     "body": [
       "fix ([&](auto dfs, int crr) -> void {",
       "  ckd.at(crr) = true;",
@@ -1241,7 +767,7 @@
     ],
     "prefix": "dfs2"
   },
-  "../src/graph_algorithms/diameter.cpp": {
+  "../src/lib/graph_algorithms/diameter.cpp": {
     "body": [
       "template<typename T>",
       "class diameter {",
@@ -1285,7 +811,7 @@
     ],
     "prefix": "diameter"
   },
-  "../src/graph_algorithms/dijkstra.cpp": {
+  "../src/lib/graph_algorithms/dijkstra.cpp": {
     "body": [
       "template <typename T>",
       "class dijkstra {",
@@ -1324,7 +850,7 @@
     ],
     "prefix": "dijkstra"
   },
-  "../src/graph_algorithms/dinic.cpp": {
+  "../src/lib/graph_algorithms/dinic.cpp": {
     "body": [
       "template <typename T>",
       "class dinic {",
@@ -1398,7 +924,7 @@
     ],
     "prefix": "dinic"
   },
-  "../src/graph_algorithms/floyd_warshall.cpp": {
+  "../src/lib/graph_algorithms/floyd_warshall.cpp": {
     "body": [
       "template<typename T>",
       "struct floyd_warshall {",
@@ -1433,7 +959,7 @@
     ],
     "prefix": "floyd_warshall"
   },
-  "../src/graph_algorithms/ford_fulkerson.cpp": {
+  "../src/lib/graph_algorithms/ford_fulkerson.cpp": {
     "body": [
       "template <typename T>",
       "class ford_fulkerson {",
@@ -1487,7 +1013,7 @@
     ],
     "prefix": "ford_fulkerson"
   },
-  "../src/graph_algorithms/grid_bfs.cpp": {
+  "../src/lib/graph_algorithms/grid_bfs.cpp": {
     "body": [
       "std::vector<std::vector<${1:long long}>> dst(h, std::vector<$1>(w, ${4:-1}));",
       "queue<std::pair<int, int>> que;",
@@ -1509,7 +1035,7 @@
     ],
     "prefix": "grid_bfs"
   },
-  "../src/graph_algorithms/heavy_light_decomposition.cpp": {
+  "../src/lib/graph_algorithms/heavy_light_decomposition.cpp": {
     "body": [
       "// Dependent libraries: Combinator.",
       "template <typename T>",
@@ -1609,7 +1135,7 @@
     ],
     "prefix": "heavy_light_decomposition"
   },
-  "../src/graph_algorithms/heights.cpp": {
+  "../src/lib/graph_algorithms/heights.cpp": {
     "body": [
       "template<typename T>",
       "class calculate_heights {",
@@ -1672,7 +1198,7 @@
     ],
     "prefix": "heights"
   },
-  "../src/graph_algorithms/inner_dfs1.cpp": {
+  "../src/lib/graph_algorithms/inner_dfs1.cpp": {
     "body": [
       "  void dfs (",
       "      int crr = 0,",
@@ -1688,7 +1214,7 @@
     ],
     "prefix": "inner_dfs1"
   },
-  "../src/graph_algorithms/kruskal.cpp": {
+  "../src/lib/graph_algorithms/kruskal.cpp": {
     "body": [
       "template<typename T>",
       "struct kruskal {",
@@ -1723,7 +1249,7 @@
     ],
     "prefix": "kruskal"
   },
-  "../src/graph_algorithms/low_link_tree.cpp": {
+  "../src/lib/graph_algorithms/low_link_tree.cpp": {
     "body": [
       "struct low_link_tree {",
       "  const int n;",
@@ -1769,7 +1295,7 @@
     ],
     "prefix": "low_link_tree"
   },
-  "../src/graph_algorithms/lowest_common_ancestor.cpp": {
+  "../src/lib/graph_algorithms/lowest_common_ancestor.cpp": {
     "body": [
       "// Class for calculating LCA.",
       "// Dependent libraries: Combinator.",
@@ -1844,7 +1370,7 @@
     ],
     "prefix": "lowest_common_ancestor"
   },
-  "../src/graph_algorithms/minimum_cost_flow.cpp": {
+  "../src/lib/graph_algorithms/minimum_cost_flow.cpp": {
     "body": [
       "template <typename T, typename U>",
       "class minimum_cost_flow {",
@@ -1929,7 +1455,7 @@
     ],
     "prefix": "minimum_cost_flow"
   },
-  "../src/graph_algorithms/prim.cpp": {
+  "../src/lib/graph_algorithms/prim.cpp": {
     "body": [
       "template <typename T>",
       "struct prim {",
@@ -1962,7 +1488,7 @@
     ],
     "prefix": "prim"
   },
-  "../src/graph_algorithms/topological_sort_1.cpp": {
+  "../src/lib/graph_algorithms/topological_sort_1.cpp": {
     "body": [
       "class topological_sort {",
       "  const int n;",
@@ -2010,13 +1536,13 @@
     ],
     "prefix": "topological_sort_1"
   },
-  "../src/graph_algorithms/topological_sort_2.cpp": {
+  "../src/lib/graph_algorithms/topological_sort_2.cpp": {
     "body": [
       "// none (tail)"
     ],
     "prefix": "topological_sort_2"
   },
-  "../src/intervals_and_strings/binary_serch.cpp": {
+  "../src/lib/intervals_and_strings/binary_serch.cpp": {
     "body": [
       "${1:int} ok = ${2:0}, ng = ${3:inf}, md;",
       "while (abs(ok - ng) > 1) {",
@@ -2027,7 +1553,7 @@
     ],
     "prefix": "binary_serch"
   },
-  "../src/intervals_and_strings/lis.cpp": {
+  "../src/lib/intervals_and_strings/lis.cpp": {
     "body": [
       "std::vector<${1:int}> lis;",
       "for (auto crr : ${2:name}) {",
@@ -2038,7 +1564,7 @@
     ],
     "prefix": "lis"
   },
-  "../src/intervals_and_strings/slide_minimum.cpp": {
+  "../src/lib/intervals_and_strings/slide_minimum.cpp": {
     "body": [
       "template <typename T, class Compare = less<T>>",
       "class slide_minimum {",
@@ -2076,7 +1602,7 @@
     ],
     "prefix": "slide_minimum"
   },
-  "../src/intervals_and_strings/sliding_window.cpp": {
+  "../src/lib/intervals_and_strings/sliding_window.cpp": {
     "body": [
       "/* init crr, ret */",
       "for (int l = 0, r = 0; l < n; l++) {",
@@ -2094,7 +1620,7 @@
     ],
     "prefix": "sliding_window"
   },
-  "../src/number_theory/factorials.cpp": {
+  "../src/lib/number_theory/factorials.cpp": {
     "body": [
       "class factorials {",
       "    std::vector<mint> fact, finv;",
@@ -2122,7 +1648,7 @@
     ],
     "prefix": "factorials"
   },
-  "../src/number_theory/factorize.cpp": {
+  "../src/lib/number_theory/factorize.cpp": {
     "body": [
       "class factorize {",
       "  int x;",
@@ -2155,7 +1681,7 @@
     ],
     "prefix": "factorize"
   },
-  "../src/number_theory/gcd.cpp": {
+  "../src/lib/number_theory/gcd.cpp": {
     "body": [
       "template<typename T>",
       "T gcd (T a, T b) {",
@@ -2171,7 +1697,7 @@
     ],
     "prefix": "gcd"
   },
-  "../src/number_theory/mint.cpp": {
+  "../src/lib/number_theory/mint.cpp": {
     "body": [
       "template <typename T>",
       "T inverse(T a, T m) {",
@@ -2307,7 +1833,7 @@
     ],
     "prefix": "mint"
   },
-  "../src/number_theory/old_mint.cpp": {
+  "../src/lib/number_theory/old_mint.cpp": {
     "body": [
       "namespace mint {",
       "  int md;",
@@ -2404,7 +1930,7 @@
     ],
     "prefix": "old_mint"
   },
-  "../src/number_theory/polynominal.cpp": {
+  "../src/lib/number_theory/polynominal.cpp": {
     "body": [
       "template <typename T,",
       "  typename T::value_type zero, // TODO: not value_type, but T",
@@ -2441,7 +1967,7 @@
     ],
     "prefix": "polynominal"
   },
-  "../src/number_theory/sieve_of_eratosthenes.cpp": {
+  "../src/lib/number_theory/sieve_of_eratosthenes.cpp": {
     "body": [
       "template <size_t N>",
       "class sieve_of_eratosthenes {",
@@ -2475,7 +2001,7 @@
     ],
     "prefix": "sieve_of_eratosthenes"
   },
-  "../src/number_theory/tropical.cpp": {
+  "../src/lib/number_theory/tropical.cpp": {
     "body": [
       "template <typename T, typename F, std::enable_if_t<",
       "    std::is_same<std::result_of_t<F(T, T)>, T>::value,",
@@ -2553,7 +2079,7 @@
     ],
     "prefix": "tropical"
   },
-  "../src/srring_algorighms/fully_indexable_dictionary.cpp": {
+  "../src/lib/srring_algorighms/fully_indexable_dictionary.cpp": {
     "body": [
       "class fully_indexable_dictionary {",
       "    using value_t = uint32_t;",
@@ -2621,7 +2147,7 @@
     ],
     "prefix": "fully_indexable_dictionary"
   },
-  "../src/srring_algorighms/rolling_hash.cpp": {
+  "../src/lib/srring_algorighms/rolling_hash.cpp": {
     "body": [
       "class rolling_hash {",
       "  public:",
@@ -2692,7 +2218,7 @@
     ],
     "prefix": "rolling_hash"
   },
-  "../src/srring_algorighms/run_length_encoding.cpp": {
+  "../src/lib/srring_algorighms/run_length_encoding.cpp": {
     "body": [
       "template<typename T>",
       "class run_length_encoding {",
@@ -2717,149 +2243,7 @@
     ],
     "prefix": "run_length_encoding"
   },
-  "../src/standard_in_out/1sin.cpp": {
-    "body": [
-      "${1:int} $2; std::cin >> $2;"
-    ],
-    "prefix": "1sin"
-  },
-  "../src/standard_in_out/2sin.cpp": {
-    "body": [
-      "${1:int} $2, $3; std::cin >> $2 >> $3;"
-    ],
-    "prefix": "2sin"
-  },
-  "../src/standard_in_out/3sin.cpp": {
-    "body": [
-      "${1:int} $2, $3, $4;",
-      "std::cin >> $2 >> $3 >> $4;"
-    ],
-    "prefix": "3sin"
-  },
-  "../src/standard_in_out/4sin.cpp": {
-    "body": [
-      "${1:int} $2, $3, $4, $5;",
-      "std::cin >> $2 >> $3 >> $4 >> $5;"
-    ],
-    "prefix": "4sin"
-  },
-  "../src/standard_in_out/5sin.cpp": {
-    "body": [
-      "${1:int} $2, $3, $4, $5, $6;",
-      "std::cin >> $2 >> $3 >> $4 >> $5 >> $6;"
-    ],
-    "prefix": "5sin"
-  },
-  "../src/standard_in_out/adjacency_input.cpp": {
-    "body": [
-      "int ${1:n}, ${2:m};",
-      "std::cin >> $1 >> $2;",
-      "constexpr ${3:long long} inf = 1LL << 60;",
-      "std::vector<std::vector<$3>> adj(n, std::vector<$3>(n, inf));",
-      "for (int i = 0; i < $1; i++) adj[i][i] = 0;",
-      "for (int i = 0; i < m; i++) {",
-      "  $3 d; int s, t;",
-      "  std::cin >> s >> t >> d;",
-      "  chmin(adj[s][t], d);",
-      "}"
-    ],
-    "prefix": "adjacency_input"
-  },
-  "../src/standard_in_out/edge_input.cpp": {
-    "body": [
-      "int ${1:n}, ${2:m};",
-      "std::cin >> $1 >> $2;",
-      "std::vector<tuple<${3:long long}, int, int>> edg;",
-      "for (int i = 0; i < $2; i++) {",
-      "  $3 d;",
-      "  int s, t;",
-      "  std::cin >> s >> t >> d;",
-      "  edg.emplace_back(d, ${4:--}s, $4t);",
-      "}"
-    ],
-    "prefix": "edge_input"
-  },
-  "../src/standard_in_out/err.cpp": {
-    "body": [
-      "auto err = [&] {",
-      "  std::cout << $0 << std::endl;",
-      "  exit(0);",
-      "};"
-    ],
-    "prefix": "err"
-  },
-  "../src/standard_in_out/graph_input.cpp": {
-    "body": [
-      "std::vector<std::vector<int>> grh(${1:n});",
-      "for (int i = 0; i < ${2:n - 1}; i++) {",
-      "  int s, t;",
-      "  std::cin >> s >> t;",
-      "  grh[${3:--}s].push_back($3t);",
-      "  grh[t].push_back(s);",
-      "}"
-    ],
-    "prefix": "graph_input"
-  },
-  "../src/standard_in_out/graph_pair_input.cpp": {
-    "body": [
-      "std::vector<std::vector<std::pair<${3:long long}, int>>> grh(${1:n});",
-      "for (int i = 0; i < ${2:m}; i++) {",
-      "  int s, t; $3 d;",
-      "  std::cin >> s >> t >> d;",
-      "  grh[${4:--}s].emplace_back(d, $4t);",
-      "  grh[t].emplace_back(d, s);",
-      "}"
-    ],
-    "prefix": "graph_pair_input"
-  },
-  "../src/standard_in_out/grid_input.cpp": {
-    "body": [
-      "int ${1:h}, ${2:w};",
-      "std::cin >> $1 >> $2;",
-      "std::vector<std::vector<int>> grd($1, std::vector<int>($2));",
-      "for (int i = 0; i < $1; i++) {",
-      "  for (int j = 0; j < $2; j++) {",
-      "    char c;",
-      "    std::cin >> c;",
-      "    grd[i][j] = c == '#';",
-      "  }",
-      "}"
-    ],
-    "prefix": "grid_input"
-  },
-  "../src/standard_in_out/optional_value.cpp": {
-    "body": [
-      "(${1:dst[i]} == ${2:inf} ? \"${3:INF}\" : to_string($1))"
-    ],
-    "prefix": "optional_value"
-  },
-  "../src/standard_in_out/sout.cpp": {
-    "body": [
-      "std::cout << $0 << std::endl;"
-    ],
-    "prefix": "sout"
-  },
-  "../src/standard_in_out/space_or_newline.cpp": {
-    "body": [
-      "(${1:i} == ${2:n - 1} ? \" \" : \"\\n\")"
-    ],
-    "prefix": "space_or_newline"
-  },
-  "../src/standard_in_out/ternary.cpp": {
-    "body": [
-      "($1 ? $2 : $3)"
-    ],
-    "prefix": "ternary"
-  },
-  "../src/standard_in_out/tin.cpp": {
-    "body": [
-      "${1:int} ${2:tmp};",
-      "std::cin >> $2;",
-      "$0;"
-    ],
-    "prefix": "tin"
-  },
-  "../src/utility/affine_group.cpp": {
+  "../src/lib/utility/affine_group.cpp": {
     "body": [
       "  auto apply = [&] (std::pair<int, int>p, int& ret) -> void {",
       "    int coeff, a; std::tie(coeff, a) = p;",
@@ -2883,7 +2267,7 @@
     ],
     "prefix": "affine_group"
   },
-  "../src/utility/at.cpp": {
+  "../src/lib/utility/at.cpp": {
     "body": [
       "  // Access the j-th bit.",
       "  auto at = [](unsigned x, size_t j) -> bool {",
@@ -2892,7 +2276,7 @@
     ],
     "prefix": "at"
   },
-  "../src/utility/cmn_cmx.cpp": {
+  "../src/lib/utility/cmn_cmx.cpp": {
     "body": [
       "template<typename T, typename U>",
       "inline auto cmn (T& a, U b) {if (a > b) {a = b; return true;} return false;}",
@@ -2901,7 +2285,7 @@
     ],
     "prefix": "cmn_cmx"
   },
-  "../src/utility/combinator.cpp": {
+  "../src/lib/utility/combinator.cpp": {
     "body": [
       "template<typename T>",
       "class fixed_point : T {",
@@ -2919,7 +2303,7 @@
     ],
     "prefix": "combinator"
   },
-  "../src/utility/convolution.cpp": {
+  "../src/lib/utility/convolution.cpp": {
     "body": [
       "template<typename T>",
       "class convolution {",
@@ -2964,14 +2348,14 @@
     ],
     "prefix": "convolution"
   },
-  "../src/utility/didj.cpp": {
+  "../src/lib/utility/didj.cpp": {
     "body": [
       "int d${1:i}[4] = {-1, +1, 0, 0};",
       "int d${2:j}[4] = {0, 0, -1, +1};"
     ],
     "prefix": "didj"
   },
-  "../src/utility/fix_define.cpp": {
+  "../src/lib/utility/fix_define.cpp": {
     "body": [
       "auto ${1:cal} = fix ([&](auto $1, $0) -> ${2:int} {",
       "  ",
@@ -2979,7 +2363,7 @@
     ],
     "prefix": "fix_define"
   },
-  "../src/utility/fix_do.cpp": {
+  "../src/lib/utility/fix_do.cpp": {
     "body": [
       "fix ([&](auto ${1:dfs}, $0) -> ${2:void} {",
       "  ",
@@ -2987,7 +2371,7 @@
     ],
     "prefix": "fix_do"
   },
-  "../src/utility/free_group.cpp": {
+  "../src/lib/utility/free_group.cpp": {
     "body": [
       "class free_group {",
       "  public:",
@@ -3015,7 +2399,7 @@
     ],
     "prefix": "free_group"
   },
-  "../src/utility/gauss_jordan_int.cpp": {
+  "../src/lib/utility/gauss_jordan_int.cpp": {
     "body": [
       "class gauss_jordan {",
       "  const int h, w;",
@@ -3072,7 +2456,7 @@
     ],
     "prefix": "gauss_jordan_int"
   },
-  "../src/utility/guess.cpp": {
+  "../src/lib/utility/guess.cpp": {
     "body": [
       "struct rational {int n, d;};",
       "auto to_string(rational r) -> std::string {",
@@ -3095,7 +2479,7 @@
     ],
     "prefix": "guess"
   },
-  "../src/utility/make_higher_vector.cpp": {
+  "../src/lib/utility/make_higher_vector.cpp": {
     "body": [
       "template <typename T>",
       "auto make_vector(size_t sz, T t) {",
@@ -3127,7 +2511,7 @@
     ],
     "prefix": "make_higher_vector"
   },
-  "../src/utility/remove_bit_insert_bit.cpp": {
+  "../src/lib/utility/remove_bit_insert_bit.cpp": {
     "body": [
       "int remove_bit(int x, int j) {",
       "  int low = x & ((1 << j) - 1);",
@@ -3140,7 +2524,7 @@
     ],
     "prefix": "remove_bit_insert_bit"
   },
-  "../src/utility/remove_insert_bit.cpp": {
+  "../src/lib/utility/remove_insert_bit.cpp": {
     "body": [
       "  // Remove the j-th bit of x, then shift the upper part to the right.",
       "  auto remove_bit = [](unsigned x, size_t j) -> unsigned {",
@@ -3153,7 +2537,7 @@
     ],
     "prefix": "remove_insert_bit"
   },
-  "../src/utility/square_matrix.cpp": {
+  "../src/lib/utility/square_matrix.cpp": {
     "body": [
       "constexpr size_t sz = 3;",
       "using vec = std::array<mint, sz>;",
@@ -3195,5 +2579,621 @@
       "};"
     ],
     "prefix": "square_matrix"
+  },
+  "../src/snippets/code_fragments/all.cpp": {
+    "body": [
+      "${1:name}.begin(), $1.end()"
+    ],
+    "prefix": "all"
+  },
+  "../src/snippets/code_fragments/for_const.cpp": {
+    "body": [
+      "for (auto const & ${1:e}: ${2:name}) {",
+      "  $0",
+      "}"
+    ],
+    "prefix": "for_const"
+  },
+  "../src/snippets/code_fragments/for_iterator.cpp": {
+    "body": [
+      "for (auto ${1:it} = ${2:name}.begin(); $1 != $2.end(); it++) {",
+      "  $0",
+      "}"
+    ],
+    "prefix": "for_iterator"
+  },
+  "../src/snippets/code_fragments/for_range.cpp": {
+    "body": [
+      "for (auto const& ${1:e} : ${2:name}) {",
+      "  $0",
+      "}"
+    ],
+    "prefix": "for_range"
+  },
+  "../src/snippets/code_fragments/for_reverse.cpp": {
+    "body": [
+      "for (int ${1:i} = ${2:n - 1}; $1 >= ${3:0}; $1--) {",
+      "  $0",
+      "}"
+    ],
+    "prefix": "for_reverse"
+  },
+  "../src/snippets/code_fragments/fors.cpp": {
+    "body": [
+      "for (${1:int} ${2:i} = ${3:0}; $2 < ${4:n}; $2++) {",
+      "  $0",
+      "}"
+    ],
+    "prefix": "fors"
+  },
+  "../src/snippets/code_fragments/inf.cpp": {
+    "body": [
+      "constexpr int inf = 1 << 30;"
+    ],
+    "prefix": "inf"
+  },
+  "../src/snippets/code_fragments/interval_dp.cpp": {
+    "body": [
+      "for (int d = 1; d <= ${1:n}; d++) {",
+      "  for (int l = 0, r = d; r <= $1; l++, r++) {",
+      "    $0",
+      "  }",
+      "}"
+    ],
+    "prefix": "interval_dp"
+  },
+  "../src/snippets/code_fragments/lambda.cpp": {
+    "body": [
+      "auto ${1:name} = [&] ($2) {",
+      "  $0",
+      "};"
+    ],
+    "prefix": "lambda"
+  },
+  "../src/snippets/code_fragments/long_inf.cpp": {
+    "body": [
+      "constexpr long long inf = 1LL << 60;"
+    ],
+    "prefix": "long_inf"
+  },
+  "../src/snippets/code_fragments/lower_bound.cpp": {
+    "body": [
+      "std::lower_bound(${1:name}.begin(), ${1:name}.end(), ${2:きじゅんち});"
+    ],
+    "prefix": "lower_bound"
+  },
+  "../src/snippets/code_fragments/output_stream.cpp": {
+    "body": [
+      "copy(${1:a}.begin(), $1.end(), ostream_iterator<${2:int}>(std::cout, \" \"));",
+      "$0"
+    ],
+    "prefix": "output_stream"
+  },
+  "../src/snippets/code_fragments/pair.cpp": {
+    "body": [
+      "std::pair<${1:int}, ${2:int}> ${3:name}(${4:0}, ${5:0})$0;"
+    ],
+    "prefix": "pair"
+  },
+  "../src/snippets/code_fragments/reverse.cpp": {
+    "body": [
+      "reverse(${1:name}.begin(), ${1:name}.end());"
+    ],
+    "prefix": "reverse"
+  },
+  "../src/snippets/code_fragments/reverse_priority_queue.cpp": {
+    "body": [
+      "priority_queue<",
+      "  ${1:std::pair<int, int>},",
+      "  std::vector<$1>,",
+      "  greater<$1>",
+      "> ${2:que};",
+      "$2.emplace($0);"
+    ],
+    "prefix": "reverse_priority_queue"
+  },
+  "../src/snippets/code_fragments/sort.cpp": {
+    "body": [
+      "sort(${1:name}.begin(), ${1:name}.end());"
+    ],
+    "prefix": "sort"
+  },
+  "../src/snippets/code_fragments/sort_reverse.cpp": {
+    "body": [
+      "sort(${1:name}.begin(), ${1:name}.end(), greater<${2:int}>());"
+    ],
+    "prefix": "sort_reverse"
+  },
+  "../src/snippets/code_fragments/stemp.cpp": {
+    "body": [
+      "#include <bits/stdc++.h>",
+      "int main() {",
+      "  std::cin.tie(0); std::cin.sync_with_stdio(false);",
+      "  $0",
+      "  return 0;",
+      "}"
+    ],
+    "prefix": "stemp"
+  },
+  "../src/snippets/code_fragments/upper_bound.cpp": {
+    "body": [
+      "std::upper_bound(${1:name}.begin(), ${1:おname.end(), ${2:きじゅんち});"
+    ],
+    "prefix": "upper_bound"
+  },
+  "../src/snippets/code_fragments/vec.cpp": {
+    "body": [
+      "std::vector<${1:int}> ${2:name}(${3:n});$0"
+    ],
+    "prefix": "vec"
+  },
+  "../src/snippets/code_fragments/vecpair.cpp": {
+    "body": [
+      "std::vector<std::pair<${1:int}, ${2:int}>> ${3:name}(${4:n}, {${5:0}, ${6:0}})$0;"
+    ],
+    "prefix": "vecpair"
+  },
+  "../src/snippets/code_fragments/vecvec.cpp": {
+    "body": [
+      "std::vector<std::vector<${1:int}>> ${2:grh}($0);"
+    ],
+    "prefix": "vecvec"
+  },
+  "../src/snippets/code_fragments/vecvecpair.cpp": {
+    "body": [
+      "std::vector<std::vector<std::pair<${1:int}, ${2:int}>>> ${3:name}(${4:h}, std::vector<std::pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;"
+    ],
+    "prefix": "vecvecpair"
+  },
+  "../src/snippets/debug/-pdbg.cpp": {
+    "body": [
+      "std::cout << \"(\" << ${1:name}${2:->}first << \", \" << $1$2second << \")\";"
+    ],
+    "prefix": "-pdbg"
+  },
+  "../src/snippets/debug/-ppdbg.cpp": {
+    "body": [
+      "std::cout << \"(\" << get<0>(${1:*it}) << \", \" << get<1>($1) << \", \" << get<2>($1) << \")\";"
+    ],
+    "prefix": "-ppdbg"
+  },
+  "../src/snippets/debug/-sdbg.cpp": {
+    "body": [
+      "std::cout << ${1:name};"
+    ],
+    "prefix": "-sdbg"
+  },
+  "../src/snippets/debug/1dbg.cpp": {
+    "body": [
+      "{ // debug",
+      "  std::cout << \"${1:a} = \" << $1 << std::endl;",
+      "} //"
+    ],
+    "prefix": "1dbg"
+  },
+  "../src/snippets/debug/1prompt.cpp": {
+    "body": [
+      "std::cout << \"${2:a} > \";",
+      "${1:int} $2;",
+      "std::cin >> $2;"
+    ],
+    "prefix": "1prompt"
+  },
+  "../src/snippets/debug/1vdebug.cpp": {
+    "body": [
+      "{ // debug",
+      "  int n = 0;",
+      "  if (n < (int)${1:name}.size()) n = $1.size();",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "} //"
+    ],
+    "prefix": "1vdebug"
+  },
+  "../src/snippets/debug/2dbg.cpp": {
+    "body": [
+      "{ // debug",
+      "  std::cout",
+      "    << \"${1:a} = \" << $1 << \", \"",
+      "    << \"${2:b} = \" << $2",
+      "    << std::endl;",
+      "} //"
+    ],
+    "prefix": "2dbg"
+  },
+  "../src/snippets/debug/2prpmpt.cpp": {
+    "body": [
+      "std::cout << \"${2:a}, ${3:b} > \";",
+      "${1:int} $2, $3;",
+      "std::cin >> $2 >> $3;"
+    ],
+    "prefix": "2prpmpt"
+  },
+  "../src/snippets/debug/2vdebug.cpp": {
+    "body": [
+      "{ // debug",
+      "  int n = 0;",
+      "  if (n < (int)${1:name}.size()) n = $1.size();",
+      "  if (n < (int)${2:name}.size()) n = $2.size();",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"$2\"; for (auto const& e : $2) std::cout << std::setw(4) << e; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "} //"
+    ],
+    "prefix": "2vdebug"
+  },
+  "../src/snippets/debug/3dbg.cpp": {
+    "body": [
+      "{ // debug",
+      "  std::cout",
+      "    << \"${1:a} = \" << $1 << \", \"",
+      "    << \"${2:b} = \" << $2 << \", \"",
+      "    << \"${3:c} = \" << $3",
+      "    << std::endl;",
+      "} //"
+    ],
+    "prefix": "3dbg"
+  },
+  "../src/snippets/debug/3prompt.cpp": {
+    "body": [
+      "std::cout << \"${2:a}, ${3:b}, ${4:c} > \";",
+      "${1:int} $2, $3, $4;",
+      "std::cin >> $2 >> $3 >> $4;"
+    ],
+    "prefix": "3prompt"
+  },
+  "../src/snippets/debug/3vdebug.cpp": {
+    "body": [
+      "{ // debug",
+      "  int n = 0;",
+      "  if (n < (int)${1:name}.size()) n = $1.size();",
+      "  if (n < (int)${2:name}.size()) n = $2.size();",
+      "  if (n < (int)${3:name}.size()) n = $3.size();",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"$2\"; for (auto const& e : $2) std::cout << std::setw(4) << e; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"$3\"; for (auto const& e : $3) std::cout << std::setw(4) << e; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "} //"
+    ],
+    "prefix": "3vdebug"
+  },
+  "../src/snippets/debug/4dbg.cpp": {
+    "body": [
+      "{ // debug",
+      "  std::cout",
+      "    << \"${1:a} = \" << $1 << \", \"",
+      "    << \"${2:b} = \" << $2 << \", \"",
+      "    << \"${3:c} = \" << $3 << \", \"",
+      "    << \"${4:d} = \" << $4",
+      "    << std::endl;",
+      "} //"
+    ],
+    "prefix": "4dbg"
+  },
+  "../src/snippets/debug/4vdebug.cpp": {
+    "body": [
+      "{ // debug",
+      "  int n = 0;",
+      "  if (n < (int)${1:name}.size()) n = $1.size();",
+      "  if (n < (int)${2:name}.size()) n = $2.size();",
+      "  if (n < (int)${3:name}.size()) n = $3.size();",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"$2\"; for (auto const& e : $2) std::cout << std::setw(4) << e; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"$3\"; for (auto const& e : $3) std::cout << std::setw(4) << e; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"$4\"; for (auto const& e : $4) std::cout << std::setw(4) << e; std::cout << std::endl;",
+      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
+      "} //"
+    ],
+    "prefix": "4vdebug"
+  },
+  "../src/snippets/debug/bug.cpp": {
+    "body": [
+      "/* ↓ 消し忘れないで！！！ ↓ */",
+      "$0",
+      "/* ↑ いや振りじゃないから ↑ */"
+    ],
+    "prefix": "bug"
+  },
+  "../src/snippets/debug/check.cpp": {
+    "body": [
+      "std::cout << \"/\" << ${1:crr} << std::endl;",
+      "std::cout << \"\\\\\\\\\" << ${1:crr} << std::endl;"
+    ],
+    "prefix": "check"
+  },
+  "../src/snippets/debug/interval_debug.cpp": {
+    "body": [
+      "{ // debug",
+      "  std::cout",
+      "    << \"[\" << $1 << \", \" << $2 << \")\" << std::endl;",
+      "} //"
+    ],
+    "prefix": "interval_debug"
+  },
+  "../src/snippets/debug/map_debug.cpp": {
+    "body": [
+      "{ // debug",
+      "  for (auto ${2:it} = ${1:mp}.begin(); $2 != $1.end(); $2++) {",
+      "    std::cout << \"mp[\";",
+      "    std::cout << $0$2->first;",
+      "    std::cout << \"] = \";",
+      "    std::cout << $2->second;",
+      "    std::cout << \"\" << (next($2) == $1.end() ? \"\\n\" : \", \");",
+      "  }",
+      "} //"
+    ],
+    "prefix": "map_debug"
+  },
+  "../src/snippets/debug/ndbg.cpp": {
+    "body": [
+      "std::cout << \"$0\" << std::endl;"
+    ],
+    "prefix": "ndbg"
+  },
+  "../src/snippets/debug/new_line.cpp": {
+    "body": [
+      "{ // debug",
+      "  std::cout << std::endl;",
+      "} //"
+    ],
+    "prefix": "new_line"
+  },
+  "../src/snippets/debug/pdbg.cpp": {
+    "body": [
+      "{ // debug",
+      "  std::cout << \"${1:name} = (\" << $1${2:.}first << \", \" <<\t$1$2second << \")\" << std::endl;",
+      "} //"
+    ],
+    "prefix": "pdbg"
+  },
+  "../src/snippets/debug/pretty_debug.cpp": {
+    "body": [
+      "#define LOCAL",
+      "using std::to_string;",
+      "auto to_string(std::string s) -> std::string {",
+      "  return '\"' + s + '\"';",
+      "}",
+      "auto to_string(char c) -> std::string {",
+      "  return \"'\" + std::string{c} + \"'\";",
+      "}",
+      "auto to_string(const char* s) -> std::string {",
+      "  return to_string((std::string) s);",
+      "}",
+      "auto to_string(bool b) -> std::string {",
+      "  return (b ? \"true\" : \"false\");",
+      "}",
+      "template <typename T, typename U>",
+      "auto to_string(std::pair<T, U> p) -> std::string {",
+      "  return \"(\" + to_string(p.first) + \", \" + to_string(p.second) + \")\";",
+      "}",
+      "template <size_t N>",
+      "auto to_string(std::bitset<N> bs) -> std::string {",
+      "  std::string res{};",
+      "  for (size_t i = 0; i < N; i++)",
+      "    res.insert(res.begin(), bs.test(i) ? '1' : '0');",
+      "  return res;",
+      "}",
+      "template <typename T>",
+      "auto to_string(T v) -> std::string {",
+      "  bool flg = false;",
+      "  std::string res = \"{\";",
+      "  for (auto const&x : v) {",
+      "    if (flg) res += \", \";",
+      "    else flg = true;",
+      "    res += to_string(x);",
+      "  }",
+      "  res += \"}\";",
+      "  return res;",
+      "}",
+      "void debug_out() { std::cerr << std::endl; }",
+      "template <typename Head, typename... Tail>",
+      "void debug_out(Head H, Tail... T) {",
+      "  std::cerr << \" \" << to_string(H);",
+      "  debug_out(T...);",
+      "}",
+      "#ifdef LOCAL",
+      "#define debug(...) std::cerr << \"[\" << #__VA_ARGS__ << \"]:\", debug_out(__VA_ARGS__)",
+      "#else",
+      "#define debug(...) 42",
+      "#endif"
+    ],
+    "prefix": "pretty_debug"
+  },
+  "../src/snippets/debug/vpdebug.cpp": {
+    "body": [
+      "{ // debug",
+      "  std::cout << \"${1:name}: \";",
+      "  for (auto ${2:it} = $1.begin(); $2 != $1.end(); $2++) {",
+      "    std::cout << \"(\";",
+      "    std::cout << $2->first;",
+      "    std::cout << \", \";",
+      "    std::cout << $2->second;",
+      "    std::cout << \")\" << (next($2) == $1.end() ? \"\\n\" : \", \");",
+      "  }",
+      "  std::cout << std::endl;",
+      "} //"
+    ],
+    "prefix": "vpdebug"
+  },
+  "../src/snippets/debug/vvdbg.cpp": {
+    "body": [
+      "{ // debug",
+      "  int h = ${1:name}.size(); int w = 0;",
+      "  int name_length = ${2:3}; int output_length = ${3:4};",
+      "  for (int i = 0; i < h; i++) if (w < (int)$1[i].size()) w = $1[i].size();",
+      "  std::cout << std::string(name_length, '-') << \"--\";",
+      "  for (int j = 0; j < w; j++) std::cout << std::setw(${3:output length}) << \"----\";",
+      "  std::cout << std::endl;",
+      "  std::cout << std::setw(name_length) << std::right << \"$1\" << \"| \";",
+      "  for (int j = 0; j < w; j++) std::cout << std::setw(output_length) << std::right <<  j;",
+      "  std::cout << std::endl;",
+      "  std::cout << std::string(name_length, '-') << \"+-\";",
+      "  for (int j = 0; j < w; j++) std::cout << std::string(output_length, '-');",
+      "  std::cout << std::endl;",
+      "  for (int i = 0; i < h; i++) {",
+      "    std::cout << std::setw(name_length) << std::right << i << \"| \";",
+      "    for (auto const& e : $1[i]) std::cout << std::setw(output_length) << std::right << (e == ${4:0} ? \"0\" : std::to_string(e));",
+      "    std::cout << std::endl;",
+      "  }",
+      "  std::cout << std::string(name_length, '-') << \"--\";",
+      "  for (int j = 0; j < w; j++) std::cout << std::string(output_length, '-');",
+      "  std::cout << std::endl;",
+      "} //"
+    ],
+    "prefix": "vvdbg"
+  },
+  "../src/snippets/standard_in_out/1sin.cpp": {
+    "body": [
+      "${1:int} $2; std::cin >> $2;"
+    ],
+    "prefix": "1sin"
+  },
+  "../src/snippets/standard_in_out/2sin.cpp": {
+    "body": [
+      "${1:int} $2, $3; std::cin >> $2 >> $3;"
+    ],
+    "prefix": "2sin"
+  },
+  "../src/snippets/standard_in_out/3sin.cpp": {
+    "body": [
+      "${1:int} $2, $3, $4;",
+      "std::cin >> $2 >> $3 >> $4;"
+    ],
+    "prefix": "3sin"
+  },
+  "../src/snippets/standard_in_out/4sin.cpp": {
+    "body": [
+      "${1:int} $2, $3, $4, $5;",
+      "std::cin >> $2 >> $3 >> $4 >> $5;"
+    ],
+    "prefix": "4sin"
+  },
+  "../src/snippets/standard_in_out/5sin.cpp": {
+    "body": [
+      "${1:int} $2, $3, $4, $5, $6;",
+      "std::cin >> $2 >> $3 >> $4 >> $5 >> $6;"
+    ],
+    "prefix": "5sin"
+  },
+  "../src/snippets/standard_in_out/adjacency_input.cpp": {
+    "body": [
+      "int ${1:n}, ${2:m};",
+      "std::cin >> $1 >> $2;",
+      "constexpr ${3:long long} inf = 1LL << 60;",
+      "std::vector<std::vector<$3>> adj(n, std::vector<$3>(n, inf));",
+      "for (int i = 0; i < $1; i++) adj[i][i] = 0;",
+      "for (int i = 0; i < m; i++) {",
+      "  $3 d; int s, t;",
+      "  std::cin >> s >> t >> d;",
+      "  chmin(adj[s][t], d);",
+      "}"
+    ],
+    "prefix": "adjacency_input"
+  },
+  "../src/snippets/standard_in_out/edge_input.cpp": {
+    "body": [
+      "int ${1:n}, ${2:m};",
+      "std::cin >> $1 >> $2;",
+      "std::vector<tuple<${3:long long}, int, int>> edg;",
+      "for (int i = 0; i < $2; i++) {",
+      "  $3 d;",
+      "  int s, t;",
+      "  std::cin >> s >> t >> d;",
+      "  edg.emplace_back(d, ${4:--}s, $4t);",
+      "}"
+    ],
+    "prefix": "edge_input"
+  },
+  "../src/snippets/standard_in_out/err.cpp": {
+    "body": [
+      "auto err = [&] {",
+      "  std::cout << $0 << std::endl;",
+      "  exit(0);",
+      "};"
+    ],
+    "prefix": "err"
+  },
+  "../src/snippets/standard_in_out/graph_input.cpp": {
+    "body": [
+      "std::vector<std::vector<int>> grh(${1:n});",
+      "for (int i = 0; i < ${2:n - 1}; i++) {",
+      "  int s, t;",
+      "  std::cin >> s >> t;",
+      "  grh[${3:--}s].push_back($3t);",
+      "  grh[t].push_back(s);",
+      "}"
+    ],
+    "prefix": "graph_input"
+  },
+  "../src/snippets/standard_in_out/graph_pair_input.cpp": {
+    "body": [
+      "std::vector<std::vector<std::pair<${3:long long}, int>>> grh(${1:n});",
+      "for (int i = 0; i < ${2:m}; i++) {",
+      "  int s, t; $3 d;",
+      "  std::cin >> s >> t >> d;",
+      "  grh[${4:--}s].emplace_back(d, $4t);",
+      "  grh[t].emplace_back(d, s);",
+      "}"
+    ],
+    "prefix": "graph_pair_input"
+  },
+  "../src/snippets/standard_in_out/grid_input.cpp": {
+    "body": [
+      "int ${1:h}, ${2:w};",
+      "std::cin >> $1 >> $2;",
+      "std::vector<std::vector<int>> grd($1, std::vector<int>($2));",
+      "for (int i = 0; i < $1; i++) {",
+      "  for (int j = 0; j < $2; j++) {",
+      "    char c;",
+      "    std::cin >> c;",
+      "    grd[i][j] = c == '#';",
+      "  }",
+      "}"
+    ],
+    "prefix": "grid_input"
+  },
+  "../src/snippets/standard_in_out/optional_value.cpp": {
+    "body": [
+      "(${1:dst[i]} == ${2:inf} ? \"${3:INF}\" : to_string($1))"
+    ],
+    "prefix": "optional_value"
+  },
+  "../src/snippets/standard_in_out/sout.cpp": {
+    "body": [
+      "std::cout << $0 << std::endl;"
+    ],
+    "prefix": "sout"
+  },
+  "../src/snippets/standard_in_out/space_or_newline.cpp": {
+    "body": [
+      "(${1:i} == ${2:n - 1} ? \" \" : \"\\n\")"
+    ],
+    "prefix": "space_or_newline"
+  },
+  "../src/snippets/standard_in_out/ternary.cpp": {
+    "body": [
+      "($1 ? $2 : $3)"
+    ],
+    "prefix": "ternary"
+  },
+  "../src/snippets/standard_in_out/tin.cpp": {
+    "body": [
+      "${1:int} ${2:tmp};",
+      "std::cin >> $2;",
+      "$0;"
+    ],
+    "prefix": "tin"
   }
 }
