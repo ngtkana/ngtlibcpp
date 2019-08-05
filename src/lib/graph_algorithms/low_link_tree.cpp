@@ -22,7 +22,7 @@ public:
   }
   void dfs (
     int crr
-  ,	int prt
+  ,  int prt
   ) {
     int cnt = 0;
     ord[crr] = low[crr] = tmr++;
