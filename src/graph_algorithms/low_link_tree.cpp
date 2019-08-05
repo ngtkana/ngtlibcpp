@@ -1,4 +1,4 @@
-﻿struct low_link_tree {
+struct low_link_tree {
   const int n;
   const int r = 0;
   int tmr = 0;

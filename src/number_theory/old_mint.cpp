@@ -1,4 +1,4 @@
-﻿namespace mint {
+namespace mint {
   int md;
   inline void add (int &a, int b) {
     assert(0 <= a && a < md && 0 <= b && b < md);

@@ -1,1 +1,1 @@
-﻿${1:name}.begin(), $1.end()
+${1:name}.begin(), $1.end()

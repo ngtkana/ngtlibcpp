@@ -1,1 +1,1 @@
-﻿reverse(${1:name}.begin(), ${1:name}.end());
+reverse(${1:name}.begin(), ${1:name}.end());

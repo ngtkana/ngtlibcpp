@@ -1,0 +1,8 @@
+[
+  {
+    "output_file": "../out.json",
+    "input_dirs": [
+      "../src"
+    ]
+  }
+]

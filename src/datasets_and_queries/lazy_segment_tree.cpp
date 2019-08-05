@@ -1,4 +1,4 @@
-﻿template<typename T, typename U>
+template<typename T, typename U>
 struct range_minimum_query {
 	const T id;
 	const std::function<T(T, T)> merge_function;

@@ -1,4 +1,4 @@
-﻿{ // debug
+{ // debug
   std::cout << "${1:name}: ";
   for (auto ${2:it} = $1.begin(); $2 != $1.end(); $2++) {
     std::cout << "(";

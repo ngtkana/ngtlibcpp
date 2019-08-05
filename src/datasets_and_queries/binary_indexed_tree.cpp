@@ -1,4 +1,4 @@
-﻿template <typename T>
+template <typename T>
 class binary_indexed_tree {
     size_t sz;
     std::vector<T> tr;

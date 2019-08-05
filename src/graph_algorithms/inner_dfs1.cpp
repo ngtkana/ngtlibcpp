@@ -1,4 +1,4 @@
-﻿  void dfs (
+  void dfs (
       int crr = 0,
       int prt = 0
     ) {

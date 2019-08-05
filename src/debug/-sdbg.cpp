@@ -1,1 +1,1 @@
-﻿std::cout << ${1:name};
+std::cout << ${1:name};

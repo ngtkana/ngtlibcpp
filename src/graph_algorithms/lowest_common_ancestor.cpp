@@ -1,4 +1,4 @@
-﻿// Class for calculating LCA.
+// Class for calculating LCA.
 // Dependent libraries: Combinator.
 template <typename T>
 class lowest_common_ancestor {

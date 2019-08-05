@@ -1,4 +1,4 @@
-﻿/* init crr, ret */
+/* init crr, ret */
 for (int l = 0, r = 0; l < n; l++) {
   if (r <= l) {
     r = l;

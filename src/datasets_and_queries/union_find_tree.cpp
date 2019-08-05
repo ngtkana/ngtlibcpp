@@ -1,4 +1,4 @@
-﻿class union_find_tree {
+class union_find_tree {
     int n;
     std::vector<int> prt;
 

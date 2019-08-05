@@ -1,4 +1,4 @@
-﻿template <size_t N>
+template <size_t N>
 class sieve_of_eratosthenes {
     std::bitset<N> is_prime_;
 

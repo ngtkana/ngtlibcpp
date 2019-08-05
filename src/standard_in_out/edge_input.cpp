@@ -1,4 +1,4 @@
-﻿int ${1:n}, ${2:m};
+int ${1:n}, ${2:m};
 std::cin >> $1 >> $2;
 std::vector<tuple<${3:long long}, int, int>> edg;
 for (int i = 0; i < $2; i++) {

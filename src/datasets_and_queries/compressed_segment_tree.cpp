@@ -1,4 +1,4 @@
-﻿template<typename T, typename U>
+template<typename T, typename U>
 class compressed_segment_tree {
 	const std::vector<T> a;
 	const size_t sz, Sz;

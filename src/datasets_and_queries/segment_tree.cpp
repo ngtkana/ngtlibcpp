@@ -1,4 +1,4 @@
-﻿template<typename T, typename F, std::enable_if_t<
+template<typename T, typename F, std::enable_if_t<
   std::is_same<std::result_of_t<F(T, T)>, T>::value,
   std::nullptr_t
 > = nullptr>

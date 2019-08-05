@@ -1,4 +1,4 @@
-﻿class factorize {
+class factorize {
   int x;
   map<int, int> mp;
   std::vector<int> pdv;

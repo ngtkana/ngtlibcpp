@@ -1,4 +1,4 @@
-﻿class potential_disjoint_set {
+class potential_disjoint_set {
   public:
   std::vector<int> rank, prt, ptl;
   potential_disjoint_set (int size) {

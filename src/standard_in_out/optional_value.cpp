@@ -1,1 +1,1 @@
-﻿(${1:dst[i]} == ${2:inf} ? "${3:INF}" : to_string($1))
+(${1:dst[i]} == ${2:inf} ? "${3:INF}" : to_string($1))

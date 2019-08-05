@@ -1,4 +1,4 @@
-﻿template <typename T>
+template <typename T>
 class sparse_table {
   const int n, ht;
   const std::vector<int> msb;

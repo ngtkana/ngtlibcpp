@@ -1,4 +1,4 @@
-﻿{ // debug
+{ // debug
   int h = ${1:name}.size(); int w = 0;
   int name_length = ${2:3}; int output_length = ${3:4};
   for (int i = 0; i < h; i++) if (w < (int)$1[i].size()) w = $1[i].size();

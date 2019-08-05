@@ -1,1 +1,1 @@
-﻿std::cout << "$0" << std::endl;
+std::cout << "$0" << std::endl;

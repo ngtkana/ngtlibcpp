@@ -1,4 +1,4 @@
-﻿{ // debug
+{ // debug
   int n = 0;
   if (n < (int)${1:name}.size()) n = $1.size();
   if (n < (int)${2:name}.size()) n = $2.size();
