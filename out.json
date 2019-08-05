@@ -1,13 +1,13 @@
 {
   "../src/code_fragments/all.cpp": {
     "body": [
-      "﻿${1:name}.begin(), $1.end()"
+      "${1:name}.begin(), $1.end()"
     ],
     "prefix": "all.cpp"
   },
   "../src/code_fragments/for_const.cpp": {
     "body": [
-      "﻿for (auto const & ${1:e}: ${2:name}) {",
+      "for (auto const & ${1:e}: ${2:name}) {",
       "  $0",
       "}"
     ],
@@ -15,7 +15,7 @@
   },
   "../src/code_fragments/for_iterator.cpp": {
     "body": [
-      "﻿for (auto ${1:it} = ${2:name}.begin(); $1 != $2.end(); it++) {",
+      "for (auto ${1:it} = ${2:name}.begin(); $1 != $2.end(); it++) {",
       "  $0",
       "}"
     ],
@@ -23,7 +23,7 @@
   },
   "../src/code_fragments/for_range.cpp": {
     "body": [
-      "﻿for (auto const& ${1:e} : ${2:name}) {",
+      "for (auto const& ${1:e} : ${2:name}) {",
       "  $0",
       "}"
     ],
@@ -31,7 +31,7 @@
   },
   "../src/code_fragments/for_reverse.cpp": {
     "body": [
-      "﻿for (int ${1:i} = ${2:n - 1}; $1 >= ${3:0}; $1--) {",
+      "for (int ${1:i} = ${2:n - 1}; $1 >= ${3:0}; $1--) {",
       "  $0",
       "}"
     ],
@@ -39,7 +39,7 @@
   },
   "../src/code_fragments/fors.cpp": {
     "body": [
-      "﻿for (${1:int} ${2:i} = ${3:0}; $2 < ${4:n}; $2++) {",
+      "for (${1:int} ${2:i} = ${3:0}; $2 < ${4:n}; $2++) {",
       "  $0",
       "}"
     ],
@@ -77,7 +77,7 @@
   },
   "../src/code_fragments/lower_bound.cpp": {
     "body": [
-      "﻿std::lower_bound(${1:name}.begin(), ${1:name}.end(), ${2:きじゅんち});"
+      "std::lower_bound(${1:name}.begin(), ${1:name}.end(), ${2:きじゅんち});"
     ],
     "prefix": "lower_bound.cpp"
   },
@@ -90,13 +90,13 @@
   },
   "../src/code_fragments/pair.cpp": {
     "body": [
-      "﻿std::pair<${1:int}, ${2:int}> ${3:name}(${4:0}, ${5:0})$0;"
+      "std::pair<${1:int}, ${2:int}> ${3:name}(${4:0}, ${5:0})$0;"
     ],
     "prefix": "pair.cpp"
   },
   "../src/code_fragments/reverse.cpp": {
     "body": [
-      "﻿reverse(${1:name}.begin(), ${1:name}.end());"
+      "reverse(${1:name}.begin(), ${1:name}.end());"
     ],
     "prefix": "reverse.cpp"
   },
@@ -113,19 +113,19 @@
   },
   "../src/code_fragments/sort.cpp": {
     "body": [
-      "﻿sort(${1:name}.begin(), ${1:name}.end());"
+      "sort(${1:name}.begin(), ${1:name}.end());"
     ],
     "prefix": "sort.cpp"
   },
   "../src/code_fragments/sort_reverse.cpp": {
     "body": [
-      "﻿sort(${1:name}.begin(), ${1:name}.end(), greater<${2:int}>());"
+      "sort(${1:name}.begin(), ${1:name}.end(), greater<${2:int}>());"
     ],
     "prefix": "sort_reverse.cpp"
   },
   "../src/code_fragments/stemp.cpp": {
     "body": [
-      "﻿#include <bits/stdc++.h>",
+      "#include <bits/stdc++.h>",
       "int main() {",
       "  std::cin.tie(0); std::cin.sync_with_stdio(false);",
       "  $0",
@@ -136,37 +136,37 @@
   },
   "../src/code_fragments/upper_bound.cpp": {
     "body": [
-      "﻿std::upper_bound(${1:name}.begin(), ${1:おname.end(), ${2:きじゅんち});"
+      "std::upper_bound(${1:name}.begin(), ${1:おname.end(), ${2:きじゅんち});"
     ],
     "prefix": "upper_bound.cpp"
   },
   "../src/code_fragments/vec.cpp": {
     "body": [
-      "﻿std::vector<${1:int}> ${2:name}(${3:n});$0"
+      "std::vector<${1:int}> ${2:name}(${3:n});$0"
     ],
     "prefix": "vec.cpp"
   },
   "../src/code_fragments/vecpair.cpp": {
     "body": [
-      "﻿std::vector<std::pair<${1:int}, ${2:int}>> ${3:name}(${4:n}, {${5:0}, ${6:0}})$0;"
+      "std::vector<std::pair<${1:int}, ${2:int}>> ${3:name}(${4:n}, {${5:0}, ${6:0}})$0;"
     ],
     "prefix": "vecpair.cpp"
   },
   "../src/code_fragments/vecvec.cpp": {
     "body": [
-      "﻿std::vector<std::vector<${1:int}>> ${2:grh}($0);"
+      "std::vector<std::vector<${1:int}>> ${2:grh}($0);"
     ],
     "prefix": "vecvec.cpp"
   },
   "../src/code_fragments/vecvecpair.cpp": {
     "body": [
-      "﻿std::vector<std::vector<std::pair<${1:int}, ${2:int}>>> ${3:name}(${4:h}, std::vector<std::pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;"
+      "std::vector<std::vector<std::pair<${1:int}, ${2:int}>>> ${3:name}(${4:h}, std::vector<std::pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;"
     ],
     "prefix": "vecvecpair.cpp"
   },
   "../src/datasets_and_queries/binary_indexed_tree.cpp": {
     "body": [
-      "﻿template <typename T>",
+      "template <typename T>",
       "class binary_indexed_tree {",
       "    size_t sz;",
       "    std::vector<T> tr;",
@@ -219,7 +219,7 @@
   },
   "../src/datasets_and_queries/compressed_segment_tree.cpp": {
     "body": [
-      "﻿template<typename T, typename U>",
+      "template<typename T, typename U>",
       "class compressed_segment_tree {",
       "\tconst std::vector<T> a;",
       "\tconst size_t sz, Sz;",
@@ -339,7 +339,7 @@
   },
   "../src/datasets_and_queries/lazy_segment_tree.cpp": {
     "body": [
-      "﻿template<typename T, typename U>",
+      "template<typename T, typename U>",
       "struct range_minimum_query {",
       "\tconst T id;",
       "\tconst std::function<T(T, T)> merge_function;",
@@ -580,7 +580,7 @@
   },
   "../src/datasets_and_queries/potential_disjoint_set.cpp": {
     "body": [
-      "﻿class potential_disjoint_set {",
+      "class potential_disjoint_set {",
       "  public:",
       "  std::vector<int> rank, prt, ptl;",
       "  potential_disjoint_set (int size) {",
@@ -635,7 +635,7 @@
   },
   "../src/datasets_and_queries/segment_tree.cpp": {
     "body": [
-      "﻿template<typename T, typename F, std::enable_if_t<",
+      "template<typename T, typename F, std::enable_if_t<",
       "  std::is_same<std::result_of_t<F(T, T)>, T>::value,",
       "  std::nullptr_t",
       "> = nullptr>",
@@ -707,7 +707,7 @@
   },
   "../src/datasets_and_queries/sparse_table.cpp": {
     "body": [
-      "﻿template <typename T>",
+      "template <typename T>",
       "class sparse_table {",
       "  const int n, ht;",
       "  const std::vector<int> msb;",
@@ -757,7 +757,7 @@
   },
   "../src/datasets_and_queries/union_find_tree.cpp": {
     "body": [
-      "﻿class union_find_tree {",
+      "class union_find_tree {",
       "    int n;",
       "    std::vector<int> prt;",
       "",
@@ -791,25 +791,25 @@
   },
   "../src/debug/-pdbg.cpp": {
     "body": [
-      "﻿std::cout << \"(\" << ${1:name}${2:->}first << \", \" << $1$2second << \")\";"
+      "std::cout << \"(\" << ${1:name}${2:->}first << \", \" << $1$2second << \")\";"
     ],
     "prefix": "-pdbg.cpp"
   },
   "../src/debug/-ppdbg.cpp": {
     "body": [
-      "﻿std::cout << \"(\" << get<0>(${1:*it}) << \", \" << get<1>($1) << \", \" << get<2>($1) << \")\";"
+      "std::cout << \"(\" << get<0>(${1:*it}) << \", \" << get<1>($1) << \", \" << get<2>($1) << \")\";"
     ],
     "prefix": "-ppdbg.cpp"
   },
   "../src/debug/-sdbg.cpp": {
     "body": [
-      "﻿std::cout << ${1:name};"
+      "std::cout << ${1:name};"
     ],
     "prefix": "-sdbg.cpp"
   },
   "../src/debug/1dbg.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  std::cout << \"${1:a} = \" << $1 << std::endl;",
       "} //"
     ],
@@ -817,7 +817,7 @@
   },
   "../src/debug/1prompt.cpp": {
     "body": [
-      "﻿std::cout << \"${2:a} > \";",
+      "std::cout << \"${2:a} > \";",
       "${1:int} $2;",
       "std::cin >> $2;"
     ],
@@ -825,7 +825,7 @@
   },
   "../src/debug/1vdebug.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  int n = 0;",
       "  if (n < (int)${1:name}.size()) n = $1.size();",
       "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
@@ -839,7 +839,7 @@
   },
   "../src/debug/2dbg.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  std::cout",
       "    << \"${1:a} = \" << $1 << \", \"",
       "    << \"${2:b} = \" << $2",
@@ -850,7 +850,7 @@
   },
   "../src/debug/2prpmpt.cpp": {
     "body": [
-      "﻿std::cout << \"${2:a}, ${3:b} > \";",
+      "std::cout << \"${2:a}, ${3:b} > \";",
       "${1:int} $2, $3;",
       "std::cin >> $2 >> $3;"
     ],
@@ -858,7 +858,7 @@
   },
   "../src/debug/2vdebug.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  int n = 0;",
       "  if (n < (int)${1:name}.size()) n = $1.size();",
       "  if (n < (int)${2:name}.size()) n = $2.size();",
@@ -874,7 +874,7 @@
   },
   "../src/debug/3dbg.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  std::cout",
       "    << \"${1:a} = \" << $1 << \", \"",
       "    << \"${2:b} = \" << $2 << \", \"",
@@ -886,7 +886,7 @@
   },
   "../src/debug/3prompt.cpp": {
     "body": [
-      "﻿std::cout << \"${2:a}, ${3:b}, ${4:c} > \";",
+      "std::cout << \"${2:a}, ${3:b}, ${4:c} > \";",
       "${1:int} $2, $3, $4;",
       "std::cin >> $2 >> $3 >> $4;"
     ],
@@ -894,7 +894,7 @@
   },
   "../src/debug/3vdebug.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  int n = 0;",
       "  if (n < (int)${1:name}.size()) n = $1.size();",
       "  if (n < (int)${2:name}.size()) n = $2.size();",
@@ -912,7 +912,7 @@
   },
   "../src/debug/4dbg.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  std::cout",
       "    << \"${1:a} = \" << $1 << \", \"",
       "    << \"${2:b} = \" << $2 << \", \"",
@@ -925,7 +925,7 @@
   },
   "../src/debug/4vdebug.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  int n = 0;",
       "  if (n < (int)${1:name}.size()) n = $1.size();",
       "  if (n < (int)${2:name}.size()) n = $2.size();",
@@ -944,7 +944,7 @@
   },
   "../src/debug/bug.cpp": {
     "body": [
-      "﻿/* ↓ 消し忘れないで！！！ ↓ */",
+      "/* ↓ 消し忘れないで！！！ ↓ */",
       "$0",
       "/* ↑ いや振りじゃないから ↑ */"
     ],
@@ -952,14 +952,14 @@
   },
   "../src/debug/check.cpp": {
     "body": [
-      "﻿std::cout << \"/\" << ${1:crr} << std::endl;",
+      "std::cout << \"/\" << ${1:crr} << std::endl;",
       "std::cout << \"\\\\\\\\\" << ${1:crr} << std::endl;"
     ],
     "prefix": "check.cpp"
   },
   "../src/debug/interval_debug.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  std::cout",
       "    << \"[\" << $1 << \", \" << $2 << \")\" << std::endl;",
       "} //"
@@ -968,7 +968,7 @@
   },
   "../src/debug/map_debug.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  for (auto ${2:it} = ${1:mp}.begin(); $2 != $1.end(); $2++) {",
       "    std::cout << \"mp[\";",
       "    std::cout << $0$2->first;",
@@ -982,13 +982,13 @@
   },
   "../src/debug/ndbg.cpp": {
     "body": [
-      "﻿std::cout << \"$0\" << std::endl;"
+      "std::cout << \"$0\" << std::endl;"
     ],
     "prefix": "ndbg.cpp"
   },
   "../src/debug/new_line.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  std::cout << std::endl;",
       "} //"
     ],
@@ -996,7 +996,7 @@
   },
   "../src/debug/pdbg.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  std::cout << \"${1:name} = (\" << $1${2:.}first << \", \" <<\t$1$2second << \")\" << std::endl;",
       "} //"
     ],
@@ -1057,7 +1057,7 @@
   },
   "../src/debug/vpdebug.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  std::cout << \"${1:name}: \";",
       "  for (auto ${2:it} = $1.begin(); $2 != $1.end(); $2++) {",
       "    std::cout << \"(\";",
@@ -1073,7 +1073,7 @@
   },
   "../src/debug/vvdbg.cpp": {
     "body": [
-      "﻿{ // debug",
+      "{ // debug",
       "  int h = ${1:name}.size(); int w = 0;",
       "  int name_length = ${2:3}; int output_length = ${3:4};",
       "  for (int i = 0; i < h; i++) if (w < (int)$1[i].size()) w = $1[i].size();",
@@ -1220,7 +1220,7 @@
   },
   "../src/graph_algorithms/dfs1.cpp": {
     "body": [
-      "﻿fix ([&](auto dfs, int crr, int p) -> void {",
+      "fix ([&](auto dfs, int crr, int p) -> void {",
       "  for (auto const& nxt : graph.at(crr)) {",
       "    if (nxt == p) continue;",
       "    dfs(nxt, crr);",
@@ -1231,7 +1231,7 @@
   },
   "../src/graph_algorithms/dfs2.cpp": {
     "body": [
-      "﻿fix ([&](auto dfs, int crr) -> void {",
+      "fix ([&](auto dfs, int crr) -> void {",
       "  ckd.at(crr) = true;",
       "  for (auto const& nxt : graph.at(crr)) {",
       "    if (ckd.at(nxt)) continue;",
@@ -1674,7 +1674,7 @@
   },
   "../src/graph_algorithms/inner_dfs1.cpp": {
     "body": [
-      "﻿  void dfs (",
+      "  void dfs (",
       "      int crr = 0,",
       "      int prt = 0",
       "    ) {",
@@ -1725,7 +1725,7 @@
   },
   "../src/graph_algorithms/low_link_tree.cpp": {
     "body": [
-      "﻿struct low_link_tree {",
+      "struct low_link_tree {",
       "  const int n;",
       "  const int r = 0;",
       "  int tmr = 0;",
@@ -1771,7 +1771,7 @@
   },
   "../src/graph_algorithms/lowest_common_ancestor.cpp": {
     "body": [
-      "﻿// Class for calculating LCA.",
+      "// Class for calculating LCA.",
       "// Dependent libraries: Combinator.",
       "template <typename T>",
       "class lowest_common_ancestor {",
@@ -2018,7 +2018,7 @@
   },
   "../src/intervals_and_strings/binary_serch.cpp": {
     "body": [
-      "﻿${1:int} ok = ${2:0}, ng = ${3:inf}, md;",
+      "${1:int} ok = ${2:0}, ng = ${3:inf}, md;",
       "while (abs(ok - ng) > 1) {",
       "  md = (ok + ng) >> 1;",
       "  if (${4:ck(md)}) ok = md;",
@@ -2029,7 +2029,7 @@
   },
   "../src/intervals_and_strings/lis.cpp": {
     "body": [
-      "﻿std::vector<${1:int}> lis;",
+      "std::vector<${1:int}> lis;",
       "for (auto crr : ${2:name}) {",
       "  auto lb = std::lower_bound(lis.begin(), lis.end(), crr);",
       "  if (lb == lis.end()) lis.push_back(crr);",
@@ -2078,7 +2078,7 @@
   },
   "../src/intervals_and_strings/sliding_window.cpp": {
     "body": [
-      "﻿/* init crr, ret */",
+      "/* init crr, ret */",
       "for (int l = 0, r = 0; l < n; l++) {",
       "  if (r <= l) {",
       "    r = l;",
@@ -2124,7 +2124,7 @@
   },
   "../src/number_theory/factorize.cpp": {
     "body": [
-      "﻿class factorize {",
+      "class factorize {",
       "  int x;",
       "  map<int, int> mp;",
       "  std::vector<int> pdv;",
@@ -2157,7 +2157,7 @@
   },
   "../src/number_theory/gcd.cpp": {
     "body": [
-      "﻿template<typename T>",
+      "template<typename T>",
       "T gcd (T a, T b) {",
       "  if (a < 0) a = -a;",
       "  if (b < 0) b = -b;",
@@ -2309,7 +2309,7 @@
   },
   "../src/number_theory/old_mint.cpp": {
     "body": [
-      "﻿namespace mint {",
+      "namespace mint {",
       "  int md;",
       "  inline void add (int &a, int b) {",
       "    assert(0 <= a && a < md && 0 <= b && b < md);",
@@ -2443,7 +2443,7 @@
   },
   "../src/number_theory/sieve_of_eratosthenes.cpp": {
     "body": [
-      "﻿template <size_t N>",
+      "template <size_t N>",
       "class sieve_of_eratosthenes {",
       "    std::bitset<N> is_prime_;",
       "",
@@ -2719,33 +2719,33 @@
   },
   "../src/standard_in_out/1sin.cpp": {
     "body": [
-      "﻿${1:int} $2; std::cin >> $2;"
+      "${1:int} $2; std::cin >> $2;"
     ],
     "prefix": "1sin.cpp"
   },
   "../src/standard_in_out/2sin.cpp": {
     "body": [
-      "﻿${1:int} $2, $3; std::cin >> $2 >> $3;"
+      "${1:int} $2, $3; std::cin >> $2 >> $3;"
     ],
     "prefix": "2sin.cpp"
   },
   "../src/standard_in_out/3sin.cpp": {
     "body": [
-      "﻿${1:int} $2, $3, $4;",
+      "${1:int} $2, $3, $4;",
       "std::cin >> $2 >> $3 >> $4;"
     ],
     "prefix": "3sin.cpp"
   },
   "../src/standard_in_out/4sin.cpp": {
     "body": [
-      "﻿${1:int} $2, $3, $4, $5;",
+      "${1:int} $2, $3, $4, $5;",
       "std::cin >> $2 >> $3 >> $4 >> $5;"
     ],
     "prefix": "4sin.cpp"
   },
   "../src/standard_in_out/5sin.cpp": {
     "body": [
-      "﻿${1:int} $2, $3, $4, $5, $6;",
+      "${1:int} $2, $3, $4, $5, $6;",
       "std::cin >> $2 >> $3 >> $4 >> $5 >> $6;"
     ],
     "prefix": "5sin.cpp"
@@ -2767,7 +2767,7 @@
   },
   "../src/standard_in_out/edge_input.cpp": {
     "body": [
-      "﻿int ${1:n}, ${2:m};",
+      "int ${1:n}, ${2:m};",
       "std::cin >> $1 >> $2;",
       "std::vector<tuple<${3:long long}, int, int>> edg;",
       "for (int i = 0; i < $2; i++) {",
@@ -2781,7 +2781,7 @@
   },
   "../src/standard_in_out/err.cpp": {
     "body": [
-      "﻿auto err = [&] {",
+      "auto err = [&] {",
       "  std::cout << $0 << std::endl;",
       "  exit(0);",
       "};"
@@ -2829,31 +2829,31 @@
   },
   "../src/standard_in_out/optional_value.cpp": {
     "body": [
-      "﻿(${1:dst[i]} == ${2:inf} ? \"${3:INF}\" : to_string($1))"
+      "(${1:dst[i]} == ${2:inf} ? \"${3:INF}\" : to_string($1))"
     ],
     "prefix": "optional_value.cpp"
   },
   "../src/standard_in_out/sout.cpp": {
     "body": [
-      "﻿std::cout << $0 << std::endl;"
+      "std::cout << $0 << std::endl;"
     ],
     "prefix": "sout.cpp"
   },
   "../src/standard_in_out/space_or_newline.cpp": {
     "body": [
-      "﻿(${1:i} == ${2:n - 1} ? \" \" : \"\\n\")"
+      "(${1:i} == ${2:n - 1} ? \" \" : \"\\n\")"
     ],
     "prefix": "space_or_newline.cpp"
   },
   "../src/standard_in_out/ternary.cpp": {
     "body": [
-      "﻿($1 ? $2 : $3)"
+      "($1 ? $2 : $3)"
     ],
     "prefix": "ternary.cpp"
   },
   "../src/standard_in_out/tin.cpp": {
     "body": [
-      "﻿${1:int} ${2:tmp};",
+      "${1:int} ${2:tmp};",
       "std::cin >> $2;",
       "$0;"
     ],
@@ -2894,7 +2894,7 @@
   },
   "../src/utility/cmn_cmx.cpp": {
     "body": [
-      "﻿template<typename T, typename U>",
+      "template<typename T, typename U>",
       "inline auto cmn (T& a, U b) {if (a > b) {a = b; return true;} return false;}",
       "template<typename T, typename U>",
       "inline auto cmx (T& a, U b) {if (a < b) {a = b; return true;} return false;}"
@@ -2966,7 +2966,7 @@
   },
   "../src/utility/didj.cpp": {
     "body": [
-      "﻿int d${1:i}[4] = {-1, +1, 0, 0};",
+      "int d${1:i}[4] = {-1, +1, 0, 0};",
       "int d${2:j}[4] = {0, 0, -1, +1};"
     ],
     "prefix": "didj.cpp"
