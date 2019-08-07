@@ -8,8 +8,8 @@ cd ${SCRIPT_DIR}
 mkdir -p build
 cd build
 cmake ..
-cmake --build .
-ctest
+make
+make test
 
 cd ${ORIG_WD}
 
