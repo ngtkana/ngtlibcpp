@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <disjoint_sets/union_find_tree.cpp>
+#include <disjoint_sets/union_find_tree.hpp>
 
 TEST_CASE("union find", "[union-find]") {
   auto uft = union_find_tree(3);
