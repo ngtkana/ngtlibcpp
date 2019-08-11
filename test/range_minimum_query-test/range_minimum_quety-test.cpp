@@ -5,14 +5,14 @@
 
 struct segment_tree_tag{};
 
-template <typename T>
-class range_minimum_query_engine{};
+template <typename DispatchTag>
+class range_minimum_query_engine_t{};
 
 template <>
-class range_minimum_query_engine<segment_tree_tag>
+class range_minimum_query_engine_t<segment_tree_tag>
 {
 public:
-  static auto new_(int n)
+  auto new_(int n) const
   {
     return make_segment_tree<int>
     (
@@ -23,17 +23,21 @@ public:
   }
 
   template <typename Storage>
-  static int query(Storage const& storage, int l, int r)
+  int query(Storage const& storage, int l, int r) const
   {
     return storage.query(l, r);
   }
 
   template <typename Storage>
-  static void update(Storage& storage, int i, int x)
+  void update(Storage& storage, int i, int x) const
   {
     storage.update(i, x);
   }
 };
+
+template <typename DispatchTag>
+constexpr auto range_minimum_query_engine
+  = range_minimum_query_engine_t<DispatchTag>{};
 
 
 TEMPLATE_TEST_CASE
@@ -43,13 +47,13 @@ TEMPLATE_TEST_CASE
   segment_tree_tag
 )
 {
-  using engine = range_minimum_query_engine<TestType>;
-  auto instance = engine::new_(3);
-  engine::update(instance, 0, 1);
-  engine::update(instance, 1, 2);
-  engine::update(instance, 2, 3);
-  REQUIRE(engine::query(instance, 0, 2) == 1);
-  REQUIRE(engine::query(instance, 1, 2) == 2);
+  constexpr auto engine = range_minimum_query_engine<TestType>;
+  auto instance = engine.new_(3);
+  engine.update(instance, 0, 1);
+  engine.update(instance, 1, 2);
+  engine.update(instance, 2, 3);
+  REQUIRE(engine.query(instance, 0, 2) == 1);
+  REQUIRE(engine.query(instance, 1, 2) == 2);
 }
 
 TEMPLATE_TEST_CASE
@@ -59,10 +63,10 @@ TEMPLATE_TEST_CASE
   segment_tree_tag
 )
 {
-  using engine = range_minimum_query_engine<TestType>;
-  auto instance = engine::new_(1);
-  REQUIRE(engine::query(instance, 0, 1) == std::numeric_limits<int>::max());
-  engine::update(instance, 0, 5);
-  REQUIRE(engine::query(instance, 0, 1) == 5);
+  constexpr auto engine = range_minimum_query_engine<TestType>;
+  auto instance = engine.new_(1);
+  REQUIRE(engine.query(instance, 0, 1) == std::numeric_limits<int>::max());
+  engine.update(instance, 0, 5);
+  REQUIRE(engine.query(instance, 0, 1) == 5);
 }
 
