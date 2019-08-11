@@ -32,7 +32,6 @@ public:
   group_type find    (int x)        const {return leader.at(x);}
 
   // Returns `true` if x and y are newly connected.
-  // The smaller one x becomes a child of the larger one y.
   bool unite   (int x, int y) {
     if ((x = find(x)) == (y = find(y))) return false;
     if (size(x) > size(y)) std::swap(x, y);
@@ -41,6 +40,7 @@ public:
       leader.at(child) = y;
       members.at(y).push_back(child);
     }
+    std::decay_t<decltype(members.at(x))>{}.swap(members.at(x));
     return true;
   }
 };
