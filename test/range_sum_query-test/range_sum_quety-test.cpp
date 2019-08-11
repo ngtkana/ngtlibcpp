@@ -6,67 +6,65 @@
 struct binary_indexed_tree_tag{};
 struct segment_tree_tag{};
 
-template <typename T>
-class range_sum_query_engine_t{};
-
-template <>
-class range_sum_query_engine_t<binary_indexed_tree_tag>
-{
-public:
-  auto new_(int n) const
-  {
-    return make_binary_indexed_tree<int>
-    (
-      n,
-      [](int x, int y){return x + y;},
-      [](int x, int y){return x - y;},
-      0
-    );
-  }
-
-  template <typename Storage>
-  int query(Storage const& storage, int l, int r) const
-  {
-    return storage.query(l, r);
-  }
-
-  template <typename Storage>
-  void update(Storage& storage, int i, int x) const
-  {
-    storage.update(i, x);
-  }
-};
-
-template <>
-class range_sum_query_engine_t<segment_tree_tag>
-{
-public:
-  auto new_(int n) const
-  {
-    return make_segment_tree<int>
-    (
-      n,
-      [](int x, int y){return x + y;},
-      0
-    );
-  }
-
-  template <typename Storage>
-  int query(Storage const& storage, int l, int r) const
-  {
-    return storage.query(l, r);
-  }
-
-  template <typename Storage>
-  void update(Storage& storage, int i, int x) const
-  {
-    storage.update(i, x);
-  }
-};
-
 template <typename DispatchTag>
-constexpr auto range_sum_query_engine
-  = range_sum_query_engine_t<DispatchTag>{};
+class range_sum_query_engine{};
+
+template <>
+class range_sum_query_engine<binary_indexed_tree_tag>
+{
+  using position_type       = int;
+  using size_type           = int;
+  using add_function_type   = std::plus<int>;
+  using sub_function_type   = std::minus<int>;
+  using storage_type        = binary_indexed_tree<
+                                int,
+                                add_function_type,
+                                sub_function_type
+                              >;
+  storage_type storage;
+
+public:
+  range_sum_query_engine(int n):
+    storage(
+      n,
+      add_function_type{},
+      sub_function_type{},
+      0
+    )
+    {}
+
+  int query(int l, int r) const {return storage.query(l, r);}
+
+  void update(int i, int x) {storage.update(i, x);}
+};
+
+template <>
+class range_sum_query_engine<segment_tree_tag>
+{
+  using position_type       = int;
+  using size_type           = int;
+  using add_function_type   = std::plus<int>;
+  using storage_type        = segment_tree<
+                                int,
+                                add_function_type
+                              >;
+  storage_type storage;
+  static constexpr auto id = 0;
+
+public:
+  range_sum_query_engine(int n):
+    storage(
+      n,
+      add_function_type{},
+      id
+    )
+    {}
+
+  int query(int l, int r) const {return storage.query(l, r);}
+
+  void update(int i, int x) {storage.update(i, x);}
+};
+
 
 TEMPLATE_TEST_CASE
 (
@@ -76,12 +74,11 @@ TEMPLATE_TEST_CASE
   binary_indexed_tree_tag
 )
 {
-  constexpr auto engine = range_sum_query_engine<TestType>;
-  auto instance = engine.new_(3);
-  engine.update(instance, 0, 1);
-  engine.update(instance, 1, 2);
-  engine.update(instance, 2, 3);
-  REQUIRE(engine.query(instance, 0, 2) == 3);
-  REQUIRE(engine.query(instance, 1, 2) == 2);
+  auto engine = range_sum_query_engine<TestType>(3);
+  engine.update(0, 1);
+  engine.update(1, 2);
+  engine.update(2, 3);
+  REQUIRE(engine.query(0, 2) == 3);
+  REQUIRE(engine.query(1, 2) == 2);
 }
 

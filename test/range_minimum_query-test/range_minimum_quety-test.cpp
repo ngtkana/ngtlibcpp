@@ -2,42 +2,39 @@
 #include <bits/stdc++.h>
 #include <range_queries/binary_indexed_tree.hpp>
 #include <range_queries/segment_tree.hpp>
+#include "../utility.hpp"
 
 struct segment_tree_tag{};
 
 template <typename DispatchTag>
-class range_minimum_query_engine_t{};
+class range_minimum_query_engine{};
 
 template <>
-class range_minimum_query_engine_t<segment_tree_tag>
+class range_minimum_query_engine<segment_tree_tag>
 {
+  using position_type       = int;
+  using size_type           = int;
+  using merge_function_type = minimum_function_t<int, int>;
+  using storage_type        = segment_tree<
+                                int,
+                                merge_function_type
+                              >;
+  storage_type storage;
+  static constexpr auto id = std::numeric_limits<int>::max();
+
 public:
-  auto new_(int n) const
-  {
-    return make_segment_tree<int>
-    (
+  range_minimum_query_engine(int n):
+    storage(
       n,
-      [](int x, int y){return std::min(x, y);},
-      std::numeric_limits<int>::max()
-    );
-  }
+      merge_function_type{},
+      id
+    )
+    {}
 
-  template <typename Storage>
-  int query(Storage const& storage, int l, int r) const
-  {
-    return storage.query(l, r);
-  }
+  int query(int l, int r) const {return storage.query(l, r);}
 
-  template <typename Storage>
-  void update(Storage& storage, int i, int x) const
-  {
-    storage.update(i, x);
-  }
+  void update(int i, int x) {storage.update(i, x);}
 };
-
-template <typename DispatchTag>
-constexpr auto range_minimum_query_engine
-  = range_minimum_query_engine_t<DispatchTag>{};
 
 
 TEMPLATE_TEST_CASE
@@ -47,13 +44,12 @@ TEMPLATE_TEST_CASE
   segment_tree_tag
 )
 {
-  constexpr auto engine = range_minimum_query_engine<TestType>;
-  auto instance = engine.new_(3);
-  engine.update(instance, 0, 1);
-  engine.update(instance, 1, 2);
-  engine.update(instance, 2, 3);
-  REQUIRE(engine.query(instance, 0, 2) == 1);
-  REQUIRE(engine.query(instance, 1, 2) == 2);
+  auto engine = range_minimum_query_engine<TestType>(3);
+  engine.update(0, 1);
+  engine.update(1, 2);
+  engine.update(2, 3);
+  REQUIRE(engine.query(0, 2) == 1);
+  REQUIRE(engine.query(1, 2) == 2);
 }
 
 TEMPLATE_TEST_CASE
@@ -63,10 +59,9 @@ TEMPLATE_TEST_CASE
   segment_tree_tag
 )
 {
-  constexpr auto engine = range_minimum_query_engine<TestType>;
-  auto instance = engine.new_(1);
-  REQUIRE(engine.query(instance, 0, 1) == std::numeric_limits<int>::max());
-  engine.update(instance, 0, 5);
-  REQUIRE(engine.query(instance, 0, 1) == 5);
+  auto engine = range_minimum_query_engine<TestType>(1);
+  REQUIRE(engine.query(0, 1) == std::numeric_limits<int>::max());
+  engine.update(0, 5);
+  REQUIRE(engine.query(0, 1) == 5);
 }
 
