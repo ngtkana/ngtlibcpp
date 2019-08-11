@@ -1,7 +1,7 @@
-class potential_disjoint_set {
+class weighted_union_find_tree {
   public:
   std::vector<int> rank, prt, ptl;
-  potential_disjoint_set (int size) {
+  weighted_union_find_tree (int size) {
     rank.resize(size);
     prt.resize(size);
     ptl.resize(size);
