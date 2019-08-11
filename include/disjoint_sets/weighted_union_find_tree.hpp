@@ -1,50 +1,50 @@
-class weighted_union_find_tree {
-  public:
-  std::vector<int> rank, prt, ptl;
-  weighted_union_find_tree (int size) {
-    rank.resize(size);
-    prt.resize(size);
-    ptl.resize(size);
-    for (int i = 0; i < size; i++) {
-      prt[i] = i;
-      rank[i] = 0;
-      ptl[i] = 0;
+template <typename T>
+class weighted_union_find_tree
+{
+  int n;
+  std::vector<int> prt;
+  std::vector<T>   wt;
+
+public:
+  weighted_union_find_tree(int n) : n(n), prt(n, -1), wt(n, 0){}
+
+  inline bool is_root (int x)        const {return prt.at(x) < 0;}
+
+  inline int  size    (int x)        {return -prt.at(find(x));}
+
+  inline bool is_equiv(int x, int y) {return find(x) == find(y);}
+
+  inline T    weight  (int x)        {return wt.at(find(x));}
+
+  inline T    diff    (int x, int y) {return weight(x) == weight(y);}
+
+  // Path compression.
+  // Cannot be inline.
+  int  find    (int x)
+  {
+    if (is_root(x)) return x;
+    else
+    {
+      auto root = find(prt.at(x));
+      wt.at(x) += wt.at(prt.at(x));
+      return prt.at(x) = root;
     }
   }
-  int find (int x) {
-    if (x == prt[x]){
-      return x;
-    } else {
-      int r = find(prt[x]);
-      ptl[x] += ptl[prt[x]];
-      return prt[x] = r;
-    }
-  }
-  bool is_equiv (int x, int y) {
-    return find(x) == find(y);
-  }
-  bool unite (int x, int y, int w) {
-    if (find(x) == find(y)) {
-      return false;
-    }
-    w += ptl[x];
-    w -= ptl[y];
-    x = find(x);
-    y = find(y);
-    if (rank[x] < rank[y]) {
+
+  // Returns `true` if x and y are newly connected.
+  // The smaller one x becomes a child of the larger one y.
+  inline bool unite   (int x, int y, T d)
+  {
+    d -= wt.at(x);
+    d += wt.at(y);
+    if ((x = find(x)) == (y = find(y))) return false;
+    if (size(x) > size(y))
+    {
       std::swap(x, y);
-      w *= -1;
+      d = -d;
     }
-    prt[y] = x;
-    ptl[y] = w;
-    if (rank[x] == rank[y]) {
-      rank[x]++;
-    }
+    prt.at(y) += prt.at(x);
+    prt.at(x) = y;
     return true;
-  }
-  int diff (int x, int y) {
-    find(x);
-    find(y);
-    return ptl[y] - ptl[x];
   }
 };
