@@ -28,28 +28,28 @@ public:
   right(0)
   {}
 
-  inline auto get_left_index() const -> position_type
+  auto get_left_index() const -> position_type
   {
     return left;
   }
 
-  inline auto get_right_index() const -> position_type
+  auto get_right_index() const -> position_type
   {
     return right;
   }
 
-  inline auto query_index() const -> position_type
+  auto query_index() const -> position_type
   {
     assert(!que.empty());
     return que.front();
   }
 
-  inline auto query() const -> value_type
+  auto query() const -> value_type
   {
     return v.at(query_index());
   }
 
-  inline void pop_left()
+  void pop_left()
   {
     if (que.front() == left++) {
       que.pop_front();
@@ -57,7 +57,7 @@ public:
     assert(left <= right);
   }
 
-  inline void push_right()
+  void push_right()
   {
     while (!que.empty() && !cmp(v.at(que.back()), v.at(right))) {
       que.pop_back();
@@ -66,25 +66,25 @@ public:
     assert(right <= n);
   }
 
-  inline void slide()
+  void slide()
   {
     pop_left();
     push_right();
   }
 
-  inline void pop_left_until(int target)
+  void pop_left_until(int target)
   {
     assert(target <= right);
     while (left < target) pop_left();
   }
 
-  inline void push_right_until(int target)
+  void push_right_until(int target)
   {
     assert(target <= n);
     while (right < target) push_right();
   }
 
-  inline void advance_until(int l, int r)
+  void advance_until(int l, int r)
   {
     push_right_until(r);
     pop_left_until(l);

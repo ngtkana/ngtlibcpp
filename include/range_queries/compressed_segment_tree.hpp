@@ -5,7 +5,7 @@ class compressed_segment_tree {
   std::vector<U> seg;
   const std::function<U(U, U)> o;
   const U id;
-  inline auto find (T k) const {
+  auto find (T k) const {
     auto it = std::lower_bound(a.begin(), a.end(), k);
     assert(it != a.end() && *it == k);
     return it - a.begin() + sz;

@@ -17,7 +17,7 @@ class gauss_jordan {
       }
     }
   }
-  inline int transform (int y) const {
+  int transform (int y) const {
     int z = 0;
     for (int i = 0; i < h; i++) {
       if (y >> i & 1) z |= p[i];
@@ -40,10 +40,10 @@ class gauss_jordan {
       {
         init();
       }
-    inline int rank () const {return rk;}
-    inline int kernel () const {return w - rk;}
-    inline int image () const {return h - rk;}
-    inline bool solvable (int y) const {
+    int rank () const {return rk;}
+    int kernel () const {return w - rk;}
+    int image () const {return h - rk;}
+    bool solvable (int y) const {
       assert (!(y >> h));
       int acm = accumulate(a.begin(), a.end(), 0, [](int x, int y){return x | y;});
       int z = transform(y);

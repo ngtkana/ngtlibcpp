@@ -23,17 +23,17 @@ public:
     }
   }
 
-  inline bool       is_root (int x)        const {return find(x) == x;}
+  bool       is_root (int x)        const {return find(x) == x;}
 
-  inline size_type  size    (int x)        const {return members.at(x).size();}
+  size_type  size    (int x)        const {return members.at(x).size();}
 
-  inline bool       is_equiv(int x, int y) const {return find(x) == find(y);}
+  bool       is_equiv(int x, int y) const {return find(x) == find(y);}
 
-  inline group_type find    (int x)        const {return leader.at(x);}
+  group_type find    (int x)        const {return leader.at(x);}
 
   // Returns `true` if x and y are newly connected.
   // The smaller one x becomes a child of the larger one y.
-  inline bool unite   (int x, int y) {
+  bool unite   (int x, int y) {
     if ((x = find(x)) == (y = find(y))) return false;
     if (size(x) > size(y)) std::swap(x, y);
     for (auto child : members.at(x))

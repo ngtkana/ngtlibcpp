@@ -1,4 +1,4 @@
-inline auto make_failure_table (std::string w) -> std::vector<int> {
+auto make_failure_table (std::string w) -> std::vector<int> {
   int n = w.length();
   std::vector<int> ret(n + 1, -1);
   int len = 0, pos = 1;
@@ -51,7 +51,7 @@ class kmp_search_engine {
 };
 
 // Returns the beginning positions of all the occurence of w in s.
-inline auto kmp_search(std::string w, std::string s) {
+auto kmp_search(std::string w, std::string s) {
   auto kmp = kmp_search_engine(std::move(w));
   return kmp.search(std::move(s));
 }

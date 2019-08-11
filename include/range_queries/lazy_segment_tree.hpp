@@ -153,11 +153,11 @@ class lazy_segment_tree {
       {
       }
     
-    inline int lft (int i) {return i << 1;}
-    inline int rgt (int i) {return (i << 1) + 1;}
-    inline int upp (int i) {return i >> 1;}
+    int lft (int i) {return i << 1;}
+    int rgt (int i) {return (i << 1) + 1;}
+    int upp (int i) {return i >> 1;}
 
-    inline void propagate (
+    void propagate (
         int k,
         int L,
         int R
