@@ -1,4 +1,4 @@
-template <typename T, class Compare = less<T>>
+template <typename T, typename Compare = std::less<T>>
 class slide_minimum {
   public:
   const std::vector<T> a;
