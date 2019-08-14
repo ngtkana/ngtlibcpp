@@ -30,39 +30,33 @@ public:
 template <>
 class sliding_minimum_query_engine<segment_tree_tag>
 {
-  using position_type       = int;
-  using size_type           = int;
-  using merge_function_type = minimum_function_t<int, int>;
-  using segment_tree_type   = segment_tree<int, merge_function_type>;
+  int                         left, right;
+  segment_tree<int, min_fn_t> min_tree;
 
-  merge_function_type merge_function{};
+public:
+  sliding_minimum_query_engine(int n):
+    left    (0),
+    right   (0),
+    min_tree(n, min_fn, inf)
+    {}
 
-  static constexpr auto id
-    = std::numeric_limits<int>::max();
+  int  query (int l, int r) const {return min_tree.query(l, r);}
 
-  position_type     left, right;
-  size_type         n;
-  segment_tree_type storage;
+  void update(int i, int x)       {min_tree.update(i, x);}
+
 
 public:
   sliding_minimum_query_engine (const std::vector<int>& v):
     left (0),
     right(0),
-    n    (v.size()),
-    storage
-    (
-      n,
-      merge_function,
-      id,
-      std::move(v)
-    )
+    min_tree(v.size(), min_fn, inf, std::move(v))
     {}
 
-  auto query() const {return storage.query(left, right);}
+  auto query() const {return min_tree.query(left, right);}
 
-  void pop_left()  {assert(left++ <= right);}
+  void pop_left()   {left++;}
 
-  void push_right() {assert(right++ <= n);}
+  void push_right() {right++;}
 };
 
 

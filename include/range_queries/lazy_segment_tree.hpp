@@ -1,236 +1,187 @@
-template<typename T, typename U>
-struct range_minimum_query {
-  const T id;
-  const std::function<T(T, T)> merge_function;
-  const std::function<void(U&)> twice;
-  const std::function<U(U)> half;
-  range_minimum_query(T id):
-    id(id),
-    merge_function ([](T a, T b) {return min(a, b);}),
-    twice ([](U& a) {}),
-    half ([](U a) {return a;})
-    {
-    }
-};
-template<typename T, typename U>
-struct range_maximum_query {
-  const T id;
-  const std::function<T(T, T)> merge_function;
-  const std::function<void(U&)> twice;
-  const std::function<U(U)> half;
-  range_maximum_query(T id):
-    id(id),
-    merge_function ([](T a, T b) {return max(a, b);}),
-    twice ([](U& a) {}),
-    half ([](U a) {return a;})
-    {
-    }
-};
-template<typename T, typename U>
-struct range_sum_query {
-  const T id;
-  const std::function<T(T, T)> merge_function;
-  const std::function<void(U&)> twice;
-  const std::function<U(U)> half;
-  range_sum_query(T id = 0):
-    id(id),
-    merge_function ([](T a, T b) {return a + b;}),
-    twice ([](U& a) {a *= 2;}),
-    half ([](U a) {return a / 2;})
-    {
-    }
-};
-template<typename T, typename U>
-struct range_update_query {
-    const U id;
-    const std::function<void(T&, U)> action;
-    const std::function<void(U&, U)> composition;
+template<
+  typename Value1,    typename Value2,
+  typename BinaryOp1, typename BinaryOp2, typename BinaryOp3,
+  typename UnaryOp1,  typename UnaryOp2
+  >
+class lazy_segment_tree
+{
   public:
-    range_update_query(U id = 0):
-      id(id),
-      action ([](T& a, U b) {a = b;}),
-      composition ([](U& a, U b) {a = b;})
-      {
-      }
-};
-template<typename T, typename U>
-struct range_add_query {
-    const U id;
-    const std::function<void(T&, U)> action;
-    const std::function<void(U&, U)> composition;
-  public:
-    range_add_query(U id = 0):
-      id(id),
-      action ([](T& a, U b) {a += b;}),
-      composition ([](U& a, U b) {a += b;})
-      {
-      }
-};
-template<typename T, typename U>
-class lazy_segment_tree {
-  int sz;
-  int Sz;
-  int ht;
-  std::vector<T> seg;
-  std::vector<U> act;
-  std::vector<bool> has_act;
-  const std::function<T(T, T)> o;
-  const std::function<void(T&, U)> oo;
-  const std::function<void(U&, U)> ooo;
-  const std::function<void(U&)> twice;
-  const std::function<U(U)> half;
-  const T tid;
-  const U uid;
-  
-  public:
-    lazy_segment_tree(
-        int n,
-        const std::function<T(T, T)> merge_function,
-        const std::function<void(T&, U)> action,
-        const std::function<void(U&, U)> composition,
-        const std::function<void(U&)> twice,
-        const std::function<U(U)> half,
-        const T seg_id,
-        const U act_id
-      )
-        : o(merge_function)
-        , oo(action)
-        , ooo(composition)
-        , twice(twice)
-        , half(half)
-        , tid(seg_id)
-        , uid(act_id)
-      {
-        ht = 1, sz = 1;
-        while(sz < n) ht++, sz <<= 1;
-        Sz = sz << 1;
-        seg.assign(Sz, tid);
-        act.resize(Sz, act_id);
-        has_act.assign(Sz, false);
-      }
-    
-    lazy_segment_tree(
-        const std::vector<T>& data,
-        const std::function<T(T, T)> merge_function,
-        const std::function<void(T&, U)> action,
-        const std::function<void(U&, U)> composition,
-        const std::function<void(U&)> twice,
-        const std::function<U(U)> half,
-        const T seg_id,
-        const U act_id
-      )
-        : lazy_segment_tree(
-            data.size(),
-            merge_function,
-            action,
-            composition,
-            twice,
-            half,
-            seg_id,
-            act_id
-          )
-      {
-        copy(data.begin(), data.end(), seg.begin() + sz);
-        for (int i = sz - 1; i >= 1; i--) seg[i] = o(seg[i << 1], seg[(i << 1) + 1]);
-      }
-    
-    template<typename V, typename M, typename A>
-    lazy_segment_tree(
-        const V n_or_v,
-        const M& merge_instance,
-        const A& action_instance
-      )
-        : lazy_segment_tree(
-          n_or_v,
-          merge_instance.merge_function,
-          action_instance.action,
-          action_instance.composition,
-          merge_instance.twice,
-          merge_instance.half,
-          merge_instance.id,
-          action_instance.id
-        )
-      {
-      }
-    
-    int lft (int i) {return i << 1;}
-    int rgt (int i) {return (i << 1) + 1;}
-    int upp (int i) {return i >> 1;}
+    using size_type = int;
 
-    void propagate (
-        int k,
-        int L,
-        int R
-      )
+  private:
+    struct node
+    {
+      size_type id, l, r;
+      node (size_type id, size_type l, size_type r):
+        id(id), l(l), r(r)
+        {};
+
+      auto size () const {return r - l;}
+
+      auto left_child  () const
       {
-        if (has_act[k]) {
-          oo(seg[k], act[k]);
-          if (k < sz) {
-            ooo(act[lft(k)], half(act[k]));
-            ooo(act[rgt(k)], half(act[k]));
-            has_act[lft(k)] = has_act[rgt(k)] = true;
-          }
-          act[k] = uid, has_act[k] = false;
-        }
+        assert(size() > 1);
+        return node(id * 2, l, (l + r) / 2);
       }
 
-    void update (
-        int l,
-        int r,
-        T x,
-        int k = 1,
-        int L = 0,
-        int R = -1
-      )
+      auto right_child () const
       {
-        if (R == -1) R = sz;
-        if (k == 1) for (int i = 0; i < ht - 1; i++) twice(x);
-        propagate(k, L, R);
-        if (R <= l || r <= L) return;
-        if (l <= L && R <= r) {
-          ooo(act[k], x), has_act[k] = true;
-          propagate(k, L, R);
-        } else {
-          int C = (L + R) >> 1;
-          update(l, r, half(x), lft(k), L, C);
-          update(l, r, half(x), rgt(k), C, R);
-          seg[k] = o(seg[lft(k)], seg[rgt(k)]);
-        }
+        assert(size() > 1);
+        return node(id * 2 + 1, (l + r) / 2, r);
       }
-    
-    T query (
-        int l,
-        int r,
-        int k = 1,
-        int L = 0,
-        int R = -1
-      )
-      {
-        if (R == -1) R = sz;
-        propagate(k, L, R);
-        if (R <= l || r <= L) return tid;
-        if (l <= L && R <= r) {
-          propagate(k, L, R);
-          return seg[k];
-        } else {
-          int C = (L + R) >> 1;
-          T lv = query(l, r, lft(k), L, C);
-          T rv = query(l, r, rgt(k), C, R);
-          seg[k] = o(seg[lft(k)], seg[rgt(k)]);
-          return o(lv, rv);
-        }
-      }
+    };
 
-    void print(int w = 4) {
-      for (int i(1), last(2), output_size(w << ht); last <= Sz; last <<= 1, output_size >>= 1) {
-        for (; i < last; i++) {
-          std::cout << std::right << std::setw(w);
-          std::cout << (seg[i] != tid ? to_string(seg[i]) : "");
-          std::cout << std::setw(2) <<  "<";
-          std::cout << left << std::setw(output_size - w - 2);
-          std::cout << (has_act[i] ? to_string(act[i]) : "");
-        }
-        std::cout << std::endl;
+    size_type           n, N;
+    BinaryOp1           op1;
+    BinaryOp2           op2;
+    BinaryOp3           op3;
+    Value1              id1;
+    Value2              id2;
+    UnaryOp1            expand;
+    UnaryOp2            shrink;
+    std::vector<Value1> table;
+    std::vector<Value2> lazy;
+    node                initial_node;
+
+    auto& op1_eq (Value1& x, Value1 y) {return x = op1(x, y);}
+    auto& op2_eq (Value1& x, Value2 y) {return x = op2(x, y);}
+    auto& op3_eq (Value2& x, Value2 y) {return x = op3(x, y);}
+
+    void cal (size_type u)
+    {
+      table.at(u) = op1(table.at(2 * u), table.at(2 * u + 1));
+    }
+
+    auto prop (size_type u)
+    {
+      op2_eq(table.at(u), lazy.at(u));
+      if (u < n)
+      {
+        op3_eq(lazy.at(2 * u),     shrink(lazy.at(u)));
+        op3_eq(lazy.at(2 * u + 1), shrink(lazy.at(u)));
+      }
+      lazy.at(u)     = id2;
+      return table.at(u);
+    }
+
+    auto query_base (size_type l, size_type r, Value2 val, const node& now)
+    {
+      prop(now.id);
+      if (now.r <= l || r <= now.l) return id1;
+      else if (l <= now.l && now.r <= r)
+      {
+        op3_eq(lazy.at(now.id), val);
+        return prop(now.id);
+      }
+      else
+      {
+        auto ret =op1(
+          query_base(l, r, shrink(val), now.left_child()),
+          query_base(l, r, shrink(val), now.right_child())
+        );
+        cal(now.id);
+        return ret;
       }
     }
+
+  public:
+    lazy_segment_tree
+    (
+      size_type size,
+      BinaryOp1  op1,
+      BinaryOp2  op2,
+      BinaryOp3  op3,
+      Value1     id1,
+      Value2     id2,
+      UnaryOp1   expand,
+      UnaryOp2   shrink
+    ):
+      n (std::pow(2, int(std::log2(size)) + 1)), N(n * 2),
+      op1(std::move(op1)), op2(std::move(op2)), op3(std::move(op3)),
+      id1(id1), id2(id2),
+      expand(std::move(expand)), shrink(std::move(shrink)),
+      table(N, id1), lazy(N, id2),
+      initial_node(1, 0, n)
+      {
+        assert(op1 (id1, id1) == id1);
+        assert(op2 (id1, id2) == id1);
+        assert(op3 (id2, id2) == id2);
+        assert(shrink(expand(id2)) == id2);
+      }
+
+    void build (const std::vector<Value1>& v)
+    {
+      assert(int(v.size()) <= n);
+      std::move(v.begin(), v.end(), table.begin() + n);
+      for (int i = n - 1; i >= 0; i--) cal(i);
+    }
+
+    auto at (size_type i) const -> Value1
+    {
+      return table.at(n + i);
+    }
+
+    void act (size_type l, size_type r, Value2 val)
+    {
+      for (int i = 1; i < n; i *= 2) {
+        val = expand(val);
+      }
+      query_base(l, r, val, initial_node);
+    }
+
+    auto query (size_type l, size_type r)
+    {
+      return query_base(l, r, id2, initial_node);
+    }
 };
+
+template<
+  typename Value1,    typename Value2,
+  typename BinaryOp1, typename BinaryOp2, typename BinaryOp3,
+  typename UnaryOp1,  typename UnaryOp2
+  >
+auto make_lazy_segment_tree
+(
+  int        size,
+  BinaryOp1  op1,
+  BinaryOp2  op2,
+  BinaryOp3  op3,
+  Value1     id1,
+  Value2     id2,
+  UnaryOp1   expand,
+  UnaryOp2   shrink
+)
+{
+  return lazy_segment_tree<
+    Value1,    Value2,
+    BinaryOp1, BinaryOp2, BinaryOp3,
+    UnaryOp1,  UnaryOp2
+    >
+    (
+      size, std::move(op1), std::move(op2), std::move(op3),
+      id1, id2, std::move(expand), std::move(shrink)
+    );
+}
+
+
+template<
+  typename Value1,    typename Value2,
+  typename BinaryOp1, typename BinaryOp2, typename BinaryOp3
+  >
+auto make_lazy_segment_tree
+(
+  int        size,
+  BinaryOp1  op1,
+  BinaryOp2  op2,
+  BinaryOp3  op3,
+  Value1     id1,
+  Value2     id2
+)
+{
+  auto f = [](auto x){return x;};
+  return make_lazy_segment_tree
+    (
+      size, std::move(op1), std::move(op2), std::move(op3),
+      id1, id2, std::move(f), std::move(f)
+    );
+}
