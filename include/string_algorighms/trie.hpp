@@ -1,4 +1,3 @@
-
 template <int Num, typename ConvertFn>
 class trie
 {
@@ -66,14 +65,31 @@ public:
   {
     std::vector<int> seq(s.length());
     std::transform(s.begin(), s.end(), seq.begin(), f);
-    auto pos = 0;
+    auto vid = 0;
     for (auto x : seq)
     {
-      auto& now = storage.at(pos);
-      pos = now.next(x);
-      if (pos == -1) return{};
+      vid = storage.at(vid).next(x);
+      if (vid == -1) return{};
     }
-    return storage.at(pos).ids;
+    return storage.at(vid).ids;
+  }
+
+  // Return the pairs of length & id
+  auto find_prefixes(const std::string& s) -> std::vector<std::pair<int, int>>
+  {
+    int  n   = s.length();
+    auto ret = std::vector<std::pair<int, int>>{};
+    auto vid = 0;
+    for (int i = 0; i < n; i++)
+    {
+      vid = storage.at(vid).next(f(s.at(i)));
+      if (vid == -1) return ret;
+      for (auto id : storage.at(vid).ids)
+      {
+        ret.emplace_back(i + 1, id);
+      }
+    }
+    return ret;
   }
 };
 
