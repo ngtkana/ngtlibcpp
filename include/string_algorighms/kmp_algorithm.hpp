@@ -1,4 +1,5 @@
-auto make_failure_table (std::string w) -> std::vector<int> {
+auto make_failure_table (std::string w) -> std::vector<int>
+{
   int n = w.length();
   std::vector<int> ret(n + 1, -1);
   int len = 0, pos = 1;
@@ -16,20 +17,22 @@ auto make_failure_table (std::string w) -> std::vector<int> {
   return ret;
 }
 
-class kmp_search_engine {
+class kmp_algorithm
+{
     std::string w;
     std::vector<int> failure_table;
 
   public:
-    kmp_search_engine()=default;
+    kmp_algorithm()=default;
 
-    kmp_search_engine(std::string w) :
-      w(std::move(w)),
+    kmp_algorithm(const std::string& w) :
+      w(w),
       failure_table(std::move(make_failure_table(this->w)))
       {}
 
     // Returns the starting positions of all the matches.
-    auto search(std::string s) -> std::vector<int> {
+    auto search(std::string s) -> std::vector<int>
+    {
       std::vector<int> ret;
       int pos_w = 0, pos_s = 0;
       while (pos_s < (int)s.length()) {
@@ -49,9 +52,3 @@ class kmp_search_engine {
       return ret;
     }
 };
-
-// Returns the beginning positions of all the occurence of w in s.
-auto kmp_search(std::string w, std::string s) {
-  auto kmp = kmp_search_engine(std::move(w));
-  return kmp.search(std::move(s));
-}
