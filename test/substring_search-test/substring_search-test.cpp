@@ -2,9 +2,11 @@
 #include <bits/stdc++.h>
 #include <string_algorighms/kmp_algorithm.hpp>
 #include <string_algorighms/z_algorithm.hpp>
+#include <string_algorighms/suffix_array.hpp>
 
 struct kmp_algorithm_tag{};
 struct z_algorithm_tag{};
+struct suffix_array_tag{};
 
 template <typename DispatchTag>
 class substring_search_engine{};
