@@ -52,7 +52,7 @@ class modular {
     auto& operator--() {return *this -= 1;}
     auto  operator++(int) {modular result(*this); operator++(); return result;}
     auto  operator--(int) {modular result(*this); operator--(); return result;}
-  
+
     template <typename U = T>
     auto& operator*=(const modular& rhs) {
       value = normalize(static_cast<int64_t>(value) * static_cast<int64_t>(rhs.value));
@@ -118,14 +118,14 @@ auto operator>>(std::istream& is, T& a)
   return is;
 }
 
-/*
-using ModType = int;
- 
-struct VarMod { static ModType value; };
-ModType VarMod::value;
-ModType& md = VarMod::value;
-using Mint = Modular<VarMod>;
-*/
+
+using mod_type = int;
+
+struct voriable_mod { static mod_type value; };
+mod_type voriable_mod::value;
+// mod_type& md = voriable_mod::value;
+// using Mint = Modular<voriable_mod>;
+
 
 constexpr int md = 1'000'000'007;
 using mint = modular<std::integral_constant<std::decay_t<decltype(md)>, md>>;
