@@ -127,5 +127,5 @@ mod_type voriable_mod::value;
 // using Mint = Modular<voriable_mod>;
 
 
-constexpr int md = 1'000'000'007;
+constexpr int md = ${1:1'000'000'007};
 using mint = modular<std::integral_constant<std::decay_t<decltype(md)>, md>>;
