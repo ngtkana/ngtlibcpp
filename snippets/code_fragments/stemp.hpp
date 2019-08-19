@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < n; ngtkana_is_genius++)
-#define rep(i, begin, end) for(int i = begin; i < end; i++)
+#define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
 
 int main()
 {
