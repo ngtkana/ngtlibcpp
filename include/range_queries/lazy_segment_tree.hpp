@@ -5,14 +5,10 @@ template<
   >
 class lazy_segment_tree
 {
-  public:
-    using size_type = int;
-
-  private:
     struct node
     {
-      size_type id, l, r;
-      node (size_type id, size_type l, size_type r):
+      int id, l, r;
+      node (int id, int l, int r):
         id(id), l(l), r(r)
         {};
 
@@ -31,7 +27,7 @@ class lazy_segment_tree
       }
     };
 
-    size_type           n, N;
+    int                 n, N;
     BinaryOp1           op1;
     BinaryOp2           op2;
     BinaryOp3           op3;
@@ -47,12 +43,23 @@ class lazy_segment_tree
     auto& op2_eq (Value1& x, Value2 y) {return x = op2(x, y);}
     auto& op3_eq (Value2& x, Value2 y) {return x = op3(x, y);}
 
-    void cal (size_type u)
+    void cal (int u)
     {
       table.at(u) = op1(table.at(2 * u), table.at(2 * u + 1));
     }
 
-    auto prop (size_type u)
+    auto chain (int u) const
+    {
+      auto ret = std::vector<int>{};
+      for (auto i = u; i > 0; i /= 2)
+      {
+        ret.emplace_back(i);
+      }
+      std::reverse(ret.begin(), ret.end());
+      return ret;
+    }
+
+    auto prop (int u)
     {
       op2_eq(table.at(u), lazy.at(u));
       if (u < n)
@@ -64,7 +71,7 @@ class lazy_segment_tree
       return table.at(u);
     }
 
-    auto query_base (size_type l, size_type r, Value2 val, const node& now)
+    auto query_base (int l, int r, Value2 val, const node& now)
     {
       prop(now.id);
       if (now.r <= l || r <= now.l) return id1;
@@ -87,7 +94,7 @@ class lazy_segment_tree
   public:
     lazy_segment_tree
     (
-      size_type size,
+      int size,
       BinaryOp1  op1,
       BinaryOp2  op2,
       BinaryOp3  op3,
@@ -116,6 +123,11 @@ class lazy_segment_tree
         }
       }
 
+    void build (const Value1 x)
+    {
+      std::fill(table.begin(), table.end(), x);
+    }
+
     void build (const std::vector<Value1>& v)
     {
       assert(int(v.size()) <= n);
@@ -123,12 +135,7 @@ class lazy_segment_tree
       for (int i = n - 1; i >= 0; i--) cal(i);
     }
 
-    auto at (size_type i) const -> Value1
-    {
-      return table.at(n + i);
-    }
-
-    void act (size_type l, size_type r, Value2 val)
+    void act (int l, int r, Value2 val)
     {
       for (int i = 1; i < n; i *= 2) {
         val = expand(val);
@@ -136,9 +143,55 @@ class lazy_segment_tree
       query_base(l, r, val, initial_node);
     }
 
-    auto query (size_type l, size_type r)
+    auto query (int l, int r)
     {
       return query_base(l, r, id2, initial_node);
+    }
+
+    auto quiet_at (int i) const
+    {
+      i += n;
+      auto actor = id2;
+      for (auto j : chain(i))
+      {
+        actor = shrink(actor);
+        actor = op3(actor, lazy.at(j));
+      }
+      return op2(table.at(i), actor);
+    }
+
+    auto quiet_collect () const
+    {
+      auto ret = std::vector<Value1>(n);
+      for (auto i = 0; i < n; i++)
+      {
+        ret.at(i) = quiet_at(i);
+      }
+      return ret;
+    }
+
+    auto at (int i)
+    {
+      i += n;
+      for (auto j : chain(i))
+      {
+        prop(j);
+      }
+      return table.at(i);
+    }
+
+    auto collect ()
+    {
+      for (int i = 0; i < N; i++)
+      {
+        prop(i);
+      }
+      auto ret = std::vector<Value1>(n);
+      for (auto i = 0; i < n; i++)
+      {
+        ret.at(i) = table.at(i + n);
+      }
+      return ret;
     }
 };
 
