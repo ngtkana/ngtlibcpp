@@ -2,7 +2,7 @@
   "../include/algorithm/coenumerate.hpp": {
     "body": [
       "template <typename InputIterator, typename OutputIterator>",
-      "constexpr void",
+      "constexpr OutputIterator",
       "  coenumerate(InputIterator  first,",
       "              InputIterator  last,",
       "              OutputIterator result)",
@@ -13,17 +13,18 @@
       "    *result = std::make_pair(*first, cnt);",
       "    result++, first++, cnt++;",
       "  }",
+      "  return result;",
       "}"
     ],
     "prefix": "coenumerate"
   },
-  "../include/algorithm/enumerate copy.hpp": {
+  "../include/algorithm/enumerate.hpp": {
     "body": [
       "template <typename InputIterator, typename OutputIterator>",
-      "constexpr void",
-      "  coenumerate(InputIterator  first,",
-      "              InputIterator  last,",
-      "              OutputIterator result)",
+      "constexpr OutputIterator",
+      "  enumerate(InputIterator  first,",
+      "            InputIterator  last,",
+      "            OutputIterator result)",
       "{",
       "  int cnt = 0;",
       "  while (first != last)",
@@ -31,9 +32,78 @@
       "    *result = std::make_pair(cnt, *first);",
       "    result++, first++, cnt++;",
       "  }",
+      "  return result;",
       "}"
     ],
-    "prefix": "enumerate copy"
+    "prefix": "enumerate"
+  },
+  "../include/algorithm/zip2.hpp": {
+    "body": [
+      "template <typename InputIterator1,",
+      "          typename InputIterator2, typename OutputIterator>",
+      "constexpr OutputIterator",
+      "  zip2(InputIterator1 first1,",
+      "      InputIterator1 last1,",
+      "      InputIterator2 first2,",
+      "      OutputIterator result)",
+      "{",
+      "  while (first1 != last1)",
+      "  {",
+      "    *result = std::make_pair(*first1, *first2);",
+      "    result++, first1++, first2++;",
+      "  }",
+      "  return result;",
+      "}"
+    ],
+    "prefix": "zip2"
+  },
+  "../include/algorithm/zip3.hpp": {
+    "body": [
+      "template <typename InputIterator1,",
+      "          typename InputIterator2,",
+      "          typename InputIterator3, typename OutputIterator>",
+      "constexpr OutputIterator",
+      "  zip3(InputIterator1 first1,",
+      "      InputIterator1 last1,",
+      "      InputIterator2 first2,",
+      "      InputIterator3 first3,",
+      "      OutputIterator result)",
+      "{",
+      "  while (first1 != last1)",
+      "  {",
+      "    *result = std::make_tuple(*first1, *first2, *first3);",
+      "    result++, first1++, first2++, first3++;",
+      "  }",
+      "  return result;",
+      "}"
+    ],
+    "prefix": "zip3"
+  },
+  "../include/algorithm/zip4.hpp": {
+    "body": [
+      "template <typename InputIterator1,",
+      "          typename InputIterator2,",
+      "          typename InputIterator3,",
+      "          typename InputIterator4,",
+      "          typename OutputIterator>",
+      "constexpr OutputIterator",
+      "  zip4(InputIterator1 first1,",
+      "      InputIterator1 last1,",
+      "      InputIterator2 first2,",
+      "      InputIterator3 first3,",
+      "      InputIterator4 first4,",
+      "      OutputIterator result)",
+      "{",
+      "  while (first1 != last1)",
+      "  {",
+      "    *result = std::make_tuple(*first1, *first2, *first3, *first4);",
+      "    result++, first1++, first2++, first3++, first4++;",
+      "  }",
+      "  return result;",
+      "}",
+      ""
+    ],
+    "prefix": "zip4"
   },
   "../include/combinator/combinator.hpp": {
     "body": [
@@ -640,6 +710,63 @@
     ],
     "prefix": "topological_sort_2"
   },
+  "../include/io/pair_io.hpp": {
+    "body": [
+      "template <typename T, typename U>",
+      "std::ostream& operator<< (std::ostream& os, const std::pair<T, U>& pair){",
+      "  return os << \"(\" << pair.first << \",\" << pair.second << \")\";",
+      "}",
+      "",
+      "template <typename T, typename U>",
+      "std::istream& operator>> (std::iostream& is, std::pair<T, U>& pair) {",
+      "  return is >> pair.first >> pair.second;",
+      "}"
+    ],
+    "prefix": "pair_io"
+  },
+  "../include/io/tuple_io.hpp": {
+    "body": [
+      "template <typename... Args, std::size_t ... Inds>",
+      "std::ostream& tuple_output_impl",
+      "(",
+      "  std::ostream& os,",
+      "  const std::tuple<Args...>& tuple,",
+      "  std::integer_sequence<std::size_t, Inds...>",
+      ")",
+      "{",
+      "  os << \"(\";",
+      "  (void)std::initializer_list<int>{(",
+      "    (void)(os << (Inds > 0 ? \",\" : \"\") << std::get<Inds>(tuple)), 0",
+      "  )...};",
+      "  return os << \")\";",
+      "}",
+      "template <typename... Args>",
+      "std::ostream& operator<< (std::ostream& os, const std::tuple<Args...>& tuple)",
+      "{",
+      "  return tuple_output_impl(os, tuple, std::index_sequence_for<Args...>());",
+      "}",
+      "",
+      "template <typename... Args, std::size_t ... Inds>",
+      "std::istream& tuple_input_impl",
+      "(",
+      "  std::istream& is,",
+      "  std::tuple<Args...>& tuple,",
+      "  std::integer_sequence<std::size_t, Inds...>",
+      ")",
+      "{",
+      "  (void)std::initializer_list<int>{(",
+      "    (void)(is >> std::get<Inds>(tuple)), 0",
+      "  )...};",
+      "  return is;",
+      "}",
+      "template <typename... Args>",
+      "std::istream& operator>> (std::istream& is, std::tuple<Args...>& tuple)",
+      "{",
+      "  return tuple_input_impl(is, tuple, std::index_sequence_for<Args...>());",
+      "}"
+    ],
+    "prefix": "tuple_io"
+  },
   "../include/io/vector_io.hpp": {
     "body": [
       "template <typename T>",
@@ -647,6 +774,16 @@
       "{",
       "  for (auto & x : v) is >> x;",
       "  return is;",
+      "}",
+      "",
+      "template <typename T>",
+      "std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)",
+      "{",
+      "  auto n = v.size();",
+      "  os << \"{\";",
+      "  for (size_t i = 0; i < n; i++)",
+      "    os << (i > 0 ? \",\" : \"\") << v[i];",
+      "  return os << \"}\";",
       "}"
     ],
     "prefix": "vector_io"
