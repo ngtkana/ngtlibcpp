@@ -4,6 +4,15 @@
 #define lint long long
 auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};
 auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};
+void debug_impl() { std::cerr << std::endl; }
+template <typename Head, typename... Tail>
+void debug_impl(Head head, Tail... tail){
+  std::cerr << " " << head;
+  debug_impl(tail...);
+}
+#define debug(...) std::cerr << std::boolalpha << "[" << #__VA_ARGS__ << "]:";\
+  debug_impl(__VA_ARGS__);\
+  std::cerr << std::noboolalpha;
 
 int main()
 {
