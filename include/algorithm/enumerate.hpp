@@ -1,8 +1,8 @@
 template <typename InputIterator, typename OutputIterator>
 constexpr OutputIterator
   enumerate(InputIterator  first,
-              InputIterator  last,
-              OutputIterator result)
+            InputIterator  last,
+            OutputIterator result)
 {
   int cnt = 0;
   while (first != last)
