@@ -170,7 +170,7 @@ class lazy_segment_tree
       return ret;
     }
 
-    auto at (int i)
+    auto& at (int i)
     {
       i += n;
       for (auto j : chain(i))
@@ -180,7 +180,7 @@ class lazy_segment_tree
       return table.at(i);
     }
 
-    auto collect ()
+    auto& collect ()
     {
       for (int i = 0; i < N; i++)
       {
