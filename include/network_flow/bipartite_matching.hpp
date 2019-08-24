@@ -2,7 +2,7 @@ class bipartite_matching
 {
     int L, R;
     std::vector<std::vector<int>> graph;
-    std::vector<int> match_list, level;
+    std::vector<int> match, level;
 
     bool bfs()
     {
@@ -10,7 +10,7 @@ class bipartite_matching
       std::queue<int> que;
       for (int i = 0; i < L; i++)
       {
-        if (match_list.at(i) < 0)
+        if (match.at(i) < 0)
         {
           level.at(i) = 0;
           que.emplace(i);
@@ -24,7 +24,7 @@ class bipartite_matching
         {
           if (level.at(nxt) != -1) continue;
           level.at(nxt) = level.at(crr) + 1;
-          auto w = match_list.at(nxt);
+          auto w = match.at(nxt);
           if (w == -1)
           {
             ret = true;
@@ -46,11 +46,11 @@ class bipartite_matching
         assert(level.at(nxt) <= level.at(crr) + 1);
         if (level.at(nxt) < level.at(crr) + 1) continue;
         level.at(nxt) = -1;
-        auto w = match_list.at(nxt);
+        auto w = match.at(nxt);
         if (w == -1 || dfs(w))
         {
-          match_list.at(nxt) = crr;
-          match_list.at(crr) = nxt;
+          match.at(nxt) = crr;
+          match.at(crr) = nxt;
           level.at(crr) = -1;
           return true;
         }
@@ -62,7 +62,7 @@ class bipartite_matching
   public:
     bipartite_matching()=default;
     bipartite_matching(int L, int R):
-      L(L), R(R), graph(L + R), match_list(L + R, -1), level(L + R)
+      L(L), R(R), graph(L + R), match(L + R, -1), level(L + R)
       {}
 
     void insert_edge(int u, int v)
@@ -80,7 +80,7 @@ class bipartite_matching
       {
         for (int i = 0; i < L; i++)
         {
-          if (match_list.at(i) == -1 && dfs(i))
+          if (match.at(i) == -1 && dfs(i))
           {
             ret++;
           }
@@ -89,5 +89,12 @@ class bipartite_matching
       return ret;
     }
 
-    auto match() const {return match_list;}
+    auto collect() const {return match;}
+
+    auto count() const
+    {
+      auto k = L + R - std::count(match.begin(), match.end(), -1);
+      assert(k % 2 == 0);
+      return k / 2;
+    }
 };
