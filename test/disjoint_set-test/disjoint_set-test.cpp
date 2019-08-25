@@ -65,10 +65,12 @@ public:
 template <>
 class disjoint_set_query_engine<weighted_union_find_tree_tag>
 {
-  weighted_union_find_tree<int> storage;
+  weighted_union_find_tree<int, std::plus<int>, std::minus<int>> storage;
 
 public:
-  disjoint_set_query_engine(int n): storage(n) {}
+  disjoint_set_query_engine(int n):
+    storage(n, std::plus<int>{}, std::minus<int>{}, 0)
+    {}
 
   int find(int x) {return storage.find(x);}
 
@@ -200,4 +202,32 @@ TEST_CASE
   DISJOINT_SET_TEST_COLLECT_VALS_TEST(4, 1, 4, 4)
   REQUIRE(uf.unite(1, 2));
   DISJOINT_SET_TEST_COLLECT_VALS_TEST(5, 5, 5, 5)
+}
+
+TEST_CASE
+(
+  "Valued Disjoint Sets Test from AOJ DSL_1_B",
+  "[Weighted Union-Find Tree]"
+)
+{
+  auto uf = make_weighted_union_find_tree
+  (
+    5,
+    [](auto x, auto y){return x + y;},
+    [](auto x, auto y){return x - y;},
+    0
+  );
+  REQUIRE(uf.unite(2, 0, 5));
+  REQUIRE(uf.diff(2, 0) == 5);
+  REQUIRE(uf.diff(0, 2) == -5);
+
+  REQUIRE(uf.unite(2, 1, 3));
+  REQUIRE(uf.diff(2, 1) == 3);
+  REQUIRE(uf.diff(2, 0) == 5);
+  REQUIRE(uf.diff(1, 0) == 2);
+
+  REQUIRE(uf.unite(4, 1, 8));
+  REQUIRE(uf.diff(4, 1) == 8);
+  REQUIRE(uf.diff(4, 2) == 5);
+  REQUIRE(uf.diff(4, 0) == 10);
 }
