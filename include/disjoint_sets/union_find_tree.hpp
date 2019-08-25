@@ -10,7 +10,7 @@ public:
 
   int  size    (int x)        const {return -prt.at(find(x));}
 
-  bool is_equiv(int x, int y) const {return find(x) == find(y);}
+  bool same(int x, int y) const {return find(x) == find(y);}
 
   int  find    (int x)        const {
     while (!is_root(x)) x = prt.at(x);

@@ -12,7 +12,7 @@ public:
 
   int  size    (int x)        {return -prt.at(find(x));}
 
-  bool is_equiv(int x, int y) {return find(x) == find(y);}
+  bool same(int x, int y) {return find(x) == find(y);}
 
   T    weight  (int x)        {return wt.at(find(x));}
 
