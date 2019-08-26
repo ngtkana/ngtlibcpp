@@ -15,87 +15,59 @@ struct weighted_quick_find_tag{};
 struct weighted_union_find_tree_tag{};
 
 template <typename DispatchTag>
-class disjoint_set_query_engine{};
+struct disjoint_set_query_engine{};
 
 template <>
-class disjoint_set_query_engine<quick_find_tag>
+struct disjoint_set_query_engine<quick_find_tag>
 {
-    quick_find storage;
-
-  public:
-    disjoint_set_query_engine(int n): storage(n) {}
-
-    int find(int x) {return storage.find(x);}
-
-    bool same(int x, int y) {return storage.same(x, y);}
-
-    void unite(int x, int y) {storage.unite(x, y);}
+  quick_find storage;
+  disjoint_set_query_engine(int n): storage(n) {}
+  int find(int x) {return storage.find(x);}
+  bool same(int x, int y) {return storage.same(x, y);}
+  void unite(int x, int y) {storage.unite(x, y);}
 };
 
 template <>
-class disjoint_set_query_engine<union_find_tree_tag>
+struct disjoint_set_query_engine<union_find_tree_tag>
 {
-    union_find_tree storage;
-
-  public:
-    disjoint_set_query_engine(int n): storage(n) {}
-
-    int find(int x) {return storage.find(x);}
-
-    bool same(int x, int y) {return storage.same(x, y);}
-
-    void unite(int x, int y) {storage.unite(x, y);}
+  union_find_tree storage;
+  disjoint_set_query_engine(int n): storage(n) {}
+  int find(int x) {return storage.find(x);}
+  bool same(int x, int y) {return storage.same(x, y);}
+  void unite(int x, int y) {storage.unite(x, y);}
 };
 
 template <>
-class disjoint_set_query_engine<valued_union_find_tree_tag>
+struct disjoint_set_query_engine<valued_union_find_tree_tag>
 {
-    valued_union_find_tree<int, std::plus<int>> storage;
-
-  public:
-    disjoint_set_query_engine(int n):
-      storage(n, std::plus<int>{}, 1, 0)
-      {}
-
-    int find(int x) {return storage.find(x);}
-
-    bool same(int x, int y) {return storage.same(x, y);}
-
-    void unite(int x, int y) {storage.unite(x, y);}
+  valued_union_find_tree<int, std::plus<int>> storage;
+  disjoint_set_query_engine(int n):
+    storage(n, std::plus<int>{}, 1, 0) {}
+  int find(int x) {return storage.find(x);}
+  bool same(int x, int y) {return storage.same(x, y);}
+  void unite(int x, int y) {storage.unite(x, y);}
 };
 
 template <>
-class disjoint_set_query_engine<weighted_quick_find_tag>
+struct disjoint_set_query_engine<weighted_quick_find_tag>
 {
-    weighted_quick_find<int, std::plus<int>, std::minus<int>> storage;
-
-  public:
-    disjoint_set_query_engine(int n):
-      storage(n, std::plus<int>{}, std::minus<int>{}, 0)
-      {}
-
-    int find(int x) {return storage.find(x);}
-
-    bool same(int x, int y) {return storage.same(x, y);}
-
-    void unite(int x, int y) {storage.unite(x, y, 0);}
+  weighted_quick_find<int, std::plus<int>, std::minus<int>> storage;
+  disjoint_set_query_engine(int n):
+    storage(n, std::plus<int>{}, std::minus<int>{}, 0) {}
+  int find(int x) {return storage.find(x);}
+  bool same(int x, int y) {return storage.same(x, y);}
+  void unite(int x, int y) {storage.unite(x, y, 0);}
 };
 
 template <>
-class disjoint_set_query_engine<weighted_union_find_tree_tag>
+struct disjoint_set_query_engine<weighted_union_find_tree_tag>
 {
-    weighted_union_find_tree<int, std::plus<int>, std::minus<int>> storage;
-
-  public:
-    disjoint_set_query_engine(int n):
-      storage(n, std::plus<int>{}, std::minus<int>{}, 0)
-      {}
-
-    int find(int x) {return storage.find(x);}
-
-    bool same(int x, int y) {return storage.same(x, y);}
-
-    void unite(int x, int y) {storage.unite(x, y, 0);}
+  weighted_union_find_tree<int, std::plus<int>, std::minus<int>> storage;
+  disjoint_set_query_engine(int n):
+    storage(n, std::plus<int>{}, std::minus<int>{}, 0){}
+  int find(int x) {return storage.find(x);}
+  bool same(int x, int y) {return storage.same(x, y);}
+  void unite(int x, int y) {storage.unite(x, y, 0);}
 };
 
 TEMPLATE_TEST_CASE
