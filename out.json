@@ -3653,33 +3653,19 @@
     ],
     "prefix": "didj"
   },
-  "../snippets/code_fragments/for_const.hpp": {
-    "body": [
-      "for (auto const & ${1:e}: ${2:name}) {",
-      "  $0",
-      "}"
-    ],
-    "prefix": "for_const"
-  },
   "../snippets/code_fragments/for_iterator.hpp": {
     "body": [
-      "for (auto ${1:it} = ${2:name}.begin(); $1 != $2.end(); it++) {",
+      "for (auto ${1:it} = ${2:name}.begin(); $1 != $2.end(); it++)",
+      "{",
       "  $0",
       "}"
     ],
     "prefix": "for_iterator"
   },
-  "../snippets/code_fragments/for_range.hpp": {
-    "body": [
-      "for (auto const& ${1:e} : ${2:name}) {",
-      "  $0",
-      "}"
-    ],
-    "prefix": "for_range"
-  },
   "../snippets/code_fragments/for_reverse.hpp": {
     "body": [
-      "for (int ${1:i} = ${2:n - 1}; $1 >= ${3:0}; $1--) {",
+      "for (auto ${1:i} = ${2:n - 1}; $1 >= ${3:0}; $1--)",
+      "{",
       "  $0",
       "}"
     ],
@@ -3687,7 +3673,8 @@
   },
   "../snippets/code_fragments/fors.hpp": {
     "body": [
-      "for (${1:int} ${2:i} = ${3:0}; $2 < ${4:n}; $2++) {",
+      "for (${1:int} ${2:i} = ${3:0}; $2 < ${4:n}; $2++)",
+      "{",
       "  $0",
       "}"
     ],
@@ -3711,7 +3698,8 @@
   },
   "../snippets/code_fragments/lambda.hpp": {
     "body": [
-      "auto ${1:name} = [&] ($2) {",
+      "auto ${1:name} = [&] ($2)",
+      "{",
       "  $0",
       "};"
     ],
@@ -3719,87 +3707,9 @@
   },
   "../snippets/code_fragments/long_inf.hpp": {
     "body": [
-      "constexpr long long inf = 1LL << 60;"
+      "constexpr long long linf = 1LL << 60;"
     ],
     "prefix": "long_inf"
-  },
-  "../snippets/code_fragments/lower_bound.hpp": {
-    "body": [
-      "std::lower_bound(${1:name}.begin(), ${1:name}.end(), ${2:きじゅんち});"
-    ],
-    "prefix": "lower_bound"
-  },
-  "../snippets/code_fragments/output_stream.hpp": {
-    "body": [
-      "copy(${1:a}.begin(), $1.end(), ostream_iterator<${2:int}>(std::cout, \" \"));",
-      "$0"
-    ],
-    "prefix": "output_stream"
-  },
-  "../snippets/code_fragments/pair.hpp": {
-    "body": [
-      "std::pair<${1:int}, ${2:int}> ${3:name}(${4:0}, ${5:0})$0;"
-    ],
-    "prefix": "pair"
-  },
-  "../snippets/code_fragments/reverse.hpp": {
-    "body": [
-      "reverse(${1:name}.begin(), ${1:name}.end());"
-    ],
-    "prefix": "reverse"
-  },
-  "../snippets/code_fragments/reverse_priority_queue.hpp": {
-    "body": [
-      "priority_queue<",
-      "  ${1:std::pair<int, int>},",
-      "  std::vector<$1>,",
-      "  greater<$1>",
-      "> ${2:que};",
-      "$2.emplace($0);"
-    ],
-    "prefix": "reverse_priority_queue"
-  },
-  "../snippets/code_fragments/sort.hpp": {
-    "body": [
-      "sort(${1:name}.begin(), ${1:name}.end());"
-    ],
-    "prefix": "sort"
-  },
-  "../snippets/code_fragments/sort_reverse.hpp": {
-    "body": [
-      "sort(${1:name}.begin(), ${1:name}.end(), greater<${2:int}>());"
-    ],
-    "prefix": "sort_reverse"
-  },
-  "../snippets/code_fragments/upper_bound.hpp": {
-    "body": [
-      "std::upper_bound(${1:name}.begin(), ${1:おname.end(), ${2:きじゅんち});"
-    ],
-    "prefix": "upper_bound"
-  },
-  "../snippets/code_fragments/vec.hpp": {
-    "body": [
-      "std::vector<${1:int}> ${2:name}(${3:n});$0"
-    ],
-    "prefix": "vec"
-  },
-  "../snippets/code_fragments/vecpair.hpp": {
-    "body": [
-      "std::vector<std::pair<${1:int}, ${2:int}>> ${3:name}(${4:n}, {${5:0}, ${6:0}})$0;"
-    ],
-    "prefix": "vecpair"
-  },
-  "../snippets/code_fragments/vecvec.hpp": {
-    "body": [
-      "std::vector<std::vector<${1:int}>> ${2:grh}($0);"
-    ],
-    "prefix": "vecvec"
-  },
-  "../snippets/code_fragments/vecvecpair.hpp": {
-    "body": [
-      "std::vector<std::vector<std::pair<${1:int}, ${2:int}>>> ${3:name}(${4:h}, std::vector<std::pair<${1:int}, ${2:int}>>(${5:w}, {${6:0}, ${7:0}}))$0;"
-    ],
-    "prefix": "vecvecpair"
   },
   "../snippets/debug/-pdbg.hpp": {
     "body": [
@@ -4143,35 +4053,6 @@
     ],
     "prefix": "5sin"
   },
-  "../snippets/io/adjacency_input.hpp": {
-    "body": [
-      "int ${1:n}, ${2:m};",
-      "std::cin >> $1 >> $2;",
-      "constexpr ${3:long long} inf = 1LL << 60;",
-      "std::vector<std::vector<$3>> adj(n, std::vector<$3>(n, inf));",
-      "for (int i = 0; i < $1; i++) adj[i][i] = 0;",
-      "for (int i = 0; i < m; i++) {",
-      "  $3 d; int s, t;",
-      "  std::cin >> s >> t >> d;",
-      "  chmin(adj[s][t], d);",
-      "}"
-    ],
-    "prefix": "adjacency_input"
-  },
-  "../snippets/io/edge_input.hpp": {
-    "body": [
-      "int ${1:n}, ${2:m};",
-      "std::cin >> $1 >> $2;",
-      "std::vector<tuple<${3:long long}, int, int>> edg;",
-      "for (int i = 0; i < $2; i++) {",
-      "  $3 d;",
-      "  int s, t;",
-      "  std::cin >> s >> t >> d;",
-      "  edg.emplace_back(d, ${4:--}s, $4t);",
-      "}"
-    ],
-    "prefix": "edge_input"
-  },
   "../snippets/io/err.hpp": {
     "body": [
       "auto err = [&] {",
@@ -4181,68 +4062,11 @@
     ],
     "prefix": "err"
   },
-  "../snippets/io/graph_input.hpp": {
-    "body": [
-      "std::vector<std::vector<int>> grh(${1:n});",
-      "for (int i = 0; i < ${2:n - 1}; i++) {",
-      "  int s, t;",
-      "  std::cin >> s >> t;",
-      "  grh[${3:--}s].push_back($3t);",
-      "  grh[t].push_back(s);",
-      "}"
-    ],
-    "prefix": "graph_input"
-  },
-  "../snippets/io/graph_pair_input.hpp": {
-    "body": [
-      "std::vector<std::vector<std::pair<${3:long long}, int>>> grh(${1:n});",
-      "for (int i = 0; i < ${2:m}; i++) {",
-      "  int s, t; $3 d;",
-      "  std::cin >> s >> t >> d;",
-      "  grh[${4:--}s].emplace_back(d, $4t);",
-      "  grh[t].emplace_back(d, s);",
-      "}"
-    ],
-    "prefix": "graph_pair_input"
-  },
-  "../snippets/io/grid_input.hpp": {
-    "body": [
-      "int ${1:h}, ${2:w};",
-      "std::cin >> $1 >> $2;",
-      "std::vector<std::vector<int>> grd($1, std::vector<int>($2));",
-      "for (int i = 0; i < $1; i++) {",
-      "  for (int j = 0; j < $2; j++) {",
-      "    char c;",
-      "    std::cin >> c;",
-      "    grd[i][j] = c == '#';",
-      "  }",
-      "}"
-    ],
-    "prefix": "grid_input"
-  },
-  "../snippets/io/optional_value.hpp": {
-    "body": [
-      "(${1:dst[i]} == ${2:inf} ? \"${3:INF}\" : to_string($1))"
-    ],
-    "prefix": "optional_value"
-  },
   "../snippets/io/sout.hpp": {
     "body": [
       "std::cout << $0 << std::endl;"
     ],
     "prefix": "sout"
-  },
-  "../snippets/io/space_or_newline.hpp": {
-    "body": [
-      "(${1:i} == ${2:n - 1} ? \" \" : \"\\n\")"
-    ],
-    "prefix": "space_or_newline"
-  },
-  "../snippets/io/ternary.hpp": {
-    "body": [
-      "($1 ? $2 : $3)"
-    ],
-    "prefix": "ternary"
   },
   "../snippets/io/tin.hpp": {
     "body": [

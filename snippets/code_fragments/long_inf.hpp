@@ -1,1 +1,1 @@
-constexpr long long inf = 1LL << 60;
+constexpr long long linf = 1LL << 60;
