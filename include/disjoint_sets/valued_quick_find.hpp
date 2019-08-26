@@ -26,7 +26,7 @@ public:
   bool same    (int x, int y) const {return find(x) == find(y);}
   int  find    (int x)        const {return prt.at(x);}
   auto get     (int x)        const {return table.at(find(x));}
-  void set     (int x, Value val)   {table.at(find(x)) = x;}
+  void set     (int x, Value val)   {table.at(find(x)) = val;}
   void add     (int x, Value val)   {set(x, get(x) + val);}
   auto collect_vals()         const
   {
@@ -39,7 +39,6 @@ public:
   }
 
   // Returns `true` if x and y are newly connected.
-  // x - y = d
   bool unite   (int x, int y)
   {
     if ((x = find(x)) == (y = find(y))) return false;
@@ -50,7 +49,7 @@ public:
       child.at(x).push_back(z);
     }
     op_eq(table.at(x), table.at(y));
-    table.at(x) = id;
+    table.at(y) = id;
     typename decltype(child)::value_type{}.swap(child.at(y));
     return true;
   }
