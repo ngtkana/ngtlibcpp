@@ -1,10 +1,10 @@
-class union_find_tree
+class union_find
 {
   int n;
   std::vector<int> prt;
 
 public:
-  union_find_tree (int n) : n(n), prt(n, -1){}
+  union_find (int n) : n(n), prt(n, -1){}
 
   bool is_root (int x)        const {return prt.at(x) < 0;}
 

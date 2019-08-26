@@ -1,6 +1,6 @@
 
 template <typename Value, typename BinaryOp>
-class valued_union_find_tree
+class valued_union_find
 {
   int                n;
   std::vector<Value> table;
@@ -9,7 +9,7 @@ class valued_union_find_tree
   Value              id;
 
 public:
-  valued_union_find_tree (int n, BinaryOp op, Value id, Value init) :
+  valued_union_find (int n, BinaryOp op, Value id, Value init) :
     n(n), table(n, init), prt(n, -1), op(op), id(id)
     {}
 
@@ -51,7 +51,7 @@ public:
 };
 
 template <typename Value, typename BinaryOp>
-auto make_valued_union_find_tree(int n, BinaryOp op, Value id, Value init)
+auto make_valued_union_find(int n, BinaryOp op, Value id, Value init)
 {
-  return valued_union_find_tree<Value, BinaryOp>(n, op, id, init);
+  return valued_union_find<Value, BinaryOp>(n, op, id, init);
 }

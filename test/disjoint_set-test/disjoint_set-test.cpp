@@ -1,18 +1,18 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
 #include <disjoint_sets/quick_find.hpp>
-#include <disjoint_sets/union_find_tree.hpp>
+#include <disjoint_sets/union_find.hpp>
 #include <disjoint_sets/valued_quick_find.hpp>
-#include <disjoint_sets/valued_union_find_tree.hpp>
+#include <disjoint_sets/valued_union_find.hpp>
 #include <disjoint_sets/weighted_quick_find.hpp>
-#include <disjoint_sets/weighted_union_find_tree.hpp>
+#include <disjoint_sets/weighted_union_find.hpp>
 
 struct quick_find_tag{};
-struct union_find_tree_tag{};
+struct union_find_tag{};
 struct valued_quick_find_tag{};
-struct valued_union_find_tree_tag{};
+struct valued_union_find_tag{};
 struct weighted_quick_find_tag{};
-struct weighted_union_find_tree_tag{};
+struct weighted_union_find_tag{};
 
 template <typename DispatchTag>
 struct disjoint_set_query_engine{};
@@ -28,9 +28,9 @@ struct disjoint_set_query_engine<quick_find_tag>
 };
 
 template <>
-struct disjoint_set_query_engine<union_find_tree_tag>
+struct disjoint_set_query_engine<union_find_tag>
 {
-  union_find_tree storage;
+  union_find storage;
   disjoint_set_query_engine(int n): storage(n) {}
   int find(int x) {return storage.find(x);}
   bool same(int x, int y) {return storage.same(x, y);}
@@ -38,9 +38,9 @@ struct disjoint_set_query_engine<union_find_tree_tag>
 };
 
 template <>
-struct disjoint_set_query_engine<valued_union_find_tree_tag>
+struct disjoint_set_query_engine<valued_union_find_tag>
 {
-  valued_union_find_tree<int, std::plus<int>> storage;
+  valued_union_find<int, std::plus<int>> storage;
   disjoint_set_query_engine(int n):
     storage(n, std::plus<int>{}, 1, 0) {}
   int find(int x) {return storage.find(x);}
@@ -60,9 +60,9 @@ struct disjoint_set_query_engine<weighted_quick_find_tag>
 };
 
 template <>
-struct disjoint_set_query_engine<weighted_union_find_tree_tag>
+struct disjoint_set_query_engine<weighted_union_find_tag>
 {
-  weighted_union_find_tree<int, std::plus<int>, std::minus<int>> storage;
+  weighted_union_find<int, std::plus<int>, std::minus<int>> storage;
   disjoint_set_query_engine(int n):
     storage(n, std::plus<int>{}, std::minus<int>{}, 0){}
   int find(int x) {return storage.find(x);}
@@ -76,8 +76,8 @@ TEMPLATE_TEST_CASE
   "[Union-Find Tree, Valued Union-Find Tree, "
   "Weighted Union-Find Tree, Quick Find]",
   quick_find_tag,
-  union_find_tree_tag,
-  weighted_union_find_tree_tag
+  union_find_tag,
+  weighted_union_find_tag
 )
 {
   auto engine = disjoint_set_query_engine<TestType>(5);
@@ -100,9 +100,9 @@ template <typename DispatchTag>
 struct valued_disjoint_set_query_engine{};
 
 template <>
-struct valued_disjoint_set_query_engine<valued_union_find_tree_tag>{
+struct valued_disjoint_set_query_engine<valued_union_find_tag>{
   using Op = std::function<int(int, int)>;
-  valued_union_find_tree<int, Op> storage;
+  valued_union_find<int, Op> storage;
   valued_disjoint_set_query_engine(int n, const Op& op, int id, int init):
     storage(n, op, id, init){}
   bool unite(int x, int y) {return storage.unite(x, y);}
@@ -145,7 +145,7 @@ TEMPLATE_TEST_CASE
 (
   "Valued Disjoint Sets Tests",
   "[Valued Union-Find Tree, Valued Quick Find]",
-  valued_union_find_tree_tag,
+  valued_union_find_tag,
   valued_quick_find_tag
 )
 {
@@ -223,8 +223,8 @@ struct weighted_disjoint_set_query_engine<weighted_quick_find_tag>{
 };
 
 template <>
-struct weighted_disjoint_set_query_engine<weighted_union_find_tree_tag>{
-  weighted_union_find_tree<int, std::plus<int>, std::minus<int>> storage;
+struct weighted_disjoint_set_query_engine<weighted_union_find_tag>{
+  weighted_union_find<int, std::plus<int>, std::minus<int>> storage;
   weighted_disjoint_set_query_engine(int n): storage(n, {}, {}, 0){}
   bool unite(int x, int y, int d) {return storage.unite(x, y, d);}
   auto diff (int x, int y)        {return storage.diff(x, y);}
@@ -235,7 +235,7 @@ TEMPLATE_TEST_CASE
   "Valued Disjoint Sets Test from AOJ DSL_1_B",
   "[Weighted Union-Find Tree, Weighted Quick Find]",
   weighted_quick_find_tag,
-  weighted_union_find_tree_tag
+  weighted_union_find_tag
 )
 {
   auto uf = weighted_disjoint_set_query_engine<TestType>(5);

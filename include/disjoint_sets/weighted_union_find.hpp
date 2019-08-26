@@ -1,5 +1,5 @@
 template <typename Value, typename BinaryOp1, typename BinaryOp2>
-class weighted_union_find_tree
+class weighted_union_find
 {
   int                n;
   std::vector<int>   prt;
@@ -14,7 +14,7 @@ class weighted_union_find_tree
   auto inv    (Value& x)          const {return inv_eq(x);}
 
 public:
-  weighted_union_find_tree
+  weighted_union_find
     (int n, BinaryOp1 op1, BinaryOp2 op2, Value id) :
     n(n), prt(n, -1), wt(n, id), op1(op1), op2(op2), id(id)
     {}
@@ -103,7 +103,7 @@ public:
 };
 
 template <typename Value, typename BinaryOp1, typename BinaryOp2>
-auto make_weighted_union_find_tree(int n, BinaryOp1 op1, BinaryOp2 op2, Value id)
+auto make_weighted_union_find(int n, BinaryOp1 op1, BinaryOp2 op2, Value id)
 {
-  return weighted_union_find_tree<Value, BinaryOp1, BinaryOp2>(n, op1, op2, id);
+  return weighted_union_find<Value, BinaryOp1, BinaryOp2>(n, op1, op2, id);
 }
