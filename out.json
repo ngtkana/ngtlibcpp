@@ -1455,7 +1455,7 @@
       "    }",
       "  }",
       "",
-      "  auto dfs (int crr, int f = inf) -> Value",
+      "  auto dfs (int crr, Value f = inf) -> Value",
       "  {",
       "      if (crr == sink) return f;",
       "      ckd.at(crr) = true;",
