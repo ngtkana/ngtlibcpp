@@ -1,72 +1,78 @@
-template <typename T, typename U>
+template <typename Flow, typename Cost>
 class minimum_cost_flow {
-  public:
-    const T max_flow = numeric_limits<T>::max();
-    const U max_dist  = numeric_limits<U>::max();
-  private:
     struct edge {
-      int to; T cap; U cost;
-      weak_ptr<edge> rev;
+      int to; Flow cap; Cost cost; int rev;
+      edge(int to, Flow cap, Cost cost, int rev): to(to), cap(cap), cost(cost), rev(rev){}
     };
-    const int n, source, sink;
-    std::vector<U> dst;
-    std::vector<std::vector<shared_ptr<edge>>> grh;
-    void bf () {
-      dst.assign(n, max_dist); dst[source] = 0;
+
+    const int                      n, source, sink;
+    std::vector<Cost>              distance;
+    std::vector<std::vector<edge>> graph;
+    std::vector<int>               ckd;
+
+    const Flow max_flow = std::numeric_limits<Flow>::max();
+    const Cost max_dist = std::numeric_limits<Cost>::max();
+
+    template <typename T, typename U>
+    auto cmn(T& a, U b) {if (a > b) {a = b; return true;} return false;}
+
+    void bellman_ford () {
+      distance.assign(n, max_dist);
+      distance.at(source) = 0;
       for (int t = 0; t < n; t++) {
-        bool flg = false;
+        bool renewed = false;
         for (int i = 0; i < n; i++) {
-          for (auto const& e : grh[i]) {
-            if (e->cap == 0) continue;
-            int crr = i;     U crd = dst[crr];
-            int nxt = e->to; U nxd = crd + e->cost;
-            if (crd == max_dist) continue;
-            if (cmn(dst[nxt], nxd)) flg = true;
+          for (auto const& e : graph.at(i)) {
+            if (e.cap == 0) continue;
+            auto crr = distance.at(i);
+            if (crr == max_dist) continue;
+            if (cmn(distance.at(e.to), crr + e.cost)) {
+              renewed = true;
+            }
           }
         }
-        if (!flg) break;
-        if (t == n - 1 && flg) assert(false);
+        if (!renewed) break;
       }
     }
-    U flush () {
-      std::vector<bool> ckd(n, false);
-      return fix([&] (auto dfs, int crr, U f) -> U {
-        if (ckd[crr]) return 0;
-        ckd[crr] = true;
-        if (crr == sink) return f;
-        for (auto const& e : grh[crr]) {
-        if (e->cap == 0) continue;
-          U crd = dst[crr];
-          int nxt = e->to; U nxd = dst[nxt];
-          if (crd + e->cost != nxd) continue;
-          U d = dfs(nxt, min(f, e->cap));
-          if (d > 0) {
-            e->cap -= d;
-            e->rev.lock()->cap += d;
-            return d;
-          }
+
+    auto flush_impl (int crr, Flow f) {
+      if (ckd.at(crr)) return Flow(0);
+      ckd.at(crr) = true;
+      if (crr == sink) return f;
+      for (auto & e : graph.at(crr)) {
+        if (e.cap == 0) continue;
+        if (distance.at(crr) + e.cost != distance.at(e.to)) continue;
+        auto d = flush_impl(e.to, std::min(f, e.cap));
+        if (d > 0) {
+          e.cap -= d;
+          graph.at(e.to).at(e.rev).cap += d;
+          return d;
         }
-        return 0;
-      })(source, max_flow);
+      }
+      return Flow(0);
     }
+
+    auto flush () {
+      ckd.assign(n, false);
+      return flush_impl(source, max_flow);
+    }
+
   public:
     minimum_cost_flow (int n, int source, int sink) :
-      n(n), source(source), sink(sink), grh(n)
-      {}
-    void insert(int u, int v, T cap, U cost) {
-      auto e = make_shared<edge>(edge{v, cap, cost});
-      auto r = make_shared<edge>(edge{u, 0, -cost});
-      e->rev = r;
-      r->rev = e;
-      grh[u].push_back(e);
-      grh[v].push_back(r);
+      n(n), source(source), sink(sink), graph(n) {}
+
+    void insert(int u, int v, Flow cap, Cost cost) {
+      graph.at(u).emplace_back(v, cap, cost, graph.at(v).size());
+      graph.at(v).emplace_back(u, 0, -cost,  graph.at(u).size() - 1);
     }
-    T cal(U required_flow) {
-      T ret = 0;
+
+    auto build(Flow required_flow) {
+      Cost ret = 0;
       while (true) {
-        bf();
-        if (dst[sink] == max_dist) break;
-        T d = dst[sink]; U f = flush();
+        bellman_ford();
+        auto d = distance.at(sink);
+        if (distance.at(sink) == max_dist) break;
+        auto f = flush();
         if (f >= required_flow) {
           ret += d * required_flow;
           return ret;
