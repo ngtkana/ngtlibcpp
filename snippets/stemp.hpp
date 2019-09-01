@@ -14,8 +14,7 @@ void debug_impl(Head head, Tail... tail){
   debug_impl(__VA_ARGS__);\
   std::cerr << std::noboolalpha;
 
-int main()
-{
+int main() {
   std::cin.tie(0); std::cin.sync_with_stdio(false);
   $0
   return 0;
