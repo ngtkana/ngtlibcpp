@@ -1045,19 +1045,17 @@
   "../include/io/vector_io.hpp": {
     "body": [
       "template <typename T>",
-      "std::istream& operator>> (std::istream& is, std::vector<T>& v)",
-      "{",
+      "std::istream& operator>> (std::istream& is, std::vector<T>& v) {",
       "  for (auto & x : v) is >> x;",
       "  return is;",
       "}",
       "",
       "template <typename T>",
-      "std::ostream& operator<< (std::ostream& os, const std::vector<T>& v)",
-      "{",
+      "std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {",
       "  auto n = v.size();",
       "  os << \"{\";",
       "  for (size_t i = 0; i < n; i++)",
-      "    os << (i > 0 ? \",\" : \"\") << v[i];",
+      "    {os << (i > 0 ? \",\" : \"\") << v.at(i);}",
       "  return os << \"}\";",
       "}"
     ],
@@ -1875,7 +1873,7 @@
       "template <typename T, typename U> modular<T> operator/(U lhs, const modular<T>& rhs) { return modular<T>(lhs) /= rhs; }",
       "",
       "template<typename T, typename U>",
-      "modular<T> pow (const modular<T>& a, U b) {",
+      "modular<T> power (const modular<T>& a, U b) {",
       "  assert(b >= 0);",
       "  modular<T> x = a, ret = 1;",
       "  for (; b > 0; b /= 2) {",
@@ -3605,6 +3603,15 @@
     ],
     "prefix": "bit_at"
   },
+  "../include/utility/err.hpp": {
+    "body": [
+      "void err () {",
+      "  std::cout << 0 << std::endl;",
+      "  exit(0);",
+      "}"
+    ],
+    "prefix": "err"
+  },
   "../include/utility/guess.hpp": {
     "body": [
       "struct rational {int n, d;};",
@@ -4177,15 +4184,6 @@
     ],
     "prefix": "5sin"
   },
-  "../snippets/io/err.hpp": {
-    "body": [
-      "auto err = [&] {",
-      "  std::cout << $0 << std::endl;",
-      "  exit(0);",
-      "};"
-    ],
-    "prefix": "err"
-  },
   "../snippets/io/sout.hpp": {
     "body": [
       "std::cout << $0 << std::endl;"
@@ -4205,6 +4203,7 @@
       "#include <bits/stdc++.h>",
       "#define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)",
       "#define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)",
+      "#define all(v) v.begin(), v.end()",
       "#define lint long long",
       "auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};",
       "auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};",
@@ -4214,7 +4213,8 @@
       "  std::cerr << \" \" << head;",
       "  debug_impl(tail...);",
       "}",
-      "#define debug(...) std::cerr << std::boolalpha << \"[\" << #__VA_ARGS__ << \"]:\";\\",
+      "#define debug(...)\\",
+      "  std::cerr << std::boolalpha << \"[\" << #__VA_ARGS__ << \"]:\";\\",
       "  debug_impl(__VA_ARGS__);\\",
       "  std::cerr << std::noboolalpha;",
       "",

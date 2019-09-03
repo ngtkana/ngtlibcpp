@@ -91,7 +91,7 @@ template <typename T, typename U> modular<T> operator/(const modular<T>& lhs, U 
 template <typename T, typename U> modular<T> operator/(U lhs, const modular<T>& rhs) { return modular<T>(lhs) /= rhs; }
 
 template<typename T, typename U>
-modular<T> pow (const modular<T>& a, U b) {
+modular<T> power (const modular<T>& a, U b) {
   assert(b >= 0);
   modular<T> x = a, ret = 1;
   for (; b > 0; b /= 2) {
