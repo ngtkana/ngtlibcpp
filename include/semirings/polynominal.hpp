@@ -3,6 +3,9 @@ class polynominal {
     using Value = typename Semiring::type;
     std::vector<Value> storage;
 
+    auto add_eq(Value& a, Value b) const { return a = Semiring::add(a, b); }
+    auto is_zero() const { return storage.size() == 0u; }
+
   public:
     constexpr polynominal()=default;
     constexpr polynominal(const polynominal&)=default;
@@ -22,15 +25,25 @@ class polynominal {
     auto        degree()         const { return storage.empty() ? -1 : (int)storage.size() - 1; }
 
     auto& operator*=(polynominal< Semiring, Length> const& rhs) {
-      int m = degree();
-      int n = rhs.degree();
-      if (m == -1 || n == -1) return *this = zero();
+      if (is_zero() || rhs.is_zero()) return *this = zero();
+      int m = degree(), n = rhs.degree();
       auto ret = std::vector<Value>(std::min(n + m + 1, Length), 0);
       for (auto i = 0; i <= m; i++) {
         for (auto j = 0; j <= n && i + j < Length; j++) {
-          ret.at(i + j) += at(i) * rhs.at(j);
+          add_eq(ret.at(i + j), Semiring::mul(at(i), rhs.at(j)));
         }
       }
+      storage.swap(ret);
+      return *this;
+    }
+
+    auto& operator+=(polynominal< Semiring, Length> const& rhs) {
+      if (is_zero()) return *this = rhs;
+      if (rhs.is_zero()) return *this;
+      int m = degree(), n = rhs.degree();
+      auto ret = std::vector<Value>(std::max(n, m), 0);
+      for (auto i = 0; i <= m; i++) add_eq(ret.at(i), at(i));
+      for (auto i = 0; i <= n; i++) add_eq(ret.at(i), rhs.at(i));
       storage.swap(ret);
       return *this;
     }
@@ -43,12 +56,8 @@ class polynominal {
 };
 
 template < typename Semiring, int Length > bool operator==(const polynominal< Semiring, Length > lhs, const polynominal< Semiring, Length > rhs) { return polynominal< Semiring, Length >(lhs)() == rhs(); }
-template < typename Semiring, int Length > bool operator==(const polynominal< Semiring, Length > lhs, const typename Semiring::Value rhs) { return lhs == polynominal< Semiring, Length >{rhs}; }
-template < typename Semiring, int Length > bool operator==(const typename Semiring::Value lhs, const polynominal< Semiring, Length > rhs) { return polynominal< Semiring, Length >{lhs} == rhs; }
 
 template < typename Semiring, int Length > auto operator*(const polynominal< Semiring, Length > lhs, const polynominal< Semiring, Length > rhs) { return polynominal< Semiring, Length >(lhs) *= rhs; }
-template < typename Semiring, int Length > auto operator*(const polynominal< Semiring, Length > lhs, const typename Semiring::Value rhs) { return lhs * polynominal< Semiring, Length >{rhs}; }
-template < typename Semiring, int Length > auto operator*(const typename Semiring::Value lhs, const polynominal< Semiring, Length > rhs) { return polynominal< Semiring, Length >{lhs} * rhs; }
 
 template < typename Semiring, int Length > std::ostream& operator<<(std::ostream& os, polynominal< Semiring, Length> const& p) { return os << p(); }
 
@@ -56,4 +65,6 @@ struct int_semiring {
   using type = int;
   static constexpr auto id()   { return 1; }
   static constexpr auto zero() { return 0; }
+  static constexpr auto mul(int a, int b) { return a * b; }
+  static constexpr auto add(int a, int b) { return a + b; }
 };

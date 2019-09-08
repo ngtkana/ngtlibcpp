@@ -1,11 +1,9 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <range_queries/binary_indexed_tree.hpp>
 #include <range_queries/segment_tree.hpp>
 #include <range_queries/lazy_segment_tree.hpp>
 #include "../utility.hpp"
 
-struct binary_indexed_tree_tag{};
 struct segment_tree_tag{};
 struct lazy_segment_tree_tag{};
 
@@ -69,14 +67,6 @@ template <typename DispatchTag>
 struct range_sum_query_engine{};
 
 template <>
-struct range_sum_query_engine<binary_indexed_tree_tag>{
-  binary_indexed_tree<int, sum_fn_t, dif_fn_t> storage;
-  range_sum_query_engine(int n): storage(n, sum_fn, dif_fn, 0){}
-  int  query (int l, int r) const {return storage.query(l, r);}
-  void update(int i, int x)       {storage.update(i, x);}
-};
-
-template <>
 struct range_sum_query_engine<segment_tree_tag>{
   segment_tree<int, sum_fn_t> storage;
   range_sum_query_engine(int n): storage(n, sum_fn, 0) {}
@@ -97,7 +87,6 @@ TEMPLATE_TEST_CASE
 (
   "Range Sum Query Test from the Sample Input 1 of AOJ DSL_2_B",
   "[Binary Indexed Tree,Segment Tree]",
-  binary_indexed_tree_tag,
   segment_tree_tag,
   lazy_segment_tree_tag
 )

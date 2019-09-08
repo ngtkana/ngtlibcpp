@@ -49,8 +49,12 @@ public:
   sliding_minimum_query_engine (const std::vector<int>& v):
     left (0),
     right(0),
-    min_tree(v.size(), min_fn, inf, std::move(v))
-    {}
+    min_tree(v.size(), min_fn, inf)
+    {
+      for (size_t i = 0; i < v.size(); i++)
+        { min_tree.at(i) = v.at(i); }
+      min_tree.build();
+    }
 
   auto query() const {return min_tree.query(left, right);}
 

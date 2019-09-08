@@ -1,10 +1,13 @@
 #include <catch2/catch.hpp>
-#include <semirings/polynominal.hpp>
-#include <io/vector_io.hpp>
 #include <bits/stdc++.h>
 
+#include <semirings/mint.hpp>
+#include <semirings/polynominal.hpp>
+#include <io/vector_io.hpp>
+
 TEMPLATE_TEST_CASE( "Polynominal Tests", "[polynominal]",
-  int_semiring)
+  int_semiring
+)
 {
   SECTION( "id and zero") {
     using poly = polynominal<TestType, 20>;
