@@ -1,34 +1,38 @@
-template <typename T>
+template < typename Cost >
 class dijkstra {
-  const int n, r;
-  const std::vector<std::vector<std::pair<T, int>>>& grh;
-  std::vector<T> dst;
-  void cal () {
-    priority_queue<
-      std::pair<T, int>, std::vector<std::pair<T, int>>, greater<std::pair<T, int>>
-      > que;
-    que.emplace(0, r);
-    while (!que.empty()) {
-      T crd; int crr; std::tie(crd, crr) = que.top(), que.pop();
-      if (!cmn(dst[crr], crd)) continue;
-      for (auto e : grh[crr]) {
-        T w; int nxt; std::tie(w, nxt) = e;
-        T nxd = crd + w;
-        if (nxd < dst[nxt]) que.emplace(nxd, nxt);
+    int                 n;
+    int                 start;
+    Cost                inf;
+    std::vector< Cost > dist;
+    std::vector< std::vector< std::pair< Cost, int > > > graph;
+
+  public:
+    dijkstra()=default;
+    dijkstra(int n, int start, Cost inf) :
+      n(n), start(start), inf(inf), dist(n, inf), graph(n){}
+
+    void insert(int i, int j, Cost cost)
+      { graph.at(i).emplace_back(cost, j); }
+
+    void build() {
+      std::priority_queue<
+        std::pair< Cost, int >,
+        std::vector< std::pair< Cost, int > >,
+        std::greater< std::pair< Cost, int > >> que;
+      que.emplace(0, start);
+      while (!que.empty()) {
+        Cost d; int crr; std::tie(d, crr) = que.top(); que.pop();
+        if (dist.at(crr) <= d) continue;
+        dist.at(crr) = d;
+        for (auto pair : graph.at(crr)) {
+          Cost cost; int nxt; std::tie(cost, nxt) = pair;
+          if (dist.at(nxt) <= d + cost) continue;
+          que.emplace(d + cost, nxt);
+        }
       }
     }
-  }
-  public:
-    const T inf;
-    dijkstra (
-        const int r,
-        const std::vector<std::vector<std::pair<T, int>>>& grh,
-        const T inf = numeric_limits<T>::max()
-      ) :
-      n(grh.size()), r(r),
-      grh(grh), dst(n, inf), inf(inf)
-      {
-        cal();
-      }
-    auto result () const {return dst;}
+
+    auto collect() const { return dist; }
+
+    auto at(int i) const { return dist.at(i); }
 };
