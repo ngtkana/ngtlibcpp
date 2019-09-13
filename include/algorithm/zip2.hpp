@@ -1,15 +1,10 @@
-template <typename InputIterator1,
-          typename InputIterator2, typename OutputIterator>
-constexpr OutputIterator
-  zip2(InputIterator1 first1,
-      InputIterator1 last1,
-      InputIterator2 first2,
-      OutputIterator result)
-{
-  while (first1 != last1)
-  {
-    *result = std::make_pair(*first1, *first2);
-    result++, first1++, first2++;
-  }
-  return result;
+template < template < typename ... > class Container, typename T, typename U >
+auto zip2(Container< T > const& x, Container< U > const& y) {
+  auto n = x.size();
+  auto m = y.size();
+  assert(n == m);
+  Container< std::pair< T, U >> ret(n);
+  for (std::size_t i = 0; i < n; i++)
+    { ret.at(i) = {x.at(i), y.at(i)}; }
+  return ret;
 }
