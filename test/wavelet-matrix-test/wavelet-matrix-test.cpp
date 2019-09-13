@@ -7,34 +7,34 @@
 #define lint long long
 auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};
 auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};
-void debug_impl() { std::cerr << std::endl; }
-template <typename Head, typename... Tail>
-void debug_impl(Head head, Tail... tail){
-  std::cerr << " " << head;
-  debug_impl(tail...);
-}
-#define debug(...)\
-  std::cerr << std::boolalpha << "[" << #__VA_ARGS__ << "]:";\
-  debug_impl(__VA_ARGS__);\
-  std::cerr << std::noboolalpha;
-#define rand(l, r) std::uniform_int_distribution<int>(l, r)(mt)
+  void debug_impl() { std::cerr << std::endl; }
+  template <typename Head, typename... Tail>
+  void debug_impl(Head head, Tail... tail){
+    std::cerr << " " << head;
+    debug_impl(tail...);
+  }
+  #define debug(...)\
+    std::cerr << std::boolalpha << "[" << #__VA_ARGS__ << "]:";\
+    debug_impl(__VA_ARGS__);\
+    std::cerr << std::noboolalpha;
+  #define rand(l, r) std::uniform_int_distribution<int>(l, r)(mt)
 
-#include <range_queries/wavelet_matrix.hpp>
+  #include <range_queries/wavelet_matrix.hpp>
 
-template <typename T>
-std::istream& operator>> (std::istream& is, std::vector<T>& v) {
-  for (auto & x : v) is >> x;
-  return is;
-}
+  template <typename T>
+  std::istream& operator>> (std::istream& is, std::vector<T>& v) {
+    for (auto & x : v) is >> x;
+    return is;
+  }
 
-template <typename T>
-std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {
-  auto h = v.size();
-  os << "{";
-  for (size_t i = 0; i < h; i++)
-    {os << (i > 0 ? "," : "") << v.at(i);}
-  return os << "}";
-}
+  template <typename T>
+  std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {
+    auto h = v.size();
+    os << "{";
+    for (size_t i = 0; i < h; i++)
+      {os << (i > 0 ? "," : "") << v.at(i);}
+    return os << "}";
+  }
 
 
 std::mt19937_64 mt(std::random_device{}());

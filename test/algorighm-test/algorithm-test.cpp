@@ -1,76 +1,102 @@
 #include <catch2/catch.hpp>
+#include <bits/stdc++.h>
 #include <algorithm/coenumerate.hpp>
 #include <algorithm/enumerate.hpp>
 #include <algorithm/zip2.hpp>
 #include <algorithm/zip.hpp>
+#include <algorithm/compress.hpp>
 
-TEST_CASE( "Algorithms on Sequences", "[enumerate, coenumerate]" ) {
-  auto sz = 5;
-  auto seq1 = std::vector<int>(sz);
-  auto seq2 = std::vector<int>(sz);
-  auto seq3 = std::vector<int>(sz);
-  auto seq4 = std::vector<int>(sz);
-  std::iota(seq1.begin(), seq1.end(), 10);
-  std::iota(seq2.begin(), seq2.end(), 20);
-  std::iota(seq3.begin(), seq3.end(), 30);
-  std::iota(seq4.begin(), seq4.end(), 40);
+
+#define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
+#define loop(h) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(h); ngtkana_is_genius++)
+#define all(v) v.begin(), v.end()
+#define rand(l, r) std::uniform_int_distribution<int>(l, r)(mt)
+std::mt19937_64 mt(std::random_device{}());
+
+template <typename T>
+std::istream& operator>> (std::istream& is, std::vector<T>& v) {
+  for (auto & x : v) is >> x;
+  return is;
+}
+
+template <typename T>
+std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {
+  auto n = v.size();
+  os << "{";
+  for (size_t i = 0; i < n; i++)
+    {os << (i > 0 ? "," : "") << v.at(i);}
+  return os << "}";
+}
+
+TEST_CASE( "Algorithms on Sequences", "[enumerate, coenumerate, zip]" ) {
+  auto nmax    = 20;
+  auto max     = 1'000'000'000;
 
   SECTION( "coenumerate" ) {
-    auto const ret = coenumerate(seq1);
-    for (auto i = 0; i < sz; i++) {
-      REQUIRE(ret.at(i).first  == 10 + i);
+    loop(24) {
+      auto n = rand(1, nmax);
+      std::vector< int > a(n);
+      for (auto & x : a) x = rand(1, max);
+      auto const ret = coenumerate(a);
+      auto i = rand(0, n - 1);
+      REQUIRE(ret.at(i).first  == a.at(i));
       REQUIRE(ret.at(i).second == i);
     }
   }
-
   SECTION( "enumerate" ) {
-    auto const ret = enumerate(seq1);
-    for (auto i = 0; i < sz; i++) {
+    loop(24) {
+      auto n = rand(1, nmax);
+      std::vector< int > a(n);
+      for (auto & x : a) x = rand(1, max);
+      auto const ret = enumerate(a);
+      auto i = rand(0, n - 1);
       REQUIRE(ret.at(i).first  == i);
-      REQUIRE(ret.at(i).second == 10 + i);
+      REQUIRE(ret.at(i).second == a.at(i));
     }
   }
-
-  SECTION( "zip 2" ) {
-    auto const ret = zip2(seq1, seq2);
-    for (auto i = 0; i < sz; i++) {
-      REQUIRE(ret.at(i).first  == 10 + i);
-      REQUIRE(ret.at(i).second == 20 + i);
+  SECTION( "zip2" ) {
+    loop(24) {
+      auto n = rand(1, nmax);
+      std::vector< int > a(n), b(n);
+      for (auto & x : a) x = rand(1, max);
+      for (auto & x : b) x = rand(1, max);
+      auto const ret = zip2(a, b);
+      auto i = rand(0, n - 1);
+      REQUIRE(ret.at(i).first  == a.at(i));
+      REQUIRE(ret.at(i).second == b.at(i));
     }
   }
-
-  SECTION( "1-fold zip" ) {
-    auto const ret = zip(seq1);
-    for (auto i = 0; i < sz; i++) {
-      REQUIRE(std::get<0>(ret.at(i)) == 10 + i);
+  SECTION( "zip2" ) {
+    loop(24) {
+      auto n = rand(1, nmax);
+      std::vector< int > a(n), b(n), c(n);
+      for (auto & x : a) x = rand(1, max);
+      for (auto & x : b) x = rand(1, max);
+      for (auto & x : c) x = rand(1, max);
+      auto const ret = zip(a, b, c);
+      auto i = rand(0, n - 1);
+      REQUIRE(std::get< 0 >(ret.at(i)) == a.at(i));
+      REQUIRE(std::get< 1 >(ret.at(i)) == b.at(i));
+      REQUIRE(std::get< 2 >(ret.at(i)) == c.at(i));
     }
   }
-
-  SECTION( "2-fold zip" ) {
-    auto const ret = zip(seq1, seq2);
-    for (auto i = 0; i < sz; i++) {
-      REQUIRE(std::get<0>(ret.at(i)) == 10 + i);
-      REQUIRE(std::get<1>(ret.at(i)) == 20 + i);
+  SECTION( "compress" ) {
+    loop(24) {
+      auto n = rand(1, nmax);
+      std::vector< int > a(n);
+      for (auto & x : a) x = rand(1, n);
+      auto ret = compress(a);
+      loop(n) {
+        auto i = rand(0, n - 1);
+        auto j = rand(0, n - 1);
+        REQUIRE((a.at(i) < a.at(j)) == (ret.at(i) < ret.at(j)));
+      }
+      std::sort(all(a));
+      std::sort(all(ret));
+      a.resize(std::unique(all(a)) - a.begin());
+      ret.resize(std::unique(all(ret)) - ret.begin());
+      REQUIRE(a.size() == ret.size());
+      REQUIRE((int)ret.size() - 1 == ret.back());
     }
   }
-
-  SECTION( "3-fold zip" ) {
-    auto const ret = zip(seq1, seq2, seq3);
-    for (auto i = 0; i < sz; i++) {
-      REQUIRE(std::get<0>(ret.at(i)) == 10 + i);
-      REQUIRE(std::get<1>(ret.at(i)) == 20 + i);
-      REQUIRE(std::get<2>(ret.at(i)) == 30 + i);
-    }
-  }
-
-  SECTION( "4-fold zip" ) {
-    auto const ret = zip(seq1, seq2, seq3, seq4);
-    for (auto i = 0; i < sz; i++) {
-      REQUIRE(std::get<0>(ret.at(i)) == 10 + i);
-      REQUIRE(std::get<1>(ret.at(i)) == 20 + i);
-      REQUIRE(std::get<2>(ret.at(i)) == 30 + i);
-      REQUIRE(std::get<3>(ret.at(i)) == 40 + i);
-    }
-  }
-
 }
