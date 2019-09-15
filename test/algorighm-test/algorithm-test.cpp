@@ -5,7 +5,7 @@
 #include <algorithm/zip2.hpp>
 #include <algorithm/zip.hpp>
 #include <algorithm/compress.hpp>
-
+#include <algorithm/runlength.hpp>
 
 #define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
 #define loop(h) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(h); ngtkana_is_genius++)
@@ -97,6 +97,29 @@ TEST_CASE( "Algorithms on Sequences", "[enumerate, coenumerate, zip]" ) {
       ret.resize(std::unique(all(ret)) - ret.begin());
       REQUIRE(a.size() == ret.size());
       REQUIRE((int)ret.size() - 1 == ret.back());
+    }
+  }
+  SECTION( "runlength" ) {
+    loop(24) {
+      auto n = rand(1, nmax);
+      std::vector< int > a(n);
+      for (auto & x : a) x = rand(1, nmax);
+      std::sort(all(a));
+      auto ret = runlength(a);
+      loop(n) {
+        auto i = rand(0, n - 1);
+        auto j = 0;
+        auto y = -1;
+        for (auto pair : ret) {
+          int value, mul; std::tie(value, mul) = pair;
+          if (i < j + mul) {
+            y = value;
+            break;
+          }
+          j += mul;
+        }
+        REQUIRE(a.at(i) == y);
+      }
     }
   }
 }

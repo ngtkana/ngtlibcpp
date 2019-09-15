@@ -12,6 +12,30 @@
     ],
     "prefix": "coenumerate"
   },
+  "../include/algorithm/compress.hpp": {
+    "body": [
+      "template < template < typename ... > class Container, typename Value >",
+      "auto compress (Container< Value > const& v) {",
+      "  int n = v.size();",
+      "  if (n == 0) return v;",
+      "  Container< std::pair< Value, int > > pairs(n);",
+      "  for (auto i = 0; i < n; i++)",
+      "    { pairs.at(i) = {v.at(i), i}; }",
+      "  std::sort(pairs.begin(), pairs.end());",
+      "  std::vector< int > new_v(n);",
+      "  auto prv = pairs.at(0).first;",
+      "  auto i = 0;",
+      "  for (auto & pair : pairs) {",
+      "    Value crr; int pos; std::tie(crr, pos) = pair;",
+      "    if (prv < crr) i++;",
+      "    new_v.at(pos) = i;",
+      "    prv = crr;",
+      "  }",
+      "  return new_v;",
+      "}"
+    ],
+    "prefix": "compress"
+  },
   "../include/algorithm/enumerate.hpp": {
     "body": [
       "template < template < typename ... > class Container, typename T >",
@@ -24,6 +48,30 @@
       "}"
     ],
     "prefix": "enumerate"
+  },
+  "../include/algorithm/runlength.hpp": {
+    "body": [
+      "template < template < typename ... > class Container, typename Value >",
+      "auto runlength(Container< Value > const& v) {",
+      "  auto n = (int)v.size();",
+      "  if (n == 0)",
+      "    { return Container< std::pair< Value, int > >{}; }",
+      "  auto pos = Container< int >{};",
+      "  for (auto i = 1; i < n; i++) {",
+      "    if (v.at(i - 1) != v.at(i))",
+      "      { pos.emplace_back(i); }",
+      "  }",
+      "  pos.emplace_back(n);",
+      "  auto m = (int)pos.size();",
+      "  auto len = Container< int >(m);",
+      "  std::adjacent_difference(pos.begin(), pos.end(), len.begin());",
+      "  auto ret = Container< std::pair< Value, int > >(m);",
+      "  for (auto i = 0; i != m; i++)",
+      "    { ret.at(i) = {v.at(pos.at(i) - 1), len.at(i)}; }",
+      "  return ret;",
+      "}"
+    ],
+    "prefix": "runlength"
   },
   "../include/algorithm/zip.hpp": {
     "body": [
@@ -3140,31 +3188,6 @@
       "};"
     ],
     "prefix": "rolling_hash"
-  },
-  "../include/string_algorighms/run_length_encoding.hpp": {
-    "body": [
-      "template<typename T>",
-      "class run_length_encoding {",
-      "  std::vector<std::pair<int, T>> rle;",
-      "  public:",
-      "    run_length_encoding(",
-      "        std::vector<T> input",
-      "      ) :",
-      "      rle(0)",
-      "      {",
-      "        int cnt = 0;",
-      "        for (auto it = input.begin(); it != input.end(); it++) {",
-      "          auto jt = next(it); cnt++;",
-      "          if (jt == input.end() || *it != *jt) {",
-      "            rle.emplace_back(cnt, *it);",
-      "            cnt = 0;",
-      "          }",
-      "        }",
-      "      }",
-      "    auto const& code () const {return rle;}",
-      "};"
-    ],
-    "prefix": "run_length_encoding"
   },
   "../include/string_algorighms/suffix_array.hpp": {
     "body": [
