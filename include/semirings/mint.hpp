@@ -118,14 +118,12 @@ auto operator>>(std::istream& is, T& a)
   return is;
 }
 
-
 using mod_type = int;
 
-struct voriable_mod { static mod_type value; };
-mod_type voriable_mod::value;
-// mod_type& md = voriable_mod::value;
-// using Mint = Modular<voriable_mod>;
+// struct variable_mod { static mod_type value; };
+// mod_type variable_mod::value;
+// mod_type& mod = variable_mod::value;
+// using mint = modular< variable_mod >;
 
-
-// constexpr int md = 1'000'000'007;
-// using mint = modular<std::integral_constant<std::decay_t<decltype(md)>, md>>;
+// constexpr int mod = 1'000'000'007;
+// using mint = modular<std::integral_constant<std::decay_t<decltype(mod)>, mod>>;
