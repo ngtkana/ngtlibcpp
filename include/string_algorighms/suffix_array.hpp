@@ -1,90 +1,56 @@
-class suffix_array
-{
-  private:
-    int              n;
-    std::string      s;
-    std::vector<int> suf;
-    std::vector<int> suf_inverse;
-    std::vector<int> lcp;
-
-    template <typename T>
-    auto compress(const T& v)
-      -> std::vector<int>
-    {
-      int n = v.size();
-      auto ord = std::vector<int>(n);
-      std::iota(ord.begin(), ord.end(), 0);
-      std::sort(ord.begin(), ord.end(), [&](auto i, auto j)
-      {
-        return v.at(i) < v.at(j);
-      });
-      auto c = std::vector<int>(n);
-      int classes = 0;
-      for (auto it = ord.begin(); it != ord.end(); it++)
-      {
-        if (it != ord.begin() && v.at(*it) != v.at(*std::prev(it)))
-        {
-          classes++;
-        }
-        c.at(*it) = classes;
-      }
-      return c;
-    }
+class suffix_array {
+    int                n;
+    std::string        s;
+    std::vector< int > suf;
+    std::vector< int > rank;
+    std::vector< int > lcp;
 
   public:
     suffix_array()=default;
-    suffix_array(const suffix_array&)=default;
-    suffix_array(suffix_array&&)=default;
-    suffix_array& operator=(const suffix_array&)=default;
-    suffix_array& operator=(suffix_array&&)=default;
-
     suffix_array(const std::string& s) :
-      n(s.length()), s(s)
-      {
-        assert(s.back() == '$');
-      }
+      n(s.length()), s(s), suf(n), rank(n), lcp(n) {}
 
-    // Container Accessors.
-    auto get_suffix_array() const {assert((int)suf.size() == n); return suf;}
-
-    auto get_lcp_array()    const {assert((int)lcp.size() == n); return lcp;}
-
-    // Builders.
-    void build_suffix_array()
-    {
-      auto c = compress(s);
-      for (int k = 1; k < n; k *= 2)
-      {
-        std::vector<std::pair<int, int>> pairs(n);
-        for (int i = 0; i < n; i++)
-        {
-          pairs.at(i) = {c.at(i), c.at((i + k) % n)};
+    void build() {
+      suf.resize(n, 0);
+      rank.resize(n, 0);
+      std::iota(suf.begin(), suf.end(), 0);
+      for (auto i = 0; i < n; i++)
+        { rank.at(i) = s.at(i); }
+      auto comb = 1;
+      auto cmp = [&](auto i, auto j) {
+        if (rank.at(i) < rank.at(j)) return true;
+        if (rank.at(i) > rank.at(j)) return false;
+        if (n <= i + comb) return true;
+        if (n <= j + comb) return false;
+        return rank.at(i + comb) < rank.at(j + comb);
+      };
+      std::vector< int > buff(n);
+      for (; comb < n; comb *= 2) {
+        std::sort(suf.begin(), suf.end(), cmp);
+        buff.at(suf.front()) = 0;
+        for (auto i = 1; i < n; i++) {
+          buff.at(suf.at(i)) = buff.at(suf.at(i - 1)) + cmp(suf.at(i - 1), suf.at(i));
         }
-        c = compress(pairs);
+        buff.swap(rank);
       }
-      suf_inverse = std::move(c);
-      suf.resize(n);
-      for (int i = 0; i < n; i++)
-      {
-        suf.at(suf_inverse.at(i)) = i;
+      for (auto i = 0; i < n; i++)
+        { rank.at(suf.at(i)) = i; }
+
+      auto now = 0;
+      for (auto i = 0; i < n; i++) {
+        auto x = rank.at(i);
+        if (x == n - 1) continue;
+        auto y = x + 1;
+        auto j = suf.at(y);
+        if (0 < now) now--;
+        for (; now + std::max(i, j) < n; now++) {
+          if (s.at(i + now) != s.at(j + now))
+            { break; }
+        }
+        lcp.at(x) = now;
       }
     }
 
-    void build_lcp_array()
-    {
-      int now = 0;
-      lcp.resize(n, 0);
-      for (auto i : suf_inverse)
-      {
-        if (i == n - 1) continue;
-        auto pos = suf.at(i) + now;
-        auto qos = suf.at(i + 1) + now;
-        while (pos < n && qos < n && s.at(pos) == s.at(qos))
-        {
-          pos++, qos++, now++;
-        }
-        lcp.at(i) = now;
-        if (now > 0) now--;
-      }
-    }
+    auto get_suf() const { return suf; }
+    auto get_lcp() const { return lcp; }
 };
