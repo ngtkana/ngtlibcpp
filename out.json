@@ -1040,6 +1040,24 @@
     ],
     "prefix": "rotate45"
   },
+  "../include/io/comtainer_io.hpp": {
+    "body": [
+      "template < typename Container, typename Value = typename Container::value_type >",
+      "std::istream& operator>> (std::istream& is, Container& v) {",
+      "  for (auto & x : v) is >> x;",
+      "  return is;",
+      "}",
+      "",
+      "template < typename Container, typename Value = typename Container::value_type >",
+      "std::ostream& operator<< (std::ostream& os, Container const& v) {",
+      "  os << \"{\";",
+      "  for (auto it = v.begin(); it != v.end(); it++)",
+      "    {os << (it != v.begin() ? \",\" : \"\") << *it;}",
+      "  return os << \"}\";",
+      "}"
+    ],
+    "prefix": "comtainer_io"
+  },
   "../include/io/pair_io.hpp": {
     "body": [
       "template <typename T, typename U>",
@@ -1088,25 +1106,6 @@
       "  { return tuple_input_impl(is, tuple, std::index_sequence_for<Args...>()); }"
     ],
     "prefix": "tuple_io"
-  },
-  "../include/io/vector_io.hpp": {
-    "body": [
-      "template <typename T>",
-      "std::istream& operator>> (std::istream& is, std::vector<T>& v) {",
-      "  for (auto & x : v) is >> x;",
-      "  return is;",
-      "}",
-      "",
-      "template <typename T>",
-      "std::ostream& operator<< (std::ostream& os, const std::vector<T>& v) {",
-      "  auto n = v.size();",
-      "  os << \"{\";",
-      "  for (size_t i = 0; i < n; i++)",
-      "    {os << (i > 0 ? \",\" : \"\") << v.at(i);}",
-      "  return os << \"}\";",
-      "}"
-    ],
-    "prefix": "vector_io"
   },
   "../include/matricies/gauss_jordan_int.hpp": {
     "body": [
