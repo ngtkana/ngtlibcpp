@@ -3,7 +3,7 @@
 
 #include <semirings/mint.hpp>
 #include <semirings/polynominal.hpp>
-#include <io/vector_io.hpp>
+#include <io/container_io.hpp>
 
 TEMPLATE_TEST_CASE( "Polynominal Tests", "[polynominal]",
   int_semiring

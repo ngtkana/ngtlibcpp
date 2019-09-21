@@ -1,5 +1,5 @@
 template < typename Value >
-auto reflect(std::vector< std::vector< Value > > const& grid) {
+auto transpose(std::vector< std::vector< Value > > const& grid) {
   int h = grid.size();
   int w = grid.front().size();
   auto ret = std::vector< std::vector< Value > > (w, std::vector< Value >(h));

@@ -49,6 +49,34 @@
     ],
     "prefix": "enumerate"
   },
+  "../include/algorithm/extend.hpp": {
+    "body": [
+      "template < typename Container, typename = typename Container::value_type >",
+      "inline auto extend(Container const& v, int k) {",
+      "  auto ret = Container(k);",
+      "  for (auto i = 0; i < k; i++)",
+      "    { ret.at(i) = v.at(i % (int)v.size()); }",
+      "  return ret;",
+      "}"
+    ],
+    "prefix": "extend"
+  },
+  "../include/algorithm/max_rangesum.hpp": {
+    "body": [
+      "template < typename Container, typename Value = typename Container::value_type >",
+      "auto max_rangesum(Container v) {",
+      "  std::partial_sum(v.begin(), v.end(), v.begin());",
+      "  auto min = Value{0};",
+      "  auto ret = -std::numeric_limits<  Value >::max();",
+      "  for (auto x : v) {",
+      "    ret = std::max(ret, x - min);",
+      "    min = std::min(min, x);",
+      "  }",
+      "  return ret;",
+      "}"
+    ],
+    "prefix": "max_rangesum"
+  },
   "../include/algorithm/runlength.hpp": {
     "body": [
       "template < template < typename ... > class Container, typename Value >",
@@ -1002,23 +1030,6 @@
     ],
     "prefix": "print_grid"
   },
-  "../include/grid/reflect.hpp": {
-    "body": [
-      "template < typename Value >",
-      "auto reflect(std::vector< std::vector< Value > > const& grid) {",
-      "  int h = grid.size();",
-      "  int w = grid.front().size();",
-      "  auto ret = std::vector< std::vector< Value > > (w, std::vector< Value >(h));",
-      "  for (auto i = 0; i < h; i++) {",
-      "    for(auto j = 0; j < w; j++) {",
-      "      ret.at(j).at(i) = grid.at(i).at(j);",
-      "    }",
-      "  }",
-      "  return ret;",
-      "}"
-    ],
-    "prefix": "reflect"
-  },
   "../include/grid/rotate45.hpp": {
     "body": [
       "template < typename Value >",
@@ -1040,15 +1051,38 @@
     ],
     "prefix": "rotate45"
   },
-  "../include/io/comtainer_io.hpp": {
+  "../include/grid/transpose.hpp": {
     "body": [
-      "template < typename Container, typename Value = typename Container::value_type >",
+      "template < typename Value >",
+      "auto transpose(std::vector< std::vector< Value > > const& grid) {",
+      "  int h = grid.size();",
+      "  int w = grid.front().size();",
+      "  auto ret = std::vector< std::vector< Value > > (w, std::vector< Value >(h));",
+      "  for (auto i = 0; i < h; i++) {",
+      "    for(auto j = 0; j < w; j++) {",
+      "      ret.at(j).at(i) = grid.at(i).at(j);",
+      "    }",
+      "  }",
+      "  return ret;",
+      "}"
+    ],
+    "prefix": "transpose"
+  },
+  "../include/io/container_io.hpp": {
+    "body": [
+      "template < typename Container,",
+      "  typename Value = typename Container::value_type,",
+      "  std::enable_if_t<!std::is_same< Container, std::string >::value, std::nullptr_t> = nullptr",
+      ">",
       "std::istream& operator>> (std::istream& is, Container& v) {",
       "  for (auto & x : v) is >> x;",
       "  return is;",
       "}",
       "",
-      "template < typename Container, typename Value = typename Container::value_type >",
+      "template < typename Container,",
+      "  typename Value = typename Container::value_type,",
+      "  std::enable_if_t<!std::is_same< Container, std::string >::value, std::nullptr_t> = nullptr",
+      ">",
       "std::ostream& operator<< (std::ostream& os, Container const& v) {",
       "  os << \"{\";",
       "  for (auto it = v.begin(); it != v.end(); it++)",
@@ -1056,7 +1090,7 @@
       "  return os << \"}\";",
       "}"
     ],
-    "prefix": "comtainer_io"
+    "prefix": "container_io"
   },
   "../include/io/pair_io.hpp": {
     "body": [
@@ -1761,7 +1795,7 @@
     "body": [
       "template < typename Value >",
       "class factorials {",
-      "    std::vector<Value> fact, finv;",
+      "    std::vector< Value > fact, finv;",
       "",
       "  public:",
       "    factorials()=default;",
@@ -1773,21 +1807,16 @@
       "      finv.at(n - 1) = Value(1) / fact.at(n - 1);",
       "      for (int i = n - 2; i >= 0; i--) finv.at(i) = finv.at(i + 1) * Value(i + 1);",
       "    }",
-      "",
-      "    auto operator()(int i) const {return fact.at(i);}",
-      "",
-      "    auto inv       (int i) const {return finv.at(i);}",
-      "",
+      "    auto operator()  (int i) const {return fact.at(i);}",
+      "    auto inv         (int i) const {return finv.at(i);}",
       "    auto binom(int i, int j) const {",
       "      assert(0 <= i);",
       "      if (j < 0 ||i < j) return Value(0);",
       "      return fact.at(i) * finv.at(j) * finv.at(i - j);",
       "    }",
-      "",
-      "    auto deal(int i, int j) const {",
-      "      return binom(i + j - 1, j - 1);",
-      "    }",
-      "}"
+      "    auto deal(int i, int j) const",
+      "      { return binom(i + j - 1, j - 1); }",
+      "};"
     ],
     "prefix": "factorials"
   },
@@ -3858,6 +3887,12 @@
     ],
     "prefix": "linf"
   },
+  "../snippets/code_fragments/mt.hpp": {
+    "body": [
+      "std::mt19937 mt(std::random_device{}());"
+    ],
+    "prefix": "mt"
+  },
   "../snippets/debug/-pdbg.hpp": {
     "body": [
       "std::cout << \"(\" << ${1:name}${2:->}first << \", \" << $1$2second << \")\";"
@@ -4220,6 +4255,7 @@
       "#define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)",
       "#define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)",
       "#define all(v) v.begin(), v.end()",
+      "#define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)",
       "#define lint long long",
       "auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};",
       "auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};",
@@ -4229,10 +4265,14 @@
       "  std::cerr << \" \" << head;",
       "  debug_impl(tail...);",
       "}",
+      "#ifndef STOPIT",
       "#define debug(...)\\",
       "  std::cerr << std::boolalpha << \"[\" << #__VA_ARGS__ << \"]:\";\\",
       "  debug_impl(__VA_ARGS__);\\",
       "  std::cerr << std::noboolalpha;",
+      "#else",
+      "#define debug 0;",
+      "#endif",
       "",
       "int main() {",
       "  std::cin.tie(0); std::cin.sync_with_stdio(false);",
