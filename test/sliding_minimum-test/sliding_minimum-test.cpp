@@ -22,9 +22,9 @@ public:
 
   auto query() const {return storage.query();}
 
-  void pop_left()  {storage.pop_left();}
+  void pop_left()  {storage.shrink();}
 
-  void push_right() {storage.push_right();}
+  void push_right() {storage.extend();}
 };
 
 template <>
