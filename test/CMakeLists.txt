@@ -17,7 +17,7 @@ file(GLOB_RECURSE srcs RELATIVE ${CMAKE_CURRENT_LIST_DIR} **/*.cpp)
 foreach(src ${srcs})
   get_filename_component(test_name ${src} NAME_WE)
   message(${test_name})
-  add_executable(${test_name} main ${source})
+  add_executable(${test_name} main ${src})
   add_test(NAME ${test_name} COMMAND ${test_name})
 endforeach()
 

@@ -164,36 +164,42 @@
     ],
     "prefix": "zip2"
   },
-  "../include/bit_operations/bit_at.hpp": {
+  "../include/bit_operations/bat.hpp": {
     "body": [
-      "// Access the j-th bit.",
-      "auto bit_at (int x, int j) -> bool {return (x >> j) & 1;}"
+      "bool bat (int       x, int j) {return (x >> j) & 1  ;}",
+      "bool bat (long long x, int j) {return (x >> j) & 1LL;}"
     ],
-    "prefix": "bit_at"
+    "prefix": "bat"
   },
   "../include/bit_operations/ceil2.hpp": {
     "body": [
-      "auto ceil2(lint x) {",
+      "long long ceil2(long long x) {",
       "  if (x == 0 || x == 1) return 1LL;",
-      "  return (std::numeric_limits< lint >::max() >> __builtin_clzll(x - 1) - 1) + 1;",
+      "  return (std::numeric_limits< long long >::max() >> __builtin_clzll(x - 1) - 1) + 1;",
+      "}",
+      "int ceil2(int x) {",
+      "  if (x == 0 || x == 1) return 1;",
+      "  return (std::numeric_limits< int >::max() >> __builtin_clz(x - 1) - 1) + 1;",
       "}"
     ],
     "prefix": "ceil2"
   },
   "../include/bit_operations/insert_bit.hpp": {
     "body": [
-      "int insert_bit(int x, int j, int v) {",
-      "  int low = x & ((1 << j) - 1);",
-      "  return ((x >> j) << (j + 1)) + (v << j) + low;",
+      "template < class Value >",
+      "Value insert_bit(Value x, int j, bool bit) {",
+      "  Value low = x & (Value(1) << j) - 1;",
+      "  return (x >> j << j + 1) + (Value(bit) << j) + low;",
       "}"
     ],
     "prefix": "insert_bit"
   },
   "../include/bit_operations/remove_bit.hpp": {
     "body": [
-      "int remove_bit(int x, int j) {",
-      "  int low = x & ((1 << j) - 1);",
-      "  return ((x >> (j + 1)) << j) + low;",
+      "template < class Value >",
+      "Value remove_bit(Value x, int j) {",
+      "  Value low = x & (Value(1) << j) - 1;",
+      "  return (x >> j + 1 << j) + low;",
       "}"
     ],
     "prefix": "remove_bit"

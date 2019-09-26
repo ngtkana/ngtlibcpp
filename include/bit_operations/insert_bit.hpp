@@ -1,4 +1,5 @@
-int insert_bit(int x, int j, int v) {
-  int low = x & ((1 << j) - 1);
-  return ((x >> j) << (j + 1)) + (v << j) + low;
+template < class Value >
+Value insert_bit(Value x, int j, bool bit) {
+  Value low = x & (Value(1) << j) - 1;
+  return (x >> j << j + 1) + (Value(bit) << j) + low;
 }
