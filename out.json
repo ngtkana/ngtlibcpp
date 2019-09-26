@@ -164,6 +164,13 @@
     ],
     "prefix": "zip2"
   },
+  "../include/bit_operations/bit_at.hpp": {
+    "body": [
+      "// Access the j-th bit.",
+      "auto bit_at (int x, int j) -> bool {return (x >> j) & 1;}"
+    ],
+    "prefix": "bit_at"
+  },
   "../include/bit_operations/ceil2.hpp": {
     "body": [
       "auto ceil2(lint x) {",
@@ -172,6 +179,19 @@
       "}"
     ],
     "prefix": "ceil2"
+  },
+  "../include/bit_operations/remove_bit_insert_bit.hpp": {
+    "body": [
+      "int remove_bit(int x, int j) {",
+      "  int low = x & ((1 << j) - 1);",
+      "  return ((x >> (j + 1)) << j) + low;",
+      "}",
+      "int insert_bit(int x, int j, int v) {",
+      "  int low = x & ((1 << j) - 1);",
+      "  return ((x >> j) << (j + 1)) + (v << j) + low;",
+      "}"
+    ],
+    "prefix": "remove_bit_insert_bit"
   },
   "../include/bit_operations/remove_common_header.hpp": {
     "body": [
@@ -3628,13 +3648,6 @@
     ],
     "prefix": "lowest_common_ancestor"
   },
-  "../include/utility/bit_at.hpp": {
-    "body": [
-      "// Access the j-th bit.",
-      "auto bit_at (int x, int j) -> bool {return (x >> j) & 1;}"
-    ],
-    "prefix": "bit_at"
-  },
   "../include/utility/err.hpp": {
     "body": [
       "void err () {",
@@ -3696,19 +3709,6 @@
       "  { return x % 2 ? -1 : +1; }"
     ],
     "prefix": "powm1"
-  },
-  "../include/utility/remove_bit_insert_bit.hpp": {
-    "body": [
-      "int remove_bit(int x, int j) {",
-      "  int low = x & ((1 << j) - 1);",
-      "  return ((x >> (j + 1)) << j) + low;",
-      "}",
-      "int insert_bit(int x, int j, int v) {",
-      "  int low = x & ((1 << j) - 1);",
-      "  return ((x >> j) << (j + 1)) + (v << j) + low;",
-      "}"
-    ],
-    "prefix": "remove_bit_insert_bit"
   },
   "../snippets/algorithms/binary_serch.hpp": {
     "body": [
