@@ -164,6 +164,24 @@
     ],
     "prefix": "zip2"
   },
+  "../include/bit_operations/ceil2.hpp": {
+    "body": [
+      "auto ceil2(lint x) {",
+      "  if (x == 0 || x == 1) return 1LL;",
+      "  return (std::numeric_limits< lint >::max() >> __builtin_clzll(x - 1) - 1) + 1;",
+      "}"
+    ],
+    "prefix": "ceil2"
+  },
+  "../include/bit_operations/remove_common_header.hpp": {
+    "body": [
+      "auto remove_common_header(lint x, lint y) {",
+      "  auto mask = std::numeric_limits< lint >::max() >> (__builtin_clzll(x ^ y) - 1);",
+      "  return std::make_tuple(x & mask, y & mask, mask);",
+      "}"
+    ],
+    "prefix": "remove_common_header"
+  },
   "../include/combinator/combinator.hpp": {
     "body": [
       "template< typename F >",
