@@ -10,16 +10,14 @@ add_library(test_main ${CMAKE_CURRENT_LIST_DIR}/main.cpp)
 
 enable_testing()
 
-# Listing test targets
-file(GLOB targets RELATIVE ${CMAKE_CURRENT_LIST_DIR} *-test/*.cpp)
-foreach(target ${targets})
-  get_filename_component(test_name ${target} DIRECTORY)
+# Listing test srcs
+set(main, main.cpp)
+
+file(GLOB_RECURSE srcs RELATIVE ${CMAKE_CURRENT_LIST_DIR} **/*.cpp)
+foreach(src ${srcs})
+  get_filename_component(test_name ${src} NAME_WE)
   message(${test_name})
-  if(NOT TARGET ${test_name})
-    file(GLOB source RELATIVE ${CMAKE_CURRENT_LIST_DIR} ${test_name}/*.cpp)
-    add_executable(${test_name} ${source})
-    target_link_libraries(${test_name} test_main ${OpenCASCADE_LIBRARIES})
-    add_test(NAME ${test_name} COMMAND ${test_name})
-  endif()
+  add_executable(${test_name} main ${source})
+  add_test(NAME ${test_name} COMMAND ${test_name})
 endforeach()
 
