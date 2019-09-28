@@ -1,7 +1,8 @@
-inline auto factor(int x) {
-  std::vector< std::pair< int, int > > ret{};
-  for (auto p = 2; p * p <= x; p++) {
-    auto m = 0;
+template < class Value >
+inline auto factor(Value x) {
+  std::vector< std::pair< Value, int > > ret;
+  for (Value p = 2; p * p <= x; p++) {
+    int m = 0;
     for (; x % p == 0; m++)
       { x /= p; }
     if (m > 0)
