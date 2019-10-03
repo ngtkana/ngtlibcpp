@@ -4,7 +4,7 @@
 #define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
 #define all(v) v.begin(), v.end()
 #define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)
-#define lint long long
+using lint = long long;
 auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};
 auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};
 void debug_impl() { std::cerr << std::endl; }

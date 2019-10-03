@@ -1,3 +1,23 @@
+template <typename Value>
+struct residue_edge {
+  int to; Value cap, original_cap; int rev;
+  residue_edge(int to, Value cap, int rev):
+    to(to), cap(cap), original_cap(cap), rev(rev){}
+};
+
+template <typename Value>
+std::ostream& operator<< (std::ostream& os, const residue_edge<Value>& e)
+  { return os << "residue_edge{" << "to:" << e.to << "," << "cap:" << e.cap << "," << "rev:" << e.rev << "}"; }
+
+template < typename Value >
+struct flow_edge {
+  int to; Value flow;
+  flow_edge(int to, Value flow) : to(to), flow(flow){}
+};
+template < typename Value >
+std::ostream& operator<< (std::ostream& os, const flow_edge<Value>& e)
+  { return os  << "flow_edge{"  << "to:" << e.to << ","  << "flow:" << e.flow  << "}"; }
+
 template < typename Value >
 class burnbury {
     int                 n, source, sink;
@@ -41,7 +61,7 @@ class burnbury {
     }
 
   public:
-    burnbery(int n, int source, int sink):
+    burnbury(int n, int source, int sink):
       n(n), offset(0), source(source), sink(sink), graph(n){}
 
     auto make_node() {
