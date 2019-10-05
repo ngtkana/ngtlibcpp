@@ -1,5 +1,5 @@
 template<typename T>
-class diameter {
+class diameter_tree {
     struct edge {
       size_t to; T cost;
       edge(size_t to, T cost) : to(to), cost(cost){}
@@ -8,7 +8,7 @@ class diameter {
     std::vector<std::vector<edge>> graph;
 
   public:
-    diameter(size_t n) : n(n), graph(n){}
+    diameter_tree(size_t n) : n(n), graph(n){}
 
     // Insert an edge.
     void insert(size_t i, size_t j, T cost = 1) {
@@ -18,7 +18,7 @@ class diameter {
       graph.at(j).emplace_back(i, cost);
     };
 
-    // Calculate the diameter.
+    // Calculate the diameter_tree.
     auto operator()(size_t root = 0){
       std::vector<T> depth; 
       auto cal = [&] (size_t r) {
