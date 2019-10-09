@@ -86,7 +86,6 @@ TEST_CASE( "Random Sparse Graph", "[shortest_cycle, topological_sort]" ) {
       auto y = cycle.at(i < len - 1 ? i + 1 : 0);
       REQUIRE(std::count(all(graph.at(x)), y) == 1);
     }
-    debug(len);
 
     // Matrix Test
     if (0 < len) {
