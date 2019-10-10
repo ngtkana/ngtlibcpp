@@ -2757,6 +2757,39 @@
     ],
     "prefix": "sparse_table"
   },
+  "../include/range_queries/sqrt_decomposition.hpp": {
+    "body": [
+      "class sqrt_decomposition {",
+      "  public:",
+      "    int n, block_size, block_number;",
+      "",
+      "    sqrt_decomposition(int n, int block_size) :",
+      "      n(n),",
+      "      block_size(block_size),",
+      "      block_number((n + block_size - 1) / block_size)",
+      "      {}",
+      "",
+      "    auto get_block_size()   const { return block_size;   }",
+      "    auto get_block_number() const { return block_number; }",
+      "",
+      "    template < class Append, class Stamp >",
+      "    void query(int l, int r, Append const & append, Stamp const & stamp) {",
+      "      while (l % block_size && l < r) {",
+      "        append(l, l / block_size);",
+      "        l++;",
+      "      }",
+      "      while (r % block_size && l < r) {",
+      "        r--;",
+      "        append(r, r / block_size);",
+      "      }",
+      "      for (auto j = l / block_size; j < r / block_size; j++) {",
+      "        stamp(j);",
+      "      }",
+      "    }",
+      "};"
+    ],
+    "prefix": "sqrt_decomposition"
+  },
   "../include/range_queries/wavelet_matrix.hpp": {
     "body": [
       "class fully_indexable_dictionary {",
@@ -3977,6 +4010,21 @@
       "  { return x % 2 ? -1 : +1; }"
     ],
     "prefix": "powm1"
+  },
+  "../include/utility/vending_machine.hpp": {
+    "body": [
+      "template < class Value >",
+      "struct vending_machine{",
+      "  Value i;",
+      "  vending_machine(Value i) : i(i){}",
+      "  auto issue() { return i++; }",
+      "  auto peek() const { return i; }",
+      "};",
+      "template < class Value >",
+      "auto make_vending_machine(Value i)",
+      "  { return vending_machine< Value >(i); }"
+    ],
+    "prefix": "vending_machine"
   },
   "../snippets/algorithms/binary_serch.hpp": {
     "body": [
