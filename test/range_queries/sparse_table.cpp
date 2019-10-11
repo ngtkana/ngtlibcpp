@@ -58,9 +58,9 @@ TEMPLATE_TEST_CASE( "Sparse Table", "[sparse_table]", int, long long ) {
 
       loop(24) {
         int l, r; std::tie(l, r) = random_interval(n);
-        assert(min_table.query(l, r) == *std::min_element(a.begin() + l, a.begin() + r));
-        assert(max_table.query(l, r) == *std::max_element(a.begin() + l, a.begin() + r));
-        assert(gcd_table.query(l, r) == std::accumulate(a.begin() + l, a.begin() + r, TestType{0},
+        REQUIRE(min_table.query(l, r) == *std::min_element(a.begin() + l, a.begin() + r));
+        REQUIRE(max_table.query(l, r) == *std::max_element(a.begin() + l, a.begin() + r));
+        REQUIRE(gcd_table.query(l, r) == std::accumulate(a.begin() + l, a.begin() + r, TestType{0},
           [](auto x, auto y){ return std::__gcd(x, y); }));
       }
     }
@@ -77,7 +77,7 @@ TEMPLATE_TEST_CASE( "Sparse Table", "[sparse_table]", int, long long ) {
 
       loop(24) {
         int l, r; std::tie(l, r) = random_interval(n);
-        assert(sum_table.query(l, r) == std::accumulate(a.begin() + l, a.begin() + r, TestType{0}));
+        REQUIRE(sum_table.query(l, r) == std::accumulate(a.begin() + l, a.begin() + r, TestType{0}));
       }
     }
   }
@@ -100,7 +100,7 @@ TEMPLATE_TEST_CASE( "Sparse Table", "[sparse_table]", int, long long ) {
 
       loop(24) {
         int l, r; std::tie(l, r) = random_interval(n);
-        assert(cmp_table.query(l, r) == std::accumulate(a.begin() + l, a.begin() + r,
+        REQUIRE(cmp_table.query(l, r) == std::accumulate(a.begin() + l, a.begin() + r,
           std::make_pair(TestType{1}, TestType{0}), cmp_fn));
       }
     }
@@ -127,7 +127,7 @@ TEMPLATE_TEST_CASE( "Sparse Table", "[sparse_table]", int, long long ) {
 
       loop(24) {
         int l, r; std::tie(l, r) = random_interval(n);
-        assert(cmp_table.query(l, r) == std::accumulate(a.begin() + l, a.begin() + r,
+        REQUIRE(cmp_table.query(l, r) == std::accumulate(a.begin() + l, a.begin() + r,
           std::make_tuple(TestType{1}, TestType{0}, TestType{0}, TestType{1}), cmp_fn));
       }
     }
