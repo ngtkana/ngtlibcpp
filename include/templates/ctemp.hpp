@@ -1,9 +1,11 @@
+#include <catch2/catch.hpp>
 #include <bits/stdc++.h>
 #define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)
 #define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
 #define all(v) v.begin(), v.end()
 #define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)
 using lint = long long;
+auto mt = std::mt19937_64(std::random_device{}());
 auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};
 auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};
 void debug_impl() { std::cerr << std::endl; }
@@ -21,8 +23,6 @@ void debug_impl(Head head, Tail... tail){
 #define debug 0;
 #endif
 
-int main() {
-  std::cin.tie(0); std::cin.sync_with_stdio(false);
+TEST_CASE( "", "[]" ) {
   $0
-  return 0;
 }

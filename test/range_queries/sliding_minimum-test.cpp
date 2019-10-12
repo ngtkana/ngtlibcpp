@@ -1,93 +1,49 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <range_queries/segment_tree.hpp>
 #include <range_queries/sliding_minimum.hpp>
-#include "../utility.hpp"
-
-struct sliding_minimum_tag{};
-struct segment_tree_tag{};
-
-template <typename DispatchTag>
-class sliding_minimum_query_engine{};
-
-template <>
-class sliding_minimum_query_engine<sliding_minimum_tag>
-{
-  sliding_minimum<int> storage;
-
-public:
-  sliding_minimum_query_engine (const std::vector<int>& v)
-    : storage(std::move(v))
-  {}
-
-  auto query() const {return storage.query();}
-
-  void pop_left()  {storage.shrink();}
-
-  void push_right() {storage.extend();}
-};
-
-template <>
-class sliding_minimum_query_engine<segment_tree_tag>
-{
-  int                         left, right;
-  segment_tree<int, min_fn_t> min_tree;
-
-public:
-  sliding_minimum_query_engine(int n):
-    left    (0),
-    right   (0),
-    min_tree(n, min_fn, inf)
-    {}
-
-  int  query (int l, int r) const {return min_tree.query(l, r);}
-
-  void update(int i, int x)       {min_tree.update(i, x);}
-
-
-public:
-  sliding_minimum_query_engine (const std::vector<int>& v):
-    left (0),
-    right(0),
-    min_tree(v.size(), min_fn, inf)
-    {
-      for (size_t i = 0; i < v.size(); i++)
-        { min_tree.at(i) = v.at(i); }
-      min_tree.build();
-    }
-
-  auto query() const {return min_tree.query(left, right);}
-
-  void pop_left()   {left++;}
-
-  void push_right() {right++;}
-};
-
-
-
-#define SLIDING_MINIMIM_TEST(x) \
-  engine.pop_left();\
-  engine.push_right();\
-  REQUIRE(engine.query() == x);
-
-TEMPLATE_TEST_CASE
-(
-  "Range Sum Query Test from the Sample Input 1 of AOJ DSL_3_D",
-  "[Binary Indexed Tree,Segment Tree]",
-  sliding_minimum_tag
-)
-{
-  auto engine = sliding_minimum_query_engine<TestType>
-  (
-    {1, 7, 7, 4, 8, 1, 6}
-  );
-  engine.push_right();
-  engine.push_right();
-  engine.push_right();
-  REQUIRE(engine.query() == 1);
-  SLIDING_MINIMIM_TEST(4);
-  SLIDING_MINIMIM_TEST(4);
-  SLIDING_MINIMIM_TEST(1);
-  SLIDING_MINIMIM_TEST(1);
+#define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)
+#define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
+#define all(v) v.begin(), v.end()
+#define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)
+using lint = long long;
+auto mt = std::mt19937_64(std::random_device{}());
+auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};
+auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};
+void debug_impl() { std::cerr << std::endl; }
+template <typename Head, typename... Tail>
+void debug_impl(Head head, Tail... tail){
+  std::cerr << " " << head;
+  debug_impl(tail...);
 }
+#ifndef STOPIT
+#define debug(...)\
+  std::cerr << std::boolalpha << "[" << #__VA_ARGS__ << "]:";\
+  debug_impl(__VA_ARGS__);\
+  std::cerr << std::noboolalpha;
+#else
+#define debug 0;
+#endif
 
+TEMPLATE_TEST_CASE( "sliding_minimum", "[sliding_minimum]", int, long long ) {
+  auto inf = std::numeric_limits< TestType >::max();
+  loop(24) {
+    auto n = rand(1, 40);
+    std::vector< TestType >a(n);
+    for (auto & x : a) x = rand(-inf - 1, inf);
+    auto k = rand(1, n);
+
+    auto min = make_sliding_minimum(a, [](auto x, auto y){ return x < y; });
+    auto max = make_sliding_minimum(a, [](auto x, auto y){ return x > y; });
+    auto l = 0, r = k;
+    min.advance_to(l, r);
+    max.advance_to(l, r);
+    while (true) {
+      REQUIRE(min.query() == *std::min_element(a.begin() + l, a.begin() + r));
+      REQUIRE(max.query() == *std::max_element(a.begin() + l, a.begin() + r));
+      REQUIRE(min.query() == a.at(min.query_index()));
+      REQUIRE(max.query() == a.at(max.query_index()));
+      if (r == n) break;
+      l++, r++, min.slide(), max.slide();
+    }
+  }
+}
