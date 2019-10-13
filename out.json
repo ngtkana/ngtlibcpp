@@ -2649,49 +2649,51 @@
   },
   "../include/range_queries/sliding_minimum.hpp": {
     "body": [
-      "  template < typename Value, typename Cmp = std::less< Value > >",
-      "  class sliding_minimum {",
-      "      std::deque< Value > que;",
-      "      void pop_to(int target) {",
-      "        assert(target <= right);",
-      "        while (left < target)",
-      "          { shrink(); }",
-      "      }",
-      "      void push_to(int target) {",
-      "        assert(target <= n);",
-      "        while (right < target)",
-      "          { extend(); }",
-      "      }",
-      "    public:",
-      "      int n, left, right;",
-      "      std::vector< Value > v;",
-      "      Cmp                  cmp;",
-      "      sliding_minimum(std::vector< Value > const& v, Cmp const & cmp) :",
-      "        n(v.size()), left(0), right(0), v(v), cmp(cmp)",
-      "        {}",
-      "      auto get_left_index()  const { return left; }",
-      "      auto get_right_index() const { return right; }",
-      "      auto query_index() const",
-      "        { assert(!que.empty()); return que.front(); }",
-      "      auto query() const",
-      "        { return v.at(query_index()); }",
-      "      void shrink() {",
-      "        if (que.front() == left++)",
-      "          { que.pop_front(); }",
-      "        assert(left <= right);",
-      "      }",
-      "      void extend() {",
-      "        while (!que.empty() && !cmp(v.at(que.back()), v.at(right)))",
-      "          { que.pop_back(); }",
-      "        que.push_back(right++);",
-      "        assert(right <= n);",
-      "      }",
-      "      void slide()",
-      "        { shrink(); extend(); }",
-      "      void advance_to(int l, int r)",
-      "        { push_to(r); pop_to(l); }",
-      "  };",
-      "  template < typename "
+      "template < typename Value, typename Cmp = std::less< Value > >",
+      "class sliding_minimum {",
+      "    std::deque< Value > que;",
+      "    void pop_to(int target) {",
+      "      assert(target <= right);",
+      "      while (left < target)",
+      "        { shrink(); }",
+      "    }",
+      "    void push_to(int target) {",
+      "      assert(target <= n);",
+      "      while (right < target)",
+      "        { extend(); }",
+      "    }",
+      "  public:",
+      "    int n, left, right;",
+      "    std::vector< Value > v;",
+      "    Cmp                  cmp;",
+      "    sliding_minimum(std::vector< Value > const& v, Cmp const & cmp) :",
+      "      n(v.size()), left(0), right(0), v(v), cmp(cmp)",
+      "      {}",
+      "    auto get_left_index()  const { return left; }",
+      "    auto get_right_index() const { return right; }",
+      "    auto query_index() const",
+      "      { assert(!que.empty()); return que.front(); }",
+      "    auto query() const",
+      "      { return v.at(query_index()); }",
+      "    void shrink() {",
+      "      if (que.front() == left++)",
+      "        { que.pop_front(); }",
+      "      assert(left <= right);",
+      "    }",
+      "    void extend() {",
+      "      while (!que.empty() && !cmp(v.at(que.back()), v.at(right)))",
+      "        { que.pop_back(); }",
+      "      que.push_back(right++);",
+      "      assert(right <= n);",
+      "    }",
+      "    void slide()",
+      "      { shrink(); extend(); }",
+      "    void advance_to(int l, int r)",
+      "      { push_to(r); pop_to(l); }",
+      "};",
+      "template < typename Value, typename Cmp = std::less< Value > >",
+      "auto make_sliding_minimum(std::vector< Value > const& v, Cmp const & cmp)",
+      "  { return sliding_minimum< Value, Cmp >(v, cmp); }"
     ],
     "prefix": "sliding_minimum"
   },
@@ -3568,6 +3570,73 @@
     ],
     "prefix": "z_algorithm"
   },
+  "../include/templates/ctemp.hpp": {
+    "body": [
+      "#include <catch2/catch.hpp>",
+      "#include <bits/stdc++.h>",
+      "#define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)",
+      "#define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)",
+      "#define all(v) v.begin(), v.end()",
+      "#define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)",
+      "using lint = long long;",
+      "auto mt = std::mt19937_64(std::random_device{}());",
+      "auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};",
+      "auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};",
+      "void debug_impl() { std::cerr << std::endl; }",
+      "template <typename Head, typename... Tail>",
+      "void debug_impl(Head head, Tail... tail){",
+      "  std::cerr << \" \" << head;",
+      "  debug_impl(tail...);",
+      "}",
+      "#ifndef STOPIT",
+      "#define debug(...)\\",
+      "  std::cerr << std::boolalpha << \"[\" << #__VA_ARGS__ << \"]:\";\\",
+      "  debug_impl(__VA_ARGS__);\\",
+      "  std::cerr << std::noboolalpha;",
+      "#else",
+      "#define debug 0;",
+      "#endif",
+      "",
+      "TEST_CASE( \"\", \"[]\" ) {",
+      "  $0",
+      "}"
+    ],
+    "prefix": "ctemp"
+  },
+  "../include/templates/stemp.hpp": {
+    "body": [
+      "#include <bits/stdc++.h>",
+      "#define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)",
+      "#define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)",
+      "#define all(v) v.begin(), v.end()",
+      "#define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)",
+      "using lint = long long;",
+      "auto mt = std::mt19937_64(std::random_device{}());",
+      "auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};",
+      "auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};",
+      "void debug_impl() { std::cerr << std::endl; }",
+      "template <typename Head, typename... Tail>",
+      "void debug_impl(Head head, Tail... tail){",
+      "  std::cerr << \" \" << head;",
+      "  debug_impl(tail...);",
+      "}",
+      "#ifndef STOPIT",
+      "#define debug(...)\\",
+      "  std::cerr << std::boolalpha << \"[\" << #__VA_ARGS__ << \"]:\";\\",
+      "  debug_impl(__VA_ARGS__);\\",
+      "  std::cerr << std::noboolalpha;",
+      "#else",
+      "#define debug 0;",
+      "#endif",
+      "",
+      "int main() {",
+      "  std::cin.tie(0); std::cin.sync_with_stdio(false);",
+      "  $0",
+      "  return 0;",
+      "}"
+    ],
+    "prefix": "stemp"
+  },
   "../include/tree/centroid_tree.hpp": {
     "body": [
       "",
@@ -4141,44 +4210,6 @@
     ],
     "prefix": "dfs2"
   },
-  "../snippets/algorithms/grid_bfs.hpp": {
-    "body": [
-      "std::vector<std::vector<${1:long long}>> dst(h, std::vector<$1>(w, ${4:-1}));",
-      "queue<std::pair<int, int>> que;",
-      "dst[${2:si}][${3:sj}] = 0, que.emplace($2, $3);",
-      "while (!que.empty()) {",
-      "  int cri, crj;",
-      "  std::tie(cri, crj) = que.front(), que.pop();",
-      "  for (int k = 0; k < 4; k++) {",
-      "    int nxi = cri + di[k];",
-      "    int nxj = crj + dj[k];",
-      "    if (",
-      "        0 <= nxi && nxi < h &&",
-      "        0 <= nxj && nxj <= w &&",
-      "        dst[nxi][nxj] == $4 &&",
-      "        !grd[nxi][nxj]",
-      "      ) dst[nxi][nxj] = dst[cri][crj] + 1, que.emplace(nxi, nxj);",
-      "  }",
-      "}"
-    ],
-    "prefix": "grid_bfs"
-  },
-  "../snippets/algorithms/inner_dfs1.hpp": {
-    "body": [
-      "  void dfs (",
-      "      int crr = 0,",
-      "      int prt = 0",
-      "    ) {",
-      "      for (int const& nxt : grh[crr]) {",
-      "        ${2:T} w; int nxt; std::tie(w, nxt) = e;",
-      "        if (nxt == prt) continue;",
-      "        dfs(nxt, crr);",
-      "        chmax(dp[crr], dp[nxt] + w);",
-      "      }",
-      "    }"
-    ],
-    "prefix": "inner_dfs1"
-  },
   "../snippets/algorithms/lis.hpp": {
     "body": [
       "std::vector<${1:int}> lis;",
@@ -4228,43 +4259,6 @@
     ],
     "prefix": "err"
   },
-  "../snippets/code_fragments/for_iterator.hpp": {
-    "body": [
-      "for (auto ${1:it} = ${2:name}.begin(); $1 != $2.end(); it++)",
-      "{",
-      "  $0",
-      "}"
-    ],
-    "prefix": "for_iterator"
-  },
-  "../snippets/code_fragments/for_reverse.hpp": {
-    "body": [
-      "for (auto ${1:i} = ${2:n - 1}; $1 >= ${3:0}; $1--)",
-      "{",
-      "  $0",
-      "}"
-    ],
-    "prefix": "for_reverse"
-  },
-  "../snippets/code_fragments/fors.hpp": {
-    "body": [
-      "for (${1:int} ${2:i} = ${3:0}; $2 < ${4:n}; $2++)",
-      "{",
-      "  $0",
-      "}"
-    ],
-    "prefix": "fors"
-  },
-  "../snippets/code_fragments/interval_dp.hpp": {
-    "body": [
-      "for (int d = 1; d <= ${1:n}; d++) {",
-      "  for (int l = 0, r = d; r <= $1; l++, r++) {",
-      "    $0",
-      "  }",
-      "}"
-    ],
-    "prefix": "interval_dp"
-  },
   "../snippets/code_fragments/lambda.hpp": {
     "body": [
       "auto ${1:name} = [&] ($2)",
@@ -4273,165 +4267,6 @@
       "};"
     ],
     "prefix": "lambda"
-  },
-  "../snippets/code_fragments/mt.hpp": {
-    "body": [
-      "std::mt19937 mt(std::random_device{}());"
-    ],
-    "prefix": "mt"
-  },
-  "../snippets/debug/-pdbg.hpp": {
-    "body": [
-      "std::cout << \"(\" << ${1:name}${2:->}first << \", \" << $1$2second << \")\";"
-    ],
-    "prefix": "-pdbg"
-  },
-  "../snippets/debug/-ppdbg.hpp": {
-    "body": [
-      "std::cout << \"(\" << get<0>(${1:*it}) << \", \" << get<1>($1) << \", \" << get<2>($1) << \")\";"
-    ],
-    "prefix": "-ppdbg"
-  },
-  "../snippets/debug/-sdbg.hpp": {
-    "body": [
-      "std::cout << ${1:name};"
-    ],
-    "prefix": "-sdbg"
-  },
-  "../snippets/debug/1dbg.hpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout << \"${1:a} = \" << $1 << std::endl;",
-      "} //"
-    ],
-    "prefix": "1dbg"
-  },
-  "../snippets/debug/1prompt.hpp": {
-    "body": [
-      "std::cout << \"${2:a} > \";",
-      "${1:int} $2;",
-      "std::cin >> $2;"
-    ],
-    "prefix": "1prompt"
-  },
-  "../snippets/debug/1vdebug.hpp": {
-    "body": [
-      "{ // debug",
-      "  int n = 0;",
-      "  if (n < (int)${1:name}.size()) n = $1.size();",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "1vdebug"
-  },
-  "../snippets/debug/2dbg.hpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout",
-      "    << \"${1:a} = \" << $1 << \", \"",
-      "    << \"${2:b} = \" << $2",
-      "    << std::endl;",
-      "} //"
-    ],
-    "prefix": "2dbg"
-  },
-  "../snippets/debug/2prpmpt.hpp": {
-    "body": [
-      "std::cout << \"${2:a}, ${3:b} > \";",
-      "${1:int} $2, $3;",
-      "std::cin >> $2 >> $3;"
-    ],
-    "prefix": "2prpmpt"
-  },
-  "../snippets/debug/2vdebug.hpp": {
-    "body": [
-      "{ // debug",
-      "  int n = 0;",
-      "  if (n < (int)${1:name}.size()) n = $1.size();",
-      "  if (n < (int)${2:name}.size()) n = $2.size();",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$2\"; for (auto const& e : $2) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "2vdebug"
-  },
-  "../snippets/debug/3dbg.hpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout",
-      "    << \"${1:a} = \" << $1 << \", \"",
-      "    << \"${2:b} = \" << $2 << \", \"",
-      "    << \"${3:c} = \" << $3",
-      "    << std::endl;",
-      "} //"
-    ],
-    "prefix": "3dbg"
-  },
-  "../snippets/debug/3prompt.hpp": {
-    "body": [
-      "std::cout << \"${2:a}, ${3:b}, ${4:c} > \";",
-      "${1:int} $2, $3, $4;",
-      "std::cin >> $2 >> $3 >> $4;"
-    ],
-    "prefix": "3prompt"
-  },
-  "../snippets/debug/3vdebug.hpp": {
-    "body": [
-      "{ // debug",
-      "  int n = 0;",
-      "  if (n < (int)${1:name}.size()) n = $1.size();",
-      "  if (n < (int)${2:name}.size()) n = $2.size();",
-      "  if (n < (int)${3:name}.size()) n = $3.size();",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$2\"; for (auto const& e : $2) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$3\"; for (auto const& e : $3) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "3vdebug"
-  },
-  "../snippets/debug/4dbg.hpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout",
-      "    << \"${1:a} = \" << $1 << \", \"",
-      "    << \"${2:b} = \" << $2 << \", \"",
-      "    << \"${3:c} = \" << $3 << \", \"",
-      "    << \"${4:d} = \" << $4",
-      "    << std::endl;",
-      "} //"
-    ],
-    "prefix": "4dbg"
-  },
-  "../snippets/debug/4vdebug.hpp": {
-    "body": [
-      "{ // debug",
-      "  int n = 0;",
-      "  if (n < (int)${1:name}.size()) n = $1.size();",
-      "  if (n < (int)${2:name}.size()) n = $2.size();",
-      "  if (n < (int)${3:name}.size()) n = $3.size();",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << i; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$1\"; for (auto const& e : $1) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$2\"; for (auto const& e : $2) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$3\"; for (auto const& e : $3) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"$4\"; for (auto const& e : $4) std::cout << std::setw(4) << e; std::cout << std::endl;",
-      "  std::cout << std::setw(4) << \"----\"; for (int i = 0; i < n; i++) std::cout << std::setw(4) << \"----\" ; std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "4vdebug"
   },
   "../snippets/debug/bug.hpp": {
     "body": [
@@ -4448,29 +4283,6 @@
     ],
     "prefix": "check"
   },
-  "../snippets/debug/interval_debug.hpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout",
-      "    << \"[\" << $1 << \", \" << $2 << \")\" << std::endl;",
-      "} //"
-    ],
-    "prefix": "interval_debug"
-  },
-  "../snippets/debug/map_debug.hpp": {
-    "body": [
-      "{ // debug",
-      "  for (auto ${2:it} = ${1:mp}.begin(); $2 != $1.end(); $2++) {",
-      "    std::cout << \"mp[\";",
-      "    std::cout << $0$2->first;",
-      "    std::cout << \"] = \";",
-      "    std::cout << $2->second;",
-      "    std::cout << \"\" << (next($2) == $1.end() ? \"\\n\" : \", \");",
-      "  }",
-      "} //"
-    ],
-    "prefix": "map_debug"
-  },
   "../snippets/debug/ndbg.hpp": {
     "body": [
       "std::cout << \"$0\" << std::endl;"
@@ -4484,110 +4296,6 @@
       "} //"
     ],
     "prefix": "new_line"
-  },
-  "../snippets/debug/pdbg.hpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout << \"${1:name} = (\" << $1${2:.}first << \", \" <<  $1$2second << \")\" << std::endl;",
-      "} //"
-    ],
-    "prefix": "pdbg"
-  },
-  "../snippets/debug/pretty_debug.hpp": {
-    "body": [
-      "#define LOCAL",
-      "using std::to_string;",
-      "auto to_string(std::string s) -> std::string {",
-      "  return '\"' + s + '\"';",
-      "}",
-      "auto to_string(char c) -> std::string {",
-      "  return \"'\" + std::string{c} + \"'\";",
-      "}",
-      "auto to_string(const char* s) -> std::string {",
-      "  return to_string((std::string) s);",
-      "}",
-      "auto to_string(bool b) -> std::string {",
-      "  return (b ? \"true\" : \"false\");",
-      "}",
-      "template <typename T, typename U>",
-      "auto to_string(std::pair<T, U> p) -> std::string {",
-      "  return \"(\" + to_string(p.first) + \", \" + to_string(p.second) + \")\";",
-      "}",
-      "template <size_t N>",
-      "auto to_string(std::bitset<N> bs) -> std::string {",
-      "  std::string res{};",
-      "  for (size_t i = 0; i < N; i++)",
-      "    res.insert(res.begin(), bs.test(i) ? '1' : '0');",
-      "  return res;",
-      "}",
-      "template <typename T>",
-      "auto to_string(T v) -> std::string {",
-      "  bool flg = false;",
-      "  std::string res = \"{\";",
-      "  for (auto const&x : v) {",
-      "    if (flg) res += \", \";",
-      "    else flg = true;",
-      "    res += to_string(x);",
-      "  }",
-      "  res += \"}\";",
-      "  return res;",
-      "}",
-      "void debug_out() { std::cerr << std::endl; }",
-      "template <typename Head, typename... Tail>",
-      "void debug_out(Head H, Tail... T) {",
-      "  std::cerr << \" \" << to_string(H);",
-      "  debug_out(T...);",
-      "}",
-      "#ifdef LOCAL",
-      "#define debug(...) std::cerr << \"[\" << #__VA_ARGS__ << \"]:\", debug_out(__VA_ARGS__)",
-      "#else",
-      "#define debug(...) 42",
-      "#endif"
-    ],
-    "prefix": "pretty_debug"
-  },
-  "../snippets/debug/vpdebug.hpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout << \"${1:name}: \";",
-      "  for (auto ${2:it} = $1.begin(); $2 != $1.end(); $2++) {",
-      "    std::cout << \"(\";",
-      "    std::cout << $2->first;",
-      "    std::cout << \", \";",
-      "    std::cout << $2->second;",
-      "    std::cout << \")\" << (next($2) == $1.end() ? \"\\n\" : \", \");",
-      "  }",
-      "  std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "vpdebug"
-  },
-  "../snippets/debug/vvdbg.hpp": {
-    "body": [
-      "{ // debug",
-      "  int h = ${1:name}.size(); int w = 0;",
-      "  int name_length = ${2:3}; int output_length = ${3:4};",
-      "  for (int i = 0; i < h; i++) if (w < (int)$1[i].size()) w = $1[i].size();",
-      "  std::cout << std::string(name_length, '-') << \"--\";",
-      "  for (int j = 0; j < w; j++) std::cout << std::setw(${3:output length}) << \"----\";",
-      "  std::cout << std::endl;",
-      "  std::cout << std::setw(name_length) << std::right << \"$1\" << \"| \";",
-      "  for (int j = 0; j < w; j++) std::cout << std::setw(output_length) << std::right <<  j;",
-      "  std::cout << std::endl;",
-      "  std::cout << std::string(name_length, '-') << \"+-\";",
-      "  for (int j = 0; j < w; j++) std::cout << std::string(output_length, '-');",
-      "  std::cout << std::endl;",
-      "  for (int i = 0; i < h; i++) {",
-      "    std::cout << std::setw(name_length) << std::right << i << \"| \";",
-      "    for (auto const& e : $1[i]) std::cout << std::setw(output_length) << std::right << (e == ${4:0} ? \"0\" : std::to_string(e));",
-      "    std::cout << std::endl;",
-      "  }",
-      "  std::cout << std::string(name_length, '-') << \"--\";",
-      "  for (int j = 0; j < w; j++) std::cout << std::string(output_length, '-');",
-      "  std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "vvdbg"
   },
   "../snippets/io/1sin.hpp": {
     "body": [
@@ -4635,70 +4343,5 @@
       "$0;"
     ],
     "prefix": "tin"
-  },
-  "../snippets/templates/ctemp.hpp": {
-    "body": [
-      "#include <catch2/catch.hpp>",
-      "#include <bits/stdc++.h>",
-      "#define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)",
-      "#define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)",
-      "#define all(v) v.begin(), v.end()",
-      "#define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)",
-      "using lint = long long;",
-      "auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};",
-      "auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};",
-      "void debug_impl() { std::cerr << std::endl; }",
-      "template <typename Head, typename... Tail>",
-      "void debug_impl(Head head, Tail... tail){",
-      "  std::cerr << \" \" << head;",
-      "  debug_impl(tail...);",
-      "}",
-      "#ifndef STOPIT",
-      "#define debug(...)\\",
-      "  std::cerr << std::boolalpha << \"[\" << #__VA_ARGS__ << \"]:\";\\",
-      "  debug_impl(__VA_ARGS__);\\",
-      "  std::cerr << std::noboolalpha;",
-      "#else",
-      "#define debug 0;",
-      "#endif",
-      "",
-      "TEST_CASE( \"\", \"[]\" ) {",
-      "  $0",
-      "}"
-    ],
-    "prefix": "ctemp"
-  },
-  "../snippets/templates/stemp.hpp": {
-    "body": [
-      "#include <bits/stdc++.h>",
-      "#define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)",
-      "#define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)",
-      "#define all(v) v.begin(), v.end()",
-      "#define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)",
-      "using lint = long long;",
-      "auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};",
-      "auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};",
-      "void debug_impl() { std::cerr << std::endl; }",
-      "template <typename Head, typename... Tail>",
-      "void debug_impl(Head head, Tail... tail){",
-      "  std::cerr << \" \" << head;",
-      "  debug_impl(tail...);",
-      "}",
-      "#ifndef STOPIT",
-      "#define debug(...)\\",
-      "  std::cerr << std::boolalpha << \"[\" << #__VA_ARGS__ << \"]:\";\\",
-      "  debug_impl(__VA_ARGS__);\\",
-      "  std::cerr << std::noboolalpha;",
-      "#else",
-      "#define debug 0;",
-      "#endif",
-      "",
-      "int main() {",
-      "  std::cin.tie(0); std::cin.sync_with_stdio(false);",
-      "  $0",
-      "  return 0;",
-      "}"
-    ],
-    "prefix": "stemp"
   }
 }
