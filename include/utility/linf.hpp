@@ -1,1 +1,1 @@
-constexpr auto inf = 1LL << 60;
+constexpr auto inf = (1LL << 62) - 1;
