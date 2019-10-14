@@ -65,7 +65,7 @@ TEMPLATE_TEST_CASE( "floyd_warshall", "[floyd_warshall]", int long long ) {
   constexpr auto inf = std::numeric_limits< TestType >::max();
   SECTION( "possibly negative, but not large" ) {
     constexpr auto max = 1'000'000;
-    loop(1) {
+    loop(24) {
       auto n = rand(1, 10);
       auto adj = make_vector< 2, TestType >(n, n);
       for (auto & v : adj) for (auto & x : v)
@@ -77,7 +77,7 @@ TEMPLATE_TEST_CASE( "floyd_warshall", "[floyd_warshall]", int long long ) {
   }
 
   SECTION( "non-negative" ) {
-    loop(1) {
+    loop(24) {
       auto n = rand(1, 10);
       auto adj = make_vector< 2, TestType >(n, n);
       for (auto & v : adj) for (auto & x : v)
@@ -89,7 +89,7 @@ TEMPLATE_TEST_CASE( "floyd_warshall", "[floyd_warshall]", int long long ) {
   }
 
   SECTION( "non-negative sparse" ) {
-    loop(1) {
+    loop(24) {
       auto n = rand(1, 20), m = rand(1, (int)(std::pow(n, 1.2)));
       auto adj = make_vector< 2, TestType >(n, n, inf);
       loop(m) {
