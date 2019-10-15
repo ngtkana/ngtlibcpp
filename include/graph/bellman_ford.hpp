@@ -1,40 +1,24 @@
-template <typename T>
-class bellman_ford {
-  using edge_t = tuple<T, int, int>;
-  const int n, r;
-  const std::vector<edge_t>& edg;
-  bool flg;
-  std::vector<long long> dst;
-  void cal () {
-      dst[r] = 0;
-      for (int q = n; q--;) {
-        flg = false;
-        for (auto const& e : edg) {
-          T d; int s, t; std::tie(d, s, t) = e;
-          if (dst[s] == inf) continue;
-          if (cmn(dst[t], dst[s] + d)) flg = true;
-        }
+template < class Value >
+inline auto bellman_ford(std::vector< std::tuple< int, int, Value > > const & edges,
+  int n, int start, Value inf)
+{
+  assert(inf <= std::numeric_limits< Value >::max());
+  std::vector< Value > dist(n, inf);
+  dist.at(start) = 0;
+  auto relax = [&] {
+    auto flag = false;
+    for (auto const & edge : edges) {
+      int u, v; Value d; std::tie(u, v, d) = edge;
+      auto x = dist.at(u);
+      auto & y = dist.at(v);
+      if (x != inf && x + d < y) {
+        y = x + d;
+        flag = true;
       }
-  }
-  public:
-    const T inf;
-    bellman_ford (
-        const int n, const int r,
-        const std::vector<edge_t>& edg,
-        const T inf = numeric_limits<T>::max()
-      ) :
-      n(n), r(r), edg(edg), 
-      flg(false), dst(n, inf), inf(inf)
-      {
-        cal();
-      }
-    bellman_ford (
-        const int n, const int r,
-        const std::vector<edge_t>& edg
-      ) :
-      bellman_ford(n, r, edg, numeric_limits<T>::max())
-      {
-      }
-    bool has_negative_cycle () const {return flg;}
-    auto& result () {return dst;}
-};
+    }
+    return flag;
+  };
+  for (auto i = 0; i < n; i++) { relax(); }
+  auto has_cycle = relax();
+  return std::make_pair(dist, has_cycle);
+}

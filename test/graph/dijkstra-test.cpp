@@ -42,45 +42,36 @@ auto& at(T& t, Size_t i) {return t.at(i);}
 template <typename T, typename Size_t, typename... Args>
 auto& at(T& t, Size_t i, Args... args) {return at(t.at(i), args...);}
 
-#define TRIANGULAR_EQ_TEST \
+#define DIJKSTRA_TEST \
   do {\
+    auto dist = make_vector< 2, TestType >(n, n);\
+    rep(i, 0, n) {\
+      dist.at(i) = dijkstra(graph, i, inf);\
+    }\
     rep(i, 0, n) rep(j, 0, n) rep(k, 0, n) {\
-      if (at(dist, i, i) < 0) continue;\
-      if (at(dist, j, j) < 0) continue;\
-      if (at(dist, k, k) < 0) continue;\
       auto x = at(dist, i, j);\
       auto y = at(dist, i, k);\
       auto z = at(dist, k, j);\
-      REQUIRE(x - y <= z);\
+      if (y == inf || z == inf) continue;\
+      REQUIRE(x <= y + z);\
     }\
-  } while (false)
-#define COMPARISON_TEST\
-  do {\
     rep(i, 0, n) rep(j, 0, n) {\
       REQUIRE(at(dist, i, j) <= at(adj, i, j));\
     };\
   } while(false)
 
-TEMPLATE_TEST_CASE( "dijkstra", "[dijkstra]", int long long ) {
-  constexpr auto inf = std::numeric_limits< TestType >::max();
+TEMPLATE_TEST_CASE( "dijkstra", "[dijkstra]", int, long long ) {
+  constexpr auto inf = std::numeric_limits< TestType >::max() / 2;
   loop(72) {
     auto n = rand(1, 20), m = rand(1, (int)(std::pow(n, 1.2)));
     auto adj = make_vector< 2, TestType >(n, n, inf);
-    auto graph = make_vector< 2, std::pair< TestType, int > >(n, 0);
+    auto graph = make_vector< 2, std::pair< int, TestType > >(n, 0);
     loop(m) {
       auto u = rand(0, n - 1), v = rand(0, n - 1);
       auto x = std::uniform_int_distribution< TestType >(0, inf)(mt);
       cmn(at(adj, u, v), x);
-      graph.at(u).emplace_back(x, v);
+      graph.at(u).emplace_back(v, x);
     }
-    auto dist = make_vector< 2, TestType >(n, n);
-    rep(i, 0, n) {
-      auto const dist_i = dijkstra(graph, i);
-      rep(j, 0, n) {
-        at(dist, i, j) = dist_i.at(j);
-      }
-    }
-    TRIANGULAR_EQ_TEST;
-    COMPARISON_TEST;
+    DIJKSTRA_TEST;
   }
 }
