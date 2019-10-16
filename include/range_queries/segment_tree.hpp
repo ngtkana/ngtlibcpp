@@ -49,7 +49,7 @@ class segment_tree {
       { for (i += n, i /= 2; i > 0; i /= 2) merge(i); }
 
     void build()
-      { for (auto i = 1; i < n; i++) merge(i); }
+      { for (auto i = n - 1; i > 0; i--) merge(i); }
 
     void update (int u, Value val) {
       at(u) = val;
