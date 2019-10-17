@@ -24,74 +24,89 @@ void debug_impl(Head head, Tail... tail){
 #define debug 0;
 #endif
 
-#define ACT_TEST(ACTOR_GENERATOR)\
-  do {\
-    auto p = rand(0, n - 1);\
-    auto x = ACTOR_GENERATOR();\
-    act(vec.at(p), x);\
-    act(seg.at(p), x);\
-    seg.build_oneline(p);\
-  } while (false);\
+template < typename Container, typename Value = typename Container::value_type, std::enable_if_t<!std::is_same< Container, std::string >::value, std::nullptr_t> = nullptr>
+std::istream& operator>> (std::istream& is, Container& v)
+  { for (auto & x : v) { is >> x; } return is; }
 
+template < typename Container, typename Value = typename Container::value_type, std::enable_if_t<!std::is_same< Container, std::string >::value, std::nullptr_t> = nullptr >
+std::ostream& operator<< (std::ostream& os, Container const& v) {
+ os << "{";
+  for (auto it = v.begin(); it != v.end(); it++)
+    {os << (it != v.begin() ? "," : "") << *it;}
+  return os << "}";
+}
 
-#define QUERY_TEST\
-  do {\
-    auto l = rand(0, n - 1), r = rand(0, n - 1);\
-    if (r < l) std::swap(l, r);\
-    r++;\
-    REQUIRE(seg.query(l, r) ==\
-      std::accumulate(vec.begin() + l, vec.begin() + r, id, merge));\
-  } while (false)
-
-#define CONFIG(GENERATOR, MERGE_ID_, ACT_) \
-  do {\
-    auto const n = rand(1, 8);\
-    auto const q = 2 * n;\
-    auto const generator = GENERATOR(n, q);\
-    auto vec = std::vector< std::decay_t< decltype(generator()) > >(n);\
-    for (auto & x : vec) x = generator();\
-    auto const merge_id = MERGE_ID_;\
-    auto const merge = merge_id.first;\
-    auto const id = merge_id.second;\
-    auto const act = ACT_;\
-    auto seg = make_segment_tree(n, merge, id);\
-    rep(i, 0, n)\
-      { seg.at(i) = vec.at(i); }\
-    seg.build();\
-    loop (q) {\
-      if (rand(0, 1)) {\
-        ACT_TEST(generator);\
-      } else {\
-        QUERY_TEST;\
-      }\
-      REQUIRE(seg.collect() == vec);\
-    }\
-  } while (false)
-
+auto const config = [](auto higher_generator, auto merge_id, auto act) {
+  auto const n = rand(1, 8);
+  auto const q = 2 * n;
+  auto const generator = higher_generator(n, q);
+  auto vec = std::vector< std::decay_t< decltype(generator()) > >(n);
+  for (auto & x : vec) x = generator();
+  auto const merge = merge_id.first;
+  auto const id = merge_id.second;
+  auto seg = make_segment_tree(n, merge, id);
+  rep(i, 0, n)
+    { seg.at(i) = vec.at(i); }
+  seg.build();
+  loop (q) {
+    if (rand(0, 1)) {
+      auto p = rand(0, n - 1);
+      auto x = generator();
+      act(vec.at(p), x);
+      act(seg.at(p), x);
+      seg.build_oneline(p);
+    } else {
+      auto l = rand(0, n - 1), r = rand(0, n - 1);
+      if (r < l) std::swap(l, r);
+      r++;
+      REQUIRE(seg.query(l, r) ==
+      std::accumulate(vec.begin() + l, vec.begin() + r, id, merge));
+    }
+    REQUIRE(seg.collect() == vec);
+  }
+};
 
 TEMPLATE_TEST_CASE( "segment_tree", "[segment_tree]", int long long ) {
   constexpr auto inf = std::numeric_limits< TestType >::max();
-  auto const test_rand = [](auto l, auto r)
-    { return std::uniform_int_distribution< TestType >(l, r)(mt); };
-
-  auto const additive_generator = [inf, &test_rand](auto n, auto q) {
-    auto const max = inf / (n * q);
-    return [max, &test_rand]{ return test_rand(-max, max); };
+  auto const log_unif = [
+      impl = [](auto l, auto r) {
+        assert(0 < l && l <= r);
+        return TestType(std::pow(2, std::uniform_real_distribution< double >
+          (std::log2(l), std::log2(r))(mt)));
+      }
+    ](auto l, auto r) {
+      if (0 < l)  return impl(l, r);
+      if (l == r) return TestType{l};
+      auto const lgl = l == 0 ? 0 : std::log2(-l);
+      auto const lgr = r == 0 ? 0 : std::log2(r);
+      if (l == 0) return rand(0, lgr) ? impl(1, r) : TestType{0};
+      if (r == 0) return rand(0, lgl) ? -impl(1, -l) : TestType{0};
+      auto const lg = lgl + lgr + 1;
+      auto const t = rand(0, lg - 1);
+      if (t < lgl) { return -impl(1, -l); }
+      if (t < lgl + lgr) { return impl(1, r); }
+      return TestType{0};
   };
 
-  auto const multiplicative_generator = [inf, &test_rand](auto n, auto q) {
-    auto const max = std::pow(inf, -n * q);
-    return [max, &test_rand]{ return test_rand(0, max); };
+  auto const additive_generator = [inf, &log_unif](auto n, auto q) {
+    auto const max_max = inf / (n * q);
+    TestType const max = log_unif(1, max_max);
+    return [max, log_unif]{ return log_unif(-max, max); };
   };
 
-  auto const linear_function_generator = [inf, &test_rand](auto n, auto q) {
-    auto const max = std::pow(inf, -n * q);
-    return [max, &test_rand]{ return std::make_pair(test_rand(0, max), test_rand(0, max)); };
+  auto const multiplicative_generator_ = [inf, &log_unif](auto n, auto q) {
+    TestType const max = std::pow(inf, -n * q);
+    return [max, &log_unif]{ return log_unif(0, max); };
   };
 
-  auto const inversion_number_generator = [inf, &test_rand](auto n, auto q) {
-    auto const max = std::pow(inf, -n * q);
-    return [max, &test_rand]{ return std::make_tuple(test_rand(0, max), test_rand(0, max), test_rand(0, max)); };
+  auto const linear_function_generator_ = [inf, &log_unif](auto n, auto q) {
+    TestType const max = std::pow(inf, -n * q);
+    return [max, &log_unif]{ return std::make_pair(log_unif(0, max), log_unif(0, max)); };
+  };
+
+  auto const inversion_number_generator_ = [inf, &log_unif](auto n, auto q) {
+    TestType const max = std::pow(inf, -n * q);
+    return [max, &log_unif]{ return std::make_tuple(log_unif(0, max), log_unif(0, max), log_unif(0, max)); };
   };
 
   auto const sum = std::make_pair([](auto x, auto y){ return x + y; }, TestType{0});
@@ -126,21 +141,21 @@ TEMPLATE_TEST_CASE( "segment_tree", "[segment_tree]", int long long ) {
   auto const update = [](auto & x, auto y){ x = y; };
 
   loop(72) {
-    CONFIG(additive_generator, sum, add);
-    CONFIG(additive_generator, min, add);
-    CONFIG(additive_generator, max, add);
-    CONFIG(additive_generator, sum, update);
-    CONFIG(additive_generator, min, update);
-    CONFIG(additive_generator, max, update);
-    CONFIG(additive_generator, left, update);
-    CONFIG(additive_generator, right, update);
-    CONFIG(additive_generator, bitwise_and, update);
-    CONFIG(additive_generator, bitwise_or, update);
-    CONFIG(additive_generator, bitwise_xor, update);
-    CONFIG(multiplicative_generator, gcd, update);
-    CONFIG(multiplicative_generator, lcm, update);
-    CONFIG(multiplicative_generator, prod, update);
-    CONFIG(linear_function_generator, cmp, update);
-    CONFIG(inversion_number_generator, inversion_num_merger, update);
+    config(additive_generator, sum, add);
+    config(additive_generator, min, add);
+    config(additive_generator, max, add);
+    config(additive_generator, sum, update);
+    config(additive_generator, min, update);
+    config(additive_generator, max, update);
+    config(additive_generator, left, update);
+    config(additive_generator, right, update);
+    config(additive_generator, bitwise_and, update);
+    config(additive_generator, bitwise_or, update);
+    config(additive_generator, bitwise_xor, update);
+    config(multiplicative_generator_, gcd, update);
+    config(multiplicative_generator_, lcm, update);
+    config(multiplicative_generator_, prod, update);
+    config(linear_function_generator_, cmp, update);
+    config(inversion_number_generator_, inversion_num_merger, update);
   }
 }
