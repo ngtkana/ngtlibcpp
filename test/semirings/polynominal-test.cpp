@@ -401,7 +401,7 @@ TEMPLATE_TEST_CASE( "polynominal", "[polynominal]", int, long long ) {
       TestType{0}
     );
     auto const deg_max = 40;
-    loop(24) {
+    loop(240) {
       auto const k = rand(1, deg_max), l = rand(1, deg_max);
       std::vector< TestType > a(k), b(l);
       for (auto & x : a) x = rand(0, inf);

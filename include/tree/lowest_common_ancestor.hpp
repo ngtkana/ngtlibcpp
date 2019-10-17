@@ -1,70 +1,90 @@
-// Class for calculating LCA.
-// Dependent libraries: Combinator.
-template <typename T>
+template < class Value >
 class lowest_common_ancestor {
     struct edge {
-        size_t to; T cost;
-        edge(size_t to, T cost) : to(to), cost(cost){}
-      };
-    size_t n, lg;
-    std::vector<std::vector<edge>>   graph;
-    std::vector<unsigned>            depth;
-    std::vector<T>                   weighted_depth;
-    std::vector<std::vector<size_t>> prt;
+      int to; Value cost;
+      edge(int to, Value cost) : to(to), cost(cost){}
+    };
+    int n, lg, powlg;
+    std::vector< std::vector< edge > > graph;
+    std::vector< int >                 depth;
+    std::vector< Value >               w_depth;
+    std::vector< std::vector< int > >  table;
+    std::vector< int > &               tail;
+
   public:
-    using cost_type = T;
-    lowest_common_ancestor(size_t n) :
-      n(n), lg(std::log2(n)),
-      graph(n), depth(n, 0), weighted_depth(n, 0),
-      prt(lg + 1, std::vector<size_t>(n)) {}
-    // Insert an edge.
-    void insert (size_t u, size_t v, T cost = 1) {
-        graph.at(u).emplace_back(v, cost);
-        graph.at(v).emplace_back(u, cost);
-      }
-    // Build a doubling table.
-    void build (size_t root = 0) {
-        fix ([&](auto dfs, size_t crr, size_t p) -> void {
-          prt.at(0).at(crr) = p;
-          for (auto const& e : graph.at(crr)) {
-            if (e.to == p) continue;
-            depth.at(e.to) = depth.at(crr) + 1;
-            weighted_depth.at(e.to) = weighted_depth.at(crr) + e.cost;
-            dfs(e.to, crr);
-          }
-        })(root, root);
-        for (size_t p = 1; p <= lg; p++) {
-          for (size_t i = 0; i < n; i++) {
-            prt.at(p).at(i) = prt.at(p - 1).at(prt.at(p - 1).at(i));
-          }
+    using cost_type = Value;
+    lowest_common_ancestor(int n) :
+      n(n),
+      lg(std::log2(n)),
+      powlg(std::pow(2, lg)),
+      graph(n),
+      depth(n, 0),
+      w_depth(n, 0),
+      table(lg + 1, std::vector< int >(n)),
+      tail(table.back())
+      {}
+
+    void insert (int u, int v, Value cost = 1) {
+      graph.at(u).emplace_back(v, cost);
+      graph.at(v).emplace_back(u, cost);
+    }
+
+    void build (int root = 0) {
+      auto dfs = [&](auto f, int crr, int p) -> void {
+        tail.at(crr) = p;
+        for (auto const& e : graph.at(crr)) {
+          if (e.to == p) continue;
+          depth.at(e.to) = depth.at(crr) + 1;
+          w_depth.at(e.to) = w_depth.at(crr) + e.cost;
+          f(f, e.to, crr);
+        }
+      };
+      dfs(dfs, root, root);
+      for (int p = lg; p >= 1; p--) {
+        auto & crr = table.at(p);
+        auto & nxt = table.at(p - 1);
+        for (int i = 0; i < n; i++) {
+          nxt.at(i) = crr.at(crr.at(i));
         }
       }
-    // Calculate the lca.
-    auto operator()(size_t u, size_t v) const -> size_t {
-        if (depth.at(u) < depth.at(v)) std::swap(u, v);
-        auto diff = depth.at(u) - depth.at(v);
-        if (diff > 0) {
-          for (size_t p = lg, q = std::pow(2, lg); p <= lg; p--, q /= 2) {
-            if (diff > q) u = prt.at(p).at(u), diff -= q;
+    }
+
+    auto query(int u, int v) const -> int {
+      if (depth.at(u) < depth.at(v)) std::swap(u, v);
+      auto diff = depth.at(u) - depth.at(v);
+      if (diff > 0) {
+        int coeff = powlg;
+        for (auto const & row : table) {
+          if (coeff < diff) {
+            u = row.at(u);
+            diff -= coeff;
           }
-          u = prt.at(0).at(u), diff--;
+          coeff /= 2;
         }
-        assert(diff == 0), assert(depth.at(u) == depth.at(v));
-        if (u == v) return u;
-        for (size_t p = lg, q = std::pow(2, lg); p <= lg; p--, q /= 2) {
-          auto next_u = prt.at(p).at(u);
-          auto next_v = prt.at(p).at(v);
-          if (next_u != next_v) u = next_u, v = next_v;
-        }
-        assert(u != v);
-        u = prt.at(0).at(u), v = prt.at(0).at(v), assert(u == v);
-        return u;
+        u = tail.at(u);
+        diff--;
       }
-    // Calculate the count-based distance.
-    auto row_dist (size_t u, size_t v) const -> unsigned {
-      return depth.at(u) + depth.at(v) - 2 * depth.at(operator()(u, v));}
-    // Calculate the count-based distance.
-    auto weighted_dist (size_t u, size_t v) const -> T {
-      auto& x = weighted_depth;
-      return x.at(u) + x.at(v) - 2 * x.at(operator()(u, v));}
+      assert(diff == 0);
+      assert(depth.at(u) == depth.at(v));
+      if (u == v) return u;
+      for (auto const & row : table) {
+        auto next_u = row.at(u);
+        auto next_v = row.at(v);
+        if (next_u != next_v) {
+          u = next_u;
+          v = next_v;
+        }
+      }
+      assert(u != v);
+      u = tail.at(u), v = tail.at(v), assert(u == v);
+      return u;
+    }
+
+    auto row_dist (int u, int v) const -> int {
+      return depth.at(u) + depth.at(v) - 2 * depth.at(query(u, v));
+    }
+
+    auto weighted_dist (int u, int v) const -> Value {
+      return w_depth.at(u) + w_depth.at(v) - 2 * w_depth.at(query(u, v));
+    }
 };
