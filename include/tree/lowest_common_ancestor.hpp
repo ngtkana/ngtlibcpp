@@ -80,11 +80,11 @@ class lowest_common_ancestor {
       return u;
     }
 
-    auto row_dist (int u, int v) const -> int {
+    auto row_distance (int u, int v) const -> int {
       return depth.at(u) + depth.at(v) - 2 * depth.at(query(u, v));
     }
 
-    auto weighted_dist (int u, int v) const -> Value {
+    auto weighted_distance (int u, int v) const -> Value {
       return w_depth.at(u) + w_depth.at(v) - 2 * w_depth.at(query(u, v));
     }
 };
