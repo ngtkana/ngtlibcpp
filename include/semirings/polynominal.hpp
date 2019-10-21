@@ -1,33 +1,53 @@
 
-template < class Mul, class Add, class Value, class Div, class Sub >
+template < class Add, class Mul, class Value, class Sub, class Div >
 class polynominal {
     using poly_type = std::vector< Value >;
-    Mul mul_fn;
     Add add_fn;
+    Mul mul_fn;
     Value zero;
-    Div div_fn;
     Sub sub_fn;
-    auto add_eq(Value & x, Value y) const { x = add_fn(x, y); }
-    auto sub_eq(Value & x, Value y) const { x = sub_fn(x, y); }
+    Div div_fn;
+    auto& add_eq(Value & x, Value y) const { return x = add_fn(x, y); }
+    auto& sub_eq(Value & x, Value y) const { return x = sub_fn(x, y); }
+    auto& mul_eq(Value & x, Value y) const { return x = mul_fn(x, y); }
 
   public:
     polynominal()=default;
     polynominal(
-      Mul const& mul_fn,
       Add const& add_fn,
+      Mul const& mul_fn,
       Value zero,
-      Div const& div_fn,
-      Sub const& sub_fn
+      Sub const& sub_fn,
+      Div const& div_fn
     ) :
-      mul_fn(mul_fn), add_fn(add_fn),
+      add_fn(add_fn), mul_fn(mul_fn),
       zero(zero),
-      div_fn(div_fn), sub_fn(sub_fn)
+      sub_fn(sub_fn), div_fn(div_fn)
       {}
 
     auto& normalize(poly_type & a) const {
       while (!a.empty() && a.back() == zero)
         { a.pop_back(); }
       return a;
+    }
+
+    auto normalized(poly_type a) const {
+      return normalize(a);
+    }
+
+    auto coeff(poly_type const & a, std::size_t i) const {
+      return i < a.size() ? a.at(i) : zero;
+    }
+
+    auto eval(poly_type const & a, Value x) const {
+      if (a.empty()) return zero;
+      auto ret = a.front();
+      auto p = x;
+      for (auto i = 1; i < (int)a.size(); i++) {
+        add_eq(ret, mul_fn(a.at(i), p));
+        mul_eq(p, x);
+      }
+      return ret;
     }
 
     auto add(poly_type const & a , poly_type const & b) const {
@@ -40,9 +60,11 @@ class polynominal {
       }
       return normalize(c);
     }
-    auto mul(poly_type const & a, poly_type const & b) const {
+    auto mul(poly_type a, poly_type b) const {
+      normalize(a), normalize(b);
       int l = a.size(), m = b.size();
       int n = l + m - 1;
+      if (n <= 0) return poly_type{};
       poly_type c(n, zero);
       for (auto i = 0; i < l; i++) {
         for (auto j = 0; j < m; j++) {
@@ -87,12 +109,12 @@ constexpr auto not_implemented = [](auto const x, auto const) {
   return x;
 };
 using not_implemented_t = std::decay_t< decltype(not_implemented) >;
-template < class Mul, class Add, class Value, class Div = not_implemented_t, class Sub = not_implemented_t >
+template < class Mul, class Add, class Value, class Sub = not_implemented_t, class Div = not_implemented_t >
 auto make_polynominal(
-  Mul const& mul_fn,
   Add const& add_fn,
+  Mul const& mul_fn,
   Value zero,
-  Div const& div_fn = not_implemented,
-  Sub const& sub_fn = not_implemented) {
-  return polynominal< Mul, Add, Value, Div, Sub >(mul_fn, add_fn, zero, div_fn, sub_fn);
+  Sub const& sub_fn = not_implemented,
+  Div const& div_fn = not_implemented) {
+  return polynominal< Add, Mul, Value, Sub, Div >(add_fn, mul_fn, zero, sub_fn, div_fn);
 }
