@@ -13,13 +13,15 @@ void debug_impl(Head head, Tail... tail){
   std::cerr << " " << head;
   debug_impl(tail...);
 }
-#ifndef STOPIT
+#ifdef STOPIT
+#define debug(...) 0
+#else
 #define debug(...)\
+do {\
   std::cerr << std::boolalpha << "[" << #__VA_ARGS__ << "]:";\
   debug_impl(__VA_ARGS__);\
-  std::cerr << std::noboolalpha;
-#else
-#define debug 0;
+  std::cerr << std::noboolalpha;\
+} while (false)
 #endif
 
 int main() {
