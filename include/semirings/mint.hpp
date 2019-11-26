@@ -118,7 +118,7 @@ auto operator>>(std::istream& is, T& a)
   return is;
 }
 
-using mod_type = int;
+// using mod_type = int;
 
 // struct variable_mod { static mod_type value; };
 // mod_type variable_mod::value;
