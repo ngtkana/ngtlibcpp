@@ -82,7 +82,7 @@ class polynominal {
       return std::make_pair(q, normalize(a));
     }
 };
-constexpr auto not_implemented = [](auto const x, auto const) {
+auto not_implemented = [](auto const x, auto const) {
   static_assert([]{ return false; }(), "Call to a not-implemented function." );
   return x;
 };

@@ -9,7 +9,7 @@ mkdir -p build
 cd build
 cmake ..
 make
-make test
+make test -j10
 
 cd ${ORIG_WD}
 

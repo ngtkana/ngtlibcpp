@@ -36,7 +36,8 @@ std::ostream& operator<< (std::ostream& os, Container const& v) {
 #include <range_queries/sparse_table.hpp>
 
 auto mt = std::mt19937_64(std::random_device{}());
-auto random_interval(auto n) {
+template < class T >
+auto random_interval(T n) {
   auto l = rand(0, n - 1), r = rand(0, n - 1);
   if (r < l) std::swap(l, r);
   r++;

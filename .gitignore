@@ -1,5 +1,5 @@
 .vscode/
 wip.cpp
 wip.sh
-build
+build/
 test/build
