@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <algorithm/runlength.hpp>
+#include <algorithm/run_length.hpp>
 #define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
 #define loop(h) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(h); ngtkana_is_genius++)
 #define all(v) v.begin(), v.end()
@@ -33,14 +33,14 @@ template <typename T, typename U>
 std::istream& operator>> (std::iostream& is, std::pair<T, U>& pair)
   { return is >> pair.first >> pair.second; }
 
-TEMPLATE_TEST_CASE( "runlength", "[runlength]", int, long long ) {
+TEMPLATE_TEST_CASE( "run_length", "[run_length]", int, long long ) {
   auto nmax = 20;
   loop(24) {
     auto n = rand(1, nmax);
     std::vector< TestType > a(n);
     for (auto & x : a) x = rand(1, (n + 2) / 3);
     std::sort(all(a));
-    auto rle = runlength(a);
+    auto rle = run_length(a);
 
     // compare with random access
     std::vector< int > mul(rle.size());

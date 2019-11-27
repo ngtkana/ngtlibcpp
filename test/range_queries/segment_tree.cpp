@@ -68,13 +68,12 @@ auto const config = [](auto higher_generator, auto merge_id, auto act) {
 
 TEMPLATE_TEST_CASE( "segment_tree", "[segment_tree]", int long long ) {
   constexpr auto inf = std::numeric_limits< TestType >::max();
-  auto const log_unif = [
-      impl = [](auto l, auto r) {
-        assert(0 < l && l <= r);
-        return TestType(std::pow(2, std::uniform_real_distribution< double >
-          (std::log2(l), std::log2(r))(mt)));
-      }
-    ](auto l, auto r) {
+  auto const log_unif_impl = [](auto l, auto r) {
+    assert(0 < l && l <= r);
+    return TestType(std::pow(2, std::uniform_real_distribution< double >
+      (std::log2(l), std::log2(r))(mt)));
+  };
+  auto const log_unif = [ impl = log_unif_impl ](auto l, auto r) {
       if (0 < l)  return impl(l, r);
       if (l == r) return TestType{l};
       auto const lgl = l == 0 ? 0 : std::log2(-l);
