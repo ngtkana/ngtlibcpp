@@ -1,54 +1,96 @@
 #include <catch2/catch.hpp>
 #include <bit_operations/bat.hpp>
 #include <bits/stdc++.h>
-#define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)
-#define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
-#define all(v) v.begin(), v.end()
-#define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)
-#define lint long long
-auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};
-auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};
-void debug_impl() { std::cerr << std::endl; }
-template <typename Head, typename... Tail>
-void debug_impl(Head head, Tail... tail){
-  std::cerr << " " << head;
-  debug_impl(tail...);
-}
-#ifndef STOPIT
-#define debug(...)\
-  std::cerr << std::boolalpha << "[" << #__VA_ARGS__ << "]:";\
-  debug_impl(__VA_ARGS__);\
-  std::cerr << std::noboolalpha;
-#else
-#define debug 0;
-#endif
 
-template < class > constexpr auto digit = -1;
-template <> constexpr auto digit< int       > = 30;
-template <> constexpr auto digit< long long > = 60;
+TEST_CASE( "Small" ) {
+  REQUIRE(bat(0, 0) == 0);
+  REQUIRE(bat(0, 1) == 0);
+  REQUIRE(bat(0, 2) == 0);
 
-TEMPLATE_TEST_CASE( "bat", "[bat]", int, long long ) {
-  SECTION( "small cases" ) {
-    REQUIRE(bat(TestType(0), 0) == 0);
-    REQUIRE(bat(TestType(0), 1) == 0);
-    REQUIRE(bat(TestType(1), 0) == 1);
-    REQUIRE(bat(TestType(1), 1) == 0);
-  }
-  SECTION( "random cases" ) {
-    loop(24) {
-      auto mt = std::mt19937(std::random_device{}());
-      auto n = rand(1, digit< TestType >);
-      std::vector< TestType > a(n);
-      for (auto & x : a) x = rand(0, 1);
-      a.emplace_back(1);
-      n++;
-      TestType val = 0;
-      rep(i, 0, n)
-        { val += a.at(i) << i; }
-      loop(6) {
-        auto i = rand(0, n - 1);
-        REQUIRE(bat(val, i) == a.at(i));
-      }
-    }
-  }
+  REQUIRE(bat(1, 0) == 1);
+  REQUIRE(bat(1, 1) == 0);
+  REQUIRE(bat(1, 2) == 0);
+
+  REQUIRE(bat(2, 0) == 0);
+  REQUIRE(bat(2, 1) == 1);
+  REQUIRE(bat(2, 2) == 0);
+
+  REQUIRE(bat(3, 0) == 1);
+  REQUIRE(bat(3, 1) == 1);
+  REQUIRE(bat(3, 2) == 0);
+
+  REQUIRE(bat(4, 0) == 0);
+  REQUIRE(bat(4, 1) == 0);
+  REQUIRE(bat(4, 2) == 1);
 }
+
+TEST_CASE( "large int" ) {
+  int max = std::numeric_limits< int >::max();
+
+  REQUIRE(bat(max, 00) == 1);
+  REQUIRE(bat(max, 01) == 1);
+  REQUIRE(bat(max, 30) == 1);
+  REQUIRE(bat(max, 31) == 0);
+
+  REQUIRE(bat(max-1, 00) == 0);
+  REQUIRE(bat(max-1, 01) == 1);
+  REQUIRE(bat(max-1, 30) == 1);
+  REQUIRE(bat(max-1, 31) == 0);
+
+  REQUIRE(bat(max-2, 00) == 1);
+  REQUIRE(bat(max-2, 01) == 0);
+  REQUIRE(bat(max-2, 30) == 1);
+  REQUIRE(bat(max-2, 31) == 0);
+
+  int min = std::numeric_limits< int >::min();
+  REQUIRE(bat(min, 00) == 0);
+  REQUIRE(bat(min, 01) == 0);
+  REQUIRE(bat(min, 30) == 0);
+  REQUIRE(bat(min, 31) == 1);
+
+  REQUIRE(bat(min+1, 00) == 1);
+  REQUIRE(bat(min+1, 01) == 0);
+  REQUIRE(bat(min+1, 30) == 0);
+  REQUIRE(bat(min+1, 31) == 1);
+
+  REQUIRE(bat(min+2, 00) == 0);
+  REQUIRE(bat(min+2, 01) == 1);
+  REQUIRE(bat(min+2, 30) == 0);
+  REQUIRE(bat(min+2, 31) == 1);
+}
+
+TEST_CASE( "large long long" ) {
+  long long max = std::numeric_limits< long long >::max();
+
+  REQUIRE(bat(max, 00) == 1);
+  REQUIRE(bat(max, 01) == 1);
+  REQUIRE(bat(max, 62) == 1);
+  REQUIRE(bat(max, 63) == 0);
+
+  REQUIRE(bat(max-1, 00) == 0);
+  REQUIRE(bat(max-1, 01) == 1);
+  REQUIRE(bat(max-1, 62) == 1);
+  REQUIRE(bat(max-1, 63) == 0);
+
+  REQUIRE(bat(max-2, 00) == 1);
+  REQUIRE(bat(max-2, 01) == 0);
+  REQUIRE(bat(max-2, 62) == 1);
+  REQUIRE(bat(max-2, 63) == 0);
+
+  long long min = std::numeric_limits< long long >::min();
+  REQUIRE(bat(min, 00) == 0);
+  REQUIRE(bat(min, 01) == 0);
+  REQUIRE(bat(min, 62) == 0);
+  REQUIRE(bat(min, 63) == 1);
+
+  REQUIRE(bat(min+1, 00) == 1);
+  REQUIRE(bat(min+1, 01) == 0);
+  REQUIRE(bat(min+1, 62) == 0);
+  REQUIRE(bat(min+1, 63) == 1);
+
+  REQUIRE(bat(min+2, 00) == 0);
+  REQUIRE(bat(min+2, 01) == 1);
+  REQUIRE(bat(min+2, 62) == 0);
+  REQUIRE(bat(min+2, 63) == 1);
+}
+

@@ -1,2 +1,2 @@
-bool bat (int       x, int j) {return (x >> j) & 1  ;}
-bool bat (long long x, int j) {return (x >> j) & 1LL;}
+template < class Value >
+bool bat(Value x, std::size_t pos) { return (x >> pos) & Value{1}; }
