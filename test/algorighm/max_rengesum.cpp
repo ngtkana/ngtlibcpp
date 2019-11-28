@@ -10,27 +10,23 @@ auto cmn = [](auto& a, auto b){if (a > b) {a = b; return true;} return false;};
 auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};
 
 std::mt19937_64 mt(std::random_device{}());
-auto nmax = 20;
-template < class Value >
-auto gen() {
-  return std::uniform_int_distribution< Value >(
-    0,
-    10
-  )(mt);
-}
 
-TEMPLATE_TEST_CASE( "max_rangesum", "[max_rangesum]", int, long long ) {
+TEST_CASE( "Tutorial" ) {
+  std::vector< int > a = { 4, -6, 0, 3, 2, -3, 1, 7 };
+  REQUIRE(max_rangesum(a) == 3+2-3+1+7);
+}
+TEST_CASE( "Random" ) {
+  int size_max = 20;
   loop(24) {
-    auto n = rand(1, nmax);
-    std::vector< TestType > a(n);
-    for (auto & x : a) x = gen< TestType >();
-    TestType expected = a.front();
-    rep(l, 0, n) rep(r, l+1, n+1) {
-      TestType now = 0;
+    auto n = rand(1, size_max);
+    std::vector< int > a(n);
+    auto ret = 0;
+    rep(l, 0, n) rep(r, l + 1, n) {
+      auto now = 0;
       rep(i, l, r)
         { now += a.at(i); }
-      cmx(expected, now);
+      cmx(ret, now);
     }
-    REQUIRE(max_rangesum(a) == expected);
+    REQUIRE(max_rangesum(a) == ret);
   }
 }
