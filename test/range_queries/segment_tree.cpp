@@ -54,7 +54,6 @@ auto const config = [](auto higher_generator, auto merge_id, auto act) {
       auto x = generator();
       act(vec.at(p), x);
       act(seg.at(p), x);
-      seg.build_oneline(p);
     } else {
       auto l = rand(0, n - 1), r = rand(0, n - 1);
       if (r < l) std::swap(l, r);

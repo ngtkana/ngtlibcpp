@@ -8,7 +8,7 @@ cd ${SCRIPT_DIR}
 mkdir -p build
 cd build
 cmake ..
-make
+make -j10
 make test -j10
 
 cd ${ORIG_WD}

@@ -4,7 +4,8 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 include_directories(
    ${CMAKE_CURRENT_LIST_DIR}/../Catch2/single_include
    ${CMAKE_CURRENT_LIST_DIR}/../include
-  )
+   PUBLIC /opt/boost/boost_1_70_0/include/
+   )
 
 add_library(test_main ${CMAKE_CURRENT_LIST_DIR}/main.cpp)
 
