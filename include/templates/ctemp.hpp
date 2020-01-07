@@ -1,4 +1,4 @@
-// #define STOPIT
+#define LOCAL 1
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
 #define loop(n) for (lint ngtkana_is_a_genius = 0; ngtkana_is_a_genius < lint(n); ngtkana_is_a_genius++)
@@ -12,7 +12,7 @@ auto cmx = [](auto&& a, auto b){ if (a < b) {a = b; return true;} return false; 
 void debug_impl() { std::cerr << std::endl; }
 template <typename Head, typename... Tail>
 void debug_impl(Head head, Tail... tail) { std::cerr << " " << head; debug_impl(tail...); }
-#ifndef STOPIT
+#if LOCAL
 #define debug(...)\
   do {\
     std::cerr << std::boolalpha << "[" << #__VA_ARGS__ << "]:";\
