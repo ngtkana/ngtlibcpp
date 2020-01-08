@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <flow/minimum_cost_flow.hpp>
+#include <minimum_cost_flow.hpp>
 
 struct minimum_cost_flow_tag{};
 

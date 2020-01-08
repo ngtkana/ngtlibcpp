@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <bstrees/bstree.hpp>
+#include <bstree.hpp>
 #include <bits/stdc++.h>
 #include <boost/format.hpp>
 #include <boost/hana/repeat.hpp>

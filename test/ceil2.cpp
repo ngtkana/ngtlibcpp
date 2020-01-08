@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <bit_operations/ceil2.hpp>
+#include <ceil2.hpp>
 #include <bits/stdc++.h>
 
 TEST_CASE( "small" ) {

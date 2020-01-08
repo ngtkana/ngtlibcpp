@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <algorithm/run_length.hpp>
+#include <run_length.hpp>
 #define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
 #define loop(h) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(h); ngtkana_is_genius++)
 #define all(v) v.begin(), v.end()

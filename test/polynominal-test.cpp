@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <semirings/polynominal.hpp>
-#include <semirings/mint.hpp>
+#include <polynominal.hpp>
+#include <mint.hpp>
 #define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)
 #define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
 #define all(v) v.begin(), v.end()

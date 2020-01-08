@@ -1,6 +1,6 @@
 // #include <catch2/catch.hpp>
 // #include <bits/stdc++.h>
-// #include <string_algorighms/trie.hpp>
+// #include <trie.hpp>
 // #include "../utility.hpp"
 
 // #define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)

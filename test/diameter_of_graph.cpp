@@ -65,9 +65,9 @@ auto& at(T& t, Size_t i) {return t.at(i);}
 
 template <typename T, typename Size_t, typename... Args>
 auto& at(T& t, Size_t i, Args... args) {return at(t.at(i), args...);}
-#include <graph/diameter_floyd_warshall.hpp>
-#include <graph/diameter_dijkstra.hpp>
-#include <graph/diameter_bfs.hpp>
+#include <diameter_floyd_warshall.hpp>
+#include <diameter_dijkstra.hpp>
+#include <diameter_bfs.hpp>
 
 class union_find {
     int n;

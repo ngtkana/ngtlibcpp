@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <string_algorighms/z_algorithm.hpp>
+#include <z_algorithm.hpp>
 
 using namespace std::literals::string_literals;
 

@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <bit_operations/bat.hpp>
+#include <bat.hpp>
 #include <bits/stdc++.h>
 
 TEST_CASE( "Small" ) {

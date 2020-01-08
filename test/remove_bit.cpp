@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <bit_operations/remove_bit.hpp>
+#include <remove_bit.hpp>
 #include <bits/stdc++.h>
 
 TEST_CASE( "small" ) {

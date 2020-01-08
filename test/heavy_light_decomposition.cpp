@@ -1,6 +1,6 @@
 // #include <catch2/catch.hpp>
 // #include <bits/stdc++.h>
-// #include <range_queries/segment_tree.hpp>
+// #include <segment_tree.hpp>
 // #define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)
 // #define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
 // #define all(v) v.begin(), v.end()
@@ -35,7 +35,7 @@
 //     {os << (it != v.begin() ? "," : "") << *it;}
 //   return os << "}";
 // }
-// #include <tree/heavy_light_decomposition.hpp>
+// #include <heavy_light_decomposition.hpp>
 
 // template <typename T>
 // auto make_vector_impl(size_t sz, T t) {return std::vector<T>(sz, t);}

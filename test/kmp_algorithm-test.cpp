@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <string_algorighms/kmp_algorithm.hpp>
+#include <kmp_algorithm.hpp>
 
 TEST_CASE("Failure Table Construction Test from Wikipedia.", "[KMP Algorithm]") {
   REQUIRE(

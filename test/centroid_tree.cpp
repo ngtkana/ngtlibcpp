@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <tree/centroid_tree.hpp>
+#include <centroid_tree.hpp>
 #define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)
 #define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
 #define all(v) v.begin(), v.end()

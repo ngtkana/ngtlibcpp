@@ -1,7 +1,7 @@
 // #include <catch2/catch.hpp>
 // #include <bits/stdc++.h>
-// #include <string_algorighms/suffix_array.hpp>
-// #include <string_algorighms/lcp_array.hpp>
+// #include <suffix_array.hpp>
+// #include <lcp_array.hpp>
 // #include "../utility.hpp"
 // #define rep(i, begin, end) for(int i = int(begin); i < int(end); i++)
 // #define loop(n) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(n); ngtkana_is_genius++)

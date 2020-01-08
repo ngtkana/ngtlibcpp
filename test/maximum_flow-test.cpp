@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <flow/dinic.hpp>
+#include <dinic.hpp>
 
 struct dinic_tag{};
 

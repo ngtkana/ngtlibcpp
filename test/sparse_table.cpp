@@ -33,7 +33,7 @@ std::ostream& operator<< (std::ostream& os, Container const& v) {
     {os << (it != v.begin() ? "," : "") << *it;}
   return os << "}";
 }
-#include <range_queries/sparse_table.hpp>
+#include <sparse_table.hpp>
 
 auto mt = std::mt19937_64(std::random_device{}());
 template < class T >

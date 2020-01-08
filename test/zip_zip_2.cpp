@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <algorithm/zip2.hpp>
-#include <algorithm/zip.hpp>
+#include <zip2.hpp>
+#include <zip.hpp>
 #define loop(h) for (int ngtkana_is_genius = 0; ngtkana_is_genius < int(h); ngtkana_is_genius++)
 #define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)
 

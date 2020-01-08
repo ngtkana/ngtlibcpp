@@ -19,7 +19,7 @@ auto cmx = [](auto& a, auto b){if (a < b) {a = b; return true;} return false;};
     std::cerr << std::noboolalpha;
   #define rand(l, r) std::uniform_int_distribution<int>(l, r)(mt)
 
-  #include <range_queries/wavelet_matrix.hpp>
+  #include <wavelet_matrix.hpp>
 
   template <typename T>
   std::istream& operator>> (std::istream& is, std::vector<T>& v) {

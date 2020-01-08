@@ -1,8 +1,8 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <string_algorighms/kmp_algorithm.hpp>
-#include <string_algorighms/z_algorithm.hpp>
-#include <string_algorighms/suffix_array.hpp>
+#include <kmp_algorithm.hpp>
+#include <z_algorithm.hpp>
+#include <suffix_array.hpp>
 
 struct kmp_algorithm_tag{};
 struct z_algorithm_tag{};

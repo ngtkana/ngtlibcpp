@@ -1,11 +1,11 @@
 #include <catch2/catch.hpp>
 #include <bits/stdc++.h>
-#include <disjoint_sets/quick_find.hpp>
-#include <disjoint_sets/union_find.hpp>
-#include <disjoint_sets/valued_quick_find.hpp>
-#include <disjoint_sets/valued_union_find.hpp>
-#include <disjoint_sets/weighted_quick_find.hpp>
-#include <disjoint_sets/weighted_union_find.hpp>
+#include <quick_find.hpp>
+#include <union_find.hpp>
+#include <valued_quick_find.hpp>
+#include <valued_union_find.hpp>
+#include <weighted_quick_find.hpp>
+#include <weighted_union_find.hpp>
 
 struct quick_find_tag{};
 struct union_find_tag{};
