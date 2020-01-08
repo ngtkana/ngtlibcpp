@@ -1,35 +1,17 @@
-// require gcc >= 7.1.0
-template < class ... Keys >
+template <class Key>
 class fmt_t {
-    using storage_t = std::tuple< Keys ... >;
-    storage_t storage;
-    static constexpr std::size_t N = sizeof ... (Keys);
+    Key key;
 
-    // is_exact_match_impl
-    template < std::size_t I, class Value >
-      auto is_exact_match_impl(long, Value) const
-        { return false; }
+    template <class Value>
+    auto is_exact_match(long, Value) const {
+      return false;
+    }
 
-    template < std::size_t I, class Value,
-      std::enable_if_t<
-        std::is_same< std::decay_t< Value > , char >::value
-        == std::is_same< std::tuple_element_t< I, storage_t >, char >::value,
-      std::nullptr_t > = nullptr,
-      class = decltype(std::declval< Value >() == std::get< I >(std::declval< storage_t >())) >
-      auto is_exact_match_impl(int, Value x) const
-        { return x == std::get< I >(storage); }
+    template <class Value, class = decltype(std::declval< Value >() == key)>
+    auto is_exact_match(int, Value x) const {
+      return x == key;
+    }
 
-    template < class Value, std::size_t ... Is >
-      auto find_exact_match_impl(Value x, std::integer_sequence< std::size_t, Is ... >) const {
-        auto ret = false;
-        (void)std::initializer_list< std::nullptr_t >
-          { (ret |= is_exact_match_impl< Is >(int{}, x), nullptr) ...  };
-        return ret;
-      }
-
-    template < class Value >
-      auto exists_exact_match(Value x) const
-      {  return find_exact_match_impl(x, std::make_index_sequence< N >()); }
 
     // tuple_format_impl
     template < class Tuple,  std::size_t ... Is >
@@ -68,14 +50,14 @@ class fmt_t {
 
     // format
     template < class Value > std::string format(Value&& x) const
-      { return exists_exact_match(x) ? std::string{'_'} : usual_format(int{}, x); }
+      { return is_exact_match(int{}, x) ? std::string{'_'} : usual_format(int{}, x); }
 
   public:
     fmt_t()=default;
-    template < Keys ... > fmt_t(Keys&& ... keys ) : storage(keys ... ){}
+    fmt_t(Key&& key) : key(key){}
 
     template < class Value > std::string operator()(Value&& x) const
       { return format(x); }
 };
-template < class ... Keys > auto fmt(Keys&& ... keys)
-  { return fmt_t< Keys ... >(std::forward< Keys >(keys) ... ); }
+template <class Key> auto fmt(Key key)
+  { return fmt_t<Key>(std::forward<Key>(key)); }
