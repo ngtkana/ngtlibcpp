@@ -14,7 +14,7 @@ enable_testing()
 # Listing test srcs
 set(main, main.cpp)
 
-file(GLOB_RECURSE srcs RELATIVE ${CMAKE_CURRENT_LIST_DIR} **/*.cpp)
+file(GLOB srcs RELATIVE ${CMAKE_CURRENT_LIST_DIR} *.cpp)
 foreach(src ${srcs})
   get_filename_component(test_name ${src} NAME_WE)
   message(${test_name})
