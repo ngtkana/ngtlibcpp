@@ -1,6 +1,5 @@
 #include <catch2/catch.hpp>
 #include <tuple_io.hpp>
-#include <pair_io.hpp>
 #include <container_io.hpp>
 #include <sstream>
 #include <iterator>
@@ -18,21 +17,6 @@ TEST_CASE("tuple io", "[tuple_io]")
   ss.str("");
   ss.clear(std::stringstream::goodbit);
   ss << tuple;
-  REQUIRE(ss.str() == "(10,c)");
-}
-
-TEST_CASE("pair io", "[pair_io]")
-{
-  std::stringstream ss;
-  ss << 10 << std::endl
-     << 'c' << std::endl;
-  std::pair<int, char> pair;
-  ss >> pair;
-  REQUIRE(pair.first  == 10);
-  REQUIRE(pair.second == 'c');
-  ss.str("");
-  ss.clear(std::stringstream::goodbit);
-  ss << pair;
   REQUIRE(ss.str() == "(10,c)");
 }
 
