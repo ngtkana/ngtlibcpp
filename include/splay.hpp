@@ -1,6 +1,10 @@
+struct splay_op {
+  static int invoke(int x, int y) { return x + y; }
+};
+
 struct splay_node {
   splay_node * left, * right, *parent;
-  int size, value, minimum;
+  int size, value, cum;
 
   splay_node() {
     left = nullptr;
@@ -56,14 +60,14 @@ struct splay_node {
   }
   void update() {
     this->size = 1;
-    this->minimum = this->value;
+    this->cum = this->value;
     if (this->left) {
       this->size += this->left->size;
-      this->minimum = std::min(this->minimum, this->left->minimum);
+      this->cum = splay_op::invoke(this->cum, this->left->cum);
     }
     if (this->right) {
       this->size += this->right->size;
-      this->minimum = std::min(this->minimum, this->right->minimum);
+      this->cum = splay_op::invoke(this->cum, this->right->cum);
     }
   }
 };
