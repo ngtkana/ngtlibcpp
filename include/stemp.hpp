@@ -13,17 +13,17 @@ template <typename Head, typename... Tail>
 void debug_impl(Head head, Tail... tail) { std::cerr << " " << head; debug_impl(tail...); }
 #if DEBUG
 #define debug(...)\
-  do {\
-    std::cerr << std::boolalpha << "[" << #__VA_ARGS__ << "]:";\
-    debug_impl(__VA_ARGS__);\
-    std::cerr << std::noboolalpha;\
-  } while (false)
+    do {\
+        std::cerr << std::boolalpha << "[" << #__VA_ARGS__ << "]:";\
+        debug_impl(__VA_ARGS__);\
+        std::cerr << std::noboolalpha;\
+    } while (false)
 #else
 #define debug(...) {}
 #endif
 
 int main() {
-  std::cin.tie(0); std::cin.sync_with_stdio(false);
-  $0
-  return 0;
+    std::cin.tie(0); std::cin.sync_with_stdio(false);
+    $0
+    return 0;
 }
