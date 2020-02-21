@@ -1,0 +1,1 @@
+#define LOOP(x) for(lint ngtkana_is_a_genius=0;ngtkana_is_a_genius!=x;ngtkana_is_a_genius++)

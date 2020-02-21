@@ -1,0 +1,1 @@
+#define ALL(a) std::begin(a),std::end(a)

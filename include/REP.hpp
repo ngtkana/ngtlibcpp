@@ -1,0 +1,1 @@
+#define REP(type,i,l,r) for(type i=(l);i!=(r);i++)

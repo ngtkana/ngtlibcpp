@@ -1,4 +1,22 @@
 {
+  "../include/ALL.hpp": {
+    "body": [
+      "#define ALL(a) std::begin(a),std::end(a)"
+    ],
+    "prefix": "ALL"
+  },
+  "../include/LOOP.hpp": {
+    "body": [
+      "#define LOOP(x) for(lint ngtkana_is_a_genius=0;ngtkana_is_a_genius!=x;ngtkana_is_a_genius++)"
+    ],
+    "prefix": "LOOP"
+  },
+  "../include/REP.hpp": {
+    "body": [
+      "#define REP(type,i,l,r) for(type i=(l);i!=(r);i++)"
+    ],
+    "prefix": "REP"
+  },
   "../include/bat.hpp": {
     "body": [
       "template < class Value >",
@@ -152,6 +170,13 @@
     ],
     "prefix": "centroid_tree"
   },
+  "../include/cmn_cmx.hpp": {
+    "body": [
+      "auto cmn = [](auto&& a, auto b){ if (a > b) {a = b; return true;} return false; };",
+      "auto cmx = [](auto&& a, auto b){ if (a < b) {a = b; return true;} return false; };"
+    ],
+    "prefix": "cmn_cmx"
+  },
   "../include/container_io.hpp": {
     "body": [
       "template < typename Container, typename Value = typename Container::value_type, std::enable_if_t<!std::is_same< Container, std::string >::value, std::nullptr_t> = nullptr>",
@@ -167,6 +192,25 @@
       "}"
     ],
     "prefix": "container_io"
+  },
+  "../include/debug.hpp": {
+    "body": [
+      "void debug_impl() { std::cerr << std::endl; }",
+      "template <typename Head, typename... Tail>",
+      "void debug_impl(Head head, Tail... tail) { std::cerr << \" \" << head; debug_impl(tail...); }",
+      "#define DEBUG 1",
+      "#if DEBUG",
+      "#define debug(...)\\",
+      "    do {\\",
+      "        std::cerr << std::boolalpha << \"[\" << #__VA_ARGS__ << \"]:\";\\",
+      "        debug_impl(__VA_ARGS__);\\",
+      "        std::cerr << std::noboolalpha;\\",
+      "    } while (false)",
+      "#else",
+      "#define debug(...) {}",
+      "#endif"
+    ],
+    "prefix": "debug"
   },
   "../include/dinic.hpp": {
     "body": [
@@ -2693,29 +2737,8 @@
   },
   "../include/stemp.hpp": {
     "body": [
-      "#define DEBUG 1",
       "#include <bits/stdc++.h>",
-      "#define loop(n) for (lint ngtkana_is_a_genius = 0; ngtkana_is_a_genius < lint(n); ngtkana_is_a_genius++)",
-      "#define rep(i, begin, end) for (lint i = lint(begin); (i) < lint(end); i++)",
-      "#define all(v) v.begin(), v.end()",
-      "#define rand(l, r) std::uniform_int_distribution<>(l, r)(mt)",
-      "using lint = long long;",
-      "auto mt = std::mt19937_64(std::random_device{}());",
-      "auto cmn = [](auto&& a, auto b){ if (a > b) {a = b; return true;} return false; };",
-      "auto cmx = [](auto&& a, auto b){ if (a < b) {a = b; return true;} return false; };",
-      "void debug_impl() { std::cerr << std::endl; }",
-      "template <typename Head, typename... Tail>",
-      "void debug_impl(Head head, Tail... tail) { std::cerr << \" \" << head; debug_impl(tail...); }",
-      "#if DEBUG",
-      "#define debug(...)\\",
-      "    do {\\",
-      "        std::cerr << std::boolalpha << \"[\" << #__VA_ARGS__ << \"]:\";\\",
-      "        debug_impl(__VA_ARGS__);\\",
-      "        std::cerr << std::noboolalpha;\\",
-      "    } while (false)",
-      "#else",
-      "#define debug(...) {}",
-      "#endif",
+      "using longlong=long long;",
       "",
       "int main() {",
       "    std::cin.tie(0); std::cin.sync_with_stdio(false);",
