@@ -2740,10 +2740,9 @@
       "#include <bits/stdc++.h>",
       "using longlong=long long;",
       "",
-      "int main() {",
-      "    std::cin.tie(0); std::cin.sync_with_stdio(false);",
+      "int main(){",
+      "    std::cin.tie(nullptr);std::cin.sync_with_stdio(false);",
       "    $0",
-      "    return 0;",
       "}"
     ],
     "prefix": "stemp"

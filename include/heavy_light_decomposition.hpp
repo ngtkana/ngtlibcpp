@@ -1,18 +1,18 @@
 class heavy_light_decomposition {
         int n;
-        std::vector< std::vector< int > > graph;
-        std::vector < int > prt, sz, vid, ord, head;
+        std::vector<std::vector<int>>graph;
+        std::vector<int>prt,sz,vid,ord,head;
 
     public:
         heavy_light_decomposition()=default;
         heavy_light_decomposition(int n) :
-            n         (n),
-            graph (n),
-            prt     (n),
-            sz        (n, 1),
-            vid     (n),
-            ord     (n),
-            head    (n)
+            n(n),
+            graph(n),
+            prt(n),
+            sz(n, 1),
+            vid(n),
+            ord(n),
+            head(n)
             {}
 
         // Accessers.
@@ -53,8 +53,8 @@ class heavy_light_decomposition {
         void for_each (
             int x,
             int y,
-            RangeOp const& op,     // range-operation f([vid(x), vid(y)[)
-            bool skip                        // skip the top vertex
+            RangeOp const& op, // range-operation f([vid(x), vid(y)[)
+            bool skip // skip the top vertex
         )
         {
             while (true) {
