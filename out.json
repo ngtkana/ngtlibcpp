@@ -170,10 +170,17 @@
     ],
     "prefix": "centroid_tree"
   },
+  "../include/check.hpp": {
+    "body": [
+      "std::cout << \"/\" << ${1:crr} << std::endl;",
+      "std::cout << \"\\\\\\\\\" << ${1:crr} << std::endl;"
+    ],
+    "prefix": "check"
+  },
   "../include/cmn_cmx.hpp": {
     "body": [
-      "auto cmn = [](auto&& a, auto b){ if (a > b) {a = b; return true;} return false; };",
-      "auto cmx = [](auto&& a, auto b){ if (a < b) {a = b; return true;} return false; };"
+      "[[maybe_unused]]auto cmn=[](auto&& a,auto b){if(a>b){a=b;return true;}return false;};",
+      "[[maybe_unused]]auto cmx=[](auto&& a,auto b){if(a<b){a=b;return true;}return false;};"
     ],
     "prefix": "cmn_cmx"
   },
@@ -211,6 +218,13 @@
       "#endif"
     ],
     "prefix": "debug"
+  },
+  "../include/didj.hpp": {
+    "body": [
+      "std::array<int,4>di={-1,+1,0,0};",
+      "std::array<int,4>dj={0,0,-1,+1};"
+    ],
+    "prefix": "didj"
   },
   "../include/dinic.hpp": {
     "body": [
@@ -398,24 +412,12 @@
     ],
     "prefix": "divisors"
   },
-  "../include/factor.hpp": {
+  "../include/err.hpp": {
     "body": [
-      "template < class Value >",
-      "inline auto factor(Value x) {",
-      "    std::vector< std::pair< Value, int > > ret;",
-      "    for (Value p = 2; p * p <= x; p++) {",
-      "        int m = 0;",
-      "        for (; x % p == 0; m++)",
-      "            { x /= p; }",
-      "        if (m > 0)",
-      "            { ret.emplace_back(p, m); }",
-      "    }",
-      "    if (1 < x)",
-      "        { ret.emplace_back(x, 1); }",
-      "    return ret;",
-      "}"
+      "void err() { std::cout << $1 << std::endl; exit(0); }",
+      "#define require(exp) do { if (!(exp)) { err(); } } while(false)"
     ],
-    "prefix": "factor"
+    "prefix": "err"
   },
   "../include/factorials.hpp": {
     "body": [
@@ -445,6 +447,24 @@
       "};"
     ],
     "prefix": "factorials"
+  },
+  "../include/factorize.hpp": {
+    "body": [
+      "inline auto factorize(long long x) {",
+      "    std::vector<std::pair<long long,int>> ret;",
+      "    for (long long p=2;p*p<=x;p++) {",
+      "        int m=0;",
+      "        for (;x%p==0;m++)",
+      "            {x /= p; }",
+      "        if (m>0)",
+      "            {ret.emplace_back(p, m);}",
+      "    }",
+      "    if (1<x)",
+      "        {ret.emplace_back(x,1);}",
+      "    return ret;",
+      "}"
+    ],
+    "prefix": "factorize"
   },
   "../include/floyd_warshall.hpp": {
     "body": [
@@ -744,19 +764,19 @@
     "body": [
       "class heavy_light_decomposition {",
       "        int n;",
-      "        std::vector< std::vector< int > > graph;",
-      "        std::vector < int > prt, sz, vid, ord, head;",
+      "        std::vector<std::vector<int>>graph;",
+      "        std::vector<int>prt,sz,vid,ord,head;",
       "",
       "    public:",
       "        heavy_light_decomposition()=default;",
       "        heavy_light_decomposition(int n) :",
-      "            n         (n),",
-      "            graph (n),",
-      "            prt     (n),",
-      "            sz        (n, 1),",
-      "            vid     (n),",
-      "            ord     (n),",
-      "            head    (n)",
+      "            n(n),",
+      "            graph(n),",
+      "            prt(n),",
+      "            sz(n, 1),",
+      "            vid(n),",
+      "            ord(n),",
+      "            head(n)",
       "            {}",
       "",
       "        // Accessers.",
@@ -797,8 +817,8 @@
       "        void for_each (",
       "            int x,",
       "            int y,",
-      "            RangeOp const& op,     // range-operation f([vid(x), vid(y)[)",
-      "            bool skip                        // skip the top vertex",
+      "            RangeOp const& op, // range-operation f([vid(x), vid(y)[)",
+      "            bool skip // skip the top vertex",
       "        )",
       "        {",
       "            while (true) {",
@@ -3831,167 +3851,54 @@
     ],
     "prefix": "z_algorithm"
   },
-  "../snippets/algorithms/binary_serch.hpp": {
-    "body": [
-      "${1:int} ok = ${2:0}, ng = ${3:inf}, md;",
-      "while (abs(ok - ng) > 1) {",
-      "  md = (ok + ng) >> 1;",
-      "  if (${4:ck(md)}) ok = md;",
-      "  else ng = md;",
-      "}"
-    ],
-    "prefix": "binary_serch"
-  },
-  "../snippets/algorithms/dfs1.hpp": {
-    "body": [
-      "fix ([&](auto dfs, int crr, int p) -> void {",
-      "  for (auto const& nxt : graph.at(crr)) {",
-      "    if (nxt == p) continue;",
-      "    dfs(nxt, crr);",
-      "  }",
-      "})(${1:root}, $1);"
-    ],
-    "prefix": "dfs1"
-  },
-  "../snippets/algorithms/dfs2.hpp": {
-    "body": [
-      "fix ([&](auto dfs, int crr) -> void {",
-      "  ckd.at(crr) = true;",
-      "  for (auto const& nxt : graph.at(crr)) {",
-      "    if (ckd.at(nxt)) continue;",
-      "    dfs(nxt);",
-      "  }",
-      "})(${1:root});"
-    ],
-    "prefix": "dfs2"
-  },
-  "../snippets/algorithms/lis.hpp": {
-    "body": [
-      "std::vector<${1:int}> lis;",
-      "for (auto crr : ${2:name}) {",
-      "  auto lb = std::lower_bound(lis.begin(), lis.end(), crr);",
-      "  if (lb == lis.end()) lis.push_back(crr);",
-      "  else *lb = crr;",
-      "}"
-    ],
-    "prefix": "lis"
-  },
-  "../snippets/algorithms/shakutori.hpp": {
-    "body": [
-      "/* init crr, ret */",
-      "for (int l = 0, r = 0; l < n; l++) {",
-      "  if (r <= l) {",
-      "    r = l;",
-      "    /* re-init crr */;",
-      "  }",
-      "  for (; r < n; r++) {",
-      "    if (/* cannot push r */) break;",
-      "    /* push r */;",
-      "  }",
-      "  ret += r - l;",
-      "  /* pop l */",
-      "}"
-    ],
-    "prefix": "shakutori"
-  },
-  "../snippets/code_fragments/all.hpp": {
-    "body": [
-      "${1:name}.begin(), $1.end()"
-    ],
-    "prefix": "all"
-  },
-  "../snippets/code_fragments/didj.hpp": {
-    "body": [
-      "int d${1:i}[4] = {-1, +1, 0, 0};",
-      "int d${2:j}[4] = {0, 0, -1, +1};"
-    ],
-    "prefix": "didj"
-  },
-  "../snippets/code_fragments/err.hpp": {
-    "body": [
-      "void err() { std::cout << $1 << std::endl; exit(0); }",
-      "#define require(exp) do { if (!(exp)) { err(); } } while(false)"
-    ],
-    "prefix": "err"
-  },
-  "../snippets/code_fragments/lambda.hpp": {
-    "body": [
-      "auto ${1:name} = [&] ($2)",
-      "{",
-      "  $0",
-      "};"
-    ],
-    "prefix": "lambda"
-  },
-  "../snippets/debug/bug.hpp": {
-    "body": [
-      "/* ↓ 消し忘れないで！！！ ↓ */",
-      "$0",
-      "/* ↑ いや振りじゃないから ↑ */"
-    ],
-    "prefix": "bug"
-  },
-  "../snippets/debug/check.hpp": {
-    "body": [
-      "std::cout << \"/\" << ${1:crr} << std::endl;",
-      "std::cout << \"\\\\\\\\\" << ${1:crr} << std::endl;"
-    ],
-    "prefix": "check"
-  },
-  "../snippets/debug/ndbg.hpp": {
-    "body": [
-      "std::cout << \"$0\" << std::endl;"
-    ],
-    "prefix": "ndbg"
-  },
-  "../snippets/debug/new_line.hpp": {
-    "body": [
-      "{ // debug",
-      "  std::cout << std::endl;",
-      "} //"
-    ],
-    "prefix": "new_line"
-  },
-  "../snippets/io/1sin.hpp": {
+  "../snippets/1sin.hpp": {
     "body": [
       "${1:int} $2; std::cin >> $2;"
     ],
     "prefix": "1sin"
   },
-  "../snippets/io/2sin.hpp": {
+  "../snippets/2sin.hpp": {
     "body": [
       "${1:int} $2, $3; std::cin >> $2 >> $3;"
     ],
     "prefix": "2sin"
   },
-  "../snippets/io/3sin.hpp": {
+  "../snippets/3sin.hpp": {
     "body": [
       "${1:int} $2, $3, $4;",
       "std::cin >> $2 >> $3 >> $4;"
     ],
     "prefix": "3sin"
   },
-  "../snippets/io/4sin.hpp": {
+  "../snippets/4sin.hpp": {
     "body": [
       "${1:int} $2, $3, $4, $5;",
       "std::cin >> $2 >> $3 >> $4 >> $5;"
     ],
     "prefix": "4sin"
   },
-  "../snippets/io/5sin.hpp": {
+  "../snippets/5sin.hpp": {
     "body": [
       "${1:int} $2, $3, $4, $5, $6;",
       "std::cin >> $2 >> $3 >> $4 >> $5 >> $6;"
     ],
     "prefix": "5sin"
   },
-  "../snippets/io/sout.hpp": {
+  "../snippets/lambda.hpp": {
+    "body": [
+      "auto ${1:name}=[&]($2){",
+      "    $0",
+      "};"
+    ],
+    "prefix": "lambda"
+  },
+  "../snippets/sout.hpp": {
     "body": [
       "std::cout << $0 << std::endl;"
     ],
     "prefix": "sout"
   },
-  "../snippets/io/tin.hpp": {
+  "../snippets/tin.hpp": {
     "body": [
       "${1:int} ${2:tmp};",
       "std::cin >> $2;",
